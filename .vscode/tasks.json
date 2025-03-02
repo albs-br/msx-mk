@@ -1,0 +1,68 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "assembly",
+            "type": "shell",
+            "command": "C:\\Users\\Public\\msx\\tniasm\\tniasm.exe",
+                "args": [
+                    {
+                      "value": "Main.s",
+                      "quoting": "strong"
+                    }
+                ],
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
+            "command": "C:\\Users\\Public\\msx\\openmsx\\openmsx.exe",
+                "args": [
+                    {
+                        "value": "msx-mk.rom",
+                        "quoting": "weak"
+                    },
+                    
+                    //     // When changing this, it's necessary to first save this file before build, it will not work with
+                    //     // the "auto save all unsaved files before build" feature of VS Code (it executes this file before save)
+                  
+                    {   "value": "-machine", "quoting": "escape" },
+                    {   
+                        //"value": "Gradiente_Expert_GPC-1",     // MSX 1
+                        //"value": "Yamaha_CX11",                // MSX 1 with V9938
+                        //"value": "Sony_HB-F1XD",               // MSX 2
+                        "value": "Sony_HB-F1XDJ",                // MSX 2+
+                        //"value": "Panasonic_FS-A1WSX",         // MSX 2+ with turbo
+                        //"value": "Panasonic_FS-A1GT",          // MSX Turbo R
+
+                        "quoting": "weak" 
+                    },
+
+                    {   "value": "-romtype", "quoting": "escape" },
+                    {   "value": "ASCII16", "quoting": "weak" },
+
+ 
+                    {   "value": "-script", "quoting": "escape" },
+                    {   "value": "${workspaceFolder}\\msx-mk.tcl", "quoting": "weak" },
+
+                ],
+            "label": "run openmsx",
+            "type": "shell",
+            "dependsOn": [
+                "assembly"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
