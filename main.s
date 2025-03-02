@@ -90,7 +90,7 @@ Execute:
     ld      (Player_1_Vars.Animation_CurrentFrame_Data), hl
 
 
-    ld      a, 128 - (58/2)
+    ld      a, 64 - (58/2)
     ld      (Player_1_Vars.Restore_BG_X), a
     ld      a, 100
     ld      (Player_1_Vars.Restore_BG_Y), a
@@ -100,8 +100,7 @@ Execute:
     ld      (Player_1_Vars.Restore_BG_HeightInPixels), a
 
 
-    ld      hl, 0 + ((128 - (58/2))/2) + (128*100) ; column number 128 - (58/2); line number 100
-    ; ld      hl, 0x0000
+    ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
     ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
     xor     a
@@ -352,11 +351,10 @@ DrawSprite:
         ld      h, a
         ld      l, c
 
-        ; ---- DE -= HL
+        ; ---- DE += HL
         add     hl, de ; HL = HL + DE
         ; DE = HL
         ex      de, hl
-        
 
     pop     hl, af
 
@@ -603,6 +601,8 @@ Palette:
 
 ; --------------------------------------------------------
 
+MEGAROM_PAGE_SCORPION_DATA_0: equ 1 ; TODO
+
 Player_1_Animation_List:
     dw Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List
     dw Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List
@@ -627,33 +627,33 @@ Player_1_Animation_Data:
 ; increment in bytes, length in bytes, address of the slice on the Data
 
 Frame_0:
-    .Header:    INCLUDE "Data/scorpion_frame_0_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
-    .List:      INCLUDE "Data/scorpion_frame_0_list.s"
-    .Data:      INCLUDE "Data/scorpion_frame_0_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_0_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
+    .List:      INCLUDE "Data/scorpion_R_frame_0_list.s"
+    .Data:      INCLUDE "Data/scorpion_R_frame_0_data.s"
 Frame_1:
-    .Header:    INCLUDE "Data/scorpion_frame_1_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_1_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_1_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_1_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_1_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_1_data.s"
 Frame_2:
-    .Header:    INCLUDE "Data/scorpion_frame_2_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_2_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_2_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_2_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_2_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_2_data.s"
 Frame_3:
-    .Header:    INCLUDE "Data/scorpion_frame_3_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_3_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_3_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_3_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_3_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_3_data.s"
 Frame_4:
-    .Header:    INCLUDE "Data/scorpion_frame_4_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_4_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_4_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_4_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_4_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_4_data.s"
 Frame_5:
-    .Header:    INCLUDE "Data/scorpion_frame_5_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_5_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_5_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_5_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_5_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_5_data.s"
 Frame_6:
-    .Header:    INCLUDE "Data/scorpion_frame_6_header.s"
-    .List:  INCLUDE "Data/scorpion_frame_6_list.s"
-    .Data:  INCLUDE "Data/scorpion_frame_6_data.s"
+    .Header:    INCLUDE "Data/scorpion_R_frame_6_header.s"
+    .List:  INCLUDE "Data/scorpion_R_frame_6_list.s"
+    .Data:  INCLUDE "Data/scorpion_R_frame_6_data.s"
 
 ; --------------------------------------------------------
 
@@ -696,6 +696,13 @@ Bg_Bottom:
     INCBIN "Images/mk-bg-bottom.sc5"
 .size:      equ $ - Bg_Bottom
 	ds PageSize - ($ - 0x8000), 255
+
+; ; ------- Page 3
+; 	org	0x8000, 0xBFFF
+
+
+; .size:      equ $ - 
+; 	ds PageSize - ($ - 0x8000), 255
 
 
 

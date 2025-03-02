@@ -491,6 +491,7 @@ BIOS_FILNAM: equ 0F866h ; last def. pass 3
 BIOS_QUETAB: equ 0F959h ; last def. pass 3
 REG4SAV: equ 0F3E3h ; last def. pass 3
 BIOS_GRPACY: equ 0FCB9h ; last def. pass 3
+MEGAROM_PAGE_SCORPION_DATA_0: equ 01h ; last def. pass 3
 Frame_5.Header: equ 0698Ch ; last def. pass 3
 Frame_1.List: equ 04D29h ; last def. pass 3
 BIOS_H_SAVD: equ 0FE94h ; last def. pass 3
