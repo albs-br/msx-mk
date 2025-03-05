@@ -165,6 +165,7 @@ Triple_Buffer_Step_0:
 
     ; --- restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
     ld      hl, Y_BASE_PAGE_2
+    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 1
@@ -205,6 +206,7 @@ Triple_Buffer_Step_1:
 
     ; --- restore bg on page 0
     ld      hl, Y_BASE_PAGE_0
+    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 2
@@ -230,6 +232,7 @@ Triple_Buffer_Step_2:
 
     ; --- restore bg on page 1
     ld      hl, Y_BASE_PAGE_1
+    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 0
@@ -506,11 +509,13 @@ DrawSprite:
 
 ; Input:
 ;   HL: Y of base of page (constants: Y_BASE_PAGE_n)
+;   IX: Player Vars base addr
 RestoreBg:
 
     ; ; Destiny_Y = Y of base of page + Player.Restore_BG_Y
     ld      d, 0
-    ld      a, (Player_1_Vars.Restore_BG_Y)
+    ; ld      a, (Player_1_Vars.Restore_BG_Y)
+    ld      a, (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars))
     ld      e, a
     add     hl, de
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_Y), hl
@@ -518,7 +523,8 @@ RestoreBg:
     
     ; X is the same for both source and destiny
     ld      h, 0
-    ld      a, (Player_1_Vars.Restore_BG_X)
+    ; ld      a, (Player_1_Vars.Restore_BG_X)
+    ld      a, (ix + (Player_1_Vars.Restore_BG_X - Player_1_Vars))
     ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Source_X), hl
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_X), hl
@@ -526,7 +532,8 @@ RestoreBg:
     ; Source_Y is always on the page 3
     ; Source_Y = (256 * 3) + Player.Restore_BG_Y
     ld      h, 0
-    ld      a, (Player_1_Vars.Restore_BG_Y)
+    ; ld      a, (Player_1_Vars.Restore_BG_Y)
+    ld      a, (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars))
     ld      l, a
     ld      de, 768
     add     hl, de
@@ -534,13 +541,14 @@ RestoreBg:
 
 
     ld      h, 0
-    ld      a, (Player_1_Vars.Restore_BG_WidthInPixels)
+    ; ld      a, (Player_1_Vars.Restore_BG_WidthInPixels)
+    ld      a, (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars))
     ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Cols), hl
 
     ld      h, 0
-    ld      a, (Player_1_Vars.Restore_BG_HeightInPixels)
-    ld      l, a
+    ; ld      a, (Player_1_Vars.Restore_BG_HeightInPixels)
+    ld      a, (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars))
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Lines), hl
 
     ; .Source_X:   dw    0 	            ; Source X (9 bits)
@@ -569,9 +577,9 @@ RestoreBg:
 ; Input:
 ;   AHL: 17-bit VRAM address
 LoadImageTo_SC5_Page:
-	; enable page 1
+	; enable megarom page with top of bg
     push    af
-        ld	    a, 1
+        ld	    a, MEGAROM_PAGE_BG_0
         ld	    (Seg_P8000_SW), a
     pop     af
 
@@ -588,9 +596,9 @@ LoadImageTo_SC5_Page:
         jp      nz, .loop_10
     pop     hl, af
 
-	; enable page 2
+	; enable megarom page with bottom of bg
     push    af
-        ld	    a, 2
+        ld	    a, MEGAROM_PAGE_BG_1
         ld	    (Seg_P8000_SW), a
     pop     af
 
@@ -696,6 +704,7 @@ Player_1_Vars:
     .Restore_BG_Y:                      rb 1
     .Restore_BG_WidthInPixels:          rb 1
     .Restore_BG_HeightInPixels:         rb 1
+    ; CAUTION: put new vars only at the end
 
 ; ;frame data
 ; ;.frame_data_slices:     rb (Frame_Data_Slice.size) * 256
