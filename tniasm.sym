@@ -12,7 +12,7 @@ BIOS_SAVTXT: equ 0F6AFh ; last def. pass 3
 Wait_Vblank: equ 0409Ah ; last def. pass 3
 BIOS_WRSLT: equ 014h ; last def. pass 3
 BIOS_PTRFIL: equ 0F864h ; last def. pass 3
-GetCurrentFrameAndGoToNext: equ 0442Bh ; last def. pass 3
+GetCurrentFrameAndGoToNext: equ 043EAh ; last def. pass 3
 Restore_BG_HMMM_Parameters.Cols: equ 0458Dh ; last def. pass 3
 BIOS_H_ONGO: equ 0FDEAh ; last def. pass 3
 BIOS_H_FIEL: equ 0FE2Bh ; last def. pass 3
@@ -126,7 +126,7 @@ BIOS_H_RSET: equ 0FE26h ; last def. pass 3
 BIOS_BAKCLR: equ 0F3EAh ; last def. pass 3
 BIOS_H_NEWS: equ 0FF3Eh ; last def. pass 3
 BIOS_HIMEM: equ 0FC4Ah ; last def. pass 3
-Triple_Buffer_Loop: equ 043B5h ; last def. pass 3
+Triple_Buffer_Loop: equ 044B4h ; last def. pass 3
 Wait_15_Vblanks.loop: equ 0408Ah ; last def. pass 3
 Y_BASE_PAGE_0: equ 00h ; last def. pass 3
 Execute_VDP_PSET: equ 04220h ; last def. pass 3
@@ -140,7 +140,7 @@ BIOS_KILBUF: equ 0156h ; last def. pass 3
 BIOS_DRWFLG: equ 0FCBBh ; last def. pass 3
 BIOS_DOT: equ 0F6B5h ; last def. pass 3
 BIOS_VOICCQ: equ 0FA75h ; last def. pass 3
-Execute: equ 0432Ah ; last def. pass 3
+Execute: equ 04429h ; last def. pass 3
 BIOS_ESTBLS: equ 0FB1Dh ; last def. pass 3
 BIOS_CYOFF: equ 0F947h ; last def. pass 3
 BIOS_CXOFF: equ 0F945h ; last def. pass 3
@@ -182,7 +182,7 @@ Restore_BG_HMMM_Parameters.Options: equ 04592h ; last def. pass 3
 SetPaletteColor_FromAddress: equ 0402Dh ; last def. pass 3
 LDIRVM_MSX2: equ 041B2h ; last def. pass 3
 BIOS_H_LPTS: equ 0FFBBh ; last def. pass 3
-RestoreBg: equ 044EFh ; last def. pass 3
+RestoreBg: equ 043A6h ; last def. pass 3
 BIOS_ESCCNT: equ 0FCA7h ; last def. pass 3
 BIOS_RTYCNT: equ 0FC9Ah ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_X: equ 0C00Ah ; last def. pass 3
@@ -213,7 +213,7 @@ BIOS_H_POSD: equ 0FEBCh ; last def. pass 3
 MEGAROM_PAGE_BG_1: equ 02h ; last def. pass 3
 BIOS_H_FINP: equ 0FF5Ch ; last def. pass 3
 BIOS_LINLEN: equ 0F3B0h ; last def. pass 3
-DrawSprite: equ 04473h ; last def. pass 3
+DrawSprite: equ 0432Ah ; last def. pass 3
 SNSMAT_NO_DI_EI.C_OK: equ 04320h ; last def. pass 3
 BIOS_XSAVE: equ 0FAFEh ; last def. pass 3
 BIOS_NEWPAD: equ 01ADh ; last def. pass 3
@@ -247,11 +247,11 @@ BIOS_TOCNT: equ 0FB03h ; last def. pass 3
 BIOS_ASPCT2: equ 0F40Dh ; last def. pass 3
 BIOS_INTVAL: equ 0FCA0h ; last def. pass 3
 BIOS_CALBAS: equ 0159h ; last def. pass 3
-DrawSprite.endFrame: equ 044DCh ; last def. pass 3
+DrawSprite.endFrame: equ 04393h ; last def. pass 3
 ClearVram_MSX2.loop_2: equ 040F7h ; last def. pass 3
 BIOS_OLDINT: equ 0FB12h ; last def. pass 3
 BIOS_TEMP3: equ 0F69Dh ; last def. pass 3
-Triple_Buffer_Step_2: equ 04409h ; last def. pass 3
+Triple_Buffer_Step_2: equ 04508h ; last def. pass 3
 BIOS_H_ISRE: equ 0FF2Ah ; last def. pass 3
 BIOS_TEMPST: equ 0F67Ah ; last def. pass 3
 SetInterlacedMode: equ 04167h ; last def. pass 3
@@ -391,7 +391,7 @@ BIOS_CALLF: equ 030h ; last def. pass 3
 PPI.A: equ 0A8h ; last def. pass 3
 BIOS_ARG: equ 0F847h ; last def. pass 3
 Palette: equ 04565h ; last def. pass 3
-DrawSprite.loop: equ 044A3h ; last def. pass 3
+DrawSprite.loop: equ 0435Ah ; last def. pass 3
 BIOS_CLS: equ 0C3h ; last def. pass 3
 BIOS_PRTFLG: equ 0F416h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Source_X: equ 0C006h ; last def. pass 3
@@ -459,7 +459,7 @@ BIOS_TXTTAB: equ 0F676h ; last def. pass 3
 BIOS_CONSAV: equ 0F668h ; last def. pass 3
 BIOS_T32CGP: equ 0F3C1h ; last def. pass 3
 BIOS_H_TIMI: equ 0FD9Fh ; last def. pass 3
-DrawSprite.cross16kb: equ 044DDh ; last def. pass 3
+DrawSprite.cross16kb: equ 04394h ; last def. pass 3
 BIOS_TRCFLG: equ 0F7C4h ; last def. pass 3
 BIOS_LOHADR: equ 0F94Bh ; last def. pass 3
 BIOS_RG2SAV: equ 0F3E1h ; last def. pass 3
@@ -476,7 +476,7 @@ BIOS_PRMSTK: equ 0F6E4h ; last def. pass 3
 CheckCollision_16x24_16x16.checkVerticalCollision: equ 041D2h ; last def. pass 3
 BIOS_RG5SAV: equ 0F3E4h ; last def. pass 3
 BIOS_FORCLR: equ 0F3E9h ; last def. pass 3
-Triple_Buffer_Step_1: equ 043E6h ; last def. pass 3
+Triple_Buffer_Step_1: equ 044E5h ; last def. pass 3
 BIOS_H_CRUN: equ 0FF20h ; last def. pass 3
 BIOS_NULBUF: equ 0F862h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Cols: equ 0C00Eh ; last def. pass 3
@@ -604,7 +604,7 @@ BIOS_H_SCRE: equ 0FFC0h ; last def. pass 3
 BIOS_GRPHED: equ 0FCA6h ; last def. pass 3
 Frame_3.Header: equ 09616h ; last def. pass 3
 PPI.R: equ 0ABh ; last def. pass 3
-SetActivePage: equ 0446Ah ; last def. pass 3
+SetActivePage: equ 043E1h ; last def. pass 3
 Frame_2.Header: equ 08ED8h ; last def. pass 3
 BIOS_RG3SAV: equ 0F3E2h ; last def. pass 3
 BIOS_NSTWRT: equ 0171h ; last def. pass 3
@@ -638,7 +638,7 @@ BIOS_LINL32: equ 0F3AFh ; last def. pass 3
 BIOS_CNVCHR: equ 0ABh ; last def. pass 3
 Seg_P8000_SW: equ 07000h ; last def. pass 3
 MEGAROM_PAGE_BG_0: equ 01h ; last def. pass 3
-DrawSprite.continue: equ 044D2h ; last def. pass 3
+DrawSprite.continue: equ 04389h ; last def. pass 3
 BIOS_H_SETS: equ 0FDF4h ; last def. pass 3
 BIOS_INITXT: equ 06Ch ; last def. pass 3
 BIOS_H_LIST: equ 0FF89h ; last def. pass 3
@@ -665,12 +665,12 @@ VDP_LOGIC_OPERATION_TIMP: equ 08h ; last def. pass 3
 BIOS_INIFNK: equ 03Eh ; last def. pass 3
 BIOS_MCLFLG: equ 0F958h ; last def. pass 3
 VDP_COMMAND_SRCH: equ 060h ; last def. pass 3
-Triple_Buffer_Step_0: equ 043C3h ; last def. pass 3
+Triple_Buffer_Step_0: equ 044C2h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Options: equ 0C013h ; last def. pass 3
 BIOS_ENASCR: equ 044h ; last def. pass 3
 BIOS_H_ERAF: equ 0FDB8h ; last def. pass 3
 BIOS_COMMSK: equ 0FB1Eh ; last def. pass 3
-GetCurrentFrameAndGoToNext.continue: equ 04452h ; last def. pass 3
+GetCurrentFrameAndGoToNext.continue: equ 04411h ; last def. pass 3
 BIOS_H_DEVN: equ 0FEC1h ; last def. pass 3
 BIOS_CLIKFL: equ 0FBD9h ; last def. pass 3
 BIOS_H_CHGE: equ 0FDC2h ; last def. pass 3
@@ -738,7 +738,7 @@ DisableSprites: equ 04194h ; last def. pass 3
 BIOS_CSRY: equ 0F3DCh ; last def. pass 3
 BIOS_CSRX: equ 0F3DDh ; last def. pass 3
 EnableRomPage2: equ 04057h ; last def. pass 3
-GetCurrentFrameAndGoToNext.returnToFirstFrame: equ 0444Ch ; last def. pass 3
+GetCurrentFrameAndGoToNext.returnToFirstFrame: equ 0440Bh ; last def. pass 3
 Frame_4: equ 09D32h ; last def. pass 3
 BIOS_ERRFLG: equ 0F414h ; last def. pass 3
 BIOS_H_COPY: equ 0FE08h ; last def. pass 3
