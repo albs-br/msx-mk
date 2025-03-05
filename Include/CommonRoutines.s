@@ -6,18 +6,18 @@
 ; range of bytes (e.g. 16 or 256), meaning there is a trade-off between speed and size
 ; PS. 16x 16 bytes LDIR can be a good solution
 
-; ClearRam:
-;     ld      hl, RamStart        ; RAM start address
-;     ld      de, RamEnd + 1      ; RAM end address
+ClearRam:
+    ld      hl, RamStart        ; RAM start address
+    ld      de, RamEnd + 1      ; RAM end address
 
-; .loop:
-;     xor     a                   ; same as ld a, 0, but faster
-;     ld      (hl), a
+.loop:
+    xor     a                   ; same as ld a, 0, but faster
+    ld      (hl), a
 
-;     inc     hl
-;     call    BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
-;     ret     z
-;     jp      .loop
+    inc     hl
+    call    BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
+    ret     z
+    jp      .loop
 
 
 

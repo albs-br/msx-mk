@@ -18,6 +18,19 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "TripleBuffer/GetCurrentFrameAndGoToNext.s" 
 
 Execute:
+    ; init interrupt mode and stack pointer (in case the ROM isn't the first thing to be loaded)
+	di                          ; disable interrupts
+	im      1                   ; interrupt mode 1
+    ld      sp, (BIOS_HIMEM)    ; init SP
+
+    ; call    BIOS_DISSCR
+
+    call    ClearRam
+
+    ; PSG: silence
+	call	BIOS_GICINI
+
+
     call    EnableRomPage2
 
 	; enable page 1
@@ -359,65 +372,5 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 ; RAM
 	org     0xc000, 0xe5ff                   ; for machines with 16kb of RAM (use it if you need 16kb RAM, will crash on 8kb machines, such as the Casio PV-7)
 
-Last_NAMTBL_Addr:   rw 1
+    INCLUDE "Variables.s"
 
-;   step      page            page drawing            page
-;   value     active          sprites                 restoring bg
-;   -----     -------         ---------------         ------------
-;   0         0               1                       2
-;   1         1               2                       0
-;   2         2               0                       1
-TripleBuffer_Vars:
-    .Step:                  rb 1
-    .BaseDataAddr:          rw 1
-    .R14_Value:             rb 1
-    ; .PageActive:            rb 1
-    ; .PageDrawingSprites:    rb 1
-    ; .PageRefreshingBg_Y_Base:   rw 1    ; page 0: 0;    page 1: 256;    page 2: 512
-
-TripleBuffer_Vars_RestoreBG_HMMM_Command:
-    .Source_X:   rw 1
-    .Source_Y:   rw 1
-    .Destiny_X:  rw 1
-    .Destiny_Y:  rw 1
-    .Cols:       rw 1
-    .Lines:      rw 1
-    .NotUsed:    rb 1
-    .Options:    rb 1
-    .Command:    rb 1
-
-
-; ----------------------------
-Player_1_Vars:
-    .Animation_CurrentFrame_List:       rw 1
-    .Animation_CurrentFrame_Data:       rw 1
-    .CurrentFrame_List_Addr:            rw 1
-    .CurrentFrame_Data_Addr:            rw 1
-    .CurrentFrame_MegaRomPage:          rb 1
-    .VRAM_NAMTBL_Addr:                  rw 1
-    .Restore_BG_X:                      rb 1
-    .Restore_BG_Y:                      rb 1
-    .Restore_BG_WidthInPixels:          rb 1
-    .Restore_BG_HeightInPixels:         rb 1
-    ; CAUTION: put new vars only at the end
-
-; ;frame data
-; ;.frame_data_slices:     rb (Frame_Data_Slice.size) * 256
-
-
-
-; ; ----------------------------
-
-; Debug:
-Jiffy_FrameStart:   rw 1
-Total_Frames:       rw 1
-Frame_Counter:      rb 1
-
-
-; ; for each slice:
-; Frame_Data_Slice:
-; .offset:    rb 1 ; offset in bytes from top left of frame/last slice start
-; .length:    rb 1 ; length in bytes (can be changed to pointer to unrolled OUTI's)
-; .address:   rw 1 ; address of bytes to be plotted to screen
-
-; .size: $ - Frame_Data_Slice
