@@ -2,12 +2,14 @@
 ; Input:
 ;   A: value of R#14 to set VDP to write/read VRAM (constants: R14_PAGE_n)
 ;   HL: addr of frame list
-;   IX: addr of frame data
+;   IY: addr of frame data
 ;   DE: VRAM NAMTBL addr position
+;   IX: Player Vars base addr
 DrawSprite:
 
     push    af
-        ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
+        ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
+        ld      a, (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars))
         ld	    (Seg_P8000_SW), a
     pop     af
 
@@ -37,7 +39,7 @@ DrawSprite:
 
     pop     hl, af
 
-    ld      (TripleBuffer_Vars.BaseDataAddr), ix
+    ld      (TripleBuffer_Vars.BaseDataAddr), iy
 
     ld      (TripleBuffer_Vars.R14_Value), a
     ; set R#14
@@ -128,8 +130,6 @@ DrawSprite:
 
         ; HL = Data + slice addr
         ; ld      hl, Frame_0.Data
-        ; push    ix
-        ; pop     hl
         ld      hl, (TripleBuffer_Vars.BaseDataAddr)
         add     hl, de
 

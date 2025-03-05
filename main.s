@@ -105,8 +105,12 @@ Execute:
 
     ld      hl, Player_1_Animation_List
     ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
+    ld      (Player_1_Vars.Animation_FirstFrame_List), hl
     ld      hl, Player_1_Animation_Data
     ld      (Player_1_Vars.Animation_CurrentFrame_Data), hl
+    ld      (Player_1_Vars.Animation_FirstFrame_Data), hl
+
+
 
     ; TODO: get these values from frame header
 
@@ -182,25 +186,13 @@ Triple_Buffer_Step_0:
     ld      a, R2_PAGE_0
     call    SetActivePage
 
+    ld      ix, Player_1_Vars
+
     ; --- restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
     ld      hl, Y_BASE_PAGE_2
-    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 1
-    
-    ; ;ld      hl, Frame_0.List
-    ; ld      a, (Player_1_Vars.CurrentFrame_List_Addr)
-    ; ld      l, a
-    ; ld      a, (Player_1_Vars.CurrentFrame_List_Addr + 1)
-    ; ld      h, a
-    
-    ; ;ld      ix, Frame_0.Data ; TODO: fix
-    ; ld      a, (Player_1_Vars.CurrentFrame_Data_Addr)
-    ; ld      ixl, a
-    ; ld      a, (Player_1_Vars.CurrentFrame_Data_Addr + 1)
-    ; ld      ixh, a
-    
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
@@ -223,9 +215,10 @@ Triple_Buffer_Step_1:
     ld      a, R2_PAGE_1
     call    SetActivePage
 
+    ld      ix, Player_1_Vars
+
     ; --- restore bg on page 0
     ld      hl, Y_BASE_PAGE_0
-    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 2
@@ -249,9 +242,10 @@ Triple_Buffer_Step_2:
     ld      a, R2_PAGE_2
     call    SetActivePage
 
+    ld      ix, Player_1_Vars
+
     ; --- restore bg on page 1
     ld      hl, Y_BASE_PAGE_1
-    ld      ix, Player_1_Vars
     call    RestoreBg
     
     ; --- draw sprites on page 0
@@ -269,18 +263,6 @@ Triple_Buffer_Step_2:
 
 ;--------------------------------------------------------------------
 
-
-;--------------------------------------------------------------------
-
-
-;--------------------------------------------------------------------
-
-
-
-; ----------
-
-
-; ----------
 
 ; Input:
 ;   AHL: 17-bit VRAM address

@@ -29,6 +29,8 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 Player_1_Vars:
     .Animation_CurrentFrame_List:       rw 1
     .Animation_CurrentFrame_Data:       rw 1
+    .Animation_FirstFrame_List:         rw 1
+    .Animation_FirstFrame_Data:         rw 1
     .CurrentFrame_List_Addr:            rw 1
     .CurrentFrame_Data_Addr:            rw 1
     .CurrentFrame_MegaRomPage:          rb 1
