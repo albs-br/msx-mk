@@ -23,8 +23,6 @@ Execute:
 	im      1                   ; interrupt mode 1
     ld      sp, (BIOS_HIMEM)    ; init SP
 
-    ; call    BIOS_DISSCR
-
     call    ClearRam
 
     ; PSG: silence
@@ -97,16 +95,21 @@ Execute:
     ld      bc, Restore_BG_HMMM_Parameters_size
     ldir
 
+    xor     a
+    ld      (TripleBuffer_Vars.Step), a
+
+    ; ----- init player 1
+
     ld      hl, Frame_0.List
     ld      (Player_1_Vars.CurrentFrame_List_Addr), hl
 
     ld      hl, Frame_0.Data
     ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
 
-    ld      hl, Player_1_Animation_List
+    ld      hl, Scorpion_Stance_Left_Animation_List
     ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
     ld      (Player_1_Vars.Animation_FirstFrame_List), hl
-    ld      hl, Player_1_Animation_Data
+    ld      hl, Scorpion_Stance_Left_Animation_Data
     ld      (Player_1_Vars.Animation_CurrentFrame_Data), hl
     ld      (Player_1_Vars.Animation_FirstFrame_Data), hl
 
@@ -130,8 +133,42 @@ Execute:
     ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
     ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
-    xor     a
-    ld      (TripleBuffer_Vars.Step), a
+
+    ; ----- init player 2
+
+    ld      hl, Frame_0.List
+    ld      (Player_2_Vars.CurrentFrame_List_Addr), hl
+
+    ld      hl, Frame_0.Data
+    ld      (Player_2_Vars.CurrentFrame_Data_Addr), hl
+
+    ld      hl, Scorpion_Stance_Left_Animation_List
+    ld      (Player_2_Vars.Animation_CurrentFrame_List), hl
+    ld      (Player_2_Vars.Animation_FirstFrame_List), hl
+    ld      hl, Scorpion_Stance_Left_Animation_Data
+    ld      (Player_2_Vars.Animation_CurrentFrame_Data), hl
+    ld      (Player_2_Vars.Animation_FirstFrame_Data), hl
+
+
+
+    ; TODO: get these values from frame header
+
+    ld      a, MEGAROM_PAGE_SCORPION_DATA_0
+    ld      (Player_2_Vars.CurrentFrame_MegaRomPage), a
+
+    ld      a, 192 - (58/2)
+    ld      (Player_2_Vars.Restore_BG_X), a
+    ld      a, 100
+    ld      (Player_2_Vars.Restore_BG_Y), a
+    ld      a, 58
+    ld      (Player_2_Vars.Restore_BG_WidthInPixels), a
+    ld      a, 105
+    ld      (Player_2_Vars.Restore_BG_HeightInPixels), a
+
+
+    ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
+    ld      (Player_2_Vars.VRAM_NAMTBL_Addr), hl
+
 
 Triple_Buffer_Loop:
 
@@ -186,18 +223,45 @@ Triple_Buffer_Step_0:
     ld      a, R2_PAGE_0
     call    SetActivePage
 
+
+
+
+
+    ; ------ player 1
+    
     ld      ix, Player_1_Vars
 
-    ; --- restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
+    ; restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
     ld      hl, Y_BASE_PAGE_2
     call    RestoreBg
     
-    ; --- draw sprites on page 1
+    ; draw sprites on page 1
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
     ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
+
+
+
+    ; ------ player 2
+    
+    ld      ix, Player_2_Vars
+
+    ; restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
+    ld      hl, Y_BASE_PAGE_2
+    call    RestoreBg
+    
+    ; draw sprites on page 1
+    call    GetCurrentFrameAndGoToNext
+    
+    ld      a, R14_PAGE_1
+    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    call    DrawSprite
+
+
+
+
 
     ; --- update triple buffer vars
     ld      a, 1
@@ -215,18 +279,47 @@ Triple_Buffer_Step_1:
     ld      a, R2_PAGE_1
     call    SetActivePage
 
+
+
+
+
+
+    ; ------ player 1
+
     ld      ix, Player_1_Vars
 
-    ; --- restore bg on page 0
+    ; restore bg on page 0
     ld      hl, Y_BASE_PAGE_0
     call    RestoreBg
     
-    ; --- draw sprites on page 2
+    ; draw sprites on page 2
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_2
     ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
+
+
+
+    ; ------ player 2
+
+    ld      ix, Player_2_Vars
+
+    ; restore bg on page 0
+    ld      hl, Y_BASE_PAGE_0
+    call    RestoreBg
+    
+    ; draw sprites on page 2
+    call    GetCurrentFrameAndGoToNext
+    
+    ld      a, R14_PAGE_2
+    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    call    DrawSprite
+
+
+
+
+
 
     ; --- update triple buffer vars
     ld      a, 2
@@ -242,18 +335,45 @@ Triple_Buffer_Step_2:
     ld      a, R2_PAGE_2
     call    SetActivePage
 
+
+
+
+
+    ; ------ player 1
+
     ld      ix, Player_1_Vars
 
-    ; --- restore bg on page 1
+    ; restore bg on page 1
     ld      hl, Y_BASE_PAGE_1
     call    RestoreBg
     
-    ; --- draw sprites on page 0
+    ; draw sprites on page 0
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_0
     ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
+
+
+
+    ; ------ player 2
+
+    ld      ix, Player_2_Vars
+
+    ; restore bg on page 1
+    ld      hl, Y_BASE_PAGE_1
+    call    RestoreBg
+    
+    ; draw sprites on page 0
+    call    GetCurrentFrameAndGoToNext
+    
+    ld      a, R14_PAGE_0
+    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    call    DrawSprite
+
+
+
+
 
     ; --- update triple buffer vars
     xor     a

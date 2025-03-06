@@ -39,9 +39,24 @@ Player_1_Vars:
     .Restore_BG_Y:                      rb 1
     .Restore_BG_WidthInPixels:          rb 1
     .Restore_BG_HeightInPixels:         rb 1
-    ; CAUTION: put new vars only at the end
+
+; .size:  equ $ - Player_1_Vars
 
 
+
+Player_2_Vars:
+    .Animation_CurrentFrame_List:       rw 1
+    .Animation_CurrentFrame_Data:       rw 1
+    .Animation_FirstFrame_List:         rw 1
+    .Animation_FirstFrame_Data:         rw 1
+    .CurrentFrame_List_Addr:            rw 1
+    .CurrentFrame_Data_Addr:            rw 1
+    .CurrentFrame_MegaRomPage:          rb 1
+    .VRAM_NAMTBL_Addr:                  rw 1
+    .Restore_BG_X:                      rb 1
+    .Restore_BG_Y:                      rb 1
+    .Restore_BG_WidthInPixels:          rb 1
+    .Restore_BG_HeightInPixels:         rb 1
 
 
 ; ----------------------------

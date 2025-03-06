@@ -1,23 +1,23 @@
 
 
-Player_1_Animation_List:
-    dw Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List, Frame_0.List
-    dw Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List, Frame_1.List
-    dw Frame_2.List, Frame_2.List, Frame_2.List, Frame_2.List, Frame_2.List, Frame_2.List
-    dw Frame_3.List, Frame_3.List, Frame_3.List, Frame_3.List, Frame_3.List, Frame_3.List
-    dw Frame_4.List, Frame_4.List, Frame_4.List, Frame_4.List, Frame_4.List, Frame_4.List
-    dw Frame_5.List, Frame_5.List, Frame_5.List, Frame_5.List, Frame_5.List, Frame_5.List
-    dw Frame_6.List, Frame_6.List, Frame_6.List, Frame_6.List, Frame_6.List, Frame_6.List
+Scorpion_Stance_Left_Animation_List:
+    dw Frame_0.List, Frame_0.List, Frame_0.List
+    dw Frame_1.List, Frame_1.List, Frame_1.List
+    dw Frame_2.List, Frame_2.List, Frame_2.List
+    dw Frame_3.List, Frame_3.List, Frame_3.List
+    dw Frame_4.List, Frame_4.List, Frame_4.List
+    dw Frame_5.List, Frame_5.List, Frame_5.List
+    dw Frame_6.List, Frame_6.List, Frame_6.List
     dw 0 ; end of data
 
-Player_1_Animation_Data:
-    dw Frame_0.Data, Frame_0.Data, Frame_0.Data, Frame_0.Data, Frame_0.Data, Frame_0.Data
-    dw Frame_1.Data, Frame_1.Data, Frame_1.Data, Frame_1.Data, Frame_1.Data, Frame_1.Data
-    dw Frame_2.Data, Frame_2.Data, Frame_2.Data, Frame_2.Data, Frame_2.Data, Frame_2.Data
-    dw Frame_3.Data, Frame_3.Data, Frame_3.Data, Frame_3.Data, Frame_3.Data, Frame_3.Data
-    dw Frame_4.Data, Frame_4.Data, Frame_4.Data, Frame_4.Data, Frame_4.Data, Frame_4.Data
-    dw Frame_5.Data, Frame_5.Data, Frame_5.Data, Frame_5.Data, Frame_5.Data, Frame_5.Data
-    dw Frame_6.Data, Frame_6.Data, Frame_6.Data, Frame_6.Data, Frame_6.Data, Frame_6.Data
+Scorpion_Stance_Left_Animation_Data:
+    dw Frame_0.Data, Frame_0.Data, Frame_0.Data
+    dw Frame_1.Data, Frame_1.Data, Frame_1.Data
+    dw Frame_2.Data, Frame_2.Data, Frame_2.Data
+    dw Frame_3.Data, Frame_3.Data, Frame_3.Data
+    dw Frame_4.Data, Frame_4.Data, Frame_4.Data
+    dw Frame_5.Data, Frame_5.Data, Frame_5.Data
+    dw Frame_6.Data, Frame_6.Data, Frame_6.Data
     dw 0 ; end of data
 
 ; --- Slice index list

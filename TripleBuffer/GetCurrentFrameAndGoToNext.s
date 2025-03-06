@@ -1,6 +1,9 @@
 
 ; Inputs:
 ;   IX: Player Vars base addr
+; Outputs:
+;   HL: Player current frame list addr
+;   IY: Player current frame data addr
 GetCurrentFrameAndGoToNext:
 
     ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
@@ -13,7 +16,11 @@ GetCurrentFrameAndGoToNext:
     ld      h, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1)
     
     ;ld      iy, Frame_0.Data
-    ld      iy, (Player_1_Vars.CurrentFrame_Data_Addr)
+    ; ld      iy, (Player_1_Vars.CurrentFrame_Data_Addr)
+    ld      a, (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars))
+    ld      iyl, a
+    ld      a, (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars) + 1)
+    ld      iyh, a
 
 
     
