@@ -27,6 +27,17 @@ MEGAROM_PAGE_SCORPION_DATA_0: equ 3
 	org	0x8000, 0xBFFF
 Scorpion_Data_Start:
     INCLUDE "Data/scorpion/scorpion_data.s"
-Scorpion_Data_Start_size:      equ $ - Scorpion_Data_Start ; 03270
+Scorpion_Data_Start_size:      equ $ - Scorpion_Data_Start ; 0x3270
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 4 -------------------------------------------------
+
+MEGAROM_PAGE_SUBZERO_DATA_0: equ 4
+
+	org	0x8000, 0xBFFF
+Subzero_Data_Start:
+    INCLUDE "Data/subzero/subzero_data.s"
+Subzero_Data_Start_size:      equ $ - Subzero_Data_Start ; 0x2F5A (only 7 frames)
 
 	ds PageSize - ($ - 0x8000), 255

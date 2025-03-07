@@ -100,10 +100,10 @@ Execute:
 
     ; ----- init player 1
 
-    ld      hl, Frame_0.List
+    ld      hl, Scorpion_Stance_Left_Frame_0.List
     ld      (Player_1_Vars.CurrentFrame_List_Addr), hl
 
-    ld      hl, Frame_0.Data
+    ld      hl, Scorpion_Stance_Left_Frame_0.Data
     ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
 
     ld      hl, Scorpion_Stance_Left_Animation_List
@@ -136,16 +136,16 @@ Execute:
 
     ; ----- init player 2
 
-    ld      hl, Frame_0.List
+    ld      hl, Subzero_Stance_Right_Frame_0.List
     ld      (Player_2_Vars.CurrentFrame_List_Addr), hl
 
-    ld      hl, Frame_0.Data
+    ld      hl, Subzero_Stance_Right_Frame_0.Data
     ld      (Player_2_Vars.CurrentFrame_Data_Addr), hl
 
-    ld      hl, Scorpion_Stance_Left_Animation_List
+    ld      hl, Subzero_Stance_Right_Animation_List
     ld      (Player_2_Vars.Animation_CurrentFrame_List), hl
     ld      (Player_2_Vars.Animation_FirstFrame_List), hl
-    ld      hl, Scorpion_Stance_Left_Animation_Data
+    ld      hl, Subzero_Stance_Right_Animation_Data
     ld      (Player_2_Vars.Animation_CurrentFrame_Data), hl
     ld      (Player_2_Vars.Animation_FirstFrame_Data), hl
 
@@ -153,7 +153,7 @@ Execute:
 
     ; TODO: get these values from frame header
 
-    ld      a, MEGAROM_PAGE_SCORPION_DATA_0
+    ld      a, MEGAROM_PAGE_SUBZERO_DATA_0
     ld      (Player_2_Vars.CurrentFrame_MegaRomPage), a
 
     ld      a, 192 - (58/2)
@@ -166,7 +166,7 @@ Execute:
     ld      (Player_2_Vars.Restore_BG_HeightInPixels), a
 
 
-    ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
+    ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 192 - (58/2); line number 100
     ld      (Player_2_Vars.VRAM_NAMTBL_Addr), hl
 
 

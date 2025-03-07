@@ -42,6 +42,7 @@ RestoreBg:
     ld      h, 0
     ; ld      a, (Player_1_Vars.Restore_BG_HeightInPixels)
     ld      a, (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars))
+    ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Lines), hl
 
     ; .Source_X:   dw    0 	            ; Source X (9 bits)
