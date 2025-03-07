@@ -124,4 +124,12 @@
 	db	14,	4	dw	1070
 	db	114,	4	dw	1074
 	db	14,	5	dw	1078
+	db	113,	5	dw	1083
+	db	16,	4	dw	1088
+	db	112,	5	dw	1092
+	db	16,	4	dw	1097
+	db	112,	4	dw	1101
+	db	16,	4	dw	1105
+	db	112,	4	dw	1109
+	db	17,	2	dw	1113
 	db  0 ; end of frame

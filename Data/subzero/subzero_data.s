@@ -6,6 +6,9 @@ Subzero_Stance_Right_Animation_List:
     dw Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List
     dw Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List
     dw Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List
+    dw Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List
+    dw Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List
+    ; dw Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List
     dw 0 ; end of data
 
 Subzero_Stance_Right_Animation_Data:
@@ -16,6 +19,9 @@ Subzero_Stance_Right_Animation_Data:
     dw Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data
     dw Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data
     dw Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data
+    dw Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data
+    dw Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data
+    ; dw Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data
     dw 0 ; end of data
 
 
@@ -53,3 +59,18 @@ Subzero_Stance_Right_Frame_6:
     .Header:    INCLUDE "Data/subzero/stance/right/subzero_frame_6_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
     .List:      INCLUDE "Data/subzero/stance/right/subzero_frame_6_list.s"
     .Data:      INCLUDE "Data/subzero/stance/right/subzero_frame_6_data.s"
+
+Subzero_Stance_Right_Frame_7:
+    .Header:    INCLUDE "Data/subzero/stance/right/subzero_frame_7_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
+    .List:      INCLUDE "Data/subzero/stance/right/subzero_frame_7_list.s"
+    .Data:      INCLUDE "Data/subzero/stance/right/subzero_frame_7_data.s"
+
+Subzero_Stance_Right_Frame_8:
+    .Header:    INCLUDE "Data/subzero/stance/right/subzero_frame_8_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
+    .List:      INCLUDE "Data/subzero/stance/right/subzero_frame_8_list.s"
+    .Data:      INCLUDE "Data/subzero/stance/right/subzero_frame_8_data.s"
+
+; Subzero_Stance_Right_Frame_9:
+;     .Header:    INCLUDE "Data/subzero/stance/right/subzero_frame_9_header.s" ; dw yOffset; db width; db height; db MEgaROM page number
+;     .List:      INCLUDE "Data/subzero/stance/right/subzero_frame_9_list.s"
+;     .Data:      INCLUDE "Data/subzero/stance/right/subzero_frame_9_data.s"
