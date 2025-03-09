@@ -1,25 +1,4 @@
 
-
-Scorpion_Stance_Left_Animation_List:
-    dw Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List
-    dw Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List
-    dw Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List
-    dw Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List
-    dw Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List
-    dw Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List
-    dw Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List
-    dw 0 ; end of data
-
-Scorpion_Stance_Left_Animation_Data:
-    dw Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data
-    dw Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data
-    dw Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data
-    dw Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data
-    dw Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data
-    dw Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data
-    dw Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data
-    dw 0 ; end of data
-
 ; --- Slice index list
 ; increment in bytes, length in bytes, address of the slice on the Data
 

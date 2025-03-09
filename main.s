@@ -98,7 +98,7 @@ Execute:
     xor     a
     ld      (TripleBuffer_Vars.Step), a
 
-    ; ----- init player 1
+    ; ------------ init player 1
 
     ld      hl, Scorpion_Stance_Left_Frame_0.List
     ld      (Player_1_Vars.CurrentFrame_List_Addr), hl
@@ -106,6 +106,8 @@ Execute:
     ld      hl, Scorpion_Stance_Left_Frame_0.Data
     ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
 
+    xor     a
+    ld      (Player_1_Vars.Animation_Current_Frame_Number), a
     ld      hl, Scorpion_Stance_Left_Animation_List
     ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
     ld      (Player_1_Vars.Animation_FirstFrame_List), hl
@@ -134,7 +136,7 @@ Execute:
     ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
 
-    ; ----- init player 2
+    ; ------------ init player 2
 
     ld      hl, Subzero_Stance_Right_Frame_0.List
     ld      (Player_2_Vars.CurrentFrame_List_Addr), hl
@@ -142,6 +144,8 @@ Execute:
     ld      hl, Subzero_Stance_Right_Frame_0.Data
     ld      (Player_2_Vars.CurrentFrame_Data_Addr), hl
 
+    xor     a
+    ld      (Player_2_Vars.Animation_Current_Frame_Number), a
     ld      hl, Subzero_Stance_Right_Animation_List
     ld      (Player_2_Vars.Animation_CurrentFrame_List), hl
     ld      (Player_2_Vars.Animation_FirstFrame_List), hl
@@ -452,9 +456,69 @@ Restore_BG_HMMM_Parameters:
 .Command:    db    VDP_COMMAND_HMMM
 Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
+; ----------------------------------------------------------
+
+
+Scorpion_Stance_Left_Animation_List:
+    dw Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List
+    dw Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List
+    dw Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List
+    dw Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List
+    dw Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List
+    dw Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List
+    dw Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List
+    dw 255 ; end of data
+
+Scorpion_Stance_Left_Animation_Data:
+    dw Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data
+    dw Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data
+    dw Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data
+    dw Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data
+    dw Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data
+    dw Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data
+    dw Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data
+    dw 255 ; end of data
+
+
+
+Subzero_Stance_Right_Animation_List:
+    dw Subzero_Stance_Right_Frame_0.List, Subzero_Stance_Right_Frame_0.List, Subzero_Stance_Right_Frame_0.List
+    dw Subzero_Stance_Right_Frame_1.List, Subzero_Stance_Right_Frame_1.List, Subzero_Stance_Right_Frame_1.List
+    dw Subzero_Stance_Right_Frame_2.List, Subzero_Stance_Right_Frame_2.List, Subzero_Stance_Right_Frame_2.List
+    dw Subzero_Stance_Right_Frame_3.List, Subzero_Stance_Right_Frame_3.List, Subzero_Stance_Right_Frame_3.List
+    dw Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List
+    dw Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List
+    dw Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List
+    dw Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List
+    dw Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List
+    dw 255 ; end of data
+    ; dw Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List
+    ; dw Subzero_Stance_Right_Frame_10.List, Subzero_Stance_Right_Frame_10.List, Subzero_Stance_Right_Frame_10.List
+    ; dw Subzero_Stance_Right_Frame_11.List, Subzero_Stance_Right_Frame_11.List, Subzero_Stance_Right_Frame_11.List
+    ; dw Subzero_Stance_Right_Frame_12.List, Subzero_Stance_Right_Frame_12.List, Subzero_Stance_Right_Frame_12.List
+    ; dw 255 ; end of data
+
+Subzero_Stance_Right_Animation_Data:
+    dw Subzero_Stance_Right_Frame_0.Data, Subzero_Stance_Right_Frame_0.Data, Subzero_Stance_Right_Frame_0.Data
+    dw Subzero_Stance_Right_Frame_1.Data, Subzero_Stance_Right_Frame_1.Data, Subzero_Stance_Right_Frame_1.Data
+    dw Subzero_Stance_Right_Frame_2.Data, Subzero_Stance_Right_Frame_2.Data, Subzero_Stance_Right_Frame_2.Data
+    dw Subzero_Stance_Right_Frame_3.Data, Subzero_Stance_Right_Frame_3.Data, Subzero_Stance_Right_Frame_3.Data
+    dw Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data
+    dw Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data
+    dw Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data
+    dw Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data
+    dw Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data
+    dw 255 ; end of data
+    ; dw Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data
+    ; dw Subzero_Stance_Right_Frame_10.Data, Subzero_Stance_Right_Frame_10.Data, Subzero_Stance_Right_Frame_10.Data
+    ; dw Subzero_Stance_Right_Frame_11.Data, Subzero_Stance_Right_Frame_11.Data, Subzero_Stance_Right_Frame_11.Data
+    ; dw Subzero_Stance_Right_Frame_12.Data, Subzero_Stance_Right_Frame_12.Data, Subzero_Stance_Right_Frame_12.Data
+    ; dw 255 ; end of data
 
 
     db      "End ROM started at 0x4000"
+
+Page_0x4000_size: equ $ - Execute ; 0x0216
 
 	ds PageSize - ($ - 0x4000), 255	; Fill the unused area with 0xFF
 

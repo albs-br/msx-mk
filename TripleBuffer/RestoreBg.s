@@ -5,6 +5,8 @@
 ;   IX: Player Vars base addr
 RestoreBg:
 
+    ; Set HMMM command parameters based on Player Vars and execute it
+
     ; ; Destiny_Y = Y of base of page + Player.Restore_BG_Y
     ld      d, 0
     ; ld      a, (Player_1_Vars.Restore_BG_Y)

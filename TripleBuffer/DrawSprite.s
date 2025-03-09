@@ -4,7 +4,7 @@
 ;   HL: addr of frame list
 ;   IY: addr of frame data
 ;   DE: VRAM NAMTBL addr position
-;   IX: Player Vars base addr
+;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
 
     push    af
@@ -13,30 +13,44 @@ DrawSprite:
         ld	    (Seg_P8000_SW), a
     pop     af
 
-
+    ; ; get megaROM page number from header, save to player vars and switch to the page
+    ; dec     hl
+    ;     ld      a, (hl)
+    ;     ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
+    ;     ld	    (Seg_P8000_SW), a
+    ; inc     hl
     
     push    af, hl
         
-        ; HL -= 5
-        ld      bc, 5 ; frame header is 5 bytes before frame list
-        xor     a
-        sbc     hl, bc
-        
-        ; --- adjust VRAM NAMTBL address based on yOffset
-        
-        ; HL = (HL)
-        ld      a, (hl)
-        ld      c, a
-        inc     hl
-        ld      a, (hl)
-        ld      h, a
-        ld      l, c
+        ; header: ;		yOffset (word), width (byte), height (byte), megaROM page
 
-        ; ---- DE += HL
-        add     hl, de ; HL = HL + DE
-        ; DE = HL
-        ex      de, hl
+        ;push    hl
+            ; HL -= 5
+            ld      bc, 5 ; frame header is 5 bytes before frame list
+            xor     a
+            sbc     hl, bc
+            
+            ; --- adjust VRAM NAMTBL address based on yOffset
+        
+            ; HL = (HL)     (yOffset)
+            ld      a, (hl)
+            ld      c, a
+            inc     hl
+            ld      a, (hl)
+            ld      h, a
+            ld      l, c
 
+            ; ---- DE += HL         NAMTBL_Addr += yOffset
+            add     hl, de ; HL = HL + DE
+            ex      de, hl ; DE = HL
+        ;pop     hl
+
+        ; ; get megaROM page number from header, save to player vars and switch to the page
+        ; dec     hl
+        ; ld      a, (hl)
+        ; ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
+        ; ;ld	    (Seg_P8000_SW), a
+; JP $
     pop     hl, af
 
     ld      (TripleBuffer_Vars.BaseDataAddr), iy
@@ -142,6 +156,16 @@ DrawSprite:
     ; ---
 
 .endFrame:
+
+    ; ; get megaROM page of next frame from IX
+    ; ld      l, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars))
+    ; ld      h, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1)
+
+    ; dec     hl ; back one address to the last position of header
+    ; ld      a, (hl)
+
+    ; ; save it to player vars
+    ; ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
 
     ret
 

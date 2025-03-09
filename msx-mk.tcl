@@ -10,3 +10,9 @@ ram_watch   add     0xc002      -type byte      -desc Step      -format dec
 #ram_watch   add     0xc00c      -type word      -desc HMMM.D_Y      -format dec
 #ram_watch   add     0xc00e      -type word      -desc HMMM.Cols      -format dec
 #ram_watch   add     0xc010      -type word      -desc HMMM.Lines     -format dec
+
+
+ram_watch   add     0xc029      -type byte      -desc P2_curr_frame     -format dec
+
+
+#Player_2_Vars.Animation_Current_Frame_Number: equ 0C029h ; last def. pass 3

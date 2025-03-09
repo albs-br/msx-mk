@@ -27,6 +27,7 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 
 ; ----------------------------
 Player_1_Vars:
+    .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_List:       rw 1
     .Animation_CurrentFrame_Data:       rw 1
     .Animation_FirstFrame_List:         rw 1
@@ -45,6 +46,7 @@ Player_1_Vars:
 
 
 Player_2_Vars:
+    .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_List:       rw 1
     .Animation_CurrentFrame_Data:       rw 1
     .Animation_FirstFrame_List:         rw 1

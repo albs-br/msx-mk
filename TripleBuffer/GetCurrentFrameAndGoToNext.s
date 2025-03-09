@@ -6,9 +6,11 @@
 ;   IY: Player current frame data addr
 GetCurrentFrameAndGoToNext:
 
-    ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
-    ld      a, (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars))
-    ld	    (Seg_P8000_SW), a
+    ; ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
+    ; ld      a, (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars))
+    ; ld	    (Seg_P8000_SW), a
+
+
 
     ;ld      hl, Frame_0.List
     ; ld      hl, (Player_1_Vars.CurrentFrame_List_Addr)
@@ -38,8 +40,10 @@ GetCurrentFrameAndGoToNext:
         inc     de
         inc     de
 
+        inc      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars))
+
         ld      a, (hl)
-        or      a
+        inc     a ; if (next frame == 255) returnToFirstFrame
         jp      z, .returnToFirstFrame
 
         jp      .continue
@@ -51,6 +55,9 @@ GetCurrentFrameAndGoToNext:
         ; ld      de, Player_1_Animation_Data
         ld      e, (ix + (Player_1_Vars.Animation_FirstFrame_Data - Player_1_Vars))
         ld      d, (ix + (Player_1_Vars.Animation_FirstFrame_Data - Player_1_Vars) + 1)
+
+        xor     a
+        ld      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars)), a
 
 .continue:
 
@@ -85,5 +92,13 @@ GetCurrentFrameAndGoToNext:
         ld      (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars) + 1), h
 
     pop     hl
+
+    ; ; get megaROM page number from header, save to player vars and switch to the page
+    ; dec     hl  ; 
+    ;     ld      a, (hl)
+    ;     ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
+    ;     ld	    (Seg_P8000_SW), a
+    ; inc     hl
+
 
     ret
