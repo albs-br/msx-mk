@@ -476,12 +476,12 @@ Subzero_Stance_Right_Animation_Headers:
     dw Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header
     dw Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header
     dw Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header
-    dw 0x0000 ; end of data
-    ; dw Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header
-    ; dw Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header
-    ; dw Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header
-    ; dw Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header
     ; dw 0x0000 ; end of data
+    dw Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header
+    dw Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header
+    dw Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header
+    dw Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header
+    dw 0x0000 ; end of data
 
 
 

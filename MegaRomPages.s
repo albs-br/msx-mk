@@ -45,6 +45,8 @@ MEGAROM_PAGE_SUBZERO_DATA_0: equ 4
 
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frames_0_to_8_data_and_list.s"
 
+MegaROM_Page_4_size: equ $ - 0x8000
+
 	ds PageSize - ($ - 0x8000), 255
 
 ; ------------------------------------------------- Page 5 -------------------------------------------------
@@ -53,6 +55,6 @@ MEGAROM_PAGE_SUBZERO_DATA_1: equ 5
 
 	org	0x8000, 0xBFFF
 
-    ; INCLUDE "Data/subzero/stance/right/subzero_stance_right_frames_9_to_12_data_and_list.s"
+    INCLUDE "Data/subzero/stance/right/subzero_stance_right_frames_9_to_12_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255
