@@ -100,40 +100,40 @@ Execute:
 
     ; ------------ init player 1
 
-    ld      hl, Scorpion_Stance_Left_Frame_0.List
-    ld      (Player_1_Vars.CurrentFrame_List_Addr), hl
+    ; ld      hl, Scorpion_Stance_Left_Frame_0.List
+    ; ld      (Player_1_Vars.CurrentFrame_List_Addr), hl
 
-    ld      hl, Scorpion_Stance_Left_Frame_0.Data
-    ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
+    ; ld      hl, Scorpion_Stance_Left_Frame_0.Data
+    ; ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
 
-    xor     a
-    ld      (Player_1_Vars.Animation_Current_Frame_Number), a
-    ld      hl, Scorpion_Stance_Left_Animation_List
-    ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
-    ld      (Player_1_Vars.Animation_FirstFrame_List), hl
-    ld      hl, Scorpion_Stance_Left_Animation_Data
-    ld      (Player_1_Vars.Animation_CurrentFrame_Data), hl
-    ld      (Player_1_Vars.Animation_FirstFrame_Data), hl
-
-
-
-    ; TODO: get these values from frame header
-
-    ld      a, MEGAROM_PAGE_SCORPION_DATA_0
-    ld      (Player_1_Vars.CurrentFrame_MegaRomPage), a
-
-    ld      a, 64 - (58/2)
-    ld      (Player_1_Vars.Restore_BG_X), a
-    ld      a, 100
-    ld      (Player_1_Vars.Restore_BG_Y), a
-    ld      a, 58
-    ld      (Player_1_Vars.Restore_BG_WidthInPixels), a
-    ld      a, 105
-    ld      (Player_1_Vars.Restore_BG_HeightInPixels), a
+    ; xor     a
+    ; ld      (Player_1_Vars.Animation_Current_Frame_Number), a
+    ; ld      hl, Scorpion_Stance_Left_Animation_List
+    ; ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
+    ; ld      (Player_1_Vars.Animation_FirstFrame_List), hl
+    ; ld      hl, Scorpion_Stance_Left_Animation_Data
+    ; ld      (Player_1_Vars.Animation_CurrentFrame_Data), hl
+    ; ld      (Player_1_Vars.Animation_FirstFrame_Data), hl
 
 
-    ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
-    ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
+
+    ; ; TODO: get these values from frame header
+
+    ; ld      a, MEGAROM_PAGE_SCORPION_DATA_0
+    ; ld      (Player_1_Vars.CurrentFrame_MegaRomPage), a
+
+    ; ld      a, 64 - (58/2)
+    ; ld      (Player_1_Vars.Restore_BG_X), a
+    ; ld      a, 100
+    ; ld      (Player_1_Vars.Restore_BG_Y), a
+    ; ld      a, 58
+    ; ld      (Player_1_Vars.Restore_BG_WidthInPixels), a
+    ; ld      a, 105
+    ; ld      (Player_1_Vars.Restore_BG_HeightInPixels), a
+
+
+    ; ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
+    ; ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
 
     ; ------------ init player 2
@@ -141,24 +141,18 @@ Execute:
     ld      hl, Subzero_Stance_Right_Frame_0.List
     ld      (Player_2_Vars.CurrentFrame_List_Addr), hl
 
-    ld      hl, Subzero_Stance_Right_Frame_0.Data
-    ld      (Player_2_Vars.CurrentFrame_Data_Addr), hl
-
     xor     a
     ld      (Player_2_Vars.Animation_Current_Frame_Number), a
-    ld      hl, Subzero_Stance_Right_Animation_List
-    ld      (Player_2_Vars.Animation_CurrentFrame_List), hl
-    ld      (Player_2_Vars.Animation_FirstFrame_List), hl
-    ld      hl, Subzero_Stance_Right_Animation_Data
-    ld      (Player_2_Vars.Animation_CurrentFrame_Data), hl
-    ld      (Player_2_Vars.Animation_FirstFrame_Data), hl
+    ld      hl, Subzero_Stance_Right_Animation_Headers
+    ld      (Player_2_Vars.Animation_CurrentFrame_Header), hl
+    ld      (Player_2_Vars.Animation_FirstFrame_Header), hl
 
 
 
     ; TODO: get these values from frame header
 
-    ld      a, MEGAROM_PAGE_SUBZERO_DATA_0
-    ld      (Player_2_Vars.CurrentFrame_MegaRomPage), a
+    ; ld      a, MEGAROM_PAGE_SUBZERO_DATA_0
+    ; ld      (Player_2_Vars.CurrentFrame_MegaRomPage), a
 
     ld      a, 192 - (58/2)
     ld      (Player_2_Vars.Restore_BG_X), a
@@ -231,20 +225,20 @@ Triple_Buffer_Step_0:
 
 
 
-    ; ------ player 1
+    ; ; ------ player 1
     
-    ld      ix, Player_1_Vars
+    ; ld      ix, Player_1_Vars
 
-    ; restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
-    ld      hl, Y_BASE_PAGE_2
-    call    RestoreBg
+    ; ; restore bg on page 2 (first we trigger VDP command to get some parallel access to VRAM)
+    ; ld      hl, Y_BASE_PAGE_2
+    ; call    RestoreBg
     
-    ; draw sprites on page 1
-    call    GetCurrentFrameAndGoToNext
+    ; ; draw sprites on page 1
+    ; call    GetCurrentFrameAndGoToNext
     
-    ld      a, R14_PAGE_1
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
-    call    DrawSprite
+    ; ld      a, R14_PAGE_1
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; call    DrawSprite
 
 
 
@@ -288,20 +282,20 @@ Triple_Buffer_Step_1:
 
 
 
-    ; ------ player 1
+    ; ; ------ player 1
 
-    ld      ix, Player_1_Vars
+    ; ld      ix, Player_1_Vars
 
-    ; restore bg on page 0
-    ld      hl, Y_BASE_PAGE_0
-    call    RestoreBg
+    ; ; restore bg on page 0
+    ; ld      hl, Y_BASE_PAGE_0
+    ; call    RestoreBg
     
-    ; draw sprites on page 2
-    call    GetCurrentFrameAndGoToNext
+    ; ; draw sprites on page 2
+    ; call    GetCurrentFrameAndGoToNext
     
-    ld      a, R14_PAGE_2
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
-    call    DrawSprite
+    ; ld      a, R14_PAGE_2
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; call    DrawSprite
 
 
 
@@ -343,20 +337,20 @@ Triple_Buffer_Step_2:
 
 
 
-    ; ------ player 1
+    ; ; ------ player 1
 
-    ld      ix, Player_1_Vars
+    ; ld      ix, Player_1_Vars
 
-    ; restore bg on page 1
-    ld      hl, Y_BASE_PAGE_1
-    call    RestoreBg
+    ; ; restore bg on page 1
+    ; ld      hl, Y_BASE_PAGE_1
+    ; call    RestoreBg
     
-    ; draw sprites on page 0
-    call    GetCurrentFrameAndGoToNext
+    ; ; draw sprites on page 0
+    ; call    GetCurrentFrameAndGoToNext
     
-    ld      a, R14_PAGE_0
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
-    call    DrawSprite
+    ; ld      a, R14_PAGE_0
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; call    DrawSprite
 
 
 
@@ -458,62 +452,38 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 ; ----------------------------------------------------------
 
-
-Scorpion_Stance_Left_Animation_List:
-    dw Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List, Scorpion_Stance_Left_Frame_0.List
-    dw Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List, Scorpion_Stance_Left_Frame_1.List
-    dw Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List, Scorpion_Stance_Left_Frame_2.List
-    dw Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List, Scorpion_Stance_Left_Frame_3.List
-    dw Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List, Scorpion_Stance_Left_Frame_4.List
-    dw Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List, Scorpion_Stance_Left_Frame_5.List
-    dw Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List, Scorpion_Stance_Left_Frame_6.List
-    dw 255 ; end of data
-
-Scorpion_Stance_Left_Animation_Data:
-    dw Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data, Scorpion_Stance_Left_Frame_0.Data
-    dw Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data, Scorpion_Stance_Left_Frame_1.Data
-    dw Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data, Scorpion_Stance_Left_Frame_2.Data
-    dw Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data, Scorpion_Stance_Left_Frame_3.Data
-    dw Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data, Scorpion_Stance_Left_Frame_4.Data
-    dw Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data, Scorpion_Stance_Left_Frame_5.Data
-    dw Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data, Scorpion_Stance_Left_Frame_6.Data
-    dw 255 ; end of data
+; Scorpion_Stance_Left_Animation_Headers:
+;     dw Scorpion_Stance_Left_Frame_0.Header, Scorpion_Stance_Left_Frame_0.Header, Scorpion_Stance_Left_Frame_0.Header
+;     dw Scorpion_Stance_Left_Frame_1.Header, Scorpion_Stance_Left_Frame_1.Header, Scorpion_Stance_Left_Frame_1.Header
+;     dw Scorpion_Stance_Left_Frame_2.Header, Scorpion_Stance_Left_Frame_2.Header, Scorpion_Stance_Left_Frame_2.Header
+;     dw Scorpion_Stance_Left_Frame_3.Header, Scorpion_Stance_Left_Frame_3.Header, Scorpion_Stance_Left_Frame_3.Header
+;     dw Scorpion_Stance_Left_Frame_4.Header, Scorpion_Stance_Left_Frame_4.Header, Scorpion_Stance_Left_Frame_4.Header
+;     dw Scorpion_Stance_Left_Frame_5.Header, Scorpion_Stance_Left_Frame_5.Header, Scorpion_Stance_Left_Frame_5.Header
+;     dw Scorpion_Stance_Left_Frame_6.Header, Scorpion_Stance_Left_Frame_6.Header, Scorpion_Stance_Left_Frame_6.Header
+    dw 0x0000 ; end of data
 
 
 
-Subzero_Stance_Right_Animation_List:
-    dw Subzero_Stance_Right_Frame_0.List, Subzero_Stance_Right_Frame_0.List, Subzero_Stance_Right_Frame_0.List
-    dw Subzero_Stance_Right_Frame_1.List, Subzero_Stance_Right_Frame_1.List, Subzero_Stance_Right_Frame_1.List
-    dw Subzero_Stance_Right_Frame_2.List, Subzero_Stance_Right_Frame_2.List, Subzero_Stance_Right_Frame_2.List
-    dw Subzero_Stance_Right_Frame_3.List, Subzero_Stance_Right_Frame_3.List, Subzero_Stance_Right_Frame_3.List
-    dw Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List, Subzero_Stance_Right_Frame_4.List
-    dw Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List, Subzero_Stance_Right_Frame_5.List
-    dw Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List, Subzero_Stance_Right_Frame_6.List
-    dw Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List, Subzero_Stance_Right_Frame_7.List
-    dw Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List, Subzero_Stance_Right_Frame_8.List
-    dw 255 ; end of data
-    ; dw Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List, Subzero_Stance_Right_Frame_9.List
-    ; dw Subzero_Stance_Right_Frame_10.List, Subzero_Stance_Right_Frame_10.List, Subzero_Stance_Right_Frame_10.List
-    ; dw Subzero_Stance_Right_Frame_11.List, Subzero_Stance_Right_Frame_11.List, Subzero_Stance_Right_Frame_11.List
-    ; dw Subzero_Stance_Right_Frame_12.List, Subzero_Stance_Right_Frame_12.List, Subzero_Stance_Right_Frame_12.List
-    ; dw 255 ; end of data
 
-Subzero_Stance_Right_Animation_Data:
-    dw Subzero_Stance_Right_Frame_0.Data, Subzero_Stance_Right_Frame_0.Data, Subzero_Stance_Right_Frame_0.Data
-    dw Subzero_Stance_Right_Frame_1.Data, Subzero_Stance_Right_Frame_1.Data, Subzero_Stance_Right_Frame_1.Data
-    dw Subzero_Stance_Right_Frame_2.Data, Subzero_Stance_Right_Frame_2.Data, Subzero_Stance_Right_Frame_2.Data
-    dw Subzero_Stance_Right_Frame_3.Data, Subzero_Stance_Right_Frame_3.Data, Subzero_Stance_Right_Frame_3.Data
-    dw Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data, Subzero_Stance_Right_Frame_4.Data
-    dw Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data, Subzero_Stance_Right_Frame_5.Data
-    dw Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data, Subzero_Stance_Right_Frame_6.Data
-    dw Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data, Subzero_Stance_Right_Frame_7.Data
-    dw Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data, Subzero_Stance_Right_Frame_8.Data
-    dw 255 ; end of data
-    ; dw Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data, Subzero_Stance_Right_Frame_9.Data
-    ; dw Subzero_Stance_Right_Frame_10.Data, Subzero_Stance_Right_Frame_10.Data, Subzero_Stance_Right_Frame_10.Data
-    ; dw Subzero_Stance_Right_Frame_11.Data, Subzero_Stance_Right_Frame_11.Data, Subzero_Stance_Right_Frame_11.Data
-    ; dw Subzero_Stance_Right_Frame_12.Data, Subzero_Stance_Right_Frame_12.Data, Subzero_Stance_Right_Frame_12.Data
-    ; dw 255 ; end of data
+
+Subzero_Stance_Right_Animation_Headers:
+    dw Subzero_Stance_Right_Frame_0_Header, Subzero_Stance_Right_Frame_0_Header, Subzero_Stance_Right_Frame_0_Header
+    dw Subzero_Stance_Right_Frame_1_Header, Subzero_Stance_Right_Frame_1_Header, Subzero_Stance_Right_Frame_1_Header
+    dw Subzero_Stance_Right_Frame_2_Header, Subzero_Stance_Right_Frame_2_Header, Subzero_Stance_Right_Frame_2_Header
+    dw Subzero_Stance_Right_Frame_3_Header, Subzero_Stance_Right_Frame_3_Header, Subzero_Stance_Right_Frame_3_Header
+    dw Subzero_Stance_Right_Frame_4_Header, Subzero_Stance_Right_Frame_4_Header, Subzero_Stance_Right_Frame_4_Header
+    dw Subzero_Stance_Right_Frame_5_Header, Subzero_Stance_Right_Frame_5_Header, Subzero_Stance_Right_Frame_5_Header
+    dw Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header
+    dw Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header
+    dw Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header
+    dw 0x0000 ; end of data
+    ; dw Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header
+    ; dw Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header
+    ; dw Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header
+    ; dw Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header
+    ; dw 0x0000 ; end of data
+
+
 
 
     db      "End ROM started at 0x4000"

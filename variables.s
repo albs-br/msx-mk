@@ -10,7 +10,7 @@ Last_NAMTBL_Addr:   rw 1
 ;   2         2               0                       1
 TripleBuffer_Vars:
     .Step:                  rb 1
-    .BaseDataAddr:          rw 1
+    ; .BaseDataAddr:          rw 1
     .R14_Value:             rb 1
 
 TripleBuffer_Vars_RestoreBG_HMMM_Command:
@@ -26,14 +26,12 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 
 
 ; ----------------------------
+
 Player_1_Vars:
     .Animation_Current_Frame_Number:    rb 1
-    .Animation_CurrentFrame_List:       rw 1
-    .Animation_CurrentFrame_Data:       rw 1
-    .Animation_FirstFrame_List:         rw 1
-    .Animation_FirstFrame_Data:         rw 1
+    .Animation_CurrentFrame_Header:       rw 1
+    .Animation_FirstFrame_Header:         rw 1
     .CurrentFrame_List_Addr:            rw 1
-    .CurrentFrame_Data_Addr:            rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
@@ -47,12 +45,9 @@ Player_1_Vars:
 
 Player_2_Vars:
     .Animation_Current_Frame_Number:    rb 1
-    .Animation_CurrentFrame_List:       rw 1
-    .Animation_CurrentFrame_Data:       rw 1
-    .Animation_FirstFrame_List:         rw 1
-    .Animation_FirstFrame_Data:         rw 1
+    .Animation_CurrentFrame_Header:       rw 1
+    .Animation_FirstFrame_Header:         rw 1
     .CurrentFrame_List_Addr:            rw 1
-    .CurrentFrame_Data_Addr:            rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1

@@ -2,103 +2,82 @@
 ; Inputs:
 ;   IX: Player Vars base addr
 ; Outputs:
-;   HL: Player current frame list addr
-;   IY: Player current frame data addr
+;   IY: Player current frame header addr
 GetCurrentFrameAndGoToNext:
 
-    ; ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
-    ; ld      a, (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars))
-    ; ld	    (Seg_P8000_SW), a
-
-
-
-    ;ld      hl, Frame_0.List
-    ; ld      hl, (Player_1_Vars.CurrentFrame_List_Addr)
-    ld      l, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars))
-    ld      h, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1)
-    
-    ;ld      iy, Frame_0.Data
-    ; ld      iy, (Player_1_Vars.CurrentFrame_Data_Addr)
-    ld      a, (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars))
+    ; IY = current frame header addr
+    ld      l, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars))
+    ld      h, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1)
+    ld      a, (hl)
     ld      iyl, a
-    ld      a, (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars) + 1)
+    inc     hl
+    ld      a, (hl)
     ld      iyh, a
 
+;jp $ ; debug
+; IY value here is 0xB680 (= Subzero_Stance_Right_Frame_0_Header) OK
 
+    ; ; HL = current frame list addr
+    ; ld      l, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars))
+    ; ld      h, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1)
+    
     
     ; go to next frame
-    push    hl
-        ; ld      hl, (Player_1_Vars.Animation_CurrentFrame_List)
-        ld      l, (ix + (Player_1_Vars.Animation_CurrentFrame_List - Player_1_Vars))
-        ld      h, (ix + (Player_1_Vars.Animation_CurrentFrame_List - Player_1_Vars) + 1)
+    ; push    hl
+        ; HL = (Animation_CurrentFrame_Header)
+        ld      l, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars))
+        ld      h, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1)
+
+; jp $ ; debug
+; HL here = 0x45af (= Subzero_Stance_Right_Animation_Headers) OK
+
+        ; HL++
         inc     hl
         inc     hl
 
-        ; ld      de, (Player_1_Vars.Animation_CurrentFrame_Data)
-        ld      e, (ix + (Player_1_Vars.Animation_CurrentFrame_Data - Player_1_Vars))
-        ld      d, (ix + (Player_1_Vars.Animation_CurrentFrame_Data - Player_1_Vars) + 1)
-        inc     de
-        inc     de
-
+        ; Animation_Current_Frame_Number++
         inc      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars))
 
+        inc     hl      ; read high byte
         ld      a, (hl)
-        inc     a ; if (next frame == 255) returnToFirstFrame
+        dec     hl      ; go back
+        or      a ; if (next frame high byte == 0) returnToFirstFrame
         jp      z, .returnToFirstFrame
 
         jp      .continue
 .returnToFirstFrame:
-        ; ld      hl, Player_1_Animation_List
-        ld      l, (ix + (Player_1_Vars.Animation_FirstFrame_List - Player_1_Vars))
-        ld      h, (ix + (Player_1_Vars.Animation_FirstFrame_List - Player_1_Vars) + 1)
+        ; HL = (Animation_FirstFrame_Header)
+        ld      l, (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars))
+        ld      h, (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars) + 1)
 
-        ; ld      de, Player_1_Animation_Data
-        ld      e, (ix + (Player_1_Vars.Animation_FirstFrame_Data - Player_1_Vars))
-        ld      d, (ix + (Player_1_Vars.Animation_FirstFrame_Data - Player_1_Vars) + 1)
-
+        ; Animation_Current_Frame_Number = 0
         xor     a
         ld      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars)), a
 
 .continue:
 
         ; save new frame
-        ; ld      (Player_1_Vars.Animation_CurrentFrame_List), hl
-        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_List - Player_1_Vars)), l
-        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_List - Player_1_Vars) + 1), h
+        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars)), l
+        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1), h
         
-        ; ld      (Player_1_Vars.Animation_CurrentFrame_Data), de
-        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Data - Player_1_Vars)), e
-        ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Data - Player_1_Vars) + 1), d
-
-        ; get value on addr pointed by HL
-        ; Player_1_Vars.CurrentFrame_List_Addr = (HL)
-        ld      c, (hl)
-        inc     hl
-        ld      b, (hl)
-        ; ld      (Player_1_Vars.CurrentFrame_List_Addr), bc
-        ld      (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars)), c
-        ld      (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1), b
 
 
-        ; get value on addr pointed by DE
-        ; Player_1_Vars.CurrentFrame_Data_Addr = (DE)
-        ld      a, (de)
-        ld      l, a
-        inc     de
-        ld      a, (de)
-        ld      h, a
-        ; ld      (Player_1_Vars.CurrentFrame_Data_Addr), hl
-        ld      (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars)), l
-        ld      (ix + (Player_1_Vars.CurrentFrame_Data_Addr - Player_1_Vars) + 1), h
+        ; ; ?????????
 
-    pop     hl
+        ; ; set MegaROM page to Headers
 
-    ; ; get megaROM page number from header, save to player vars and switch to the page
-    ; dec     hl  ; 
-    ;     ld      a, (hl)
-    ;     ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
-    ;     ld	    (Seg_P8000_SW), a
-    ; inc     hl
+        ; ; get value on addr pointed by HL
+        ; ; Player_1_Vars.CurrentFrame_List_Addr = (HL)
+        ; ld      c, (hl)
+        ; inc     hl
+        ; ld      b, (hl)
+        ; ; ld      (Player_1_Vars.CurrentFrame_List_Addr), bc
+        ; ld      (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars)), c
+        ; ld      (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1), b
 
+
+
+
+    ; pop     hl
 
     ret

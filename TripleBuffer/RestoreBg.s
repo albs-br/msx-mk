@@ -5,7 +5,7 @@
 ;   IX: Player Vars base addr
 RestoreBg:
 
-    ; Set HMMM command parameters based on Player Vars and execute it
+    ; Set HMMM command parameters based on Player Vars (previous frame) and execute it
 
     ; ; Destiny_Y = Y of base of page + Player.Restore_BG_Y
     ld      d, 0
@@ -65,4 +65,7 @@ RestoreBg:
 
     ld      hl, TripleBuffer_Vars_RestoreBG_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
+
     ret
