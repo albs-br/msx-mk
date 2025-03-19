@@ -138,9 +138,6 @@ Execute:
 
     ; ------------ init player 2
 
-    ld      hl, Subzero_Stance_Right_Frame_0.List
-    ld      (Player_2_Vars.CurrentFrame_List_Addr), hl
-
     xor     a
     ld      (Player_2_Vars.Animation_Current_Frame_Number), a
     ld      hl, Subzero_Stance_Right_Animation_Headers
@@ -150,9 +147,6 @@ Execute:
 
 
     ; TODO: get these values from frame header
-
-    ; ld      a, MEGAROM_PAGE_SUBZERO_DATA_0
-    ; ld      (Player_2_Vars.CurrentFrame_MegaRomPage), a
 
     ld      a, 192 - (58/2)
     ld      (Player_2_Vars.Restore_BG_X), a
@@ -440,11 +434,11 @@ Palette:
 
 Restore_BG_HMMM_Parameters:
 .Source_X:   dw    0 	            ; Source X (9 bits)
-.Source_Y:   dw    0 + (256*3)      ; Source Y (10 bits)
+.Source_Y:   dw    0 ;+ (256*3)      ; Source Y (10 bits)
 .Destiny_X:  dw    0 	    ; Destiny X (9 bits)
 .Destiny_Y:  dw    0 	    ; Destiny Y (10 bits)
-.Cols:       dw    58       ; number of cols (9 bits)
-.Lines:      dw    105       ; number of lines (10 bits)
+.Cols:       dw    0;58       ; number of cols (9 bits)
+.Lines:      dw    0;105       ; number of lines (10 bits)
 .NotUsed:    db    0
 .Options:    db    0        ; select destination memory and direction from base coordinate
 .Command:    db    VDP_COMMAND_HMMM
@@ -452,37 +446,11 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 ; ----------------------------------------------------------
 
-; Scorpion_Stance_Left_Animation_Headers:
-;     dw Scorpion_Stance_Left_Frame_0.Header, Scorpion_Stance_Left_Frame_0.Header, Scorpion_Stance_Left_Frame_0.Header
-;     dw Scorpion_Stance_Left_Frame_1.Header, Scorpion_Stance_Left_Frame_1.Header, Scorpion_Stance_Left_Frame_1.Header
-;     dw Scorpion_Stance_Left_Frame_2.Header, Scorpion_Stance_Left_Frame_2.Header, Scorpion_Stance_Left_Frame_2.Header
-;     dw Scorpion_Stance_Left_Frame_3.Header, Scorpion_Stance_Left_Frame_3.Header, Scorpion_Stance_Left_Frame_3.Header
-;     dw Scorpion_Stance_Left_Frame_4.Header, Scorpion_Stance_Left_Frame_4.Header, Scorpion_Stance_Left_Frame_4.Header
-;     dw Scorpion_Stance_Left_Frame_5.Header, Scorpion_Stance_Left_Frame_5.Header, Scorpion_Stance_Left_Frame_5.Header
-;     dw Scorpion_Stance_Left_Frame_6.Header, Scorpion_Stance_Left_Frame_6.Header, Scorpion_Stance_Left_Frame_6.Header
-    dw 0x0000 ; end of data
+; ------- Animation frame headers
 
+    INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_animation.s"
 
-
-
-
-Subzero_Stance_Right_Animation_Headers:
-    dw Subzero_Stance_Right_Frame_0_Header, Subzero_Stance_Right_Frame_0_Header, Subzero_Stance_Right_Frame_0_Header
-    dw Subzero_Stance_Right_Frame_1_Header, Subzero_Stance_Right_Frame_1_Header, Subzero_Stance_Right_Frame_1_Header
-    dw Subzero_Stance_Right_Frame_2_Header, Subzero_Stance_Right_Frame_2_Header, Subzero_Stance_Right_Frame_2_Header
-    dw Subzero_Stance_Right_Frame_3_Header, Subzero_Stance_Right_Frame_3_Header, Subzero_Stance_Right_Frame_3_Header
-    dw Subzero_Stance_Right_Frame_4_Header, Subzero_Stance_Right_Frame_4_Header, Subzero_Stance_Right_Frame_4_Header
-    dw Subzero_Stance_Right_Frame_5_Header, Subzero_Stance_Right_Frame_5_Header, Subzero_Stance_Right_Frame_5_Header
-    dw Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header, Subzero_Stance_Right_Frame_6_Header
-    dw Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header, Subzero_Stance_Right_Frame_7_Header
-    dw Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header, Subzero_Stance_Right_Frame_8_Header
-    ; dw 0x0000 ; end of data
-    dw Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header, Subzero_Stance_Right_Frame_9_Header
-    dw Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header, Subzero_Stance_Right_Frame_10_Header
-    dw Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header, Subzero_Stance_Right_Frame_11_Header
-    dw Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header, Subzero_Stance_Right_Frame_12_Header
-    dw 0x0000 ; end of data
-
+    INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
 
 
 

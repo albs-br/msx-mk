@@ -147,18 +147,15 @@ DrawSprite:
         or      a
         jp      nz, .continue
 
-        ;bit     6, h
-        ld      a, h
-        and     0100 0000 b
+        bit     6, h
+        ; ld      a, h
+        ; and     0100 0000 b
         jr      nz, .cross16kb
 .continue:
 
 
-        ; ; HL = Data + slice addr
-        ; ; ld      hl, Frame_0.Data
-        ; ld      hl, (TripleBuffer_Vars.BaseDataAddr)
-        ld hl,0 ; provisory
-        add     hl, de
+        ; ; HL = DE (slice data address)
+        ex      de, hl
 
         ; ld      c, PORT_0
         otir
@@ -171,15 +168,6 @@ DrawSprite:
 .endFrame:
 
 
-    ; ; get megaROM page of next frame from IX
-    ; ld      l, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars))
-    ; ld      h, (ix + (Player_1_Vars.CurrentFrame_List_Addr - Player_1_Vars) + 1)
-
-    ; dec     hl ; back one address to the last position of header
-    ; ld      a, (hl)
-
-    ; ; save it to player vars
-    ; ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
 
 
     ret

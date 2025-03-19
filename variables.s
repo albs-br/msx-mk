@@ -31,7 +31,6 @@ Player_1_Vars:
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:       rw 1
     .Animation_FirstFrame_Header:         rw 1
-    .CurrentFrame_List_Addr:            rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
@@ -47,7 +46,6 @@ Player_2_Vars:
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:       rw 1
     .Animation_FirstFrame_Header:         rw 1
-    .CurrentFrame_List_Addr:            rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1

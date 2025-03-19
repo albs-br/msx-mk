@@ -12,5 +12,5 @@ ram_watch   add     0xc002      -type byte      -desc Step      -format dec
 #ram_watch   add     0xc010      -type word      -desc HMMM.Lines     -format dec
 
 
-ram_watch   add     0xc021      -type byte      -desc P2_curr_frame     -format dec
+ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
