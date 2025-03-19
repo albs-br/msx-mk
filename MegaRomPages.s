@@ -23,7 +23,10 @@ Bg_Bottom:
 
 MEGAROM_PAGE_FRAME_HEADERS: equ 2
 
+    INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_frame_headers.s"
+
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frame_headers.s"
+
 
 	ds PageSize - ($ - 0x8000), 255
 
@@ -33,7 +36,7 @@ MEGAROM_PAGE_SCORPION_DATA_0: equ 3
 
 	org	0x8000, 0xBFFF
 
-    ; INCLUDE "Data/scorpion/scorpion_data.s"
+    INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_frames_0_to_6_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255
 
