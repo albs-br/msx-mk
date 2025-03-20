@@ -11,6 +11,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "Include/MsxConstants.s"
     INCLUDE "Include/CommonRoutines.s"
 
+    INCLUDE "ReadInput.s"
+    INCLUDE "GameLogic/PlayerLogic.s"
 
     INCLUDE "TripleBuffer/DrawSprite.s" 
     INCLUDE "TripleBuffer/RestoreBg.s" 
@@ -111,17 +113,22 @@ Execute:
     ; TODO: get these values from frame header
 
     ld      a, 64 - (58/2)
+    ld      (Player_1_Vars.X), a
     ld      (Player_1_Vars.Restore_BG_X), a
     ld      a, 100
+    ld      (Player_1_Vars.Y), a
     ld      (Player_1_Vars.Restore_BG_Y), a
     ld      a, 58
+    ld      (Player_1_Vars.Width), a
     ld      (Player_1_Vars.Restore_BG_WidthInPixels), a
     ld      a, 105
+    ld      (Player_1_Vars.Height), a
     ld      (Player_1_Vars.Restore_BG_HeightInPixels), a
 
-
-    ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
-    ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
+    ld      ix, Player_1_Vars
+    call    Update_VRAM_NAMTBL_Addr
+    ; ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
+    ; ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
 
     ; ------------ init player 2
@@ -137,17 +144,23 @@ Execute:
     ; TODO: get these values from frame header
 
     ld      a, 192 - (58/2)
+    ld      (Player_2_Vars.X), a
     ld      (Player_2_Vars.Restore_BG_X), a
     ld      a, 100
+    ld      (Player_2_Vars.Y), a
     ld      (Player_2_Vars.Restore_BG_Y), a
     ld      a, 58
+    ld      (Player_2_Vars.Width), a
     ld      (Player_2_Vars.Restore_BG_WidthInPixels), a
     ld      a, 105
+    ld      (Player_2_Vars.Height), a
     ld      (Player_2_Vars.Restore_BG_HeightInPixels), a
 
 
-    ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 192 - (58/2); line number 100
-    ld      (Player_2_Vars.VRAM_NAMTBL_Addr), hl
+    ; ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 192 - (58/2); line number 100
+    ; ld      (Player_2_Vars.VRAM_NAMTBL_Addr), hl
+    ld      ix, Player_2_Vars
+    call    Update_VRAM_NAMTBL_Addr
 
 
 Triple_Buffer_Loop:

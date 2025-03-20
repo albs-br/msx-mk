@@ -2,6 +2,8 @@ RamStart:
 
 Last_NAMTBL_Addr:   rw 1
 
+Keyboard_Value:     rb 1
+
 ;   step      page            page drawing            page
 ;   value     active          sprites                 restoring bg
 ;   -----     -------         ---------------         ------------
@@ -28,9 +30,13 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 ; ----------------------------
 
 Player_1_Vars:
+    .X:                                 rb 1
+    .Y:                                 rb 1
+    .Width:                             rb 1
+    .Height:                            rb 1
     .Animation_Current_Frame_Number:    rb 1
-    .Animation_CurrentFrame_Header:       rw 1
-    .Animation_FirstFrame_Header:         rw 1
+    .Animation_CurrentFrame_Header:     rw 1
+    .Animation_FirstFrame_Header:       rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
@@ -43,9 +49,13 @@ Player_1_Vars:
 
 
 Player_2_Vars:
+    .X:                                 rb 1
+    .Y:                                 rb 1
+    .Width:                             rb 1
+    .Height:                            rb 1
     .Animation_Current_Frame_Number:    rb 1
-    .Animation_CurrentFrame_Header:       rw 1
-    .Animation_FirstFrame_Header:         rw 1
+    .Animation_CurrentFrame_Header:     rw 1
+    .Animation_FirstFrame_Header:       rw 1
     .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
