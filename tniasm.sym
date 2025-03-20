@@ -14,8 +14,8 @@ Wait_Vblank: equ 040AAh ; last def. pass 3
 BIOS_WRSLT: equ 014h ; last def. pass 3
 BIOS_PTRFIL: equ 0F864h ; last def. pass 3
 Scorpion_Stance_Left_Frame_4.List: equ 0AA76h ; last def. pass 3
-GetCurrentFrameAndGoToNext: equ 0443Bh ; last def. pass 3
-Restore_BG_HMMM_Parameters.Cols: equ 04652h ; last def. pass 3
+GetCurrentFrameAndGoToNext: equ 0448Ch ; last def. pass 3
+Restore_BG_HMMM_Parameters.Cols: equ 046A6h ; last def. pass 3
 BIOS_H_ONGO: equ 0FDEAh ; last def. pass 3
 BIOS_H_FIEL: equ 0FE2Bh ; last def. pass 3
 BIOS_FILNM2: equ 0F871h ; last def. pass 3
@@ -141,7 +141,7 @@ BIOS_H_RSET: equ 0FE26h ; last def. pass 3
 BIOS_BAKCLR: equ 0F3EAh ; last def. pass 3
 BIOS_H_NEWS: equ 0FF3Eh ; last def. pass 3
 BIOS_HIMEM: equ 0FC4Ah ; last def. pass 3
-Triple_Buffer_Loop: equ 04537h ; last def. pass 3
+Triple_Buffer_Loop: equ 04588h ; last def. pass 3
 Wait_15_Vblanks.loop: equ 0409Ah ; last def. pass 3
 Y_BASE_PAGE_0: equ 00h ; last def. pass 3
 Execute_VDP_PSET: equ 04230h ; last def. pass 3
@@ -156,7 +156,7 @@ BIOS_KILBUF: equ 0156h ; last def. pass 3
 BIOS_DRWFLG: equ 0FCBBh ; last def. pass 3
 BIOS_DOT: equ 0F6B5h ; last def. pass 3
 BIOS_VOICCQ: equ 0FA75h ; last def. pass 3
-Execute: equ 0446Eh ; last def. pass 3
+Execute: equ 044BFh ; last def. pass 3
 BIOS_ESTBLS: equ 0FB1Dh ; last def. pass 3
 Subzero_Stance_Right_Frame_1.List: equ 0AAADh ; last def. pass 3
 Scorpion_Stance_Left_Frame_2: equ 0A598h ; last def. pass 3
@@ -196,11 +196,11 @@ Wait_15_Vblanks.waitVBlank: equ 0409Eh ; last def. pass 3
 BIOS_PUTPNT: equ 0F3F8h ; last def. pass 3
 BIOS_LPTPOS: equ 0F415h ; last def. pass 3
 BIOS_CHGMOD: equ 05Fh ; last def. pass 3
-Restore_BG_HMMM_Parameters.Options: equ 04657h ; last def. pass 3
+Restore_BG_HMMM_Parameters.Options: equ 046ABh ; last def. pass 3
 SetPaletteColor_FromAddress: equ 0403Dh ; last def. pass 3
 LDIRVM_MSX2: equ 041C2h ; last def. pass 3
 BIOS_H_LPTS: equ 0FFBBh ; last def. pass 3
-RestoreBg: equ 043F6h ; last def. pass 3
+RestoreBg: equ 0442Fh ; last def. pass 3
 BIOS_ESCCNT: equ 0FCA7h ; last def. pass 3
 BIOS_RTYCNT: equ 0FC9Ah ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_X: equ 0C009h ; last def. pass 3
@@ -208,9 +208,9 @@ Scorpion_Stance_Left_Frame_0_Header: equ 0B680h ; last def. pass 3
 BIOS_MEMSIZ: equ 0F672h ; last def. pass 3
 Player_1_Vars.Restore_BG_Y: equ 0C021h ; last def. pass 3
 BIOS_H_INDS: equ 0FE8Ah ; last def. pass 3
-Restore_BG_HMMM_Parameters.Destiny_X: equ 0464Eh ; last def. pass 3
+Restore_BG_HMMM_Parameters.Destiny_X: equ 046A2h ; last def. pass 3
 BIOS_H_FORM: equ 0FFACh ; last def. pass 3
-Restore_BG_HMMM_Parameters: equ 0464Ah ; last def. pass 3
+Restore_BG_HMMM_Parameters: equ 0469Eh ; last def. pass 3
 Subzero_Stance_Right_Frame_5.List: equ 0B3E5h ; last def. pass 3
 BIOS_EXPTBL: equ 0FCC1h ; last def. pass 3
 BIOS_CRTCNT: equ 0F3B1h ; last def. pass 3
@@ -234,7 +234,7 @@ Scorpion_Stance_Left_Frame_2_Header: equ 0B68Eh ; last def. pass 3
 MEGAROM_PAGE_BG_1: equ 02h ; last def. pass 3
 BIOS_H_FINP: equ 0FF5Ch ; last def. pass 3
 BIOS_LINLEN: equ 0F3B0h ; last def. pass 3
-DrawSprite: equ 04372h ; last def. pass 3
+DrawSprite: equ 043ABh ; last def. pass 3
 SNSMAT_NO_DI_EI.C_OK: equ 04330h ; last def. pass 3
 BIOS_XSAVE: equ 0FAFEh ; last def. pass 3
 BIOS_NEWPAD: equ 01ADh ; last def. pass 3
@@ -261,7 +261,7 @@ BIOS_NMI: equ 066h ; last def. pass 3
 BIOS_H_CLEAR: equ 0FED0h ; last def. pass 3
 BIOS_TRAPTBL: equ 0FC4Ch ; last def. pass 3
 BIOS_ASPECT: equ 0F931h ; last def. pass 3
-Restore_BG_HMMM_Parameters.Lines: equ 04654h ; last def. pass 3
+Restore_BG_HMMM_Parameters.Lines: equ 046A8h ; last def. pass 3
 VDP_COMMAND_STOP: equ 00h ; last def. pass 3
 BIOS_FLBMEM: equ 0FCAEh ; last def. pass 3
 BIOS_TEMPPT: equ 0F768h ; last def. pass 3
@@ -274,11 +274,11 @@ BIOS_TOCNT: equ 0FB03h ; last def. pass 3
 BIOS_ASPCT2: equ 0F40Dh ; last def. pass 3
 BIOS_INTVAL: equ 0FCA0h ; last def. pass 3
 BIOS_CALBAS: equ 0159h ; last def. pass 3
-DrawSprite.endFrame: equ 043E3h ; last def. pass 3
+DrawSprite.endFrame: equ 0441Ch ; last def. pass 3
 ClearVram_MSX2.loop_2: equ 04107h ; last def. pass 3
 BIOS_OLDINT: equ 0FB12h ; last def. pass 3
 BIOS_TEMP3: equ 0F69Dh ; last def. pass 3
-Triple_Buffer_Step_2: equ 045B7h ; last def. pass 3
+Triple_Buffer_Step_2: equ 0460Bh ; last def. pass 3
 Subzero_Stance_Right_Frames_9_to_12_Data: equ 08000h ; last def. pass 3
 BIOS_H_ISRE: equ 0FF2Ah ; last def. pass 3
 BIOS_TEMPST: equ 0F67Ah ; last def. pass 3
@@ -308,7 +308,7 @@ BIOS_ENDPRG: equ 0F40Fh ; last def. pass 3
 BIOS_MCLPTR: equ 0FB3Ch ; last def. pass 3
 BIOS_OLDSTT: equ 0FB0Ch ; last def. pass 3
 BIOS_TAPOON: equ 0EAh ; last def. pass 3
-Subzero_Stance_Right_Animation_Headers: equ 04685h ; last def. pass 3
+Subzero_Stance_Right_Animation_Headers: equ 046D9h ; last def. pass 3
 KEYBOARD: equ 00h ; last def. pass 3
 BIOS_MINUPD: equ 0F3EFh ; last def. pass 3
 Subzero_Stance_Right_Frame_8_Header: equ 0B6E9h ; last def. pass 3
@@ -352,11 +352,12 @@ BIOS_PARM1: equ 0F6E8h ; last def. pass 3
 BIOS_ONGSBF: equ 0FBD8h ; last def. pass 3
 BIOS_H_LOF: equ 0FE9Eh ; last def. pass 3
 BIOS_GRPCGP: equ 0F3CBh ; last def. pass 3
+ReadInput.player_Right: equ 0437Bh ; last def. pass 3
 BIOS_VOICAQ: equ 0F975h ; last def. pass 3
 BIOS_BOTTOM: equ 0FC48h ; last def. pass 3
 LoadPalette: equ 0404Fh ; last def. pass 3
 BIOS_CHGCLR: equ 062h ; last def. pass 3
-Restore_BG_HMMM_Parameters.Source_Y: equ 0464Ch ; last def. pass 3
+Restore_BG_HMMM_Parameters.Source_Y: equ 046A0h ; last def. pass 3
 SetPaletteColor: equ 0402Ah ; last def. pass 3
 Wait_Vblank.waitVBlank: equ 040AEh ; last def. pass 3
 BIOS_HIGH: equ 0F408h ; last def. pass 3
@@ -375,7 +376,7 @@ BIOS_QUEBAK: equ 0F971h ; last def. pass 3
 BIOS_RG1SAV: equ 0F3E0h ; last def. pass 3
 REG17SAV: equ 0FFF0h ; last def. pass 3
 BIOS_H_TOTE: equ 0FDBDh ; last def. pass 3
-LoadImageTo_SC5_Page.loop_20: equ 04623h ; last def. pass 3
+LoadImageTo_SC5_Page.loop_20: equ 04677h ; last def. pass 3
 BIOS_STRTMS: equ 099h ; last def. pass 3
 BIOS_GSPSIZ: equ 08Ah ; last def. pass 3
 BIOS_VLZADR: equ 0F419h ; last def. pass 3
@@ -413,8 +414,7 @@ Player_1_Vars.Restore_BG_HeightInPixels: equ 0C023h ; last def. pass 3
 REG11SAV: equ 0FFEAh ; last def. pass 3
 BIOS_DPPAGE: equ 0FAF5h ; last def. pass 3
 Subzero_Stance_Right_Frame_0_Header: equ 0B6B1h ; last def. pass 3
-ReadInput.player2_Left: equ 04354h ; last def. pass 3
-Scorpion_Stance_Left_Animation_Headers: equ 04659h ; last def. pass 3
+Scorpion_Stance_Left_Animation_Headers: equ 046ADh ; last def. pass 3
 BIOS_DIMFLG: equ 0F662h ; last def. pass 3
 BIOS_H_SNGF: equ 0FF39h ; last def. pass 3
 BIOS_H_FRQI: equ 0FF93h ; last def. pass 3
@@ -428,9 +428,8 @@ REG12SAV: equ 0FFEBh ; last def. pass 3
 BIOS_CALLF: equ 030h ; last def. pass 3
 PPI.A: equ 0A8h ; last def. pass 3
 BIOS_ARG: equ 0F847h ; last def. pass 3
-Palette: equ 0462Ah ; last def. pass 3
-ReadInput.player2_Right: equ 04355h ; last def. pass 3
-DrawSprite.loop: equ 043AEh ; last def. pass 3
+Palette: equ 0467Eh ; last def. pass 3
+DrawSprite.loop: equ 043E7h ; last def. pass 3
 BIOS_CLS: equ 0C3h ; last def. pass 3
 BIOS_PRTFLG: equ 0F416h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Source_X: equ 0C005h ; last def. pass 3
@@ -438,7 +437,7 @@ BIOS_DISSCR: equ 041h ; last def. pass 3
 BIOS_PARM2: equ 0F750h ; last def. pass 3
 BIOS_RG9SAV: equ 0FFE8h ; last def. pass 3
 BIOS_H_SETF: equ 0FE53h ; last def. pass 3
-Restore_BG_HMMM_Parameters.Command: equ 04658h ; last def. pass 3
+Restore_BG_HMMM_Parameters.Command: equ 046ACh ; last def. pass 3
 BIOS_H_FINE: equ 0FF1Bh ; last def. pass 3
 BIOS_DAC: equ 0F7F6h ; last def. pass 3
 BIOS_H_MKD: equ 0FE3Ah ; last def. pass 3
@@ -461,7 +460,7 @@ Scorpion_Stance_Left_Frame_1.List: equ 0A337h ; last def. pass 3
 Subzero_Stance_Right_Frame_12: equ 098B0h ; last def. pass 3
 REG23SAV: equ 0FFF6h ; last def. pass 3
 BIOS_DEFTBL: equ 0F6CAh ; last def. pass 3
-LoadImageTo_SC5_Page.loop_10: equ 04604h ; last def. pass 3
+LoadImageTo_SC5_Page.loop_10: equ 04658h ; last def. pass 3
 Scorpion_Stance_Left_Frame_1_Header: equ 0B687h ; last def. pass 3
 BIOS_H_CMD: equ 0FE0Dh ; last def. pass 3
 Player_2_Vars.Y: equ 0C025h ; last def. pass 3
@@ -506,7 +505,7 @@ BIOS_TXTTAB: equ 0F676h ; last def. pass 3
 BIOS_CONSAV: equ 0F668h ; last def. pass 3
 BIOS_T32CGP: equ 0F3C1h ; last def. pass 3
 BIOS_H_TIMI: equ 0FD9Fh ; last def. pass 3
-DrawSprite.cross16kb: equ 043E4h ; last def. pass 3
+DrawSprite.cross16kb: equ 0441Dh ; last def. pass 3
 BIOS_TRCFLG: equ 0F7C4h ; last def. pass 3
 BIOS_LOHADR: equ 0F94Bh ; last def. pass 3
 Scorpion_Stance_Left_Frames_0_to_6_Data: equ 08000h ; last def. pass 3
@@ -516,7 +515,7 @@ BIOS_CASPRV: equ 0FCB1h ; last def. pass 3
 BIOS_PADX: equ 0FC9Dh ; last def. pass 3
 BIOS_MLTPAT: equ 0F3D9h ; last def. pass 3
 BIOS_H_KYEA: equ 0FDD1h ; last def. pass 3
-Restore_BG_HMMM_Parameters.Source_X: equ 0464Ah ; last def. pass 3
+Restore_BG_HMMM_Parameters.Source_X: equ 0469Eh ; last def. pass 3
 SetVdp_Read: equ 040E3h ; last def. pass 3
 BIOS_CONTXT: equ 0F666h ; last def. pass 3
 BIOS_CLIKSW: equ 0F3DBh ; last def. pass 3
@@ -525,7 +524,7 @@ BIOS_PRMSTK: equ 0F6E4h ; last def. pass 3
 CheckCollision_16x24_16x16.checkVerticalCollision: equ 041E2h ; last def. pass 3
 BIOS_RG5SAV: equ 0F3E4h ; last def. pass 3
 BIOS_FORCLR: equ 0F3E9h ; last def. pass 3
-Triple_Buffer_Step_1: equ 0457Eh ; last def. pass 3
+Triple_Buffer_Step_1: equ 045D2h ; last def. pass 3
 BIOS_H_CRUN: equ 0FF20h ; last def. pass 3
 BIOS_NULBUF: equ 0F862h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Cols: equ 0C00Dh ; last def. pass 3
@@ -541,7 +540,7 @@ BIOS_ERAFNK: equ 0CCh ; last def. pass 3
 Restore_BG_HMMM_Parameters_size: equ 0Fh ; last def. pass 3
 BIOS_MLTATR: equ 0F3D7h ; last def. pass 3
 BIOS_FILNAM: equ 0F866h ; last def. pass 3
-Page_0x4000_size: equ 0280h ; last def. pass 3
+Page_0x4000_size: equ 0283h ; last def. pass 3
 BIOS_QUETAB: equ 0F959h ; last def. pass 3
 REG4SAV: equ 0F3E3h ; last def. pass 3
 BIOS_GRPACY: equ 0FCB9h ; last def. pass 3
@@ -593,7 +592,7 @@ SNSMAT_NO_DI_EI: equ 0432Fh ; last def. pass 3
 CheckCollision_16x24_16x16.y1IsLarger: equ 041E9h ; last def. pass 3
 Player_2_Vars.Width: equ 0C026h ; last def. pass 3
 BIOS_FLAGS: equ 0FB1Ch ; last def. pass 3
-Restore_BG_HMMM_Parameters.NotUsed: equ 04656h ; last def. pass 3
+Restore_BG_HMMM_Parameters.NotUsed: equ 046AAh ; last def. pass 3
 Wait_B_Vblanks.loop: equ 04089h ; last def. pass 3
 Subzero_Stance_Right_Frame_3: equ 0AF57h ; last def. pass 3
 Subzero_Stance_Right_Frame_6: equ 0B60Ah ; last def. pass 3
@@ -614,9 +613,10 @@ BIOS_H_BINL: equ 0FE76h ; last def. pass 3
 MSXID5: equ 02Fh ; last def. pass 3
 BIOS_CNSDFG: equ 0F3DEh ; last def. pass 3
 BIOS_H_NMI: equ 0FDD6h ; last def. pass 3
-Restore_BG_HMMM_Parameters.Destiny_Y: equ 04650h ; last def. pass 3
+Restore_BG_HMMM_Parameters.Destiny_Y: equ 046A4h ; last def. pass 3
 Subzero_Stance_Right_Frame_12_Header: equ 0B705h ; last def. pass 3
 BIOS_VCBA: equ 0FB41h ; last def. pass 3
+ReadInput.player_Left: equ 0436Ch ; last def. pass 3
 Subzero_Stance_Right_Frame_4.List: equ 0B1A0h ; last def. pass 3
 BIOS_ARYTA2: equ 0F7B5h ; last def. pass 3
 BIOS_PRMPRV: equ 0F74Ch ; last def. pass 3
@@ -665,7 +665,7 @@ BIOS_H_SCRE: equ 0FFC0h ; last def. pass 3
 Player_2_Vars.Animation_FirstFrame_Header: equ 0C02Bh ; last def. pass 3
 BIOS_GRPHED: equ 0FCA6h ; last def. pass 3
 PPI.R: equ 0ABh ; last def. pass 3
-SetActivePage: equ 04432h ; last def. pass 3
+SetActivePage: equ 04483h ; last def. pass 3
 BIOS_RG3SAV: equ 0F3E2h ; last def. pass 3
 BIOS_NSTWRT: equ 0171h ; last def. pass 3
 VDP_COMMAND_LMMC: equ 0B0h ; last def. pass 3
@@ -699,7 +699,7 @@ Seg_P8000_SW: equ 07000h ; last def. pass 3
 Player_2_Vars.VRAM_NAMTBL_Addr: equ 0C02Eh ; last def. pass 3
 Scorpion_Stance_Left_Frame_1: equ 0A337h ; last def. pass 3
 MEGAROM_PAGE_BG_0: equ 01h ; last def. pass 3
-DrawSprite.continue: equ 043DCh ; last def. pass 3
+DrawSprite.continue: equ 04415h ; last def. pass 3
 Scorpion_Stance_Left_Frame_4_Header: equ 0B69Ch ; last def. pass 3
 BIOS_H_SETS: equ 0FDF4h ; last def. pass 3
 BIOS_INITXT: equ 06Ch ; last def. pass 3
@@ -727,12 +727,12 @@ VDP_LOGIC_OPERATION_TIMP: equ 08h ; last def. pass 3
 BIOS_INIFNK: equ 03Eh ; last def. pass 3
 BIOS_MCLFLG: equ 0F958h ; last def. pass 3
 VDP_COMMAND_SRCH: equ 060h ; last def. pass 3
-Triple_Buffer_Step_0: equ 04545h ; last def. pass 3
+Triple_Buffer_Step_0: equ 04599h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Options: equ 0C012h ; last def. pass 3
 BIOS_ENASCR: equ 044h ; last def. pass 3
 BIOS_H_ERAF: equ 0FDB8h ; last def. pass 3
 BIOS_COMMSK: equ 0FB1Eh ; last def. pass 3
-GetCurrentFrameAndGoToNext.continue: equ 04467h ; last def. pass 3
+GetCurrentFrameAndGoToNext.continue: equ 044B8h ; last def. pass 3
 BIOS_H_DEVN: equ 0FEC1h ; last def. pass 3
 RamStart: equ 0C000h ; last def. pass 3
 BIOS_CLIKFL: equ 0FBD9h ; last def. pass 3
@@ -757,7 +757,7 @@ REG0SAV: equ 0F3DFh ; last def. pass 3
 BIOS_VOICBQ: equ 0F9F5h ; last def. pass 3
 BIOS_H_KEYC: equ 0FDCCh ; last def. pass 3
 BIOS_KEYINT: equ 038h ; last def. pass 3
-LoadImageTo_SC5_Page: equ 045EFh ; last def. pass 3
+LoadImageTo_SC5_Page: equ 04643h ; last def. pass 3
 Jiffy_FrameStart: equ 0C034h ; last def. pass 3
 BIOS_T32NAM: equ 0F3BDh ; last def. pass 3
 BIOS_NVBXLN: equ 0C9h ; last def. pass 3
@@ -788,7 +788,7 @@ Subzero_Stance_Right_Frame_0: equ 0A850h ; last def. pass 3
 BIOS_FRETOP: equ 0F69Bh ; last def. pass 3
 BIOS_H_FILO: equ 0FE85h ; last def. pass 3
 BIOS_GRPCOL: equ 0F3C9h ; last def. pass 3
-Update_VRAM_NAMTBL_Addr: equ 04356h ; last def. pass 3
+Update_VRAM_NAMTBL_Addr: equ 0438Fh ; last def. pass 3
 BIOS_DRWANG: equ 0FCBDh ; last def. pass 3
 BIOS_CONTYP: equ 0F669h ; last def. pass 3
 BIOS_H_INIP: equ 0FDC7h ; last def. pass 3
@@ -802,7 +802,7 @@ DisableSprites: equ 041A4h ; last def. pass 3
 BIOS_CSRY: equ 0F3DCh ; last def. pass 3
 BIOS_CSRX: equ 0F3DDh ; last def. pass 3
 EnableRomPage2: equ 04067h ; last def. pass 3
-GetCurrentFrameAndGoToNext.returnToFirstFrame: equ 0445Dh ; last def. pass 3
+GetCurrentFrameAndGoToNext.returnToFirstFrame: equ 044AEh ; last def. pass 3
 BIOS_ERRFLG: equ 0F414h ; last def. pass 3
 BIOS_H_COPY: equ 0FE08h ; last def. pass 3
 Player_2_Vars.Animation_Current_Frame_Number: equ 0C028h ; last def. pass 3

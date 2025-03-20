@@ -182,6 +182,9 @@ Triple_Buffer_Loop:
 
     ; -------
 
+    call    ReadInput
+
+    ; -------
 
     ld      a, (TripleBuffer_Vars.Step)
     or      a

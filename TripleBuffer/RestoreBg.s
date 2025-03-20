@@ -67,5 +67,19 @@ RestoreBg:
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
+    ; ---- Update Player Restore BG vars after BG is restored with previous frame
+    ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
+    ld      (ix + (Player_1_Vars.Restore_BG_X - Player_1_Vars)), a
+
+    ld      a, (ix + (Player_1_Vars.Y - Player_1_Vars))
+    ld      (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars)), a
+
+    ld      a, (ix + (Player_1_Vars.Width - Player_1_Vars))
+    ld      (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars)), a
+    
+    ld      a, (ix + (Player_1_Vars.Height - Player_1_Vars))
+    ld      (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars)), a
+    
+
 
     ret

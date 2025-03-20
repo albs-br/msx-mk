@@ -7,8 +7,8 @@ Keyboard_Value:     rb 1
 ;   step      page            page drawing            page
 ;   value     active          sprites                 restoring bg
 ;   -----     -------         ---------------         ------------
-;   0         0               1                       2
-;   1         1               2                       0
+;   0         0 x=100         1  x=102                2 x=100
+;   1         1 x=102         2  x=104                0 x=102
 ;   2         2               0                       1
 TripleBuffer_Vars:
     .Step:                  rb 1
@@ -56,7 +56,7 @@ Player_2_Vars:
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:     rw 1
     .Animation_FirstFrame_Header:       rw 1
-    .CurrentFrame_MegaRomPage:          rb 1
+    .CurrentFrame_MegaRomPage:          rb 1    ; TODO: not used, delete
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
     .Restore_BG_Y:                      rb 1

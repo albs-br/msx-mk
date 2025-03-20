@@ -6,19 +6,6 @@
 ;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
 
-    ; push    af
-    ;     ; ld      a, (Player_1_Vars.CurrentFrame_MegaRomPage)
-    ;     ld      a, (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars))
-    ;     ld	    (Seg_P8000_SW), a
-    ; pop     af
-
-    ; ; get megaROM page number from header, save to player vars and switch to the page
-    ; dec     hl
-    ;     ld      a, (hl)
-    ;     ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
-    ;     ld	    (Seg_P8000_SW), a
-    ; inc     hl
-    
     push    af
 
         ld      a, MEGAROM_PAGE_FRAME_HEADERS
@@ -36,10 +23,6 @@ DrawSprite:
         ld      h, (iy + 1)
 
 
-;jp $ ; debug
-; HL here = 0x180 = 384 (yOffset value of header 0) OK
-; --------------------------------------------------------------
-; cont here 
 
         ; ---- DE += HL         NAMTBL_Addr += yOffset
         add     hl, de ; HL = HL + DE
@@ -48,9 +31,11 @@ DrawSprite:
 
         ; get width and height and save to player vars
         ld      a, (iy + 2) ; width
-        ld      (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars)), a
+        ; ld      (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars)), a
+        ld      (ix + (Player_1_Vars.Width - Player_1_Vars)), a
         ld      a, (iy + 3) ; height
-        ld      (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars)), a
+        ; ld      (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars)), a
+        ld      (ix + (Player_1_Vars.Height - Player_1_Vars)), a
 
 
         ; HL = frame first list addr
