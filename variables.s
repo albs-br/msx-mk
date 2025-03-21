@@ -37,7 +37,6 @@ Player_1_Vars:
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:     rw 1
     .Animation_FirstFrame_Header:       rw 1
-    .CurrentFrame_MegaRomPage:          rb 1
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
     .Restore_BG_Y:                      rb 1
@@ -56,7 +55,6 @@ Player_2_Vars:
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:     rw 1
     .Animation_FirstFrame_Header:       rw 1
-    .CurrentFrame_MegaRomPage:          rb 1    ; TODO: not used, delete
     .VRAM_NAMTBL_Addr:                  rw 1
     .Restore_BG_X:                      rb 1
     .Restore_BG_Y:                      rb 1
@@ -67,11 +65,9 @@ Player_2_Vars:
 ; ----------------------------
 
 ; Debug:
-Jiffy_FrameStart:   rw 1
-Total_Frames:       rw 1
-Frame_Counter:      rb 1
-
-
+Jiffy_Saved:            rw 1
+LastFps:                rb 1
+CurrentCounter:         rb 1
 
 
 RamEnd:
