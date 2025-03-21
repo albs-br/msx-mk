@@ -1,5 +1,7 @@
 RamStart:
 
+
+OldSP:              rw 1
 Last_NAMTBL_Addr:   rw 1
 
 Keyboard_Value:     rb 1

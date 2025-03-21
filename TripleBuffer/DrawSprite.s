@@ -68,26 +68,39 @@ DrawSprite:
 
     ld      iyl, 0 ; reset 16kb boundary flag
     
+    di
+    ld      (OldSP), sp
+    ld      sp, hl
+    
 .loop:
 
         ; -----------------------------------------------------------
         ; Read list
 
-        ld      a, (hl)     ; C = increment
-        or      a
+        pop     bc              ; B = length, C = increment
+        xor     a
+        or      c
         jr      z, .endFrame ; if (increment == 0) endFrame
-        ld      c, a
+        
+        ld      a, b
 
-        inc     hl
-        ld      a, (hl)     ; A = length
+        pop     de              ; DE = slice data address
 
-        inc     hl
-        ld      e, (hl)
-        inc     hl
-        ld      d, (hl)     ; DE = slice data address
+        ; ld      a, (hl)     ; C = increment
+        ; or      a
+        ; jr      z, .endFrame ; if (increment == 0) endFrame
+        ; ld      c, a
 
-        inc     hl      ; go to next list entry
-        push    hl
+        ; inc     hl
+        ; ld      a, (hl)     ; A = length
+
+        ; inc     hl
+        ; ld      e, (hl)
+        ; inc     hl
+        ; ld      d, (hl)     ; DE = slice data address
+
+        ; inc     hl      ; go to next list entry
+        ; push    hl
             ; --- set VRAM addr
 
             ; HL = (Last_NAMTBL_Addr) + increment
@@ -98,8 +111,8 @@ DrawSprite:
 
             ld      b, a    ; B = length
 
-            di
-                ; write the lower 8 bits of the address to VDP PORT_1
+            ; di
+                ; write the lower 14 bits of the address to VDP PORT_1
                 ld      a, l
                 
                 ;nop
@@ -110,7 +123,7 @@ DrawSprite:
                 ld      a, h
 
                 or      64
-            ei
+            ; ei
             out     (PORT_1), a ; addr high
 
             ; check "crossed 16 kb boundary" flag
@@ -123,14 +136,14 @@ DrawSprite:
     .continue:
 
 
-            ; ; HL = DE (slice data address)
+            ; HL = DE (slice data address)
             ex      de, hl
 
             ; ld      c, PORT_0
             otir
 
 
-        pop     hl
+        ; pop     hl
     jp      .loop
 
 
@@ -138,6 +151,8 @@ DrawSprite:
 
 .endFrame:
 
+    ld  sp, (OldSP)
+    ei
 
 
 
@@ -149,12 +164,12 @@ DrawSprite:
     inc     a
 
     ; set R#14
-    di
+    ; di
         ; write bits a14-16 of address to R#14
         out     (PORT_1), a ; data
         ld      a, 14 + 128
         out     (PORT_1), a ; register #
-    ei
+    ; ei
 
     ld      iyl, 1 ; set flag (to not set R#14 again)
 

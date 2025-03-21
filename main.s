@@ -168,7 +168,7 @@ Triple_Buffer_Loop:
 
     ; ---------------------------------------------------------------
     ; FPS counter
-    
+
     ; if (Jiffy >= LastJiffy + 60) resetFpsCounter
     ld      hl, (Jiffy_Saved)
     ld      de, (BIOS_JIFFY)
