@@ -440,12 +440,12 @@ Palette:
 ; --------------------------------------------------------
 
 Restore_BG_HMMM_Parameters:
-.Source_X:   dw    0 	            ; Source X (9 bits)
-.Source_Y:   dw    0 ;+ (256*3)      ; Source Y (10 bits)
+.Source_X:   dw    0 	    ; Source X (9 bits)
+.Source_Y:   dw    0        ; Source Y (10 bits)
 .Destiny_X:  dw    0 	    ; Destiny X (9 bits)
 .Destiny_Y:  dw    0 	    ; Destiny Y (10 bits)
-.Cols:       dw    0;58       ; number of cols (9 bits)
-.Lines:      dw    0;105       ; number of lines (10 bits)
+.Cols:       dw    0        ; number of cols (9 bits)
+.Lines:      dw    0        ; number of lines (10 bits)
 .NotUsed:    db    0
 .Options:    db    0        ; select destination memory and direction from base coordinate
 .Command:    db    VDP_COMMAND_HMMM
@@ -458,6 +458,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_animation.s"
 
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
+    INCLUDE "Data/subzero/walking/right/subzero_walking_right_animation.s"
 
 
 

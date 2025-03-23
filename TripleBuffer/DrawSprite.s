@@ -57,7 +57,7 @@ DrawSprite:
     ld      h, (iy + 6)
 
 
-    ; get megaROM page number from header, save to player vars and switch to the page
+    ; get megaROM page number from header and switch to the page
     ld      a, (iy + 4)
     ; ld      (ix + (Player_1_Vars.CurrentFrame_MegaRomPage - Player_1_Vars)), a
     ld	    (Seg_P8000_SW), a
