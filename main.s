@@ -12,7 +12,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "Include/CommonRoutines.s"
 
     INCLUDE "ReadInput.s"
-    INCLUDE "GameLogic/PlayerLogic.s"
+    INCLUDE "GameLogic/Player_Logic.s"
+    INCLUDE "GameLogic/Players_Init.s"
 
     INCLUDE "TripleBuffer/DrawSprite.s" 
     INCLUDE "TripleBuffer/RestoreBg.s" 
@@ -30,6 +31,9 @@ Execute:
     ; PSG: silence
 	call	BIOS_GICINI
 
+    ; disable keyboard click
+    xor     a
+    ld 		(BIOS_CLIKSW), a     ; Key Press Click Switch 0:Off 1:On (1B/RW)
 
     call    EnableRomPage2
 
@@ -100,68 +104,10 @@ Execute:
     xor     a
     ld      (TripleBuffer_Vars.Step), a
 
-    ; ------------ init player 1
-
-    xor     a
-    ld      (Player_1_Vars.Animation_Current_Frame_Number), a
-    ld      hl, Scorpion_Stance_Left_Animation_Headers
-    ld      (Player_1_Vars.Animation_CurrentFrame_Header), hl
-    ld      (Player_1_Vars.Animation_FirstFrame_Header), hl
 
 
-
-    ; TODO: get these values from frame header
-
-    ld      a, 64 - (58/2)
-    ld      (Player_1_Vars.X), a
-    ld      (Player_1_Vars.Restore_BG_X), a
-    ld      a, 100
-    ld      (Player_1_Vars.Y), a
-    ld      (Player_1_Vars.Restore_BG_Y), a
-    ld      a, 58
-    ld      (Player_1_Vars.Width), a
-    ld      (Player_1_Vars.Restore_BG_WidthInPixels), a
-    ld      a, 105
-    ld      (Player_1_Vars.Height), a
-    ld      (Player_1_Vars.Restore_BG_HeightInPixels), a
-
-    ld      ix, Player_1_Vars
-    call    Update_VRAM_NAMTBL_Addr
-    ; ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
-    ; ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
-
-
-    ; ------------ init player 2
-
-    xor     a
-    ld      (Player_2_Vars.Animation_Current_Frame_Number), a
-    ld      hl, Subzero_Stance_Right_Animation_Headers
-    ld      (Player_2_Vars.Animation_CurrentFrame_Header), hl
-    ld      (Player_2_Vars.Animation_FirstFrame_Header), hl
-
-
-
-    ; TODO: get these values from frame header
-
-    ld      a, 192 - (58/2)
-    ld      (Player_2_Vars.X), a
-    ld      (Player_2_Vars.Restore_BG_X), a
-    ld      a, 100
-    ld      (Player_2_Vars.Y), a
-    ld      (Player_2_Vars.Restore_BG_Y), a
-    ld      a, 58
-    ld      (Player_2_Vars.Width), a
-    ld      (Player_2_Vars.Restore_BG_WidthInPixels), a
-    ld      a, 105
-    ld      (Player_2_Vars.Height), a
-    ld      (Player_2_Vars.Restore_BG_HeightInPixels), a
-
-
-    ; ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 192 - (58/2); line number 100
-    ; ld      (Player_2_Vars.VRAM_NAMTBL_Addr), hl
-    ld      ix, Player_2_Vars
-    call    Update_VRAM_NAMTBL_Addr
-
+    call    Players_Init
+    
 
 Triple_Buffer_Loop:
 
@@ -453,12 +399,20 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 ; ----------------------------------------------------------
 
+; ------- All animation pointers
+
+    ; INCLUDE "Data/scorpion/scorpion_all_animations.s"
+    INCLUDE "Data/subzero/subzero_all_animations.s"
+
+
+
 ; ------- Animation frame headers
 
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_animation.s"
 
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_animation.s"
+    INCLUDE "Data/subzero/walking/right/subzero_walking_backwards_right_animation.s"
 
 
 

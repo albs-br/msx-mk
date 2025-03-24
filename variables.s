@@ -44,6 +44,9 @@ Player_1_Vars:
     .Restore_BG_Y:                      rb 1
     .Restore_BG_WidthInPixels:          rb 1
     .Restore_BG_HeightInPixels:         rb 1
+    .Side:                              rb 1
+    .Position:                          rb 1
+    .AllAnimations_Addr:                rw 1
 
 ; .size:  equ $ - Player_1_Vars
 
@@ -62,6 +65,21 @@ Player_2_Vars:
     .Restore_BG_Y:                      rb 1
     .Restore_BG_WidthInPixels:          rb 1
     .Restore_BG_HeightInPixels:         rb 1
+    .Side:                              rb 1
+    .Position:                          rb 1
+    .AllAnimations_Addr:                rw 1
+
+; ----------------------------
+
+SIDE:
+    .LEFT:      equ 1
+    .RIGHT:     equ 2
+
+POSITION:
+    .STANCE:                equ 1
+    .WALKING_FORWARD:       equ 2
+    .WALKING_BACKWARDS:     equ 3
+
 
 
 ; ----------------------------

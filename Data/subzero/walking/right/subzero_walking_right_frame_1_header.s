@@ -1,2 +1,2 @@
 ;		yOffset	width	height	megaROM page	List Address
-	dw	256	db	52,	106,	MEGAROM_PAGE_SUBZERO_WALKING_RIGHT_DATA_0	dw	Subzero_Walking_Right_Frame_1.List
+	dw	256	db	56,	106,	MEGAROM_PAGE_SUBZERO_WALKING_RIGHT_DATA_0	dw	Subzero_Walking_Right_Frame_1.List

@@ -14,10 +14,9 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc036      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xc03e      -type byte      -desc LastFps     -format dec
 
 
-
-ram_watch   add     0xc029      -type byte      -desc P2.CurrFrame     -format dec
+ram_watch   add     0xc02e      -type byte      -desc P2.CurrFrame     -format dec
 
 

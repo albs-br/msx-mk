@@ -1,5 +1,5 @@
-Subzero_Walking_Right_Frames_0_to_8_Data:
-	INCLUDE "Data/subzero/walking/right/subzero_walking_right_frames_0_to_8_data.s"
+Subzero_Walking_Right_Frames_0_to_7_Data:
+	INCLUDE "Data/subzero/walking/right/subzero_walking_right_frames_0_to_7_data.s"
 ; ------------------------------------------------------------------------
 Subzero_Walking_Right_Frame_0:
 		.List:      INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_0_list.s"
@@ -24,7 +24,4 @@ Subzero_Walking_Right_Frame_6:
 
 Subzero_Walking_Right_Frame_7:
 		.List:      INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_7_list.s"
-
-Subzero_Walking_Right_Frame_8:
-		.List:      INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_8_list.s"
 

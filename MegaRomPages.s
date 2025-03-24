@@ -69,6 +69,8 @@ MEGAROM_PAGE_SUBZERO_WALKING_RIGHT_DATA_0: equ 6
 
 	org	0x8000, 0xBFFF
 
-    INCLUDE "Data/subzero/walking/right/subzero_walking_right_frames_0_to_8_data_and_list.s"
+    ; TODO: there are 9 frames for this animation (0 to 8)
+    ; frame 9 is missing because won't fit in the SC5 image
+    INCLUDE "Data/subzero/walking/right/subzero_walking_right_frames_0_to_7_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255
