@@ -14,3 +14,5 @@ Subzero_Walking_Right_Frame_6_Header:      INCLUDE "Data/subzero/walking/right/s
 
 Subzero_Walking_Right_Frame_7_Header:      INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_7_header.s"
 
+Subzero_Walking_Right_Frame_8_Header:      INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_8_header.s"
+
