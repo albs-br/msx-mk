@@ -401,7 +401,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 ; ------- All animation pointers
 
-    ; INCLUDE "Data/scorpion/scorpion_all_animations.s"
+    ;INCLUDE "Data/scorpion/scorpion_all_animations.s"
     INCLUDE "Data/subzero/subzero_all_animations.s"
 
 
