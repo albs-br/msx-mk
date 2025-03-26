@@ -66,77 +66,77 @@ DrawSprite:
     ; init vars
     ; ld      (Last_NAMTBL_Addr), de
 
-    ld      iyl, 0 ; reset 16kb boundary flag
+    ; ld      iyl, 0 ; reset 16kb boundary flag
     
     di
-    ld      (OldSP), sp
-    ld      sp, hl
+        ld      (OldSP), sp
+        ld      sp, hl
 
-    ; ld      hl, (Last_NAMTBL_Addr)
-    ld      l, e
-    ld      h, d
+        ; ld      hl, (Last_NAMTBL_Addr)
+        ld      l, e
+        ld      h, d
 
 .loop:
 
-        ; -----------------------------------------------------------
-        ; Read list
+            ; -----------------------------------------------------------
+            ; Read list
 
-        pop     bc              ; B = length, C = increment
-        xor     a
-        or      c
-        jr      z, .endFrame ; if (increment == 0) endFrame
+            pop     bc              ; B = length, C = increment
+            xor     a
+            or      c
+            jr      z, .endFrame ; if (increment == 0) endFrame
 
-        ld      a, b
+            ld      a, b
 
-        pop     de              ; DE = slice data address
+            pop     de              ; DE = slice data address
 
-        ; --- set VRAM addr
+            ; --- set VRAM addr
 
-        ; HL = (Last_NAMTBL_Addr) + increment
-        ; ld      hl, (Last_NAMTBL_Addr)
-        ld      b, 0
-        add     hl, bc  ; BC = increment
-        ; ld      (Last_NAMTBL_Addr), hl
+            ; HL = (Last_NAMTBL_Addr) + increment
+            ; ld      hl, (Last_NAMTBL_Addr)
+            ld      b, 0
+            add     hl, bc  ; BC = increment
+            ; ld      (Last_NAMTBL_Addr), hl
 
-        ld      b, a    ; B = length
+            ld      b, a    ; B = length
 
-        ; write the lower 14 bits of the address to VDP PORT_1
-        ld      a, l
-        out     (PORT_1), a ; addr low
+            ; write the lower 14 bits of the address to VDP PORT_1
+            ld      a, l
+            out     (PORT_1), a ; addr low
 
-        ld      a, h
-        or      0100 0000 b ; set bit 6 (write flag)
-        out     (PORT_1), a ; addr high
+            ld      a, h
+            or      0100 0000 b ; set bit 6 (write flag)
+            out     (PORT_1), a ; addr high
 
-        ; check "crossed 16 kb boundary" flag
-        ld      a, iyl
-        or      a
-        jp      nz, .continue
+            ; ; check "crossed 16 kb boundary" flag
+            ; ld      a, iyl
+            ; or      a
+            ; jp      nz, .continue
 
-        bit     6, h
-        jr      nz, .cross16kb
-.continue:
-
-
-        ; HL = DE (slice data address)
-        ; DE = HL (VRAM NAMTBL addr)
-        ex      de, hl
-
-        ld      c, PORT_0
-        otir
-
-        ; HL = DE (VRAM NAMTBL addr)
-        ; DE = HL (slice data address)
-        ex      de, hl
-
-    jp      .loop
+            bit     6, h
+            jr      nz, .cross16kb
+    ;.continue:
 
 
-    ; ---
+            ; HL = DE (slice data address)
+            ; DE = HL (VRAM NAMTBL addr)
+            ex      de, hl
+
+            ld      c, PORT_0
+            otir
+
+            ; HL = DE (VRAM NAMTBL addr)
+            ; DE = HL (slice data address)
+            ex      de, hl
+
+        jp      .loop
+
+
+        ; ---
 
 .endFrame:
 
-    ld  sp, (OldSP)
+        ld  sp, (OldSP)
     ei
 
 
@@ -156,6 +156,63 @@ DrawSprite:
         out     (PORT_1), a ; register #
     ; ei
 
-    ld      iyl, 1 ; set flag (to not set R#14 again)
+    ; ld      iyl, 1 ; set flag (to not set R#14 again)
 
-    jp      .continue
+    jp      DrawSprite_After16kb.continue
+
+
+; ------------------------------------------------------------------------------
+; code repeated (used after the 16kb crossed)
+DrawSprite_After16kb:
+.loop:
+
+        ; -----------------------------------------------------------
+        ; Read list
+
+        pop     bc              ; B = length, C = increment
+        xor     a
+        or      c
+        jr      z, DrawSprite.endFrame ; if (increment == 0) endFrame
+
+        ld      a, b
+
+        pop     de              ; DE = slice data address
+
+        ; --- set VRAM addr
+
+        ld      b, 0
+        add     hl, bc  ; BC = increment
+
+        ld      b, a    ; B = length
+
+        ; write the lower 14 bits of the address to VDP PORT_1
+        ld      a, l
+        out     (PORT_1), a ; addr low
+
+        ld      a, h
+        or      0100 0000 b ; set bit 6 (write flag)
+        out     (PORT_1), a ; addr high
+
+        ; Removed. Not necessary after R#14 already updated for the second 16kb of NAMTBL
+        ; ; check "crossed 16 kb boundary" flag
+        ; ld      a, iyl
+        ; or      a
+        ; jp      nz, .continue
+
+        ; bit     6, h
+        ; jr      nz, .cross16kb
+.continue:
+
+
+        ; HL = DE (slice data address)
+        ; DE = HL (VRAM NAMTBL addr)
+        ex      de, hl
+
+        ld      c, PORT_0
+        otir
+
+        ; HL = DE (VRAM NAMTBL addr)
+        ; DE = HL (slice data address)
+        ex      de, hl
+
+    jp      .loop
