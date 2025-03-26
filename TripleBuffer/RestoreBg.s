@@ -70,6 +70,7 @@ RestoreBg:
     ; ---- Update Player Restore BG vars after BG is restored with previous frame
     ld      b, 0 ; B will be added to width
     ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
+    ld      c, a ; save original X
     ; if(x >= 2) x -= 2
     cp      2
     jp      c, .skip_1
@@ -82,10 +83,20 @@ RestoreBg:
     ld      (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars)), a
 
     ld      a, (ix + (Player_1_Vars.Width - Player_1_Vars))
+    ld      d, a ; save original width
     add     b
-    ; TODO: if(x + width <= 254) x += 2
+    ld      e, a ; save new width
+    
+    ; if(x + width < 254) width += 2
+    ; if((C + D) < 254) E += 2
+    ld      a, c
+    add     d
+    cp      254
+    ld      a, e ; restore new width
+    jp      nc, .skip_2
 
     add     2 ; 2px right to be on the safe side
+.skip_2:
     ld      (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars)), a
     
     ld      a, (ix + (Player_1_Vars.Height - Player_1_Vars))
