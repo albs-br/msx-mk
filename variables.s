@@ -79,7 +79,7 @@ SIDE:
 
 POSITION:
     .STANCE:                equ 0       ; these values will be used as offset from base AllAnimations_Addr
-    .WALKING_FORWARD:       equ 2       ; so, position is important, and there should be a step of 2 between each of them
+    .WALKING_FORWARD:       equ 2       ; so, position matter and there should be a step of 2 between each of them
     .WALKING_BACKWARDS:     equ 4
 
 
