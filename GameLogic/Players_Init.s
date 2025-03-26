@@ -35,8 +35,7 @@ Players_Init:
     ld      a, POSITION.STANCE
     ld      (Player_1_Vars.Position), a
 
-    ; ld      hl, Scorpion_All_Animations_Left
-    ld      hl, Subzero_All_Animations_Right
+    ld      hl, Scorpion_All_Animations_Left
     ld      (Player_1_Vars.AllAnimations_Addr), hl
     
     ; ------------ init player 2

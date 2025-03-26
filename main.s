@@ -401,7 +401,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 ; ------- All animation pointers
 
-    ;INCLUDE "Data/scorpion/scorpion_all_animations.s"
+    INCLUDE "Data/scorpion/scorpion_all_animations.s"
     INCLUDE "Data/subzero/subzero_all_animations.s"
 
 
@@ -409,6 +409,8 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 ; ------- Animation frame headers
 
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_animation.s"
+    INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_animation.s"
+    INCLUDE "Data/scorpion/walking/left/scorpion_walking_backwards_left_animation.s"
 
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_animation.s"

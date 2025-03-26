@@ -24,6 +24,7 @@ Bg_Bottom:
 MEGAROM_PAGE_FRAME_HEADERS: equ 2
 
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_frame_headers.s"
+    INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_frame_headers.s"
 
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frame_headers.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_headers.s"
@@ -70,5 +71,15 @@ MEGAROM_PAGE_SUBZERO_WALKING_RIGHT_DATA_0: equ 6
 	org	0x8000, 0xBFFF
 
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frames_0_to_8_data_and_list.s"
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 7 -------------------------------------------------
+
+MEGAROM_PAGE_SCORPION_WALKING_LEFT_DATA_0: equ 7
+
+	org	0x8000, 0xBFFF
+
+    INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_frames_0_to_8_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255

@@ -7,21 +7,42 @@ ReadInput:
     ; ---- read keyboard for player 1
     ld      a, 2                    ; 2nd line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
-    ;ld      (Keyboard_Value), a     ; save value
+    ld      (Keyboard_Value), a     ; save value
 
     ld      ix, Player_1_Vars
+
 
     bit     6, a                    ; 6th bit (key A)
     call    z, Player_Input_Left
     
     ; TODO: no need to check right if left was pressed
+
+    ld      a, (Keyboard_Value)
+    ld      b, a
+
     ld      a, 3                    ; 3rd line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
-    ; ld      (Keyboard_Value), a     ; save value
+    ld      (Keyboard_Value), a     ; save value
 
-    ; ld      a, (Keyboard_Value)
+    ; check if both reads of SNSMAT == 255 (no key presed)
+    cp      1111 1111 b
+    jp      nz, .skip_1
+    cp      b
+    jp      z, .skip_2
+
+.skip_1:
+    ld      a, (Keyboard_Value)
     bit     1, a                    ; 1st bit (key D)
     call    z, Player_Input_Right
+
+    jp      .continue
+
+.skip_2:
+
+    call    Player_Input_None
+
+.continue:
+
 
 
 
@@ -34,7 +55,7 @@ ReadInput:
     ld      ix, Player_2_Vars
 
     cp      1111 1111 b
-    call    z, Player_Input_None ; TODO: for player 1 this will not work
+    call    z, Player_Input_None
 
     ld      a, (Keyboard_Value)
     bit     4, a                    ; 4th bit (key left)
