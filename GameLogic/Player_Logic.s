@@ -6,7 +6,7 @@ Update_VRAM_NAMTBL_Addr:
 
     ; VRAM_NAMTBL_Addr = (X/2) + (128*Y)
     ld      c, (ix + (Player_1_Vars.X - Player_1_Vars))         ; C = X
-    srl     c                                                   ; shift right C
+    srl     c                                                   ; shift right C (divide by 2, as X is stored in pixels, but should be converted to bytes)
     ld      b, 0
 
     ld      h, 0
@@ -48,9 +48,14 @@ Player_Input_Left:
     cp      POSITION.STANCE
     jp      nz, .skip_1
 
+    ; --- get addr of animation
+    ; ld      hl, Subzero_Walking_Right_Animation_Headers
+    ld      bc, POSITION.WALKING_FORWARD
+    call    GetAnimationAddr
+
+
     ; --- set animation
     ld      a, POSITION.WALKING_FORWARD
-    ld      hl, Subzero_Walking_Right_Animation_Headers ; TODO: get this from AllAnimations
     call    Player_SetAnimation
 
 .skip_1:
@@ -77,9 +82,12 @@ Player_Input_Right:
     cp      POSITION.STANCE
     jp      nz, .skip_2
 
+    ; --- get addr of animation
+    ld      bc, POSITION.WALKING_BACKWARDS
+    call    GetAnimationAddr
+
     ; --- set animation
     ld      a, POSITION.WALKING_BACKWARDS
-    ld      hl, Subzero_Walking_Backwards_Right_Animation_Headers ; TODO: get this from AllAnimations
     call    Player_SetAnimation
 
 .skip_2:
@@ -93,15 +101,23 @@ Player_Input_None:
     cp      POSITION.STANCE
     jp      z, .skip_10
 
+    ; --- get addr of animation
+    ld      bc, POSITION.STANCE
+    call    GetAnimationAddr
+
     ; --- set animation
     ld      a, POSITION.STANCE
-    ld      hl, Subzero_Stance_Right_Animation_Headers ; TODO: get this from AllAnimations
+    ; ld      hl, Subzero_Stance_Right_Animation_Headers
     call    Player_SetAnimation
 
 .skip_10:
 
     ret
 
+; Inputs:
+;   IX: Player Vars base addr
+;   A:  Position (constant POSITION.?)
+;   HL: Addr of animation
 Player_SetAnimation:
     ; ld      a, POSITION.STANCE
     ld      (ix + (Player_1_Vars.Position - Player_1_Vars)), a
@@ -115,5 +131,22 @@ Player_SetAnimation:
 
     ld      (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars)), l
     ld      (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars + 1)), h
+
+    ret
+
+; Inputs:
+;   IX: Player Vars base addr
+;   BC: Offset from base AllAnimations_Addr (constant POSITION.?)
+; Outputs:
+;   HL: Addr of animation
+GetAnimationAddr:
+    ld      l, (ix + Player_1_Vars.AllAnimations_Addr - Player_1_Vars)
+    ld      h, (ix + Player_1_Vars.AllAnimations_Addr - Player_1_Vars + 1)
+    ; ld      bc, POSITION.WALKING_FORWARD
+    add     hl, bc
+    ld      e, (hl)
+    inc     hl
+    ld      d, (hl)
+    ex      de, hl ; HL = DE
 
     ret

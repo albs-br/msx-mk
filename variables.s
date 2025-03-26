@@ -71,14 +71,16 @@ Player_2_Vars:
 
 ; ----------------------------
 
+; Constants:
+
 SIDE:
     .LEFT:      equ 1
     .RIGHT:     equ 2
 
 POSITION:
-    .STANCE:                equ 1
-    .WALKING_FORWARD:       equ 2
-    .WALKING_BACKWARDS:     equ 3
+    .STANCE:                equ 0       ; these values will be used as offset from base AllAnimations_Addr
+    .WALKING_FORWARD:       equ 2       ; so, position is important, and there should be a step of 2 between each of them
+    .WALKING_BACKWARDS:     equ 4
 
 
 
