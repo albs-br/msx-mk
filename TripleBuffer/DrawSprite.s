@@ -64,14 +64,18 @@ DrawSprite:
 
 
     ; init vars
-    ld      (Last_NAMTBL_Addr), de
+    ; ld      (Last_NAMTBL_Addr), de
 
     ld      iyl, 0 ; reset 16kb boundary flag
     
     di
     ld      (OldSP), sp
     ld      sp, hl
-    
+
+    ; ld      hl, (Last_NAMTBL_Addr)
+    ld      l, e
+    ld      h, d
+
 .loop:
 
         ; -----------------------------------------------------------
@@ -81,69 +85,50 @@ DrawSprite:
         xor     a
         or      c
         jr      z, .endFrame ; if (increment == 0) endFrame
-        
+
         ld      a, b
 
         pop     de              ; DE = slice data address
 
-        ; ld      a, (hl)     ; C = increment
-        ; or      a
-        ; jr      z, .endFrame ; if (increment == 0) endFrame
-        ; ld      c, a
+        ; --- set VRAM addr
 
-        ; inc     hl
-        ; ld      a, (hl)     ; A = length
+        ; HL = (Last_NAMTBL_Addr) + increment
+        ; ld      hl, (Last_NAMTBL_Addr)
+        ld      b, 0
+        add     hl, bc  ; BC = increment
+        ; ld      (Last_NAMTBL_Addr), hl
 
-        ; inc     hl
-        ; ld      e, (hl)
-        ; inc     hl
-        ; ld      d, (hl)     ; DE = slice data address
+        ld      b, a    ; B = length
 
-        ; inc     hl      ; go to next list entry
-        ; push    hl
-            ; --- set VRAM addr
+        ; write the lower 14 bits of the address to VDP PORT_1
+        ld      a, l
+        out     (PORT_1), a ; addr low
 
-            ; HL = (Last_NAMTBL_Addr) + increment
-            ld      hl, (Last_NAMTBL_Addr)
-            ld      b, 0
-            add     hl, bc  ; BC = increment
-            ld      (Last_NAMTBL_Addr), hl
+        ld      a, h
+        or      0100 0000 b ; set bit 6 (write flag)
+        out     (PORT_1), a ; addr high
 
-            ld      b, a    ; B = length
+        ; check "crossed 16 kb boundary" flag
+        ld      a, iyl
+        or      a
+        jp      nz, .continue
 
-            ; di
-                ; write the lower 14 bits of the address to VDP PORT_1
-                ld      a, l
-                
-                ;nop
-                ld      c, PORT_0 ; do this instead of nop to save cycles
+        bit     6, h
+        jr      nz, .cross16kb
+.continue:
 
 
-                out     (PORT_1), a ; addr low
-                ld      a, h
+        ; HL = DE (slice data address)
+        ; DE = HL (VRAM NAMTBL addr)
+        ex      de, hl
 
-                or      64
-            ; ei
-            out     (PORT_1), a ; addr high
+        ld      c, PORT_0
+        otir
 
-            ; check "crossed 16 kb boundary" flag
-            ld      a, iyl
-            or      a
-            jp      nz, .continue
+        ; HL = DE (VRAM NAMTBL addr)
+        ; DE = HL (slice data address)
+        ex      de, hl
 
-            bit     6, h
-            jr      nz, .cross16kb
-    .continue:
-
-
-            ; HL = DE (slice data address)
-            ex      de, hl
-
-            ; ld      c, PORT_0
-            otir
-
-
-        ; pop     hl
     jp      .loop
 
 
