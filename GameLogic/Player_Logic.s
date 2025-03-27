@@ -69,7 +69,7 @@ Player_Input_Right:
     sub     (ix + (Player_1_Vars.Width - Player_1_Vars))
     ld      b, a
     ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
-    cp      b       ; if (X > (255-width)) ret
+    cp      b       ; if (X >= (255-width)) ret
     ret     nc
 
     add     2
@@ -140,8 +140,8 @@ Player_SetAnimation:
 ; Outputs:
 ;   HL: Addr of animation
 GetAnimationAddr:
-    ld      l, (ix + Player_1_Vars.AllAnimations_Addr - Player_1_Vars)
-    ld      h, (ix + Player_1_Vars.AllAnimations_Addr - Player_1_Vars + 1)
+    ld      l, (ix + (Player_1_Vars.AllAnimations_Addr - Player_1_Vars))
+    ld      h, (ix + (Player_1_Vars.AllAnimations_Addr - Player_1_Vars + 1))
     ; ld      bc, POSITION.WALKING_FORWARD
     add     hl, bc
     ld      e, (hl)

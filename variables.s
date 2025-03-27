@@ -1,6 +1,18 @@
 RamStart:
 
 
+; ----------------------------
+
+; Debug:
+Jiffy_Saved:            rw 1
+LastFps:                rb 1
+CurrentCounter:         rb 1
+
+
+
+; ----------------------------
+
+
 OldSP:              rw 1
 ; Last_NAMTBL_Addr:   rw 1
 
@@ -14,7 +26,6 @@ Keyboard_Value:     rb 1
 ;   2         2               0                       1
 TripleBuffer_Vars:
     .Step:                  rb 1
-    ; .BaseDataAddr:          rw 1
     .R14_Value:             rb 1
 
 TripleBuffer_Vars_RestoreBG_HMMM_Command:
@@ -30,6 +41,10 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 
 
 ; ----------------------------
+
+Player_Struct:
+    .X:                                 equ Player_1_Vars.X - Player_1_Vars
+    ;TODO: continue
 
 Player_1_Vars:
     .X:                                 rb 1
@@ -48,11 +63,12 @@ Player_1_Vars:
     .Position:                          rb 1
     .AllAnimations_Addr:                rw 1
 
-; .size:  equ $ - Player_1_Vars
+Player_Struct_size: equ $ - Player_1_Vars
 
 
 
 Player_2_Vars:
+    ; rb Player_Struct_size
     .X:                                 rb 1
     .Y:                                 rb 1
     .Width:                             rb 1
@@ -86,10 +102,6 @@ POSITION:
 
 ; ----------------------------
 
-; Debug:
-Jiffy_Saved:            rw 1
-LastFps:                rb 1
-CurrentCounter:         rb 1
 
 
 RamEnd:
