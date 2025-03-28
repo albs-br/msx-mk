@@ -55,6 +55,7 @@ BIOS_CPNCNT8: equ 0F93Bh ; last def. pass 3
 Scorpion_Stance_Left_Frame_5.List: equ 0ACC7h ; last def. pass 3
 BIOS_DECCNT: equ 0F7F4h ; last def. pass 3
 REG19SAV: equ 0FFF2h ; last def. pass 3
+Player_Struct_size: equ 013h ; last def. pass 3
 BIOS_H_PHYD: equ 0FFA7h ; last def. pass 3
 Subzero_Walking_Right_Frame_0_Header: equ 0B74Bh ; last def. pass 3
 BIOS_SAVVOL: equ 0FB39h ; last def. pass 3
@@ -324,6 +325,7 @@ Execute_VDP_HMMM.vdpReady: equ 041F9h ; last def. pass 3
 Subzero_Stance_Right_Frame_1: equ 0AAADh ; last def. pass 3
 VDP_COMMAND_HMMC: equ 0F0h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.NotUsed: equ 0C015h ; last def. pass 3
+Player_Struct.X: equ 00h ; last def. pass 3
 Bg_Top: equ 08000h ; last def. pass 3
 BIOS_WRPRIM: equ 0F385h ; last def. pass 3
 BIOS_FNKFLG: equ 0FBCEh ; last def. pass 3
@@ -372,6 +374,7 @@ BIOS_LDIRVM: equ 05Ch ; last def. pass 3
 BIOS_TXTPAT: equ 0F3BBh ; last def. pass 3
 BIOS_CALATR: equ 087h ; last def. pass 3
 Scorpion_Stance_Left_Frame_3_Header: equ 0B695h ; last def. pass 3
+Player_Struct: equ 0C018h ; last def. pass 3
 BIOS_BIGFIL: equ 016Bh ; last def. pass 3
 BIOS_CAPST: equ 0FCABh ; last def. pass 3
 Scorpion_Walking_Left_Frame_7_Header: equ 0B6E2h ; last def. pass 3
