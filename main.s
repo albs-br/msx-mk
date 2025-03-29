@@ -184,7 +184,7 @@ Triple_Buffer_Step_0:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 
@@ -201,7 +201,7 @@ Triple_Buffer_Step_0:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
-    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 
@@ -241,7 +241,7 @@ Triple_Buffer_Step_1:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_2
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 
@@ -258,7 +258,7 @@ Triple_Buffer_Step_1:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_2
-    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 
@@ -296,7 +296,7 @@ Triple_Buffer_Step_2:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_0
-    ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 
@@ -313,7 +313,7 @@ Triple_Buffer_Step_2:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_0
-    ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
+    ; ld      de, (Player_2_Vars.VRAM_NAMTBL_Addr)
     call    DrawSprite
 
 

@@ -43,7 +43,6 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 ; ----------------------------
 
 
-; TODO: finish
 
 Player_Struct:
     .X:                                 equ Player_1_Vars.X                              - Player_1_Vars
@@ -84,22 +83,22 @@ Player_Struct_size: equ $ - Player_1_Vars
 
 
 Player_2_Vars:
-    ; rb Player_Struct_size
-    .X:                                 rb 1
-    .Y:                                 rb 1
-    .Width:                             rb 1
-    .Height:                            rb 1
-    .Animation_Current_Frame_Number:    rb 1
-    .Animation_CurrentFrame_Header:     rw 1
-    .Animation_FirstFrame_Header:       rw 1
-    .VRAM_NAMTBL_Addr:                  rw 1
-    .Restore_BG_X:                      rb 1
-    .Restore_BG_Y:                      rb 1
-    .Restore_BG_WidthInPixels:          rb 1
-    .Restore_BG_HeightInPixels:         rb 1
-    .Side:                              rb 1
-    .Position:                          rb 1
-    .AllAnimations_Addr:                rw 1
+    rb Player_Struct_size
+    ; .X:                                 rb 1
+    ; .Y:                                 rb 1
+    ; .Width:                             rb 1
+    ; .Height:                            rb 1
+    ; .Animation_Current_Frame_Number:    rb 1
+    ; .Animation_CurrentFrame_Header:     rw 1
+    ; .Animation_FirstFrame_Header:       rw 1
+    ; .VRAM_NAMTBL_Addr:                  rw 1
+    ; .Restore_BG_X:                      rb 1
+    ; .Restore_BG_Y:                      rb 1
+    ; .Restore_BG_WidthInPixels:          rb 1
+    ; .Restore_BG_HeightInPixels:         rb 1
+    ; .Side:                              rb 1
+    ; .Position:                          rb 1
+    ; .AllAnimations_Addr:                rw 1
 
 ; ----------------------------
 

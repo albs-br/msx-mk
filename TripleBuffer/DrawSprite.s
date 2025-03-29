@@ -1,10 +1,14 @@
 
-; Input:
+; Inputs:
 ;   A: value of R#14 to set VDP to write/read VRAM (constants: R14_PAGE_n)
 ;   IY: addr of current frame header
-;   DE: VRAM NAMTBL addr position
 ;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
+
+    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
+    ld      e, (ix + Player_Struct.VRAM_NAMTBL_Addr)
+    ld      d, (ix + Player_Struct.VRAM_NAMTBL_Addr + 1)
+
 
     ld      (TripleBuffer_Vars.R14_Value), a
     ; set R#14
