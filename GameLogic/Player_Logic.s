@@ -5,12 +5,12 @@ Update_VRAM_NAMTBL_Addr:
     ; ld      hl, 0 + ((192 - (58/2))/2) + (128*100) ; column number 192 - (58/2); line number 100
 
     ; VRAM_NAMTBL_Addr = (X/2) + (128*Y)
-    ld      c, (ix + (Player_1_Vars.X - Player_1_Vars))         ; C = X
+    ld      c, (ix + Player_Struct.X)         ; C = X
     srl     c                                                   ; shift right C (divide by 2, as X is stored in pixels, but should be converted to bytes)
     ld      b, 0
 
     ld      h, 0
-    ld      l, (ix + (Player_1_Vars.Y - Player_1_Vars))         ; HL = Y
+    ld      l, (ix + Player_Struct.Y)         ; HL = Y
 
     ; shift left HL 7 times (multiply by 128)
     ; T-Cycles: 32
@@ -27,24 +27,24 @@ Update_VRAM_NAMTBL_Addr:
     add     hl, bc
 
 
-    ld      (ix + (Player_1_Vars.VRAM_NAMTBL_Addr - Player_1_Vars)), l
-    ld      (ix + (Player_1_Vars.VRAM_NAMTBL_Addr - Player_1_Vars + 1)), h
+    ld      (ix + Player_Struct.VRAM_NAMTBL_Addr), l
+    ld      (ix + Player_Struct.VRAM_NAMTBL_Addr + 1), h
 
     ret
 
 Player_Input_Left:
 
-    ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
+    ld      a, (ix + Player_Struct.X)
     cp      2       ; if (X < 2) ret
     ret     c
 
     sub     2
-    ld      (ix + (Player_1_Vars.X - Player_1_Vars)), a
+    ld      (ix + Player_Struct.X), a
 
     call    Update_VRAM_NAMTBL_Addr
 
     ; if(position == STANCE)
-    ld      a, (ix + (Player_1_Vars.Position - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .skip_1
 
@@ -66,19 +66,19 @@ Player_Input_Left:
 Player_Input_Right:
 
     ld      a, 255
-    sub     (ix + (Player_1_Vars.Width - Player_1_Vars))
+    sub     (ix + Player_Struct.Width)
     ld      b, a
-    ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
+    ld      a, (ix + Player_Struct.X)
     cp      b       ; if (X >= (255-width)) ret
     ret     nc
 
     add     2
-    ld      (ix + (Player_1_Vars.X - Player_1_Vars)), a
+    ld      (ix + Player_Struct.X), a
 
     call    Update_VRAM_NAMTBL_Addr
 
     ; if(position == STANCE)
-    ld      a, (ix + (Player_1_Vars.Position - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .skip_2
 
@@ -97,7 +97,7 @@ Player_Input_Right:
 Player_Input_None:
 
     ; if(position != STANCE)
-    ld      a, (ix + (Player_1_Vars.Position - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      z, .skip_10
 
@@ -120,17 +120,17 @@ Player_Input_None:
 ;   HL: Addr of animation
 Player_SetAnimation:
     ; ld      a, POSITION.STANCE
-    ld      (ix + (Player_1_Vars.Position - Player_1_Vars)), a
+    ld      (ix + Player_Struct.Position), a
 
     xor     a
-    ld      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars)), a
+    ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
     
     ; ld      hl, Subzero_Stance_Right_Animation_Headers
-    ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars)), l
-    ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars + 1)), h
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
 
-    ld      (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars)), l
-    ld      (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars + 1)), h
+    ld      (ix + Player_Struct.Animation_FirstFrame_Header), l
+    ld      (ix + Player_Struct.Animation_FirstFrame_Header + 1), h
 
     ret
 
@@ -140,8 +140,8 @@ Player_SetAnimation:
 ; Outputs:
 ;   HL: Addr of animation
 GetAnimationAddr:
-    ld      l, (ix + (Player_1_Vars.AllAnimations_Addr - Player_1_Vars))
-    ld      h, (ix + (Player_1_Vars.AllAnimations_Addr - Player_1_Vars + 1))
+    ld      l, (ix + Player_Struct.AllAnimations_Addr)
+    ld      h, (ix + Player_Struct.AllAnimations_Addr + 1)
     ; ld      bc, POSITION.WALKING_FORWARD
     add     hl, bc
     ld      e, (hl)

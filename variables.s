@@ -45,22 +45,22 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 
 ; TODO: finish
 
-; Player_Struct:
-;     .X:                                 equ Player_1_Vars.X                               - Player_1_Vars
-;     .Y:                                 equ Player_1_Vars.Y:                              - Player_1_Vars
-;     .Width:                             equ Player_1_Vars.Width:                          - Player_1_Vars
-;     .Height:                            equ Player_1_Vars.Height:                         - Player_1_Vars
-;     .Animation_Current_Frame_Number:    equ Player_1_Vars.Animation_Current_Frame_Number: - Player_1_Vars
-;     .Animation_CurrentFrame_Header:     equ Player_1_Vars.Animation_CurrentFrame_Header:  - Player_1_Vars
-;     .Animation_FirstFrame_Header:       equ Player_1_Vars.Animation_FirstFrame_Header:    - Player_1_Vars
-;     .VRAM_NAMTBL_Addr:                  equ Player_1_Vars.VRAM_NAMTBL_Addr:               - Player_1_Vars
-;     .Restore_BG_X:                      equ Player_1_Vars.Restore_BG_X:                   - Player_1_Vars
-;     .Restore_BG_Y:                      equ Player_1_Vars.Restore_BG_Y:                   - Player_1_Vars
-;     .Restore_BG_WidthInPixels:          equ Player_1_Vars.Restore_BG_WidthInPixels:       - Player_1_Vars
-;     .Restore_BG_HeightInPixels:         equ Player_1_Vars.Restore_BG_HeightInPixels:      - Player_1_Vars
-;     .Side:                              equ Player_1_Vars.Side:                           - Player_1_Vars
-;     .Position:                          equ Player_1_Vars.Position:                       - Player_1_Vars
-;     .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr:             - Player_1_Vars
+Player_Struct:
+    .X:                                 equ Player_1_Vars.X                              - Player_1_Vars
+    .Y:                                 equ Player_1_Vars.Y                              - Player_1_Vars
+    .Width:                             equ Player_1_Vars.Width                          - Player_1_Vars
+    .Height:                            equ Player_1_Vars.Height                         - Player_1_Vars
+    .Animation_Current_Frame_Number:    equ Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars
+    .Animation_CurrentFrame_Header:     equ Player_1_Vars.Animation_CurrentFrame_Header  - Player_1_Vars
+    .Animation_FirstFrame_Header:       equ Player_1_Vars.Animation_FirstFrame_Header    - Player_1_Vars
+    .VRAM_NAMTBL_Addr:                  equ Player_1_Vars.VRAM_NAMTBL_Addr               - Player_1_Vars
+    .Restore_BG_X:                      equ Player_1_Vars.Restore_BG_X                   - Player_1_Vars
+    .Restore_BG_Y:                      equ Player_1_Vars.Restore_BG_Y                   - Player_1_Vars
+    .Restore_BG_WidthInPixels:          equ Player_1_Vars.Restore_BG_WidthInPixels       - Player_1_Vars
+    .Restore_BG_HeightInPixels:         equ Player_1_Vars.Restore_BG_HeightInPixels      - Player_1_Vars
+    .Side:                              equ Player_1_Vars.Side                           - Player_1_Vars
+    .Position:                          equ Player_1_Vars.Position                       - Player_1_Vars
+    .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr             - Player_1_Vars
 
 Player_1_Vars:
     .X:                                 rb 1

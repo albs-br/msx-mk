@@ -6,8 +6,8 @@
 GetCurrentFrameAndGoToNext:
 
     ; IY = current frame header addr
-    ld      l, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars))
-    ld      h, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1)
+    ld      l, (ix + Player_Struct.Animation_CurrentFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_CurrentFrame_Header + 1)
     ld      a, (hl)
     ld      iyl, a
     inc     hl
@@ -16,8 +16,8 @@ GetCurrentFrameAndGoToNext:
 
 
     ; HL = (Animation_CurrentFrame_Header)
-    ld      l, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars))
-    ld      h, (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1)
+    ld      l, (ix + Player_Struct.Animation_CurrentFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_CurrentFrame_Header + 1)
 
 
     ; HL++
@@ -25,7 +25,7 @@ GetCurrentFrameAndGoToNext:
     inc     hl
 
     ; Animation_Current_Frame_Number++
-    inc      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars))
+    inc      (ix + Player_Struct.Animation_Current_Frame_Number)
 
     inc     hl      ; read high byte
     ld      a, (hl)
@@ -36,18 +36,18 @@ GetCurrentFrameAndGoToNext:
     jp      .continue
 .returnToFirstFrame:
     ; HL = (Animation_FirstFrame_Header)
-    ld      l, (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars))
-    ld      h, (ix + (Player_1_Vars.Animation_FirstFrame_Header - Player_1_Vars) + 1)
+    ld      l, (ix + Player_Struct.Animation_FirstFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_FirstFrame_Header + 1)
 
     ; Animation_Current_Frame_Number = 0
     xor     a
-    ld      (ix + (Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars)), a
+    ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
 
 .continue:
 
     ; save new frame
-    ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars)), l
-    ld      (ix + (Player_1_Vars.Animation_CurrentFrame_Header - Player_1_Vars) + 1), h
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
         
 
 

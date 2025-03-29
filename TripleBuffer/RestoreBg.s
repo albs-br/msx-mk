@@ -9,8 +9,7 @@ RestoreBg:
 
     ; ; Destiny_Y = Y of base of page + Player.Restore_BG_Y
     ld      d, 0
-    ; ld      a, (Player_1_Vars.Restore_BG_Y)
-    ld      a, (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Restore_BG_Y)
     ld      e, a
     add     hl, de
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_Y), hl
@@ -18,8 +17,7 @@ RestoreBg:
     
     ; X is the same for both source and destiny
     ld      h, 0
-    ; ld      a, (Player_1_Vars.Restore_BG_X)
-    ld      a, (ix + (Player_1_Vars.Restore_BG_X - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Restore_BG_X)
     ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Source_X), hl
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_X), hl
@@ -27,8 +25,7 @@ RestoreBg:
     ; Source_Y is always on the page 3
     ; Source_Y = (256 * 3) + Player.Restore_BG_Y
     ld      h, 0
-    ; ld      a, (Player_1_Vars.Restore_BG_Y)
-    ld      a, (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Restore_BG_Y)
     ld      l, a
     ld      de, 768
     add     hl, de
@@ -36,14 +33,12 @@ RestoreBg:
 
 
     ld      h, 0
-    ; ld      a, (Player_1_Vars.Restore_BG_WidthInPixels)
-    ld      a, (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Restore_BG_WidthInPixels)
     ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Cols), hl
 
     ld      h, 0
-    ; ld      a, (Player_1_Vars.Restore_BG_HeightInPixels)
-    ld      a, (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Restore_BG_HeightInPixels)
     ld      l, a
     ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Lines), hl
 
@@ -69,7 +64,7 @@ RestoreBg:
 
     ; ---- Update Player Restore BG vars after BG is restored with previous frame
     ld      b, 0 ; B will be added to width
-    ld      a, (ix + (Player_1_Vars.X - Player_1_Vars))
+    ld      a, (ix + Player_Struct.X)
     ld      c, a ; save original X
     ; if(x >= 2) x -= 2
     cp      2
@@ -77,12 +72,12 @@ RestoreBg:
     sub     2 ; 2px left to be on the safe side
     ld      b, 2 ; width += 2 ; compensate for the x-2
 .skip_1:
-    ld      (ix + (Player_1_Vars.Restore_BG_X - Player_1_Vars)), a
+    ld      (ix + Player_Struct.Restore_BG_X), a
 
-    ld      a, (ix + (Player_1_Vars.Y - Player_1_Vars))
-    ld      (ix + (Player_1_Vars.Restore_BG_Y - Player_1_Vars)), a
+    ld      a, (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.Restore_BG_Y), a
 
-    ld      a, (ix + (Player_1_Vars.Width - Player_1_Vars))
+    ld      a, (ix + Player_Struct.Width)
     ld      d, a ; save original width
     add     b
     ld      e, a ; save new width
@@ -97,10 +92,10 @@ RestoreBg:
 
     add     2 ; 2px right to be on the safe side
 .skip_2:
-    ld      (ix + (Player_1_Vars.Restore_BG_WidthInPixels - Player_1_Vars)), a
+    ld      (ix + Player_Struct.Restore_BG_WidthInPixels), a
     
-    ld      a, (ix + (Player_1_Vars.Height - Player_1_Vars))
-    ld      (ix + (Player_1_Vars.Restore_BG_HeightInPixels - Player_1_Vars)), a
+    ld      a, (ix + Player_Struct.Height)
+    ld      (ix + Player_Struct.Restore_BG_HeightInPixels), a
     
 
 
