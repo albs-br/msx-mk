@@ -5,12 +5,25 @@ ReadInput:
 
 
     ; ---- read keyboard for player 1
-    ld      a, 2                    ; 2nd line
+    ld      ix, Player_1_Vars
+
+    ; if (!Player.IsGrounded) .skipCheck_P1_KeyUp
+    ld      a, (ix + Player_Struct.IsGrounded)
+    or      a
+    jp      z, .skipCheck_P1_KeyUp
+
+    ld      a, 5                    ; 5th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (Keyboard_Value), a     ; save value
 
-    ld      ix, Player_1_Vars
+    bit     4, a                    ; 4th bit (key W)
+    call    z, Player_Input_Up
 
+
+.skipCheck_P1_KeyUp:
+    ld      a, 2                    ; 2nd line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (Keyboard_Value), a     ; save value
 
     bit     6, a                    ; 6th bit (key A)
     call    z, Player_Input_Left

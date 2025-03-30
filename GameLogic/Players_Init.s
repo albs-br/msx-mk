@@ -2,12 +2,10 @@ Players_Init:
     ; ------------ init player 1
 
     ld      ix, Player_1_Vars
-    ; ld      hl, Scorpion_Stance_Left_Animation_Headers
-    ld      hl, Subzero_Stance_Right_Animation_Headers
+    ld      hl, Scorpion_Stance_Left_Animation_Headers
     ld      b, 64 - (58/2)      ; X coord
     ld      c, 100              ; Y coord
-    ; ld      de, Scorpion_All_Animations_Left
-    ld      de, Subzero_All_Animations_Right
+    ld      de, Scorpion_All_Animations_Left
     ld      a, SIDE.LEFT
     call    Player_Init
 
@@ -53,12 +51,10 @@ Players_Init:
     ; ------------ init player 2
 
     ld      ix, Player_2_Vars
-    ; ld      hl, Subzero_Stance_Right_Animation_Headers
-    ld      hl, Scorpion_Stance_Left_Animation_Headers
+    ld      hl, Subzero_Stance_Right_Animation_Headers
     ld      b, 192 - (58/2)     ; X coord
     ld      c, 100              ; Y coord
-    ; ld      de, Subzero_All_Animations_Right
-    ld      de, Scorpion_All_Animations_Left
+    ld      de, Subzero_All_Animations_Right
     ld      a, SIDE.RIGHT
     call    Player_Init
 
@@ -110,13 +106,13 @@ Players_Init:
     ret
 
 
-; Input:
+; Inputs:
 ;   IX: Player Vars base addr (already pointing to next frame)
 ;   HL: Animation frame header addr
-;   B: X coordinate in pixels
-;   C: Y coordinate in pixels
+;   B:  X coordinate in pixels
+;   C:  Y coordinate in pixels
 ;   DE: All animations addr
-;   A: side (constant SIDE.LEFT / RIGHT)
+;   A:  Side (constant SIDE.LEFT / RIGHT)
 Player_Init:
 
     ; ld      a, SIDE.LEFT
@@ -125,12 +121,15 @@ Player_Init:
     ld      a, POSITION.STANCE
     ld      (ix + Player_Struct.Position), a
 
+    ld      a, 1
+    ld      (ix + Player_Struct.IsGrounded), a
 
 
     xor     a
     ; ld      (Player_1_Vars.Animation_Current_Frame_Number), a
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
 
+    ; TODO: this addr can be get from All Animations First Addr
     ; ld      hl, Scorpion_Stance_Left_Animation_Headers
     ; ld      (Player_1_Vars.Animation_CurrentFrame_Header), hl
     ; ld      (Player_1_Vars.Animation_FirstFrame_Header), hl

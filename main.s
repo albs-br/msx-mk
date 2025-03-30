@@ -145,6 +145,12 @@ Triple_Buffer_Loop:
 
     call    ReadInput
 
+    ld      ix, Player_1_Vars
+    call    Player_Logic
+
+    ld      ix, Player_2_Vars
+    call    Player_Logic
+
     ; -------
 
     ld      a, (TripleBuffer_Vars.Step)

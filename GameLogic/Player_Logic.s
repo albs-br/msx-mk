@@ -1,3 +1,31 @@
+Player_Jump_Delta_Y: 
+    db -5, -5, -5, -5, -5, -5
+    db -4, -4, -4, -4, -4, -4
+    db -3, -3, -3, -3, -3, -3
+    ; TODO: more
+
+; Inputs:
+;   IX: Player Vars base addr
+Player_Logic:
+    ; if(Player.Position == POSITION.JUMPING_UP)
+
+    ; ---- Update Y
+
+    ; ; get Player_Jump_Delta_Y from Animation_Current_Frame_Number
+    ; ld      hl, Player_Jump_Delta_Y
+    ; ld      c, (ix + Player_Struct.Animation_Current_Frame_Number)
+    ; ld      b, (ix + Player_Struct.Animation_Current_Frame_Number + 1)
+    ; add     hl, bc
+    ; ld      a, (hl)
+
+    ; ; update Y with this Delta_Y
+    ; ld      b, (ix + Player_Struct.Y)
+    ; add     b
+    ; ld      (ix + Player_Struct.Y), a
+
+
+    ret
+
 ; Input:
 ;   IX: Player Vars base addr
 Update_VRAM_NAMTBL_Addr:
@@ -111,6 +139,22 @@ Player_Input_None:
     call    Player_SetAnimation
 
 .skip_10:
+
+    ret
+
+Player_Input_Up:
+
+    ; Player.IsGrounded = false
+    xor     a
+    ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.JUMPING_UP
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.JUMPING_UP
+    call    Player_SetAnimation
 
     ret
 

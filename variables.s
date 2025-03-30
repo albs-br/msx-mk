@@ -59,6 +59,7 @@ Player_Struct:
     .Restore_BG_HeightInPixels:         equ Player_1_Vars.Restore_BG_HeightInPixels      - Player_1_Vars
     .Side:                              equ Player_1_Vars.Side                           - Player_1_Vars
     .Position:                          equ Player_1_Vars.Position                       - Player_1_Vars
+    .IsGrounded:                        equ Player_1_Vars.IsGrounded                     - Player_1_Vars
     .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr             - Player_1_Vars
 
 Player_1_Vars:
@@ -76,6 +77,7 @@ Player_1_Vars:
     .Restore_BG_HeightInPixels:         rb 1
     .Side:                              rb 1
     .Position:                          rb 1
+    .IsGrounded:                        rb 1
     .AllAnimations_Addr:                rw 1
 
 Player_Struct_size: equ $ - Player_1_Vars
@@ -112,6 +114,7 @@ POSITION:
     .STANCE:                equ 0       ; these values will be used as offset from base AllAnimations_Addr
     .WALKING_FORWARD:       equ 2       ; so, position matter and there should be a step of 2 between each of them
     .WALKING_BACKWARDS:     equ 4
+    .JUMPING_UP:            equ 6
 
 
 
