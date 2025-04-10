@@ -3,27 +3,41 @@ Player_Jump_Delta_Y:
     db -4, -4, -4, -4, -4, -4
     db -3, -3, -3, -3, -3, -3
     ; TODO: more
+.size: equ $ - Player_Jump_Delta_Y
 
 ; Inputs:
 ;   IX: Player Vars base addr
 Player_Logic:
     ; if(Player.Position == POSITION.JUMPING_UP)
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.JUMPING_UP
+    jp      nz, .notJumpingUp
 
     ; ---- Update Y
 
-    ; ; get Player_Jump_Delta_Y from Animation_Current_Frame_Number
-    ; ld      hl, Player_Jump_Delta_Y
-    ; ld      c, (ix + Player_Struct.Animation_Current_Frame_Number)
-    ; ld      b, (ix + Player_Struct.Animation_Current_Frame_Number + 1)
-    ; add     hl, bc
-    ; ld      a, (hl)
+    ; --- get Player_Jump_Delta_Y from Animation_Current_Frame_Number
+    ld      hl, Player_Jump_Delta_Y
+    ld      c, (ix + Player_Struct.Animation_Current_Frame_Number)
+    ld      b, 0
+    ld      a, c
+    cp      Player_Jump_Delta_Y.size
+    jp      z, .endJump ; if (Animation_Current_Frame_Number == 60) endJump()
+    add     hl, bc
+    ld      a, (hl)
 
-    ; ; update Y with this Delta_Y
-    ; ld      b, (ix + Player_Struct.Y)
-    ; add     b
-    ; ld      (ix + Player_Struct.Y), a
+    ; update Y with this Delta_Y
+    ld      b, (ix + Player_Struct.Y)
+    add     b
+    ld      (ix + Player_Struct.Y), a
 
+    call    Update_VRAM_NAMTBL_Addr
 
+.notJumpingUp:
+
+    ret
+
+.endJump:
+    jp $;debug
     ret
 
 ; Input:
@@ -128,6 +142,10 @@ Player_Input_None:
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      z, .skip_10
+
+    ; Player.IsGrounded = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsGrounded), a
 
     ; --- get addr of animation
     ld      bc, POSITION.STANCE

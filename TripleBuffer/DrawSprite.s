@@ -142,6 +142,35 @@ DrawSprite:
         ld  sp, (OldSP)
     ei
 
+    ; --------- Update RestoreBG vars
+
+    ; --- RestoreBG_1 = RestoreBG_0
+    ld      a, (ix + Player_Struct.Restore_BG_0_X)
+    ld      (ix + Player_Struct.Restore_BG_1_X), a
+
+    ld      a, (ix + Player_Struct.Restore_BG_0_Y)
+    ld      (ix + Player_Struct.Restore_BG_1_Y), a
+
+    ld      a, (ix + Player_Struct.Restore_BG_0_WidthInPixels)
+    ld      (ix + Player_Struct.Restore_BG_1_WidthInPixels), a
+
+    ld      a, (ix + Player_Struct.Restore_BG_0_HeightInPixels)
+    ld      (ix + Player_Struct.Restore_BG_1_HeightInPixels), a
+
+
+    ; --- RestoreBG_0 = current
+    ld      a, (ix + Player_Struct.X)
+    ld      (ix + Player_Struct.Restore_BG_0_X), a
+
+    ld      a, (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.Restore_BG_0_Y), a
+
+    ld      a, (ix + Player_Struct.Width)
+    ld      (ix + Player_Struct.Restore_BG_0_WidthInPixels), a
+
+    ld      a, (ix + Player_Struct.Height)
+    ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
+
 
 
     ret

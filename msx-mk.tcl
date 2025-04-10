@@ -21,4 +21,14 @@ ram_watch   add     0xc002      -type byte      -desc LastFps     -format dec
 #Player_2_Vars.Animation_Current_Frame_Number: equ 0C02Fh ; last def. pass 3
 
 
+ram_watch   add     0xc018      -type byte      -desc P1_X     -format dec
+ram_watch   add     0xc019      -type byte      -desc P1_Y     -format dec
+ram_watch   add     0xc028      -type byte      -desc P1_Position     -format dec
+ram_watch   add     0xc029      -type byte      -desc P1_IsGrounded     -format dec
+ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
 
+#Player_1_Vars.X: equ 0C018h ; last def. pass 3
+#Player_1_Vars.Y: equ 0C019h ; last def. pass 3
+#Player_1_Vars.IsGrounded: equ 0C029h ; last def. pass 3
+#Player_1_Vars.Position: equ 0C028h ; last def. pass 3
+#Player_1_Vars.Animation_Current_Frame_Number: equ 0C01Ch ; last def. pass 3

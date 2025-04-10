@@ -143,20 +143,24 @@ Player_Init:
 
     ; ld      a, 64 - (58/2)
     ld      (ix + Player_Struct.X), b
-    ld      (ix + Player_Struct.Restore_BG_X), b
+    ld      (ix + Player_Struct.Restore_BG_0_X), b
+    ld      (ix + Player_Struct.Restore_BG_1_X), b
     ; ld      a, 100
     ld      (ix + Player_Struct.Y), c
-    ld      (ix + Player_Struct.Restore_BG_Y), c
+    ld      (ix + Player_Struct.Restore_BG_0_Y), c
+    ld      (ix + Player_Struct.Restore_BG_1_Y), c
 
 
     ; TODO: get these values from frame header
     ld      a, 58
     ld      (ix + Player_Struct.Width), a
-    ld      (ix + Player_Struct.Restore_BG_WidthInPixels), a
+    ld      (ix + Player_Struct.Restore_BG_0_WidthInPixels), a
+    ld      (ix + Player_Struct.Restore_BG_1_WidthInPixels), a
 
     ld      a, 105
     ld      (ix + Player_Struct.Height), a
-    ld      (ix + Player_Struct.Restore_BG_HeightInPixels), a
+    ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
+    ld      (ix + Player_Struct.Restore_BG_1_HeightInPixels), a
 
 
 

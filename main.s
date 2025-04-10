@@ -420,11 +420,13 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_animation.s"
     INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_animation.s"
     INCLUDE "Data/scorpion/walking/left/scorpion_walking_backwards_left_animation.s"
+    INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_animation.s"
 
     ; --- Right
     ; INCLUDE "Data/scorpion/stance/right/scorpion_stance_right_animation.s"
     ; INCLUDE "Data/scorpion/walking/right/scorpion_walking_right_animation.s"
     ; INCLUDE "Data/scorpion/walking/right/scorpion_walking_backwards_right_animation.s"
+    ; INCLUDE "Data/scorpion/jumping-up/right/scorpion_jumping_up_right_animation.s"
 
 
 
@@ -434,11 +436,13 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/stance/left/subzero_stance_left_animation.s"
     ; INCLUDE "Data/subzero/walking/left/subzero_walking_left_animation.s"
     ; INCLUDE "Data/subzero/walking/left/subzero_walking_backwards_left_animation.s"
+    ; INCLUDE "Data/subzero/jumping-up/left/subzero_jumping_up_left_animation.s"
 
     ; --- Right
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_animation.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_backwards_right_animation.s"
+    ; INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_animation.s"
 
 
 

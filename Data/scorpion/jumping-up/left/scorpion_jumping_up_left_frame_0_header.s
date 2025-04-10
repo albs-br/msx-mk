@@ -1,2 +1,2 @@
 ;		yOffset	width	height	megaROM page	List Address
-	dw	4480	db	54,	108,	MEGAROM_PAGE_SCORPION_JUMPING_UP_LEFT_DATA_0	dw	Scorpion_JumpingUp_Left_Frame_0.List
+	dw	4480	db	54,	108,	MEGAROM_PAGE_SCORPION_JUMPING_UP_LEFT_DATA_0	dw	Scorpion_Jumping_Up_Left_Frame_0.List
