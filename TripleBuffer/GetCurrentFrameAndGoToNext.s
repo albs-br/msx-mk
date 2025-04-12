@@ -33,6 +33,8 @@ GetCurrentFrameAndGoToNext:
     or      a ; if (next frame high byte == 0) returnToFirstFrame
     jp      z, .returnToFirstFrame
 
+    ; TODO: implement end of animation marking (0x0000 means looping animation, 0xff00 could be end of animation)
+
     jp      .continue
 .returnToFirstFrame:
     ; HL = (Animation_FirstFrame_Header)

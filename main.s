@@ -11,7 +11,7 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "Include/MsxConstants.s"
     INCLUDE "Include/CommonRoutines.s"
 
-    INCLUDE "ReadInput.s"
+    INCLUDE "GameLogic/ReadInput.s"
     INCLUDE "GameLogic/Player_Logic.s"
     INCLUDE "GameLogic/Players_Init.s"
 
@@ -448,7 +448,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
     db      "End ROM started at 0x4000"
 
-Page_0x4000_size: equ $ - Execute ; 0x033d
+Page_0x4000_size: equ $ - Execute ; 0x03BE5
 
 	ds PageSize - ($ - 0x4000), 255	; Fill the unused area with 0xFF
 

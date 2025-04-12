@@ -51,7 +51,7 @@ ReadInput:
 
 .skip_2:
 
-    call    Player_Input_None
+    call    Player_SetPosition_Stance
 
 .skipCheck_P1_Direction_Keys:
 
@@ -69,7 +69,7 @@ ReadInput:
     ld      ix, Player_2_Vars
 
     cp      1111 1111 b
-    call    z, Player_Input_None
+    call    z, Player_SetPosition_Stance
 
     ld      a, (Keyboard_Value)
     bit     4, a                    ; 4th bit (key left)

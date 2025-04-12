@@ -1,8 +1,6 @@
 Player_Jump_Delta_Y: 
-    db -5, -5, -5, -5, -5, -5
-    db -4, -4, -4, -4, -4, -4
-    db -3, -3, -3, -3, -3, -3
-    ; TODO: more
+    db -24, -16, -16,  -8,  -8, -8, -4, -4, -2,  -2,   0,   0
+    db   0,   0,   2,   2,   4,  4,  8,  8,  8,  16,  16,  24
 .size: equ $ - Player_Jump_Delta_Y
 
 ; Inputs:
@@ -37,7 +35,7 @@ Player_Logic:
     ret
 
 .endJump:
-    jp $;debug
+    call    Player_SetPosition_Stance
     ret
 
 ; Input:
@@ -136,7 +134,7 @@ Player_Input_Right:
 
     ret
 
-Player_Input_None:
+Player_SetPosition_Stance:
 
     ; if(position != STANCE)
     ld      a, (ix + Player_Struct.Position)
