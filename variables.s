@@ -119,10 +119,12 @@ SIDE:
     .RIGHT:     equ 2
 
 POSITION:
-    .STANCE:                equ 0       ; these values will be used as offset from base AllAnimations_Addr
-    .WALKING_FORWARD:       equ 2       ; so, position matter and there should be a step of 2 between each of them
-    .WALKING_BACKWARDS:     equ 4
-    .JUMPING_UP:            equ 6
+    .STANCE:                equ  0       ; these values will be used as offset from base AllAnimations_Addr
+    .WALKING_FORWARD:       equ  2       ; so, position matter and there should be a step of 2 between each of them
+    .WALKING_BACKWARDS:     equ  4
+    .JUMPING_UP:            equ  6
+    .JUMPING_FORWARD:       equ  8
+    .JUMPING_BACKWARDS:     equ 10
 
 
 

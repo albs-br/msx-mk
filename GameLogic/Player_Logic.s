@@ -6,10 +6,19 @@ Player_Jump_Delta_Y:
 ; Inputs:
 ;   IX: Player Vars base addr
 Player_Logic:
-    ; if(Player.Position == POSITION.JUMPING_UP)
     ld      a, (ix + Player_Struct.Position)
+
+    ; if(Player.Position == POSITION.JUMPING_UP)
     cp      POSITION.JUMPING_UP
-    jp      nz, .notJumpingUp
+    jp      z, .jumpingUp
+
+    ; ; if(Player.Position == POSITION.JUMPING_FORWARD)
+    ; cp      POSITION.JUMPING_FORWARD
+    ; jp      z, .jumpingForward
+
+    ret
+
+.jumpingUp:
 
     ; ---- Update Y
 
@@ -19,7 +28,7 @@ Player_Logic:
     ld      b, 0
     ld      a, c
     cp      Player_Jump_Delta_Y.size
-    jp      z, .endJump ; if (Animation_Current_Frame_Number == 60) endJump()
+    jp      z, .endJump ; if (Animation_Current_Frame_Number == 24) endJump()
     add     hl, bc
     ld      a, (hl)
 
@@ -29,8 +38,6 @@ Player_Logic:
     ld      (ix + Player_Struct.Y), a
 
     call    Update_VRAM_NAMTBL_Addr
-
-.notJumpingUp:
 
     ret
 
