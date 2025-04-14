@@ -16,7 +16,8 @@ CurrentCounter:         rb 1
 OldSP:              rw 1
 ; Last_NAMTBL_Addr:   rw 1
 
-Keyboard_Value:     rb 1
+PlayerInput:        rb 1
+SNSMAT_Saved:       rb 1
 
 ;   step      page         page              page drawing         value saved to  value saved to      
 ;   value     active       restoring bg      sprites              restore bg 0    restore bg 1      
