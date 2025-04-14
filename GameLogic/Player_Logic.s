@@ -6,15 +6,17 @@ Player_Jump_Delta_Y:
 ; Inputs:
 ;   IX: Player Vars base addr
 Player_Logic:
+    
+    ; switch (Player.Position)
     ld      a, (ix + Player_Struct.Position)
 
-    ; if(Player.Position == POSITION.JUMPING_UP)
+    ; case POSITION.JUMPING_UP:
     cp      POSITION.JUMPING_UP
     jp      z, .jumpingUp
 
-    ; ; if(Player.Position == POSITION.JUMPING_FORWARD)
-    ; cp      POSITION.JUMPING_FORWARD
-    ; jp      z, .jumpingForward
+    ; case POSITION.JUMPING_FORWARD:
+    cp      POSITION.JUMPING_FORWARD
+    jp      z, .jumpingForward
 
     ret
 
@@ -43,6 +45,23 @@ Player_Logic:
 
 .endJump:
     call    Player_SetPosition_Stance
+    ret
+
+.jumpingForward:
+    call    .jumpingUp
+
+    ld      a, 255
+    sub     (ix + Player_Struct.Width)
+    ld      b, a
+    ld      a, (ix + Player_Struct.X)
+    cp      b       ; if (X >= (255-width)) ret
+    ret     nc
+
+    add     6 ; TODO: not sure if 4 or 6 are the right increment here
+    ld      (ix + Player_Struct.X), a
+
+    call    Update_VRAM_NAMTBL_Addr
+
     ret
 
 ; Input:
@@ -90,7 +109,7 @@ Player_Input_Left:
 
     call    Update_VRAM_NAMTBL_Addr
 
-    ; if(position == STANCE)
+    ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .skip_1
@@ -124,7 +143,7 @@ Player_Input_Right:
 
     call    Update_VRAM_NAMTBL_Addr
 
-    ; if(position == STANCE)
+    ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .skip_2
@@ -177,6 +196,22 @@ Player_Input_Up:
 
     ; --- set animation
     ld      a, POSITION.JUMPING_UP
+    call    Player_SetAnimation
+
+    ret
+
+Player_Input_Up_Right:
+
+    ; Player.IsGrounded = false
+    xor     a
+    ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.JUMPING_FORWARD
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.JUMPING_FORWARD
     call    Player_SetAnimation
 
     ret

@@ -1,4 +1,7 @@
-Scorpion_Jumping_Up_Left_Animation_Headers:
+Scorpion_Jumping_Forward_Left_Animation_Headers:
+
+    ; TODO: fix, it's provisorily using Jumping_Up animation
+
 	dw Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header
 	dw Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header
 	dw Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header, Scorpion_Jumping_Up_Left_Frame_0_Header

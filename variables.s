@@ -106,7 +106,7 @@ Player_2_Vars:
     ; .Restore_BG_X:                      rb 1
     ; .Restore_BG_Y:                      rb 1
     ; .Restore_BG_WidthInPixels:          rb 1
-    ; .Restore_BG_HeightInPixels:         rb 1
+    ; .Restore_BG_HeightInPixels:         rb 1 ; TODO: fix
     ; .Side:                              rb 1
     ; .Position:                          rb 1
     ; .AllAnimations_Addr:                rw 1

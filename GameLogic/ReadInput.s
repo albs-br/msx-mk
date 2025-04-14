@@ -6,8 +6,10 @@ INPUT_UP:           equ 1000 0000 b
 INPUT_DOWN:         equ 0100 0000 b
 INPUT_LEFT:         equ 0010 0000 b
 INPUT_RIGHT:        equ 0001 0000 b
-INPUT_TOP_RIGHT:    equ 1001 0000 b
-;TODO: others
+INPUT_UP_RIGHT:     equ 1001 0000 b
+INPUT_DOWN_RIGHT:   equ 0101 0000 b
+INPUT_UP_LEFT:      equ 1010 0000 b
+INPUT_DOWN_LEFT:    equ 0110 0000 b
 
 ReadInput:
 
@@ -129,6 +131,10 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_UP
     call    z, Player_Input_Up
+
+    ld      a, (PlayerInput)
+    cp      INPUT_UP_RIGHT
+    call    z, Player_Input_Up_Right
 
     ld      a, (PlayerInput)
     cp      INPUT_LEFT
