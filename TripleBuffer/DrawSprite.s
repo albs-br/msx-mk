@@ -56,6 +56,25 @@ DrawSprite:
     ld      (ix + Player_Struct.Height), a
 
 
+
+; TODO: why isn't working?
+
+; ; --------------------------------------------
+;     ; if (X >= (255-width)) x = 255 - width
+;     ld      a, 255
+;     sub     (ix + Player_Struct.Width)
+;     ld      b, a ; B = max_valid_X
+;     ld      a, (ix + Player_Struct.X)
+;     cp      b       
+;     jp      c, .notOutsideOfScreen
+
+;     ld      (ix + Player_Struct.X), b ; X = max_valid_X
+; .notOutsideOfScreen:
+; ; --------------------------------------------
+
+
+
+
     ; HL = frame first list addr
     ld      l, (iy + 5)
     ld      h, (iy + 6)

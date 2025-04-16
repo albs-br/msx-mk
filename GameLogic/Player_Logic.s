@@ -57,7 +57,7 @@ Player_Logic:
     cp      b       ; if (X >= (255-width)) ret
     ret     nc
 
-    add     6 ; TODO: not sure if 4 or 6 are the right increment here
+    add     4 ; TODO: not sure if 4 or 6 are the right increment here
     ld      (ix + Player_Struct.X), a
 
     call    Update_VRAM_NAMTBL_Addr
@@ -179,6 +179,10 @@ Player_SetPosition_Stance:
     ld      a, POSITION.STANCE
     ; ld      hl, Subzero_Stance_Right_Animation_Headers
     call    Player_SetAnimation
+
+
+
+
 
 .skip_10:
 

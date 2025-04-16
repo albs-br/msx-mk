@@ -26,6 +26,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_frame_headers.s"
     INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_frame_headers.s"
     INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frame_headers.s"
+    INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -90,9 +91,20 @@ MEGAROM_PAGE_SCORPION_WALKING_LEFT_DATA_0: equ 7
 ; ------------------------------------------------- Page 8 -------------------------------------------------
 
 MEGAROM_PAGE_SCORPION_JUMPING_UP_LEFT_DATA_0: equ 8
+MEGAROM_PAGE_SCORPION_JUMPING_FORWARD_LEFT_DATA_0: equ 8
 
 	org	0x8000, 0xBFFF
 
+; ------------------------------------------------------------------------
+
+Scorpion_Jumping_Up_Left_Frames_0_to_2_Data:
+	INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_data.s"
+Scorpion_Jumping_Forward_Left_Frames_0_to_7_Data:
+	INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data.s"
+; ------------------------------------------------------------------------
+
+
     INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_data_and_list.s"
+    INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255

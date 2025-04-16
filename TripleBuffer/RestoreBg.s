@@ -55,47 +55,12 @@ RestoreBg:
 
 
 
-    ; set destiny_Y to value in HL
-    ; ld      (TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_Y), hl
 
     ld      hl, TripleBuffer_Vars_RestoreBG_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
-;     ; ---- Update Player Restore BG vars after BG is restored with previous frame
-;     ld      b, 0 ; B will be added to width
-;     ld      a, (ix + Player_Struct.X)
-;     ld      c, a ; save original X
-;     ; if(x >= 2) x -= 2
-;     cp      2
-;     jp      c, .skip_1
-;     sub     2 ; 2px left to be on the safe side
-;     ld      b, 2 ; width += 2 ; compensate for the x-2
-; .skip_1:
-;     ld      (ix + Player_Struct.Restore_BG_X), a
 
-;     ld      a, (ix + Player_Struct.Y)
-;     ld      (ix + Player_Struct.Restore_BG_Y), a
-
-;     ld      a, (ix + Player_Struct.Width)
-;     ld      d, a ; save original width
-;     add     b
-;     ld      e, a ; save new width
-    
-;     ; if(x + width < 254) width += 2
-;     ; if((C + D) < 254) E += 2
-;     ld      a, c
-;     add     d
-;     cp      254
-;     ld      a, e ; restore new width
-;     jp      nc, .skip_2
-
-;     add     2 ; 2px right to be on the safe side
-; .skip_2:
-;     ld      (ix + Player_Struct.Restore_BG_WidthInPixels), a
-    
-;     ld      a, (ix + Player_Struct.Height)
-;     ld      (ix + Player_Struct.Restore_BG_HeightInPixels), a
     
 
 
