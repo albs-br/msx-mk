@@ -57,7 +57,7 @@ Player_Logic:
     cp      b       ; if (X >= (255-width)) ret
     ret     nc
 
-    add     4 ; TODO: not sure if 4 or 6 are the right increment here
+    add     4 ; TODO: not sure if 4 or 6 is the right increment here
     ld      (ix + Player_Struct.X), a
 
     call    Update_VRAM_NAMTBL_Addr
@@ -109,7 +109,10 @@ Player_Input_Left:
 
     call    Update_VRAM_NAMTBL_Addr
 
-    ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
+
+    ; The position should be checked instead of checking IsGround because walking is possible only
+    ; when player is in Stance position (IsGrounded can be crouch, fallen, etc)
+    ; if(position == STANCE)
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .return
@@ -159,7 +162,10 @@ Player_Input_Right:
 
     call    Update_VRAM_NAMTBL_Addr
 
-    ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
+
+    ; The position should be checked instead of checking IsGround because walking is possible only
+    ; when player is in Stance position (IsGrounded can be crouch, fallen, etc)
+    ; if(position == STANCE)
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      nz, .return
