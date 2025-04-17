@@ -5,10 +5,6 @@
 ;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
 
-    ; ld      de, (Player_1_Vars.VRAM_NAMTBL_Addr)
-    ld      e, (ix + Player_Struct.VRAM_NAMTBL_Addr)
-    ld      d, (ix + Player_Struct.VRAM_NAMTBL_Addr + 1)
-
 
     ld      (TripleBuffer_Vars.R14_Value), a
     ; set R#14
@@ -36,11 +32,39 @@ DrawSprite:
 
     ; go to current frame header and get values, updating player vars (width, height, megarom, list addr)
 
+
+
+    ; get width and height and save to player vars
+    ld      a, (iy + FrameHeader_Struct.width)
+    ld      (ix + Player_Struct.Width), a
+    ld      a, (iy + FrameHeader_Struct.height)
+    ld      (ix + Player_Struct.Height), a
+
+
+
+
+    ; ----- check screen right limit
+    ; if (x >= (255-width)) x = 255 - width
+    ld      a, 255
+    sub     (ix + Player_Struct.Width)
+    ld      b, a ; B = max_valid_X
+    ld      a, (ix + Player_Struct.X)
+    cp      b       
+    jp      c, .notOutsideOfScreen
+
+    ld      (ix + Player_Struct.X), b ; x = max_valid_X
+    call    Update_VRAM_NAMTBL_Addr
+.notOutsideOfScreen:
+
+
     ; --- adjust VRAM NAMTBL address based on yOffset
 
+    ld      e, (ix + Player_Struct.VRAM_NAMTBL_Addr)
+    ld      d, (ix + Player_Struct.VRAM_NAMTBL_Addr + 1)
+
     ;  HL = yOffset
-    ld      l, (iy)
-    ld      h, (iy + 1)
+    ld      l, (iy + FrameHeader_Struct.yOffset)
+    ld      h, (iy + FrameHeader_Struct.yOffset + 1)
 
 
 
@@ -49,53 +73,23 @@ DrawSprite:
     ex      de, hl ; DE = HL
 
 
-    ; get width and height and save to player vars
-    ld      a, (iy + 2) ; width
-    ld      (ix + Player_Struct.Width), a
-    ld      a, (iy + 3) ; height
-    ld      (ix + Player_Struct.Height), a
-
-
-
-; TODO: why isn't working?
-
-; --------------------------------------------
-    ; if (X >= (255-width)) x = 255 - width
-    ld      a, 255
-    sub     (ix + Player_Struct.Width)
-    ld      b, a ; B = max_valid_X
-    ld      a, (ix + Player_Struct.X)
-    cp      b       
-    jp      c, .notOutsideOfScreen
-
-    ld      (ix + Player_Struct.X), b ; X = max_valid_X
-    call    Update_VRAM_NAMTBL_Addr
-.notOutsideOfScreen:
-; --------------------------------------------
-
-
-
 
     ; HL = frame first list addr
-    ld      l, (iy + 5)
-    ld      h, (iy + 6)
+    ld      l, (iy + FrameHeader_Struct.firstFrameList_Addr)
+    ld      h, (iy + FrameHeader_Struct.firstFrameList_Addr + 1)
 
 
-    ; get megaROM page number from header and switch to the page
-    ld      a, (iy + 4)
+    ; get megaROM page number (for data and list of the frame) from header and switch to the page
+    ld      a, (iy + FrameHeader_Struct.megaRomPage)
     ld	    (Seg_P8000_SW), a
 
 
-    ; init vars
-    ; ld      (Last_NAMTBL_Addr), de
 
-    ; ld      iyl, 0 ; reset 16kb boundary flag
     
     di
         ld      (OldSP), sp
         ld      sp, hl
 
-        ; ld      hl, (Last_NAMTBL_Addr)
         ld      l, e
         ld      h, d
 

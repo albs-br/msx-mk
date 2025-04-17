@@ -14,15 +14,13 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc002      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xc047      -type byte      -desc LastFps     -format dec
 
 
-ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
-#PlayerInput: equ 0C006h ; last def. pass 3
+#ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
 
 
 #ram_watch   add     0xc02f      -type byte      -desc P2.CurrFrame     -format dec
-#Player_2_Vars.Animation_Current_Frame_Number: equ 0C02Fh ; last def. pass 3
 
 
 ram_watch   add     0xc011      -type byte      -desc P1_X     -format dec

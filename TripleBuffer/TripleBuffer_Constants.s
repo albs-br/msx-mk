@@ -15,3 +15,12 @@ Y_BASE_PAGE_0:      equ 0   ; page 0
 Y_BASE_PAGE_1:      equ 256 ; page 1
 Y_BASE_PAGE_2:      equ 512 ; page 2
 Y_BASE_PAGE_3:      equ 768 ; page 3
+
+
+
+FrameHeader_Struct:
+    .yOffset:               equ 0   ; word
+    .width:                 equ 2   ; byte
+    .height:                equ 3   ; byte
+    .megaRomPage:           equ 4   ; byte
+    .firstFrameList_Addr:   equ 5   ; word
