@@ -3,21 +3,7 @@ RamStart:
 
 ; ----------------------------
 
-; Debug:
-Jiffy_Saved:            rw 1
-LastFps:                rb 1
-CurrentCounter:         rb 1
 
-
-
-; ----------------------------
-
-
-OldSP:              rw 1
-; Last_NAMTBL_Addr:   rw 1
-
-PlayerInput:        rb 1
-SNSMAT_Saved:       rb 1
 
 ;   step      page         page              page drawing         value saved to  value saved to      
 ;   value     active       restoring bg      sprites              restore bg 0    restore bg 1      
@@ -130,6 +116,22 @@ POSITION:
 
 
 ; ----------------------------
+
+
+OldSP:              rw 1
+; Last_NAMTBL_Addr:   rw 1
+
+PlayerInput:        rb 1
+SNSMAT_Saved:       rb 1
+
+
+; ----------------------------
+
+; Debug:
+Jiffy_Saved:            rw 1
+LastFps:                rb 1
+CurrentCounter:         rb 1
+
 
 
 

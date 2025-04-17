@@ -112,19 +112,35 @@ Player_Input_Left:
     ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
-    jp      nz, .skip_1
+    jp      nz, .return
 
-    ; --- get addr of animation
-    ; ld      hl, Subzero_Walking_Right_Animation_Headers
+
+
+    ; if (side == right) position = WALKING_FORWARD
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.RIGHT
+    jp      nz, .sideLeft
+
     ld      bc, POSITION.WALKING_FORWARD
     call    GetAnimationAddr
 
-
-    ; --- set animation
     ld      a, POSITION.WALKING_FORWARD
     call    Player_SetAnimation
+    
+    jp      .skip_2
 
-.skip_1:
+.sideLeft:
+    ld      bc, POSITION.WALKING_BACKWARDS
+    call    GetAnimationAddr
+
+    ld      a, POSITION.WALKING_BACKWARDS
+    call    Player_SetAnimation
+
+.skip_2:
+
+
+
+.return:
 
 
     ret
@@ -146,17 +162,34 @@ Player_Input_Right:
     ; if(position == STANCE) ; TODO: should this be changed to checking IsGround??????
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
-    jp      nz, .skip_2
+    jp      nz, .return
 
-    ; --- get addr of animation
+
+
+    ; if (side == right) position = WALKING_BACKWARDS
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.RIGHT
+    jp      nz, .sideLeft
+
     ld      bc, POSITION.WALKING_BACKWARDS
     call    GetAnimationAddr
 
-    ; --- set animation
     ld      a, POSITION.WALKING_BACKWARDS
     call    Player_SetAnimation
 
-.skip_2:
+    jp      .skip_10
+
+.sideLeft:
+
+    ld      bc, POSITION.WALKING_FORWARD
+    call    GetAnimationAddr
+
+    ld      a, POSITION.WALKING_FORWARD
+    call    Player_SetAnimation
+
+.skip_10:
+
+.return:
 
     ret
 
