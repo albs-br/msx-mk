@@ -137,6 +137,10 @@ ReadInput:
     call    z, Player_Input_Up_Right
 
     ld      a, (PlayerInput)
+    cp      INPUT_UP_LEFT
+    call    z, Player_Input_Up_Left
+
+    ld      a, (PlayerInput)
     cp      INPUT_LEFT
     call    z, Player_Input_Left
 

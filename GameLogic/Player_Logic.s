@@ -18,6 +18,10 @@ Player_Logic:
     cp      POSITION.JUMPING_FORWARD
     jp      z, .jumpingForward
 
+    ; case POSITION.JUMPING_BACKWARDS:
+    cp      POSITION.JUMPING_BACKWARDS
+    jp      z, .jumpingBackwards
+
     ret
 
 .jumpingUp:
@@ -58,6 +62,20 @@ Player_Logic:
     ret     nc
 
     add     4 ; TODO: not sure if 4 or 6 is the right increment here
+    ld      (ix + Player_Struct.X), a
+
+    call    Update_VRAM_NAMTBL_Addr
+
+    ret
+
+.jumpingBackwards:
+    call    .jumpingUp
+
+    ld      a, (ix + Player_Struct.X)
+    cp      4       ; if (X < 4) ret
+    ret     c
+
+    sub     4 ; TODO: not sure if 4 or 6 is the right increment here
     ld      (ix + Player_Struct.X), a
 
     call    Update_VRAM_NAMTBL_Addr
@@ -249,12 +267,32 @@ Player_Input_Up_Right:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a
 
+    ; TODO: check side to trigger jump forward/backwards
+
     ; --- get addr of animation
     ld      bc, POSITION.JUMPING_FORWARD
     call    GetAnimationAddr
 
     ; --- set animation
     ld      a, POSITION.JUMPING_FORWARD
+    call    Player_SetAnimation
+
+    ret
+
+Player_Input_Up_Left:
+
+    ; Player.IsGrounded = false
+    xor     a
+    ld      (ix + Player_Struct.IsGrounded), a
+
+    ; TODO: check side to trigger jump forward/backwards
+
+    ; --- get addr of animation
+    ld      bc, POSITION.JUMPING_BACKWARDS
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.JUMPING_BACKWARDS
     call    Player_SetAnimation
 
     ret
