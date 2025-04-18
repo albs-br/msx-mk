@@ -101,6 +101,7 @@ VDP_COMMAND_POINT: equ 040h ; last def. pass 3
 Scorpion_Stance_Left_Frame_2.List: equ 0A598h ; last def. pass 3
 BIOS_STREND: equ 0F6C6h ; last def. pass 3
 VDP_LOGIC_OPERATION_TXOR: equ 0Bh ; last def. pass 3
+MegaRom_Page_2_size: equ 037ECh ; last def. pass 3
 BIOS_ENASLT: equ 024h ; last def. pass 3
 Player_Struct.Side: equ 013h ; last def. pass 3
 BIOS_H_BAKU: equ 0FEADh ; last def. pass 3
@@ -109,6 +110,7 @@ BIOS_CSAVEA: equ 0F942h ; last def. pass 3
 Player_Struct.Y: equ 01h ; last def. pass 3
 Scorpion_Stance_Left_Frame_0.List: equ 0A0DEh ; last def. pass 3
 BIOS_EXTROM: equ 015Fh ; last def. pass 3
+MegaRom_Page_6_size: equ 03614h ; last def. pass 3
 Subzero_Stance_Right_Frame_0.List: equ 0A850h ; last def. pass 3
 Subzero_Jumping_Up_Right_Frame_1_Header: equ 0B7DEh ; last def. pass 3
 BIOS_BREAKX: equ 0B7h ; last def. pass 3
@@ -270,6 +272,7 @@ BIOS_RDSLT: equ 0Ch ; last def. pass 3
 Scorpion_Walking_Backwards_Left_Animation_Headers: equ 04942h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Destiny_Y: equ 0C008h ; last def. pass 3
 BIOS_AUTFLG: equ 0F6AAh ; last def. pass 3
+MegaRom_Page_3_size: equ 031A1h ; last def. pass 3
 BIOS_CPCNT: equ 0F939h ; last def. pass 3
 BIOS_DCOMPR: equ 020h ; last def. pass 3
 Player_Struct.Restore_BG_1_Y: equ 010h ; last def. pass 3
@@ -287,6 +290,7 @@ MEGAROM_PAGE_BG_1: equ 02h ; last def. pass 3
 BIOS_H_FINP: equ 0FF5Ch ; last def. pass 3
 BIOS_LINLEN: equ 0F3B0h ; last def. pass 3
 DrawSprite: equ 045C8h ; last def. pass 3
+MegaRom_Page_8_size: equ 02BCDh ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_6: equ 0AA5Bh ; last def. pass 3
 SNSMAT_NO_DI_EI.C_OK: equ 04330h ; last def. pass 3
 BIOS_XSAVE: equ 0FAFEh ; last def. pass 3
@@ -396,7 +400,7 @@ VDP_LOGIC_OPERATION_TNOT: equ 0Ch ; last def. pass 3
 Subzero_Stance_Right_Frame_7.List: equ 0B827h ; last def. pass 3
 BIOS_TXTNAM: equ 0F3B3h ; last def. pass 3
 BIOS_TXTCOL: equ 0F3B5h ; last def. pass 3
-MegaROM_Page_4_size: equ 03C5Dh ; last def. pass 3
+MegaRom_Page_4_size: equ 03C5Dh ; last def. pass 3
 MEGAROM_PAGE_SUBZERO_DATA_1: equ 05h ; last def. pass 3
 BIOS_RG8SAV: equ 0FFE7h ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_4: equ 0A8D9h ; last def. pass 3
@@ -458,6 +462,7 @@ BIOS_FNKSB: equ 0C9h ; last def. pass 3
 BIOS_ARYTAB: equ 0F6C4h ; last def. pass 3
 PageSize: equ 04000h ; last def. pass 3
 BIOS_CHRGTR: equ 010h ; last def. pass 3
+MegaRom_Page_7_size: equ 03A2Bh ; last def. pass 3
 POSITION.JUMPING_FORWARD: equ 08h ; last def. pass 3
 BIOS_ONELIN: equ 0F6B9h ; last def. pass 3
 Subzero_Stance_Right_Frame_6.List: equ 0B60Ah ; last def. pass 3
@@ -487,6 +492,7 @@ BIOS_H_PARD: equ 0FEB2h ; last def. pass 3
 BIOS_NLONLY: equ 0F87Ch ; last def. pass 3
 Scorpion_Walking_Left_Frame_3.List: equ 0AD25h ; last def. pass 3
 Scorpion_Walking_Left_Frame_2.List: equ 0AB20h ; last def. pass 3
+MegaRom_Page_5_size: equ 01AFDh ; last def. pass 3
 SetColor0ToTransparent: equ 04195h ; last def. pass 3
 Subzero_Stance_Right_Frame_5_Header: equ 0B760h ; last def. pass 3
 Subzero_Stance_Right_Frame_9_Header: equ 0B77Ch ; last def. pass 3
@@ -625,6 +631,7 @@ DrawSprite_After16kb.loop: equ 0467Ch ; last def. pass 3
 BIOS_T32CGP: equ 0F3C1h ; last def. pass 3
 BIOS_H_TIMI: equ 0FD9Fh ; last def. pass 3
 DrawSprite.cross16kb: equ 0466Fh ; last def. pass 3
+MegaRom_Page_9_size: equ 01265h ; last def. pass 3
 BIOS_TRCFLG: equ 0F7C4h ; last def. pass 3
 BIOS_LOHADR: equ 0F94Bh ; last def. pass 3
 Scorpion_Stance_Left_Frames_0_to_6_Data: equ 08000h ; last def. pass 3
