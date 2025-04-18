@@ -32,6 +32,8 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     ; TODO: repeat for left
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frame_headers.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_headers.s"
+    INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frame_headers.s"
+    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
 
 
 	ds PageSize - ($ - 0x8000), 255
@@ -97,12 +99,35 @@ MEGAROM_PAGE_SCORPION_JUMPING_FORWARD_LEFT_DATA_0: equ 8
 
 ; ------------------------------------------------------------------------
 
+    ; Data
 	INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_data.s"
 	INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data.s"
 
 ; ------------------------------------------------------------------------
 
+    ; List
     INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_data_and_list.s"
     INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data_and_list.s"
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 9 -------------------------------------------------
+
+MEGAROM_PAGE_SUBZERO_JUMPING_UP_RIGHT_DATA_0: equ 9
+MEGAROM_PAGE_SUBZERO_JUMPING_FORWARD_RIGHT_DATA_0: equ 9
+
+	org	0x8000, 0xBFFF
+
+; ------------------------------------------------------------------------
+
+    ; Data
+	INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_data.s"
+	; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data.s"
+
+; ------------------------------------------------------------------------
+
+    ; List
+    INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_data_and_list.s"
+    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data_and_list.s"
 
 	ds PageSize - ($ - 0x8000), 255

@@ -10,4 +10,4 @@ Subzero_All_Animations_Right:
     dw      Subzero_Stance_Right_Animation_Headers              ; POSITION.STANCE = 0
     dw      Subzero_Walking_Right_Animation_Headers             ; POSITION.WALKING_FORWARD = 2
     dw      Subzero_Walking_Backwards_Right_Animation_Headers   ; POSITION.WALKING_BACKWARDS = 4
-    dw      0 ; Subzero_Jumping_Up_Right_Animation_Headers          ; POSITION.JUMPING_UP = 6
+    dw      Subzero_Jumping_Up_Right_Animation_Headers          ; POSITION.JUMPING_UP = 6

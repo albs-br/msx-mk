@@ -82,13 +82,13 @@ ReadInput:
     bit     7, a                    ; 7th bit (key right)
     call    z, .player_Input_Right
 
-    ; ld      a, (SNSMAT_Saved)
-    ; bit     5, e                    ; 5th bit (key up)
-    ; call    z, .playerUp
+    ld      a, (SNSMAT_Saved)
+    bit     5, a                    ; 5th bit (key up)
+    call    z, .player_Input_Up
 
     ; ld      a, (SNSMAT_Saved)
-    ; bit     6, e                    ; 6th bit (key down)
-    ; call    z, .playerDown
+    ; bit     6, a                    ; 6th bit (key down)
+    ; call    z, .player_Input_Down
 
 
 
