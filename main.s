@@ -443,8 +443,8 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_animation.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_backwards_right_animation.s"
     INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_animation.s"
-    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_animation.s"
-    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_backwards_right_animation.s"
+    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_animation.s"
+    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_backwards_right_animation.s"
 
 
 

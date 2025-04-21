@@ -1,0 +1,5 @@
+Subzero_Jumping_Up_Right_Animation_Headers:
+	dw Subzero_Jumping_Up_Right_Frame_0_Header, Subzero_Jumping_Up_Right_Frame_0_Header, Subzero_Jumping_Up_Right_Frame_0_Header
+	dw Subzero_Jumping_Up_Right_Frame_1_Header, Subzero_Jumping_Up_Right_Frame_1_Header, Subzero_Jumping_Up_Right_Frame_1_Header
+	dw Subzero_Jumping_Up_Right_Frame_2_Header, Subzero_Jumping_Up_Right_Frame_2_Header, Subzero_Jumping_Up_Right_Frame_2_Header
+	dw 0x0000 ; end of data

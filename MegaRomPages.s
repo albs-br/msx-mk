@@ -33,7 +33,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frame_headers.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_headers.s"
     INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frame_headers.s"
-    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
+    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
 
@@ -127,12 +127,12 @@ MEGAROM_PAGE_SUBZERO_JUMPING_FORWARD_RIGHT_DATA_0: equ 9
 
     ; ------------ Data ---------------
 	INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_data.s"
-	; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data.s"
+	INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data.s"
 
     ; ------------ List ---------------
     INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_data_and_list.s"
-    ; INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data_and_list.s"
+    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data_and_list.s"
 
-MegaRom_Page_9_size: equ $ - 0x8000
+MegaRom_Page_9_size: equ $ - 0x8000 ; 0x2be0
 
 	ds PageSize - ($ - 0x8000), 255

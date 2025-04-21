@@ -54,6 +54,23 @@ Player_Logic:
 .jumpingForward:
     call    .jumpingUp
 
+    ; if (side == left) jumping_Increase_X else jumping_Decrease_X
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.LEFT
+    jp      z, .jumping_Increase_X
+    jp      .jumping_Decrease_X
+
+.jumpingBackwards:
+    call    .jumpingUp
+
+    ; if (side == left) jumping_Decrease_X else jumping_Increase_X
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.LEFT
+    jp      z, .jumping_Decrease_X
+    jp      .jumping_Increase_X ; TODO: not necessary
+
+.jumping_Increase_X:
+
     ld      a, 255
     sub     (ix + Player_Struct.Width)
     ld      b, a
@@ -68,8 +85,7 @@ Player_Logic:
 
     ret
 
-.jumpingBackwards:
-    call    .jumpingUp
+.jumping_Decrease_X:
 
     ld      a, (ix + Player_Struct.X)
     cp      4       ; if (X < 4) ret
@@ -137,7 +153,7 @@ Player_Input_Left:
 
 
 
-    ; if (side == right) position = WALKING_FORWARD
+    ; if (side == right) position = WALKING_FORWARD else WALKING_BACKWARDS
     ld      a, (ix + Player_Struct.Side)
     cp      SIDE.RIGHT
     jp      nz, .sideLeft
@@ -190,7 +206,7 @@ Player_Input_Right:
 
 
 
-    ; if (side == right) position = WALKING_BACKWARDS
+    ; if (side == right) position = WALKING_BACKWARDS else WALKING_FORWARD
     ld      a, (ix + Player_Struct.Side)
     cp      SIDE.RIGHT
     jp      nz, .sideLeft
@@ -267,8 +283,12 @@ Player_Input_Up_Right:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a
 
-    ; TODO: check side to trigger jump forward/backwards
+    ; if (side == right) position = JUMPING_BACKWARDS else JUMPING_FORWARD
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.RIGHT
+    jp      z, .sideRight
 
+.sideLeft:
     ; --- get addr of animation
     ld      bc, POSITION.JUMPING_FORWARD
     call    GetAnimationAddr
@@ -276,6 +296,21 @@ Player_Input_Up_Right:
     ; --- set animation
     ld      a, POSITION.JUMPING_FORWARD
     call    Player_SetAnimation
+
+    jp      .skip_10
+
+.sideRight:
+    ; --- get addr of animation
+    ld      bc, POSITION.JUMPING_BACKWARDS
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.JUMPING_BACKWARDS
+    call    Player_SetAnimation
+
+.skip_10:
+
+.return:
 
     ret
 
@@ -285,8 +320,23 @@ Player_Input_Up_Left:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a
 
-    ; TODO: check side to trigger jump forward/backwards
+    ; if (side == left) position = JUMPING_BACKWARDS else JUMPING_FORWARD
+    ld      a, (ix + Player_Struct.Side)
+    cp      SIDE.LEFT
+    jp      z, .sideLeft
 
+.sideRight:
+    ; --- get addr of animation
+    ld      bc, POSITION.JUMPING_FORWARD
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.JUMPING_FORWARD
+    call    Player_SetAnimation
+
+    jp      .skip_10
+
+.sideLeft:
     ; --- get addr of animation
     ld      bc, POSITION.JUMPING_BACKWARDS
     call    GetAnimationAddr
@@ -294,6 +344,10 @@ Player_Input_Up_Left:
     ; --- set animation
     ld      a, POSITION.JUMPING_BACKWARDS
     call    Player_SetAnimation
+
+.skip_10:
+
+.return:
 
     ret
 

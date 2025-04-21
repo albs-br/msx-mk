@@ -102,8 +102,8 @@ Player_2_Vars:
 ; Constants:
 
 SIDE:
-    .LEFT:      equ 1
-    .RIGHT:     equ 2
+    .LEFT:      equ 0   ; can be testes with OR A, saving 3 cycles
+    .RIGHT:     equ 255 ; can be testes with INC A, saving 3 cycles
 
 POSITION:
     .STANCE:                equ  0       ; these values will be used as offset from base AllAnimations_Addr
