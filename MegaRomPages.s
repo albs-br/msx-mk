@@ -2,7 +2,7 @@
 
 ; ------------------------------------------------- Page 1 -------------------------------------------------
 
-MEGAROM_PAGE_BG_0: equ 1
+MEGAROM_PAGE_BG_GOROS_LAIR_0: equ 1
 
 	org	0x8000, 0xBFFF
 Bg_Top:
@@ -12,7 +12,7 @@ Bg_Top:
 
 ; ------------------------------------------------- Page 2 -------------------------------------------------
 
-MEGAROM_PAGE_BG_1: equ 2
+MEGAROM_PAGE_BG_GOROS_LAIR_1: equ 2
 
 	org	0x8000, 0xBFFF
 Bg_Bottom:

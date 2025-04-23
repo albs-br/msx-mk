@@ -134,6 +134,7 @@ Update_VRAM_NAMTBL_Addr:
 
 Player_Input_Left:
 
+    ; check screen limit
     ld      a, (ix + Player_Struct.X)
     cp      2       ; if (X < 2) ret
     ret     c
@@ -184,6 +185,14 @@ Player_Input_Left:
 
 Player_Input_Right:
 
+    ; push    ix, iy
+    ;     ld      ix, Player_1_Vars
+    ;     ld      iy, Player_2_Vars
+    ;     call    CheckCollision_Obj1xObj2
+    ; pop     iy, ix
+    ; ret     c
+
+    ; check screen limit
     ld      a, 255
     sub     (ix + Player_Struct.Width)
     ld      b, a

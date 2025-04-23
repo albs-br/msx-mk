@@ -80,30 +80,34 @@ Player_Struct_size: equ $ - Player_1_Vars
 
 
 Player_2_Vars:
-    rb Player_Struct_size
-    ; .X:                                 rb 1
-    ; .Y:                                 rb 1
-    ; .Width:                             rb 1
-    ; .Height:                            rb 1
-    ; .Animation_Current_Frame_Number:    rb 1
-    ; .Animation_CurrentFrame_Header:     rw 1
-    ; .Animation_FirstFrame_Header:       rw 1
-    ; .VRAM_NAMTBL_Addr:                  rw 1
-    ; .Restore_BG_X:                      rb 1
-    ; .Restore_BG_Y:                      rb 1
-    ; .Restore_BG_WidthInPixels:          rb 1
-    ; .Restore_BG_HeightInPixels:         rb 1 ; TODO: fix
-    ; .Side:                              rb 1
-    ; .Position:                          rb 1
-    ; .AllAnimations_Addr:                rw 1
+    .X:                                 rb 1
+    .Y:                                 rb 1
+    .Width:                             rb 1
+    .Height:                            rb 1
+    .Animation_Current_Frame_Number:    rb 1
+    .Animation_CurrentFrame_Header:     rw 1
+    .Animation_FirstFrame_Header:       rw 1
+    .VRAM_NAMTBL_Addr:                  rw 1
+    .Restore_BG_0_X:                    rb 1 ; restore bg 0 gets the frame n - 1
+    .Restore_BG_0_Y:                    rb 1
+    .Restore_BG_0_WidthInPixels:        rb 1
+    .Restore_BG_0_HeightInPixels:       rb 1
+    .Restore_BG_1_X:                    rb 1 ; restore bg 1 gets the frame n - 2 (the one that will be used to restore bg)
+    .Restore_BG_1_Y:                    rb 1
+    .Restore_BG_1_WidthInPixels:        rb 1
+    .Restore_BG_1_HeightInPixels:       rb 1
+    .Side:                              rb 1
+    .Position:                          rb 1
+    .IsGrounded:                        rb 1
+    .AllAnimations_Addr:                rw 1
 
 ; ----------------------------
 
 ; Constants:
 
 SIDE:
-    .LEFT:      equ 0   ; can be testes with OR A, saving 3 cycles
-    .RIGHT:     equ 255 ; can be testes with INC A, saving 3 cycles
+    .LEFT:      equ 0   ; can be tested with OR A, saving 3 cycles
+    .RIGHT:     equ 255 ; can be tested with INC A, saving 3 cycles
 
 POSITION:
     .STANCE:                equ  0       ; these values will be used as offset from base AllAnimations_Addr

@@ -1,0 +1,89 @@
+;  Calculates whether a collision occurs between two objects
+; IN: 
+;   IX: addr of object 1 (format: X, Y, width, height)
+;   IY: addr of object 2 (format: X, Y, width, height)
+; OUT: Carry set if collision
+; CHANGES: AF
+CheckCollision_Obj1xObj2:
+
+        ld      a, (iy + Player_Struct.X)   ; get x2
+        sub     (ix + Player_Struct.X)      ; calculate x2 - x1
+        jr      c, .x1IsLarger              ; jump if x2 < x1
+        sub     (ix + Player_Struct.Width)  ; compare with width 1
+        ret     nc                          ; return if no collision
+        jp      .checkVerticalCollision
+.x1IsLarger:
+        neg                                 ; use negative value (Z80)
+        ; emulate neg instruction (Gameboy)
+        ; ld      b, a
+        ; xor     a                           ; same as ld a, 0
+        ; sub     a, b
+    
+        sub     (iy + Player_Struct.Width)  ; compare with width 2
+        ret     nc                          ; return if no collision
+
+.checkVerticalCollision:
+        ld      a, (iy + Player_Struct.Y)   ; get y2
+        sub     (ix + Player_Struct.Y)      ; calculate y2 - y1
+        jr      c, .y1IsLarger              ; jump if y2 < y1
+        sub     (ix + Player_Struct.Height) ; compare with height 1
+        ret                                 ; return collision or no collision
+.y1IsLarger:
+        neg                                 ; use negative value (Z80)
+        ; emulate neg instruction (Gameboy)
+        ; ld      c, a
+        ; xor     a                           ; same as ld a, 0
+        ; sub     a, c
+    
+        sub     (iy + Player_Struct.Height) ; compare with height 2
+        ret                                 ; return collision or no collision
+
+
+
+; ;  Calculates whether a collision occurs between Player 1 and 2
+; ; IN: 
+; ; OUT: Carry set if collision
+; ; CHANGES: AF
+; CheckCollision_Player_1_x_Player_2:
+
+;         ; not worth the trouble...
+
+;         ; 24 cycles
+;         ld      a, (Player_1_Vars.X)
+;         ld      b, a
+;         sub     b
+
+;         sub     (ix + Player_Struct.X) ; 21 cycles...
+
+;         ld      a, (Player_2_Vars.X)        ; get x2
+;         sub     (Player_1_Vars.X)           ; calculate x2 - x1
+;         jr      c, .x1IsLarger              ; jump if x2 < x1
+;         sub     (Player_1_Vars.Width)       ; compare with width 1
+;         ret     nc                          ; return if no collision
+;         jp      .checkVerticalCollision
+; .x1IsLarger:
+;         neg                                 ; use negative value (Z80)
+;         ; emulate neg instruction (Gameboy)
+;         ; ld      b, a
+;         ; xor     a                           ; same as ld a, 0
+;         ; sub     a, b
+    
+;         sub     (Player_2_Vars.Width)       ; compare with width 2
+;         ret     nc                          ; return if no collision
+
+; .checkVerticalCollision:
+;         ld      a, (iy + Player_Struct.Y)   ; get y2
+;         sub     (ix + Player_Struct.Y)      ; calculate y2 - y1
+;         jr      c, .y1IsLarger              ; jump if y2 < y1
+;         sub     (ix + Player_Struct.Height) ; compare with height 1
+;         ret                                 ; return collision or no collision
+; .y1IsLarger:
+;         neg                                 ; use negative value (Z80)
+;         ; emulate neg instruction (Gameboy)
+;         ; ld      c, a
+;         ; xor     a                           ; same as ld a, 0
+;         ; sub     a, c
+    
+;         sub     (iy + Player_Struct.Height) ; compare with height 2
+;         ret                                 ; return collision or no collision
+

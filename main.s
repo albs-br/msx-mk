@@ -14,6 +14,7 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "GameLogic/ReadInput.s"
     INCLUDE "GameLogic/Player_Logic.s"
     INCLUDE "GameLogic/Players_Init.s"
+    INCLUDE "GameLogic/CheckCollision.s"
 
     INCLUDE "TripleBuffer/DrawSprite.s" 
     INCLUDE "TripleBuffer/RestoreBg.s" 
@@ -334,7 +335,7 @@ Triple_Buffer_Step_2:
 LoadImageTo_SC5_Page:
 	; enable megarom page with top of bg
     push    af
-        ld	    a, MEGAROM_PAGE_BG_0
+        ld	    a, MEGAROM_PAGE_BG_GOROS_LAIR_0
         ld	    (Seg_P8000_SW), a
     pop     af
 
@@ -353,7 +354,7 @@ LoadImageTo_SC5_Page:
 
 	; enable megarom page with bottom of bg
     push    af
-        ld	    a, MEGAROM_PAGE_BG_1
+        ld	    a, MEGAROM_PAGE_BG_GOROS_LAIR_1
         ld	    (Seg_P8000_SW), a
     pop     af
 
