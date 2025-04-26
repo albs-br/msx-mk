@@ -5,14 +5,6 @@
 ;   IY: Player current frame header addr
 GetCurrentFrameAndGoToNext:
 
-    ; IY = current frame header addr
-    ld      l, (ix + Player_Struct.Animation_CurrentFrame_Header)
-    ld      h, (ix + Player_Struct.Animation_CurrentFrame_Header + 1)
-    ld      a, (hl)
-    ld      iyl, a
-    inc     hl
-    ld      a, (hl)
-    ld      iyh, a
 
 
     ; HL = (Animation_CurrentFrame_Header)
@@ -45,12 +37,22 @@ GetCurrentFrameAndGoToNext:
     xor     a
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
 
+    ; shouldn't we have to update IY here (current frame header?)
+
 .continue:
 
     ; save new frame
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
         
+    ; IY = current frame header addr
+    ; ld      l, (ix + Player_Struct.Animation_CurrentFrame_Header)
+    ; ld      h, (ix + Player_Struct.Animation_CurrentFrame_Header + 1)
+    ld      a, (hl)
+    ld      iyl, a
+    inc     hl
+    ld      a, (hl)
+    ld      iyh, a
 
 
     ret

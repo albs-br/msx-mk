@@ -20,7 +20,7 @@ Y_BASE_PAGE_3:      equ 768 ; page 3
 
 FrameHeader_Struct:
     .yOffset:               equ 0   ; word
-    .width:                 equ 2   ; byte
-    .height:                equ 3   ; byte
-    .megaRomPage:           equ 4   ; byte
-    .firstFrameList_Addr:   equ 5   ; word
+    .Width:                 equ 2   ; byte
+    .Height:                equ 3   ; byte
+    .MegaRomPage:           equ 4   ; byte
+    .FirstFrameList_Addr:   equ 5   ; word

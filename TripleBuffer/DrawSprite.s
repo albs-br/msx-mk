@@ -35,9 +35,9 @@ DrawSprite:
 
 
     ; get width and height and save to player vars
-    ld      a, (iy + FrameHeader_Struct.width)
+    ld      a, (iy + FrameHeader_Struct.Width)
     ld      (ix + Player_Struct.Width), a
-    ld      a, (iy + FrameHeader_Struct.height)
+    ld      a, (iy + FrameHeader_Struct.Height)
     ld      (ix + Player_Struct.Height), a
 
 
@@ -75,12 +75,12 @@ DrawSprite:
 
 
     ; HL = frame first list addr
-    ld      l, (iy + FrameHeader_Struct.firstFrameList_Addr)
-    ld      h, (iy + FrameHeader_Struct.firstFrameList_Addr + 1)
+    ld      l, (iy + FrameHeader_Struct.FirstFrameList_Addr)
+    ld      h, (iy + FrameHeader_Struct.FirstFrameList_Addr + 1)
 
 
     ; get megaROM page number (for data and list of the frame) from header and switch to the page
-    ld      a, (iy + FrameHeader_Struct.megaRomPage)
+    ld      a, (iy + FrameHeader_Struct.MegaRomPage)
     ld	    (Seg_P8000_SW), a
 
 
