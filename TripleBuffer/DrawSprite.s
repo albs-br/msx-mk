@@ -68,6 +68,9 @@ DrawSprite:
 
 
 
+    call    UpdateHurtbox
+
+
     ; ---- DE += HL         NAMTBL_Addr += yOffset
     add     hl, de ; HL = HL + DE
     ex      de, hl ; DE = HL

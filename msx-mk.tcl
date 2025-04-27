@@ -29,6 +29,16 @@ ram_watch   add     0xc012      -type byte      -desc P1_Y     -format dec
 #ram_watch   add     0xc029      -type byte      -desc P1_IsGrounded     -format dec
 #ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
 
+ram_watch   add     0xc015      -type byte      -desc P1_Hb_X     -format dec
+ram_watch   add     0xc016      -type byte      -desc P1_Hb_Y     -format dec
+ram_watch   add     0xc017      -type byte      -desc P1_Hb_Width     -format dec
+ram_watch   add     0xc018      -type byte      -desc P1_Hb_Height     -format dec
+
+ram_watch   add     0xc031      -type byte      -desc P2_Hb_X     -format dec
+ram_watch   add     0xc032      -type byte      -desc P2_Hb_Y     -format dec
+ram_watch   add     0xc033      -type byte      -desc P2_Hb_Width     -format dec
+ram_watch   add     0xc034      -type byte      -desc P2_Hb_Height     -format dec
+
 #Player_1_Vars.X: equ 0C018h ; last def. pass 3
 #Player_1_Vars.Y: equ 0C019h ; last def. pass 3
 #Player_1_Vars.IsGrounded: equ 0C029h ; last def. pass 3

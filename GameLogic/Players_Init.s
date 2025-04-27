@@ -169,7 +169,10 @@ Player_Init:
     ; ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100
     ; ld      (Player_1_Vars.VRAM_NAMTBL_Addr), hl
 
+    call    UpdateHurtbox
 
+
+    
     ; ld      de, Scorpion_All_Animations_Left
     ld      (ix + Player_Struct.AllAnimations_Addr), e
     ld      (ix + Player_Struct.AllAnimations_Addr + 1), d

@@ -141,6 +141,23 @@ Player_Input_Left:
 
     sub     2
     ld      (ix + Player_Struct.X), a
+    call    UpdateHurtbox
+    
+    push    ix, iy
+        ld      ix, Player_1_Vars.HurtBox
+        ld      iy, Player_2_Vars.HurtBox
+        call    CheckCollision_Obj1xObj2
+    pop     iy, ix
+    jp      c, .collision
+    jp      .noCollision
+
+.collision:
+    ld      a, (ix + Player_Struct.X)
+    add     2
+    ld      (ix + Player_Struct.X), a
+    call    UpdateHurtbox
+
+.noCollision:
 
     call    Update_VRAM_NAMTBL_Addr
 
@@ -185,13 +202,6 @@ Player_Input_Left:
 
 Player_Input_Right:
 
-    ; push    ix, iy
-    ;     ld      ix, Player_1_Vars
-    ;     ld      iy, Player_2_Vars
-    ;     call    CheckCollision_Obj1xObj2
-    ; pop     iy, ix
-    ; ret     c
-
     ; check screen limit
     ld      a, 255
     sub     (ix + Player_Struct.Width)
@@ -202,6 +212,23 @@ Player_Input_Right:
 
     add     2
     ld      (ix + Player_Struct.X), a
+    call    UpdateHurtbox
+
+    push    ix, iy
+        ld      ix, Player_1_Vars.HurtBox
+        ld      iy, Player_2_Vars.HurtBox
+        call    CheckCollision_Obj1xObj2
+    pop     iy, ix
+    jp      c, .collision
+    jp      .noCollision
+
+.collision:
+    ld      a, (ix + Player_Struct.X)
+    sub     2
+    ld      (ix + Player_Struct.X), a
+    call    UpdateHurtbox
+
+.noCollision:
 
     call    Update_VRAM_NAMTBL_Addr
 
@@ -394,5 +421,58 @@ GetAnimationAddr:
     inc     hl
     ld      d, (hl)
     ex      de, hl ; HL = DE
+
+    ret
+
+; Inputs:
+;   IX: Player Vars base addr
+UpdateHurtbox:
+
+    ; check width <= 16
+    ld      a, (ix + Player_Struct.Width)
+    cp      16 + 1
+    jp      c, .widthSmallerThan_17
+
+
+
+    ;---- width > 16
+
+    ; HurtBox_X = Player.X + 8
+    ld      a, (ix + Player_Struct.X)
+    add     8
+    ld      (ix + Player_Struct.HurtBox_X), a
+
+    ; HurtBox_Y = Player.Y
+    ld      a, (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.HurtBox_Y), a
+
+    ; HurtBox_Width = Player.Width - 16
+    ld      a, (ix + Player_Struct.Width)
+    sub     16
+    ld      (ix + Player_Struct.HurtBox_Width), a
+
+    ; HurtBox_Height = Player.Height
+    ld      a, (ix + Player_Struct.Height)
+    ld      (ix + Player_Struct.HurtBox_Height), a
+
+    ret
+
+.widthSmallerThan_17:
+
+    ; HurtBox_X = Player.X
+    ld      a, (ix + Player_Struct.X)
+    ld      (ix + Player_Struct.HurtBox_X), a
+
+    ; HurtBox_Y = Player.Y
+    ld      a, (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.HurtBox_Y), a
+
+    ; HurtBox_Width = Player.Width
+    ld      a, (ix + Player_Struct.Width)
+    ld      (ix + Player_Struct.HurtBox_Width), a
+
+    ; HurtBox_Height = Player.Height
+    ld      a, (ix + Player_Struct.Height)
+    ld      (ix + Player_Struct.HurtBox_Height), a
 
     ret

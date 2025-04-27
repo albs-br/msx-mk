@@ -36,6 +36,7 @@ Player_Struct:
     .Y:                                 equ Player_1_Vars.Y                              - Player_1_Vars
     .Width:                             equ Player_1_Vars.Width                          - Player_1_Vars
     .Height:                            equ Player_1_Vars.Height                         - Player_1_Vars
+    .HurtBox:                           equ Player_1_Vars.HurtBox                        - Player_1_Vars
         .HurtBox_X:                     equ Player_1_Vars.HurtBox_X                      - Player_1_Vars
         .HurtBox_Y:                     equ Player_1_Vars.HurtBox_Y                      - Player_1_Vars
         .HurtBox_Width:                 equ Player_1_Vars.HurtBox_Width                  - Player_1_Vars
@@ -62,6 +63,7 @@ Player_1_Vars:
     .Y:                                 rb 1
     .Width:                             rb 1
     .Height:                            rb 1
+    .HurtBox:
         .HurtBox_X:                     rb 1
         .HurtBox_Y:                     rb 1
         .HurtBox_Width:                 rb 1
@@ -92,6 +94,7 @@ Player_2_Vars:
     .Y:                                 rb 1
     .Width:                             rb 1
     .Height:                            rb 1
+    .HurtBox:
         .HurtBox_X:                     rb 1
         .HurtBox_Y:                     rb 1
         .HurtBox_Width:                 rb 1
