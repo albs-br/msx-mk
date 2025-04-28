@@ -152,6 +152,8 @@ Triple_Buffer_Loop:
     ld      ix, Player_2_Vars
     call    Player_Logic
 
+    call    CheckCollision
+    
     ; -------
 
     ld      a, (TripleBuffer_Vars.Step)

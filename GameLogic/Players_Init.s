@@ -3,7 +3,7 @@ Players_Init:
 
     ld      ix, Player_1_Vars
     ld      hl, Scorpion_Stance_Left_Animation_Headers
-    ld      b, 64 - (58/2)      ; X coord
+    ld      b, 36 ;64 - (58/2)      ; X coord
     ld      c, 100              ; Y coord
     ld      de, Scorpion_All_Animations_Left
     ld      a, SIDE.LEFT
@@ -52,7 +52,7 @@ Players_Init:
 
     ld      ix, Player_2_Vars
     ld      hl, Subzero_Stance_Right_Animation_Headers
-    ld      b, 192 - (58/2)     ; X coord
+    ld      b, 162 ; 192 - (58/2)     ; X coord
     ld      c, 100              ; Y coord
     ld      de, Subzero_All_Animations_Right
     ld      a, SIDE.RIGHT
@@ -172,7 +172,7 @@ Player_Init:
     call    UpdateHurtbox
 
 
-    
+
     ; ld      de, Scorpion_All_Animations_Left
     ld      (ix + Player_Struct.AllAnimations_Addr), e
     ld      (ix + Player_Struct.AllAnimations_Addr + 1), d

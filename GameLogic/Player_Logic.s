@@ -143,21 +143,21 @@ Player_Input_Left:
     ld      (ix + Player_Struct.X), a
     call    UpdateHurtbox
     
-    push    ix, iy
-        ld      ix, Player_1_Vars.HurtBox
-        ld      iy, Player_2_Vars.HurtBox
-        call    CheckCollision_Obj1xObj2
-    pop     iy, ix
-    jp      c, .collision
-    jp      .noCollision
+;     push    ix, iy
+;         ld      ix, Player_1_Vars.HurtBox
+;         ld      iy, Player_2_Vars.HurtBox
+;         call    CheckCollision_Obj1xObj2
+;     pop     iy, ix
+;     jp      c, .collision
+;     jp      .noCollision
 
-.collision:
-    ld      a, (ix + Player_Struct.X)
-    add     2
-    ld      (ix + Player_Struct.X), a
-    call    UpdateHurtbox
+; .collision:
+;     ld      a, (ix + Player_Struct.X)
+;     add     2
+;     ld      (ix + Player_Struct.X), a
+;     call    UpdateHurtbox
 
-.noCollision:
+; .noCollision:
 
     call    Update_VRAM_NAMTBL_Addr
 
@@ -214,21 +214,21 @@ Player_Input_Right:
     ld      (ix + Player_Struct.X), a
     call    UpdateHurtbox
 
-    push    ix, iy
-        ld      ix, Player_1_Vars.HurtBox
-        ld      iy, Player_2_Vars.HurtBox
-        call    CheckCollision_Obj1xObj2
-    pop     iy, ix
-    jp      c, .collision
-    jp      .noCollision
+;     push    ix, iy
+;         ld      ix, Player_1_Vars.HurtBox
+;         ld      iy, Player_2_Vars.HurtBox
+;         call    CheckCollision_Obj1xObj2
+;     pop     iy, ix
+;     jp      c, .collision
+;     jp      .noCollision
 
-.collision:
-    ld      a, (ix + Player_Struct.X)
-    sub     2
-    ld      (ix + Player_Struct.X), a
-    call    UpdateHurtbox
+; .collision:
+;     ld      a, (ix + Player_Struct.X)
+;     sub     2
+;     ld      (ix + Player_Struct.X), a
+;     call    UpdateHurtbox
 
-.noCollision:
+; .noCollision:
 
     call    Update_VRAM_NAMTBL_Addr
 

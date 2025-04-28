@@ -29,6 +29,12 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
 
 ; ----------------------------
 
+Object_Struct:
+    .X:                                 equ 0
+    .Y:                                 equ 1
+    .Width:                             equ 2
+    .Height:                            equ 3
+
 
 
 Player_Struct:
