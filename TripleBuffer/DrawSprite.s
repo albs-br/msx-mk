@@ -42,14 +42,15 @@ DrawSprite:
 
 
 
-
+    ; this check needs to be done because of the new width (it's not necessary for left screen boundary)
     ; ----- check screen right limit
     ; if (x >= (255-width)) x = 255 - width
-    ld      a, 255
-    sub     (ix + Player_Struct.Width)
-    ld      b, a ; B = max_valid_X
-    ld      a, (ix + Player_Struct.X)
-    cp      b       
+    ; ld      a, 255
+    ; sub     (ix + Player_Struct.Width)
+    ; ld      b, a ; B = max_valid_X
+    ; ld      a, (ix + Player_Struct.X)
+    ; cp      b       
+    call    Player_CheckScreenLimitRight
     jp      c, .notOutsideOfScreen
 
     ld      (ix + Player_Struct.X), b ; x = max_valid_X

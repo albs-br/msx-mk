@@ -71,11 +71,13 @@ Player_Logic:
 
 .jumping_Increase_X:
 
-    ld      a, 255
-    sub     (ix + Player_Struct.Width)
-    ld      b, a
-    ld      a, (ix + Player_Struct.X)
-    cp      b       ; if (X >= (255-width)) ret
+    ; ----- check screen right limit
+    ; ld      a, 255
+    ; sub     (ix + Player_Struct.Width)
+    ; ld      b, a
+    ; ld      a, (ix + Player_Struct.X)
+    ; cp      b       ; if (X >= (255-width)) ret
+    call    Player_CheckScreenLimitRight
     ret     nc
 
     add     4 ; TODO: not sure if 4 or 6 is the right increment here
@@ -87,6 +89,7 @@ Player_Logic:
 
 .jumping_Decrease_X:
 
+    ; ----- check screen left limit
     ld      a, (ix + Player_Struct.X)
     cp      4       ; if (X < 4) ret
     ret     c
@@ -134,7 +137,7 @@ Update_VRAM_NAMTBL_Addr:
 
 Player_Input_Left:
 
-    ; check screen limit
+    ; ----- check screen left limit
     ld      a, (ix + Player_Struct.X)
     cp      2       ; if (X < 2) ret
     ret     c
@@ -202,12 +205,13 @@ Player_Input_Left:
 
 Player_Input_Right:
 
-    ; check screen limit
-    ld      a, 255
-    sub     (ix + Player_Struct.Width)
-    ld      b, a
-    ld      a, (ix + Player_Struct.X)
-    cp      b       ; if (X >= (255-width)) ret
+    ; ----- check screen right limit
+    ; ld      a, 255
+    ; sub     (ix + Player_Struct.Width)
+    ; ld      b, a
+    ; ld      a, (ix + Player_Struct.X)
+    ; cp      b       ; if (X >= (255-width)) ret
+    call    Player_CheckScreenLimitRight
     ret     nc
 
     add     2
@@ -474,5 +478,21 @@ UpdateHurtbox:
     ; HurtBox_Height = Player.Height
     ld      a, (ix + Player_Struct.Height)
     ld      (ix + Player_Struct.HurtBox_Height), a
+
+    ret
+
+; Inputs:
+;   IX: Player Vars base addr
+; Return:
+;   carry: inside screen
+;   not carry: outside screen
+Player_CheckScreenLimitRight:
+    ; ----- check screen right limit
+    ; if (x >= (255-width)) x = 255 - width
+    ld      a, 255
+    sub     (ix + Player_Struct.Width)
+    ld      b, a ; B = max_valid_X
+    ld      a, (ix + Player_Struct.X)
+    cp      b       
 
     ret

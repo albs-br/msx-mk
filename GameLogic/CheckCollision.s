@@ -16,14 +16,26 @@ CheckCollision:
         cp      (iy + Player_Struct.X)
         jp      nc, .x1_isLarger
 
-    ; TODO: check screen boundaries
-
+    
     ;x2_isLarger:
+        ; if (x1 >= 2)
+        ; ----- check screen left limit
+        ld      a, (ix + Player_Struct.X)
+        cp      2       ; if (X < 2) ret
+        jp      c, .cont_10
         ; x1 -= 2
         ; ld      a, (ix + Player_Struct.X)
         sub     2
         ld      (ix + Player_Struct.X), a
 
+    .cont_10:
+        ; if (x2 + width1 <= 255)
+        push    ix
+            push    iy ; IX = IY
+            pop     ix
+            call    Player_CheckScreenLimitRight
+        pop     ix
+        jp      nc, .return
         ; x2 += 2
         ld      a, (iy + Player_Struct.X)
         add     2
@@ -31,16 +43,25 @@ CheckCollision:
 
         jp      .return
     .x1_isLarger: ; or equal
+        ; if (x1 + width1 <= 255)
+        call    Player_CheckScreenLimitRight
+        jp      nc, .cont_2
         ; x1 += 2
-        ; ld      a, (ix + Player_Struct.X)
+        ld      a, (ix + Player_Struct.X)
         add     2
         ld      (ix + Player_Struct.X), a
-
-        ; x2 -= 2
+    
+    .cont_2:
+        ; if (x2 >= 2)
+        ; ----- check screen left limit
         ld      a, (iy + Player_Struct.X)
+        cp      2       ; if (X < 2) ret
+        jp      c, .return
+        ; x2 -= 2
+        ;ld      a, (iy + Player_Struct.X)
         sub     2
         ld      (iy + Player_Struct.X), a
-
+    
     .return:
     
         ld      ix, Player_1_Vars
