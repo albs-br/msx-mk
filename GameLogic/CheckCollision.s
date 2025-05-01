@@ -29,7 +29,7 @@ CheckCollision:
         ld      (ix + Player_Struct.X), a
 
     .cont_10:
-        ; if (x2 + width1 <= 255)
+        ; if (x2 + width2 <= 255)
         push    ix
             push    iy ; IX = IY
             pop     ix

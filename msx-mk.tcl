@@ -14,7 +14,7 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc04f      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xc057      -type byte      -desc LastFps     -format dec
 
 
 #ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
@@ -34,10 +34,13 @@ ram_watch   add     0xc016      -type byte      -desc P1_Hb_Y     -format dec
 ram_watch   add     0xc017      -type byte      -desc P1_Hb_Width     -format dec
 ram_watch   add     0xc018      -type byte      -desc P1_Hb_Height     -format dec
 
-ram_watch   add     0xc031      -type byte      -desc P2_Hb_X     -format dec
-ram_watch   add     0xc032      -type byte      -desc P2_Hb_Y     -format dec
-ram_watch   add     0xc033      -type byte      -desc P2_Hb_Width     -format dec
-ram_watch   add     0xc034      -type byte      -desc P2_Hb_Height     -format dec
+ram_watch   add     0xc031      -type byte      -desc P2_X     -format dec
+ram_watch   add     0xc032      -type byte      -desc P2_Y     -format dec
+
+ram_watch   add     0xc035      -type byte      -desc P2_Hb_X     -format dec
+ram_watch   add     0xc036      -type byte      -desc P2_Hb_Y     -format dec
+ram_watch   add     0xc037      -type byte      -desc P2_Hb_Width     -format dec
+ram_watch   add     0xc038      -type byte      -desc P2_Hb_Height     -format dec
 
 #Player_1_Vars.X: equ 0C018h ; last def. pass 3
 #Player_1_Vars.Y: equ 0C019h ; last def. pass 3

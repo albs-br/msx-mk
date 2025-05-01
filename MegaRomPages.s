@@ -41,7 +41,7 @@ MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
 
 ; ------------------------------------------------- Page 3 -------------------------------------------------
 
-MEGAROM_PAGE_SCORPION_DATA_0: equ 3
+MEGAROM_PAGE_SCORPION_STANCE_LEFT_DATA_0: equ 3
 
 	org	0x8000, 0xBFFF
 
@@ -53,7 +53,7 @@ MegaRom_Page_3_size: equ $ - 0x8000 ; 0x31a1
 
 ; ------------------------------------------------- Page 4 -------------------------------------------------
 
-MEGAROM_PAGE_SUBZERO_DATA_0: equ 4
+MEGAROM_PAGE_SUBZERO_STANCE_RIGHT_DATA_0: equ 4
 
 	org	0x8000, 0xBFFF
 
@@ -65,7 +65,7 @@ MegaRom_Page_4_size: equ $ - 0x8000 ; 0x3cd5
 
 ; ------------------------------------------------- Page 5 -------------------------------------------------
 
-MEGAROM_PAGE_SUBZERO_DATA_1: equ 5
+MEGAROM_PAGE_SUBZERO_STANCE_RIGHT_DATA_1: equ 5
 
 	org	0x8000, 0xBFFF
 

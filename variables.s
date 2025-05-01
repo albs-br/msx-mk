@@ -47,6 +47,11 @@ Player_Struct:
         .HurtBox_Y:                     equ Player_1_Vars.HurtBox_Y                      - Player_1_Vars
         .HurtBox_Width:                 equ Player_1_Vars.HurtBox_Width                  - Player_1_Vars
         .HurtBox_Height:                equ Player_1_Vars.HurtBox_Height                 - Player_1_Vars
+    .HitBox:                            equ Player_1_Vars.HitBox                         - Player_1_Vars
+        .HitBox_X:                      equ Player_1_Vars.HitBox_X                       - Player_1_Vars
+        .HitBox_Y:                      equ Player_1_Vars.HitBox_Y                       - Player_1_Vars
+        .HitBox_Width:                  equ Player_1_Vars.HitBox_Width                   - Player_1_Vars
+        .HitBox_Height:                 equ Player_1_Vars.HitBox_Height                  - Player_1_Vars
     .Animation_Current_Frame_Number:    equ Player_1_Vars.Animation_Current_Frame_Number - Player_1_Vars
     .Animation_CurrentFrame_Header:     equ Player_1_Vars.Animation_CurrentFrame_Header  - Player_1_Vars
     .Animation_FirstFrame_Header:       equ Player_1_Vars.Animation_FirstFrame_Header    - Player_1_Vars
@@ -74,6 +79,11 @@ Player_1_Vars:
         .HurtBox_Y:                     rb 1
         .HurtBox_Width:                 rb 1
         .HurtBox_Height:                rb 1
+    .HitBox:
+        .HitBox_X:                      rb 1
+        .HitBox_Y:                      rb 1
+        .HitBox_Width:                  rb 1
+        .HitBox_Height:                 rb 1
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:     rw 1
     .Animation_FirstFrame_Header:       rw 1
@@ -105,6 +115,11 @@ Player_2_Vars:
         .HurtBox_Y:                     rb 1
         .HurtBox_Width:                 rb 1
         .HurtBox_Height:                rb 1
+    .HitBox:
+        .HitBox_X:                      rb 1
+        .HitBox_Y:                      rb 1
+        .HitBox_Width:                  rb 1
+        .HitBox_Height:                 rb 1
     .Animation_Current_Frame_Number:    rb 1
     .Animation_CurrentFrame_Header:     rw 1
     .Animation_FirstFrame_Header:       rw 1
