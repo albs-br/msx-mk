@@ -16,6 +16,13 @@ ReadInput:
 
     ; ------------------------ read keyboard for player 1 ------------------------
 
+    ; WASD: walk/jump/crouch
+    ; E:    block
+    ; R:    high punch
+    ; F:    low punch
+    ; T:    high kick
+    ; G:    low kick
+
     ld      ix, Player_1_Vars
 
     xor     a
@@ -57,6 +64,13 @@ ReadInput:
 
 
     ; ------------------------ read keyboard for player 2 ------------------------
+
+    ; Arrows: walk/jump/crouch
+    ; H:      block
+    ; J:      high punch
+    ; N:      low punch
+    ; K:      high kick
+    ; M:      low kick
 
     ld      ix, Player_2_Vars
 
