@@ -130,8 +130,8 @@ MEGAROM_PAGE_SUBZERO_JUMPING_FORWARD_RIGHT_DATA_0: equ 9
 	INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data.s"
 
     ; ------------ List ---------------
-    INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_data_and_list.s"
-    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_data_and_list.s"
+    INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frames_0_to_2_list.s"
+    INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_list.s"
 
 MegaRom_Page_9_size: equ $ - 0x8000 ; 0x2be0
 
