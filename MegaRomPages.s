@@ -111,8 +111,8 @@ MEGAROM_PAGE_SCORPION_JUMPING_FORWARD_LEFT_DATA_0: equ 8
 	INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data.s"
 
     ; ------------ List ---------------
-    INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_data_and_list.s"
-    INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_data_and_list.s"
+    INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frames_0_to_2_list.s"
+    INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frames_0_to_7_list.s"
 
 MegaRom_Page_8_size: equ $ - 0x8000 ; 0x2bcd
 
