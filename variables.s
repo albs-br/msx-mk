@@ -152,6 +152,7 @@ POSITION:
     .JUMPING_UP:            equ  6
     .JUMPING_FORWARD:       equ  8
     .JUMPING_BACKWARDS:     equ 10
+    .LOW_KICK:              equ 12
 
 
 

@@ -27,6 +27,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_frame_headers.s"
     INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frame_headers.s"
     INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frame_headers.s"
+    INCLUDE "Data/scorpion/kick/left/scorpion_kick_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -34,6 +35,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_headers.s"
     INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frame_headers.s"
     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
+    ; INCLUDE "Data/subzero/kick/right/subzero_kick_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
 
@@ -134,5 +136,22 @@ MEGAROM_PAGE_SUBZERO_JUMPING_FORWARD_RIGHT_DATA_0: equ 9
     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frames_0_to_7_list.s"
 
 MegaRom_Page_9_size: equ $ - 0x8000 ; 0x2be0
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 10 -------------------------------------------------
+
+MEGAROM_PAGE_SCORPION_KICK_LEFT_DATA_0: equ 10
+
+
+	org	0x8000, 0xBFFF
+
+    ; ------------ Data ---------------
+	INCLUDE "Data/scorpion/kick/left/scorpion_kick_left_frames_0_to_6_data.s"
+
+    ; ------------ List ---------------
+    INCLUDE "Data/scorpion/kick/left/scorpion_kick_left_frames_0_to_6_list.s"
+
+MegaRom_Page_10_size: equ $ - 0x8000 ; 0x27c7
 
 	ds PageSize - ($ - 0x8000), 255
