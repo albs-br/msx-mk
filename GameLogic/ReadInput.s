@@ -11,6 +11,9 @@ INPUT_DOWN_RIGHT:   equ 0101 0000 b
 INPUT_UP_LEFT:      equ 1010 0000 b
 INPUT_DOWN_LEFT:    equ 0110 0000 b
 
+INPUT_LOW_KICK:     equ 0000 0001 b
+
+
 ReadInput:
 
 
@@ -44,8 +47,14 @@ ReadInput:
 
     ld      a, 3                    ; 3rd line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Saved), a
     bit     1, a                    ; 1st bit (key D)
     call    z, .player_Input_Right
+
+    ; ld      a, (SNSMAT_Saved)
+    ; bit     4, a                    ; 4th bit (key G)
+    ; call    z, .player_Input_LowKick
+
 
     ld      a, 5                    ; 5th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
@@ -137,6 +146,11 @@ ReadInput:
     or      INPUT_RIGHT
     ld      (PlayerInput), a
     ret
+
+; .player_Input_LowKick:
+;     ld      a, INPUT_LOW_KICK
+;     ld      (PlayerInput), a
+;     ret
 
 ; ------------
 
