@@ -12,7 +12,11 @@ INPUT_UP_LEFT:      equ 1010 0000 b
 INPUT_DOWN_LEFT:    equ 0110 0000 b
 
 INPUT_LOW_KICK:     equ 0000 0001 b
+INPUT_HIGH_KICK:    equ 0000 0010 b
+INPUT_LOW_PUNCH:    equ 0000 0100 b
+INPUT_HIGH_PUNCH:   equ 0000 1000 b
 
+INPUT_BLOCK:        equ 1111 0000 b
 
 ReadInput:
 
@@ -51,9 +55,9 @@ ReadInput:
     bit     1, a                    ; 1st bit (key D)
     call    z, .player_Input_Right
 
-    ; ld      a, (SNSMAT_Saved)
-    ; bit     4, a                    ; 4th bit (key G)
-    ; call    z, .player_Input_LowKick
+    ld      a, (SNSMAT_Saved)
+    bit     4, a                    ; 4th bit (key G)
+    call    z, .player_Input_LowKick
 
 
     ld      a, 5                    ; 5th line
@@ -147,10 +151,13 @@ ReadInput:
     ld      (PlayerInput), a
     ret
 
-; .player_Input_LowKick:
-;     ld      a, INPUT_LOW_KICK
-;     ld      (PlayerInput), a
-;     ret
+; --------
+
+.player_Input_LowKick:
+    ld      a, (PlayerInput)
+    or      INPUT_LOW_KICK
+    ld      (PlayerInput), a
+    ret
 
 ; ------------
 
@@ -175,6 +182,11 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_RIGHT
     call    z, Player_Input_Right
+
+    ld      a, (PlayerInput)
+    cp      INPUT_LOW_KICK
+    call    z, Player_Input_LowKick
+
 
     ; else
     ld      a, (PlayerInput)

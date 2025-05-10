@@ -22,6 +22,10 @@ Player_Logic:
     cp      POSITION.JUMPING_BACKWARDS
     jp      z, .jumpingBackwards
 
+    ; case POSITION.LOW_KICK:
+    cp      POSITION.LOW_KICK
+    jp      z, .lowKick
+
     ret
 
 .jumpingUp:
@@ -99,6 +103,10 @@ Player_Logic:
 
     call    Update_VRAM_NAMTBL_Addr
 
+    ret
+
+.lowKick:
+;jp $;[debug]
     ret
 
 ; Input:
@@ -278,7 +286,10 @@ Player_SetPosition_Stance:
     ; if(position != STANCE)
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
-    jp      z, .skip_10
+    jp      z, .return
+
+    ; TODO: check if there is an ongoing animation
+
 
     ; Player.IsGrounded = true
     ld      a, 1
@@ -297,7 +308,7 @@ Player_SetPosition_Stance:
 
 
 
-.skip_10:
+.return:
 
     ret
 
@@ -391,18 +402,39 @@ Player_Input_Up_Left:
 
     ret
 
+Player_Input_LowKick:
+
+    ; if (player.Position != STANCE) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.STANCE
+    ret     nz
+
+    ; ; Player.IsGrounded = false
+    ; xor     a
+    ; ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.LOW_KICK
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.LOW_KICK
+    call    Player_SetAnimation
+
+
+    ret
+
+
 ; Inputs:
 ;   IX: Player Vars base addr
 ;   A:  Position (constant POSITION.?)
 ;   HL: Addr of animation
 Player_SetAnimation:
-    ; ld      a, POSITION.STANCE
     ld      (ix + Player_Struct.Position), a
 
     xor     a
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
     
-    ; ld      hl, Subzero_Stance_Right_Animation_Headers
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
 
