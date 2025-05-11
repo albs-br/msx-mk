@@ -121,8 +121,13 @@ Player_Init:
     ld      a, POSITION.STANCE
     ld      (ix + Player_Struct.Position), a
 
+    ; Player.IsGrounded = true
     ld      a, 1
     ld      (ix + Player_Struct.IsGrounded), a
+
+    ; Player.IsAnimating = false
+    xor     a
+    ld      (ix + Player_Struct.IsAnimating), a
 
 
     xor     a

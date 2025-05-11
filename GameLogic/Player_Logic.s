@@ -288,12 +288,21 @@ Player_SetPosition_Stance:
     cp      POSITION.STANCE
     jp      z, .return
 
-    ; TODO: check if there is an ongoing animation
+
+    ; check if there is an ongoing animation
+    ld      a, (ix + Player_Struct.IsAnimating)
+    or      a
+    jp      nz, .return
+
 
 
     ; Player.IsGrounded = true
     ld      a, 1
     ld      (ix + Player_Struct.IsGrounded), a
+
+    ; Player.IsAnimating = false
+    xor     a
+    ld      (ix + Player_Struct.IsAnimating), a
 
     ; --- get addr of animation
     ld      bc, POSITION.STANCE
@@ -408,6 +417,10 @@ Player_Input_LowKick:
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     ret     nz
+
+    ; Player.IsAnimating = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a
 
     ; ; Player.IsGrounded = false
     ; xor     a

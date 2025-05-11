@@ -22,12 +22,19 @@ GetCurrentFrameAndGoToNext:
     inc     hl      ; read high byte
     ld      a, (hl)
     dec     hl      ; go back
-    or      a ; if (next frame high byte == 0) returnToFirstFrame
+
+    ; if (next frame high byte == 0x00) returnToFirstFrame();
+    or      a
     jp      z, .returnToFirstFrame
+
+    ; if (next frame high byte == 0x01) endOfAnimation();
+    cp      0x01
+    jp      z, .endOfAnimation
 
     ; TODO: implement end of animation marking (0x0000 means looping animation, 0xff00 could be end of animation)
 
     jp      .continue
+
 .returnToFirstFrame:
     ; HL = (Animation_FirstFrame_Header)
     ld      l, (ix + Player_Struct.Animation_FirstFrame_Header)
@@ -38,6 +45,19 @@ GetCurrentFrameAndGoToNext:
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
 
     ; shouldn't we have to update IY here (current frame header?)
+    jp      .continue
+
+.endOfAnimation:
+
+    ; Player.IsAnimating = false
+    xor     a
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    ; if (player.IsGrounded) Player_SetPosition_Stance()
+    ld      a, (ix + Player_Struct.IsGrounded)
+    or      a
+    call    nz, Player_SetPosition_Stance
+
 
 .continue:
 

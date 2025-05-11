@@ -16,7 +16,7 @@ INPUT_HIGH_KICK:    equ 0000 0010 b
 INPUT_LOW_PUNCH:    equ 0000 0100 b
 INPUT_HIGH_PUNCH:   equ 0000 1000 b
 
-INPUT_BLOCK:        equ 1111 0000 b
+
 
 ReadInput:
 

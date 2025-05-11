@@ -67,6 +67,7 @@ Player_Struct:
     .Side:                              equ Player_1_Vars.Side                           - Player_1_Vars
     .Position:                          equ Player_1_Vars.Position                       - Player_1_Vars
     .IsGrounded:                        equ Player_1_Vars.IsGrounded                     - Player_1_Vars
+    .IsAnimating:                       equ Player_1_Vars.IsAnimating                    - Player_1_Vars
     .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr             - Player_1_Vars
 
 Player_1_Vars:
@@ -99,6 +100,7 @@ Player_1_Vars:
     .Side:                              rb 1
     .Position:                          rb 1
     .IsGrounded:                        rb 1
+    .IsAnimating:                       rb 1
     .AllAnimations_Addr:                rw 1
 
 Player_Struct_size: equ $ - Player_1_Vars
@@ -135,6 +137,7 @@ Player_2_Vars:
     .Side:                              rb 1
     .Position:                          rb 1
     .IsGrounded:                        rb 1
+    .IsAnimating:                       rb 1
     .AllAnimations_Addr:                rw 1
 
 ; ----------------------------
@@ -162,7 +165,9 @@ POSITION:
 OldSP:              rw 1
 ; Last_NAMTBL_Addr:   rw 1
 
+; --- ReadInput temp vars:
 PlayerInput:        rb 1
+PlayerInput_Block:  rb 1
 SNSMAT_Saved:       rb 1
 
 
