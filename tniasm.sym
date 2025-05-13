@@ -196,7 +196,7 @@ BIOS_H_RSET: equ 0FE26h ; last def. pass 3
 Scorpion_Walking_Left_Frame_6.List: equ 0B398h ; last def. pass 3
 Player_Input_Left: equ 044C1h ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_2: equ 0A76Fh ; last def. pass 3
-Subzero_Walking_Backwards_Right_Animation_Headers: equ 04C9Eh ; last def. pass 3
+Subzero_Walking_Backwards_Right_Animation_Headers: equ 04CD4h ; last def. pass 3
 BIOS_BAKCLR: equ 0F3EAh ; last def. pass 3
 BIOS_H_NEWS: equ 0FF3Eh ; last def. pass 3
 BIOS_HIMEM: equ 0FC4Ah ; last def. pass 3
@@ -367,8 +367,8 @@ BIOS_INIGRP: equ 072h ; last def. pass 3
 BIOS_GETPNT: equ 0F3FAh ; last def. pass 3
 Subzero_Jumping_Forward_Right_Frame_3_Header: equ 0B832h ; last def. pass 3
 BIOS_H_FRET: equ 0FF9Dh ; last def. pass 3
-Scorpion_Kick_Left_Frame_6.List: equ 0A64Ah ; last def. pass 3
-Subzero_Walking_Right_Animation_Headers: equ 04C66h ; last def. pass 3
+Scorpion_Kick_Left_Frame_6.List: equ 0A652h ; last def. pass 3
+Subzero_Walking_Right_Animation_Headers: equ 04C9Ch ; last def. pass 3
 BIOS_NMI: equ 066h ; last def. pass 3
 Player_1_Vars.HitBox_Y: equ 0C01Ah ; last def. pass 3
 BIOS_H_CLEAR: equ 0FED0h ; last def. pass 3
@@ -437,7 +437,7 @@ BIOS_MCLPTR: equ 0FB3Ch ; last def. pass 3
 BIOS_OLDSTT: equ 0FB0Ch ; last def. pass 3
 Scorpion_Kick_Left_Frame_0_Header: equ 0B73Dh ; last def. pass 3
 BIOS_TAPOON: equ 0EAh ; last def. pass 3
-Subzero_Stance_Right_Animation_Headers: equ 04C16h ; last def. pass 3
+Subzero_Stance_Right_Animation_Headers: equ 04C4Ch ; last def. pass 3
 KEYBOARD: equ 00h ; last def. pass 3
 BIOS_MINUPD: equ 0F3EFh ; last def. pass 3
 Subzero_Stance_Right_Frame_8_Header: equ 0B7A6h ; last def. pass 3
@@ -509,7 +509,7 @@ SetPaletteColor: equ 0402Ah ; last def. pass 3
 Wait_Vblank.waitVBlank: equ 040AEh ; last def. pass 3
 Subzero_Walking_Right_Frame_0.List: equ 0A3C3h ; last def. pass 3
 Scorpion_Walking_Left_Frame_6_Header: equ 0B6DBh ; last def. pass 3
-DrawSprite_After16kb: equ 04820h ; last def. pass 3
+DrawSprite_After16kb: equ 04822h ; last def. pass 3
 BIOS_HIGH: equ 0F408h ; last def. pass 3
 Subzero_Walking_Right_Frame_7: equ 0B1CEh ; last def. pass 3
 Player_2_Vars.Restore_BG_1_Y: equ 0C04Ah ; last def. pass 3
@@ -583,7 +583,7 @@ BIOS_HOLD2: equ 0F836h ; last def. pass 3
 VDP_COMMAND_PSET: equ 050h ; last def. pass 3
 Scorpion_Walking_Left_Frame_4_Header: equ 0B6CDh ; last def. pass 3
 Player_Input_Right.skip_10: equ 04534h ; last def. pass 3
-Subzero_Jumping_Forward_Right_Animation_Headers: equ 04D0Ah ; last def. pass 3
+Subzero_Jumping_Forward_Right_Animation_Headers: equ 04D40h ; last def. pass 3
 BIOS_CLRSPR: equ 069h ; last def. pass 3
 Scorpion_Kick_Left_Frame_1.List: equ 09D5Dh ; last def. pass 3
 BIOS_LFPROG: equ 0F954h ; last def. pass 3
@@ -610,7 +610,7 @@ BIOS_H_OUTD: equ 0FEE4h ; last def. pass 3
 R2_PAGE_2: equ 05Fh ; last def. pass 3
 REG12SAV: equ 0FFEBh ; last def. pass 3
 BIOS_CALLF: equ 030h ; last def. pass 3
-Scorpion_Kick_Left_Frame_6: equ 0A64Ah ; last def. pass 3
+Scorpion_Kick_Left_Frame_6: equ 0A652h ; last def. pass 3
 PPI.A: equ 0A8h ; last def. pass 3
 Player_SetPosition_Stance.return: equ 04558h ; last def. pass 3
 BIOS_ARG: equ 0F847h ; last def. pass 3
@@ -670,7 +670,7 @@ REG20SAV: equ 0FFF3h ; last def. pass 3
 VDP_LOGIC_OPERATION_AND: equ 01h ; last def. pass 3
 BIOS_KANAMD: equ 0FCADh ; last def. pass 3
 Subzero_Walking_Right_Frame_1_Header: equ 0B7D0h ; last def. pass 3
-Subzero_Jumping_Backwards_Right_Animation_Headers: equ 04D3Eh ; last def. pass 3
+Subzero_Jumping_Backwards_Right_Animation_Headers: equ 04D74h ; last def. pass 3
 BIOS_H_DOGR: equ 0FEF3h ; last def. pass 3
 BIOS_MAXUPD: equ 0F3ECh ; last def. pass 3
 SetSpritesMagnified: equ 0413Bh ; last def. pass 3
@@ -712,7 +712,7 @@ Scorpion_Walking_Left_Frame_0_Header: equ 0B6B1h ; last def. pass 3
 CheckCollision_16x24_16x16: equ 041D3h ; last def. pass 3
 BIOS_TXTTAB: equ 0F676h ; last def. pass 3
 BIOS_CONSAV: equ 0F668h ; last def. pass 3
-DrawSprite_After16kb.loop: equ 04820h ; last def. pass 3
+DrawSprite_After16kb.loop: equ 04822h ; last def. pass 3
 POSITION.HIGH_KICK: equ 0Eh ; last def. pass 3
 BIOS_T32CGP: equ 0F3C1h ; last def. pass 3
 BIOS_H_TIMI: equ 0FD9Fh ; last def. pass 3
@@ -768,7 +768,7 @@ MEGAROM_PAGE_SUBZERO_WALKING_RIGHT_DATA_0: equ 06h ; last def. pass 3
 BIOS_MLTATR: equ 0F3D7h ; last def. pass 3
 BIOS_FILNAM: equ 0F866h ; last def. pass 3
 Player_2_Vars.Restore_BG_1_X: equ 0C049h ; last def. pass 3
-Page_0x4000_size: equ 04CAh ; last def. pass 3
+Page_0x4000_size: equ 0500h ; last def. pass 3
 BIOS_QUETAB: equ 0F959h ; last def. pass 3
 Player_2_Vars.HitBox_Width: equ 0C03Ch ; last def. pass 3
 REG4SAV: equ 0F3E3h ; last def. pass 3
@@ -942,7 +942,7 @@ BIOS_RDVDP: equ 013Eh ; last def. pass 3
 Subzero_Jumping_Forward_Right_Frame_7: equ 0AB33h ; last def. pass 3
 Player_1_Vars.VRAM_NAMTBL_Addr: equ 0C022h ; last def. pass 3
 BIOS_RG6SAV: equ 0F3E5h ; last def. pass 3
-MegaRom_Page_10_size: equ 027C7h ; last def. pass 3
+MegaRom_Page_10_size: equ 027CFh ; last def. pass 3
 Scorpion_Jumping_Up_Left_Frame_2: equ 0A310h ; last def. pass 3
 Subzero_Walking_Right_Frame_8: equ 0B3F3h ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frames_0_to_7_Data: equ 08C56h ; last def. pass 3
@@ -1053,7 +1053,7 @@ BIOS_HOLD8: equ 0F806h ; last def. pass 3
 Player_Struct.Restore_BG_0_WidthInPixels: equ 015h ; last def. pass 3
 BIOS_PDIREC: equ 0F953h ; last def. pass 3
 BIOS_H_FPOS: equ 0FEA8h ; last def. pass 3
-Subzero_Jumping_Up_Right_Animation_Headers: equ 04CD6h ; last def. pass 3
+Subzero_Jumping_Up_Right_Animation_Headers: equ 04D0Ch ; last def. pass 3
 BIOS_RTPROG: equ 0F955h ; last def. pass 3
 BIOS_INIT32: equ 06Fh ; last def. pass 3
 Player_Input_Right.return: equ 04534h ; last def. pass 3
