@@ -62,9 +62,13 @@ ReadInput:
 
     ld      a, 5                    ; 5th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Saved), a
     bit     4, a                    ; 4th bit (key W)
     call    z, .player_Input_Up
 
+    ld      a, (SNSMAT_Saved)
+    bit     1, a                    ; 1st bit (key T)
+    call    z, .player_Input_HighKick
 
 
 
@@ -159,6 +163,12 @@ ReadInput:
     ld      (PlayerInput), a
     ret
 
+.player_Input_HighKick:
+    ld      a, (PlayerInput)
+    or      INPUT_HIGH_KICK
+    ld      (PlayerInput), a
+    ret
+
 ; ------------
 
 .executePlayerInput:
@@ -186,6 +196,10 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_LOW_KICK
     call    z, Player_Input_LowKick
+
+    ld      a, (PlayerInput)
+    cp      INPUT_HIGH_KICK
+    call    z, Player_Input_HighKick
 
 
     ; else

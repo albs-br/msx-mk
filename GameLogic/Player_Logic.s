@@ -438,6 +438,33 @@ Player_Input_LowKick:
     ret
 
 
+Player_Input_HighKick:
+
+    ; if (player.Position != STANCE) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.STANCE
+    ret     nz
+
+    ; Player.IsAnimating = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    ; ; Player.IsGrounded = false
+    ; xor     a
+    ; ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.HIGH_KICK
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.HIGH_KICK
+    call    Player_SetAnimation
+
+
+    ret
+
+
 ; Inputs:
 ;   IX: Player Vars base addr
 ;   A:  Position (constant POSITION.?)

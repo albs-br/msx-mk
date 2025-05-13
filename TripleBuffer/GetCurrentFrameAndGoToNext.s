@@ -31,8 +31,6 @@ GetCurrentFrameAndGoToNext:
     cp      0x01
     jp      z, .endOfAnimation
 
-    ; TODO: implement end of animation marking (0x0000 means looping animation, 0xff00 could be end of animation)
-
     jp      .continue
 
 .returnToFirstFrame:

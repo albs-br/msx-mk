@@ -421,6 +421,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_animation.s"
     INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_backwards_left_animation.s"
     INCLUDE "Data/scorpion/kick/left/scorpion_low_kick_left_animation.s"
+    INCLUDE "Data/scorpion/kick/left/scorpion_high_kick_left_animation.s"
 
     ; --- Right
     ; INCLUDE "Data/scorpion/stance/right/scorpion_stance_right_animation.s"
@@ -430,6 +431,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/scorpion/jumping-forward/right/scorpion_jumping_forward_right_animation.s"
     ; INCLUDE "Data/scorpion/jumping-forward/right/scorpion_jumping_backwards_right_animation.s"
     ; INCLUDE "Data/scorpion/kick/right/scorpion_low_kick_right_animation.s"
+    ; INCLUDE "Data/scorpion/kick/right/scorpion_high_kick_right_animation.s"
 
 
 
@@ -443,6 +445,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/jumping-forward/left/subzero_jumping_forward_left_animation.s"
     ; INCLUDE "Data/subzero/jumping-forward/left/subzero_jumping_backwards_left_animation.s"
     ; INCLUDE "Data/subzero/kick/left/subzero_low_kick_left_animation.s"
+    ; INCLUDE "Data/subzero/kick/left/subzero_high_kick_left_animation.s"
 
     ; --- Right
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
@@ -452,12 +455,13 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_animation.s"
     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_backwards_right_animation.s"
     ; INCLUDE "Data/subzero/kick/right/subzero_low_kick_right_animation.s"
+    ; INCLUDE "Data/subzero/kick/right/subzero_high_kick_right_animation.s"
 
 
 
     db      "End ROM started at 0x4000"
 
-Page_0x4000_size: equ $ - Execute ; 0x03BE5
+Page_0x4000_size: equ $ - Execute ; 0x04ba
 
 	ds PageSize - ($ - 0x4000), 255	; Fill the unused area with 0xFF
 
