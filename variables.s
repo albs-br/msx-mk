@@ -157,8 +157,9 @@ POSITION:
     .JUMPING_BACKWARDS:     equ 10
     .LOW_KICK:              equ 12
     .HIGH_KICK:             equ 14
-
-
+    .BLOCK:                 equ 16
+    .CROUCHING:             equ 18
+    .CROUCHING_BLOCK:       equ 20
 
 ; ----------------------------
 
