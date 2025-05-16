@@ -1,0 +1,5 @@
+Scorpion_Block_Left_Animation_Headers:
+	dw Scorpion_Block_Left_Frame_0_Header, Scorpion_Block_Left_Frame_0_Header, Scorpion_Block_Left_Frame_0_Header
+	dw Scorpion_Block_Left_Frame_1_Header, Scorpion_Block_Left_Frame_1_Header, Scorpion_Block_Left_Frame_1_Header
+	dw Scorpion_Block_Left_Frame_2_Header, Scorpion_Block_Left_Frame_2_Header, Scorpion_Block_Left_Frame_2_Header
+	dw 0x0000 ; end of data

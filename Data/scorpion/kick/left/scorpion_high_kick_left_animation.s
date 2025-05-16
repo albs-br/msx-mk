@@ -21,3 +21,4 @@ Scorpion_High_Kick_Left_Animation_Headers:
 	dw 0x0100 ; end of data (end animation)
 
 	; dw 0x0000 ; end of data (loop animation, return to first frame)
+	; dw 0x0200 ; end of data (stop animation, keeps the frame while key is pressed, for example during block)
