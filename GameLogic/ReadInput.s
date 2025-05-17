@@ -20,6 +20,24 @@ INPUT_HIGH_PUNCH:   equ 0000 1000 b
 
 ReadInput:
 
+    ; ----- read keyboard
+    ld      a, 2                    ; 2nd line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Line_2), a
+    
+    ld      a, 3                    ; 3rd line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Line_3), a
+    
+    ld      a, 5                    ; 5th line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Line_5), a
+
+    ld      a, 8                    ; 8th line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Line_8), a
+
+
 
     ; ------------------------ read keyboard for player 1 ------------------------
 
@@ -36,53 +54,51 @@ ReadInput:
     ld      (PlayerInput), a
     ld      (PlayerInput_Block), a
 
+    ; if (Player.IsBlocking) .skipCheck_P1_Direction_Keys
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    jp      nz, .check_P1_Block_Released
+
     ; if (!Player.IsGrounded) .skipCheck_P1_Direction_Keys
     ld      a, (ix + Player_Struct.IsGrounded)
     or      a
     jp      z, .skipCheck_P1_Direction_Keys
 
-    ; if (Player.IsBlocking) .skipCheck_P1_Direction_Keys
-    ld      a, (ix + Player_Struct.IsBlocking)
-    or      a
-    jp      nz, .skipCheck_P1_Direction_Keys
 
 
-    ld      a, 2                    ; 2nd line
-    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      a, (SNSMAT_Line_2)
     bit     6, a                    ; 6th bit (key A)
     call    z, .player_Input_Left
     
     ; TODO: no need to check right if left was pressed
 
-    ld      a, 3                    ; 3rd line
-    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
-    ld      (SNSMAT_Saved), a
+    ld      a, (SNSMAT_Line_3)
     bit     1, a                    ; 1st bit (key D)
     call    z, .player_Input_Right
 
-    ; TODO: fix bug (direction keys should be apart from action keys)
-    ld      a, (SNSMAT_Saved)
+    ld      a, (SNSMAT_Line_5)
+    bit     4, a                    ; 4th bit (key W)
+    call    z, .player_Input_Up
+
+
+
+    
+    ; ----- action buttons here
+
+    ld      a, (SNSMAT_Line_3)
+    bit     2, a                    ; 2nd bit (key E)
+    call    z, .player_Input_Block
+
+    ld      a, (SNSMAT_Line_5)
+    bit     1, a                    ; 1st bit (key T)
+    call    z, .player_Input_HighKick
+
+    ld      a, (SNSMAT_Line_3)
     bit     4, a                    ; 4th bit (key G)
     call    z, .player_Input_LowKick
 
 
 
-
-    ld      a, (SNSMAT_Saved)
-    bit     2, a                    ; 2nd bit (key E)
-    call    z, .player_Input_Block
-
-
-
-    ld      a, 5                    ; 5th line
-    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
-    ld      (SNSMAT_Saved), a
-    bit     4, a                    ; 4th bit (key W)
-    call    z, .player_Input_Up
-
-    ld      a, (SNSMAT_Saved)
-    bit     1, a                    ; 1st bit (key T)
-    call    z, .player_Input_HighKick
 
 
 
@@ -92,7 +108,7 @@ ReadInput:
 
 
 .skipCheck_P1_Direction_Keys:
-    ; TODO: action buttons here
+
 
 
 
@@ -120,24 +136,24 @@ ReadInput:
 
 
 
-    ld      a, 8                    ; 8th line
-    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
-    ld      (SNSMAT_Saved), a
+    ld      a, (SNSMAT_Line_8)
     bit     4, a                    ; 4th bit (key left)
     call    z, .player_Input_Left
     
-    ld      a, (SNSMAT_Saved)
+    ld      a, (SNSMAT_Line_8)
     bit     7, a                    ; 7th bit (key right)
     call    z, .player_Input_Right
 
-    ld      a, (SNSMAT_Saved)
+    ld      a, (SNSMAT_Line_8)
     bit     5, a                    ; 5th bit (key up)
     call    z, .player_Input_Up
 
-    ; ld      a, (SNSMAT_Saved)
+    ; ld      a, (SNSMAT_Line_8)
     ; bit     6, a                    ; 6th bit (key down)
     ; call    z, .player_Input_Down
 
+
+    ; --- action buttons here
 
 
 
@@ -148,10 +164,27 @@ ReadInput:
 
 .skipCheck_P2_Direction_Keys:
 
-    ; TODO: action buttons here
+
 
     ret
 
+; ----------
+
+.check_P1_Block_Released:
+
+    ld      a, (SNSMAT_Line_3)
+    bit     2, a                    ; 2nd bit (key E)
+    call    nz, .releaseBlock_P1
+
+    jp      .skipCheck_P1_Direction_Keys
+
+.releaseBlock_P1:
+    xor     a
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    call    Player_SetPosition_Stance
+    
+    ret
 ; -----------------
 
 .player_Input_Up:

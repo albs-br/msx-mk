@@ -31,6 +31,10 @@ GetCurrentFrameAndGoToNext:
     cp      0x01
     jp      z, .endOfAnimation
 
+    ; if (next frame high byte == 0x02) stopAnimation();
+    cp      0x02
+    jp      z, .stopAnimation
+
     jp      .continue
 
 .returnToFirstFrame:
@@ -56,6 +60,13 @@ GetCurrentFrameAndGoToNext:
     or      a
     call    nz, Player_SetPosition_Stance
 
+    jp      .continue
+
+.stopAnimation:
+
+    ; return to previous frame
+    dec     hl
+    dec     hl
 
 .continue:
 

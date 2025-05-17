@@ -284,7 +284,7 @@ Player_Input_Right:
 
 Player_SetPosition_Stance:
 
-    ; if(position != STANCE)
+    ; if(position == STANCE) return
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
     jp      z, .return
@@ -301,9 +301,11 @@ Player_SetPosition_Stance:
     ld      a, 1
     ld      (ix + Player_Struct.IsGrounded), a
 
-    ; Player.IsAnimating = false
+    
     xor     a
-    ld      (ix + Player_Struct.IsAnimating), a
+    ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = false
+
+    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = true
 
     ; --- get addr of animation
     ld      bc, POSITION.STANCE
@@ -474,9 +476,11 @@ Player_Input_Block:
     cp      POSITION.STANCE
     ret     nz
 
-    ; Player.IsAnimating = true
+    
     ld      a, 1
-    ld      (ix + Player_Struct.IsAnimating), a
+    ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = true
+
+    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = true
 
     ; ; Player.IsGrounded = true
     ; ; ld      a, 1
