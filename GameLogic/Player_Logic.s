@@ -22,9 +22,10 @@ Player_Logic:
     cp      POSITION.JUMPING_BACKWARDS
     jp      z, .jumpingBackwards
 
-    ; case POSITION.LOW_KICK:
-    cp      POSITION.LOW_KICK
-    jp      z, .lowKick
+    ; UNNECESSARY:
+    ; ; case POSITION.LOW_KICK:
+    ; cp      POSITION.LOW_KICK
+    ; jp      z, .lowKick
 
     ret
 
@@ -463,6 +464,36 @@ Player_Input_HighKick:
 
 
     ret
+
+
+
+Player_Input_Block:
+
+    ; if (player.Position != STANCE) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.STANCE
+    ret     nz
+
+    ; Player.IsAnimating = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    ; ; Player.IsGrounded = true
+    ; ; ld      a, 1
+    ; ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.BLOCK
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.BLOCK
+    call    Player_SetAnimation
+
+
+
+    ret
+
 
 
 ; Inputs:

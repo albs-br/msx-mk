@@ -125,14 +125,12 @@ Player_Init:
     ld      a, 1
     ld      (ix + Player_Struct.IsGrounded), a
 
-    ; Player.IsAnimating = false
+    
     xor     a
-    ld      (ix + Player_Struct.IsAnimating), a
+    ld      (ix + Player_Struct.IsAnimating), a ; Player.IsAnimating = false
+    ld      (ix + Player_Struct.IsBlocking), a  ; Player.IsBlocking = false
 
-
-    xor     a
-    ; ld      (Player_1_Vars.Animation_Current_Frame_Number), a
-    ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
+    ld      (ix + Player_Struct.Animation_Current_Frame_Number), a ; Player.Animation_Current_Frame_Number = 0
 
     ; TODO: this addr can be get from All Animations First Addr
     ; ld      hl, Scorpion_Stance_Left_Animation_Headers

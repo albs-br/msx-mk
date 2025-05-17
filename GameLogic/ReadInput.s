@@ -34,12 +34,17 @@ ReadInput:
 
     xor     a
     ld      (PlayerInput), a
+    ld      (PlayerInput_Block), a
 
     ; if (!Player.IsGrounded) .skipCheck_P1_Direction_Keys
     ld      a, (ix + Player_Struct.IsGrounded)
     or      a
     jp      z, .skipCheck_P1_Direction_Keys
 
+    ; if (Player.IsBlocking) .skipCheck_P1_Direction_Keys
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    jp      nz, .skipCheck_P1_Direction_Keys
 
 
     ld      a, 2                    ; 2nd line
@@ -55,9 +60,18 @@ ReadInput:
     bit     1, a                    ; 1st bit (key D)
     call    z, .player_Input_Right
 
+    ; TODO: fix bug (direction keys should be apart from action keys)
     ld      a, (SNSMAT_Saved)
     bit     4, a                    ; 4th bit (key G)
     call    z, .player_Input_LowKick
+
+
+
+
+    ld      a, (SNSMAT_Saved)
+    bit     2, a                    ; 2nd bit (key E)
+    call    z, .player_Input_Block
+
 
 
     ld      a, 5                    ; 5th line
@@ -78,6 +92,8 @@ ReadInput:
 
 
 .skipCheck_P1_Direction_Keys:
+    ; TODO: action buttons here
+
 
 
     ; ------------------------ read keyboard for player 2 ------------------------
@@ -93,6 +109,7 @@ ReadInput:
 
     xor     a
     ld      (PlayerInput), a
+    ld      (PlayerInput_Block), a
 
 
 
@@ -169,7 +186,14 @@ ReadInput:
     ld      (PlayerInput), a
     ret
 
-; ------------
+; --------
+
+.player_Input_Block:
+    ld      a, 1
+    ld      (PlayerInput_Block), a
+    ret
+
+; --------------------------------------------------------------
 
 .executePlayerInput:
 
@@ -201,10 +225,15 @@ ReadInput:
     cp      INPUT_HIGH_KICK
     call    z, Player_Input_HighKick
 
-
-    ; else
-    ld      a, (PlayerInput)
+    ld      a, (PlayerInput_Block) ; TODO: these two labels are very similar, rename one of them
     or      a
+    call    nz, Player_Input_Block ; TODO: these two labels are very similar, rename one of them
+
+    ; if (!PlayerInput && !PlayerInput_Block) Player_SetPosition_Stance();
+    ld      a, (PlayerInput)
+    ld      b, a
+    ld      a, (PlayerInput_Block)
+    or      b
     call    z, Player_SetPosition_Stance
     
     ret

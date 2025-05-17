@@ -14,7 +14,7 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc05a      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xc05c      -type byte      -desc LastFps     -format dec
 
 
 #ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex

@@ -8,7 +8,7 @@ Scorpion_High_Kick_Left_Animation_Headers:
 	dw Scorpion_Kick_Left_Frame_2_Header, Scorpion_Kick_Left_Frame_2_Header, Scorpion_Kick_Left_Frame_2_Header
 	dw Scorpion_Kick_Left_Frame_3_Header, Scorpion_Kick_Left_Frame_3_Header, Scorpion_Kick_Left_Frame_3_Header
 	dw Scorpion_Kick_Left_Frame_4_Header, Scorpion_Kick_Left_Frame_4_Header, Scorpion_Kick_Left_Frame_4_Header
-	dw Scorpion_Kick_Left_Frame_5_Header, Scorpion_Kick_Left_Frame_5_Header, Scorpion_Kick_Left_Frame_5_Header ; <--- bug here (frame 5 after 4)
+	dw Scorpion_Kick_Left_Frame_5_Header, Scorpion_Kick_Left_Frame_5_Header, Scorpion_Kick_Left_Frame_5_Header
 
 	dw Scorpion_Kick_Left_Frame_3_Header, Scorpion_Kick_Left_Frame_3_Header, Scorpion_Kick_Left_Frame_3_Header
 	dw Scorpion_Kick_Left_Frame_2_Header, Scorpion_Kick_Left_Frame_2_Header, Scorpion_Kick_Left_Frame_2_Header

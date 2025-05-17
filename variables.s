@@ -68,6 +68,7 @@ Player_Struct:
     .Position:                          equ Player_1_Vars.Position                       - Player_1_Vars
     .IsGrounded:                        equ Player_1_Vars.IsGrounded                     - Player_1_Vars
     .IsAnimating:                       equ Player_1_Vars.IsAnimating                    - Player_1_Vars
+    .IsBlocking:                        equ Player_1_Vars.IsBlocking                     - Player_1_Vars
     .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr             - Player_1_Vars
 
 Player_1_Vars:
@@ -101,6 +102,7 @@ Player_1_Vars:
     .Position:                          rb 1
     .IsGrounded:                        rb 1
     .IsAnimating:                       rb 1
+    .IsBlocking:                        rb 1
     .AllAnimations_Addr:                rw 1
 
 Player_Struct_size: equ $ - Player_1_Vars
@@ -138,6 +140,7 @@ Player_2_Vars:
     .Position:                          rb 1
     .IsGrounded:                        rb 1
     .IsAnimating:                       rb 1
+    .IsBlocking:                        rb 1
     .AllAnimations_Addr:                rw 1
 
 ; ----------------------------
