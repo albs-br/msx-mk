@@ -14,7 +14,7 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc05c      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xc05f      -type byte      -desc LastFps     -format dec
 
 
 #ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
@@ -26,6 +26,7 @@ ram_watch   add     0xc05c      -type byte      -desc LastFps     -format dec
 ram_watch   add     0xc011      -type byte      -desc P1_X     -format dec
 ram_watch   add     0xc012      -type byte      -desc P1_Y     -format dec
 ram_watch   add     0xc02d      -type byte      -desc P1_Position     -format dec
+ram_watch   add     0xc030      -type byte      -desc P1_IsBlocking   -format dec
 
 #ram_watch   add     0xc029      -type byte      -desc P1_IsGrounded     -format dec
 #ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
