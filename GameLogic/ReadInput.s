@@ -179,10 +179,22 @@ ReadInput:
     jp      .skipCheck_P1_Direction_Keys
 
 .releaseBlock_P1:
-    xor     a
-    ld      (ix + Player_Struct.IsAnimating), a
 
-    call    Player_SetPosition_Stance
+    ld      hl, Scorpion_Block_Left_Animation_Headers.RELEASE_BLOCK_ANIMATION_HEADERS_ADDR
+
+    ; save new frame
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+
+
+    xor     a
+    ld      (ix + Player_Struct.IsBlocking), a
+
+    ; xor     a
+    ; ld      (ix + Player_Struct.IsAnimating), a
+
+    ; call    Player_SetPosition_Stance
     
     ret
 ; -----------------

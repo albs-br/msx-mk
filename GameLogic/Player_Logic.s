@@ -305,7 +305,7 @@ Player_SetPosition_Stance:
     xor     a
     ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = false
 
-    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = true
+    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = false
 
     ; --- get addr of animation
     ld      bc, POSITION.STANCE
@@ -470,6 +470,11 @@ Player_Input_HighKick:
 
 
 Player_Input_Block:
+
+    ; if (player.IsBlocking) ret
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    ret     nz
 
     ; if (player.Position != STANCE) ret
     ld      a, (ix + Player_Struct.Position)

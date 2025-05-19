@@ -19,7 +19,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "TripleBuffer/DrawSprite.s" 
     INCLUDE "TripleBuffer/RestoreBg.s" 
     INCLUDE "TripleBuffer/SetActivePage.s" 
-    INCLUDE "TripleBuffer/GetCurrentFrameAndGoToNext.s" 
+    INCLUDE "TripleBuffer/GetCurrentFrameAndGoToNext.s"
+    ; INCLUDE "TripleBuffer/GoToNextFrame.s"
 
 Execute:
     ; init interrupt mode and stack pointer (in case the ROM isn't the first thing to be loaded)

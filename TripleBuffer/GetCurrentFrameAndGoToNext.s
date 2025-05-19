@@ -19,8 +19,8 @@ GetCurrentFrameAndGoToNext:
     ; Animation_Current_Frame_Number++
     inc      (ix + Player_Struct.Animation_Current_Frame_Number)
 
-    inc     hl      ; read high byte
-    ld      a, (hl)
+    inc     hl      
+    ld      a, (hl) ; read high byte
     dec     hl      ; go back
 
     ; if (next frame high byte == 0x00) returnToFirstFrame();
@@ -35,6 +35,13 @@ GetCurrentFrameAndGoToNext:
     cp      0x02
     jp      z, .stopAnimation
 
+    ; TODO: debug trap (all frame headers should be between 0x8000 and 0xbf00)
+    ;cp      0x80
+    ;jp     c, .Error
+    ;cp      0xc0
+    ;jp     nc, .Error
+
+
     jp      .continue
 
 .returnToFirstFrame:
@@ -46,7 +53,6 @@ GetCurrentFrameAndGoToNext:
     xor     a
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a
 
-    ; shouldn't we have to update IY here (current frame header?)
     jp      .continue
 
 .endOfAnimation:
@@ -58,7 +64,9 @@ GetCurrentFrameAndGoToNext:
     ; if (player.IsGrounded) Player_SetPosition_Stance()
     ld      a, (ix + Player_Struct.IsGrounded)
     or      a
-    call    nz, Player_SetPosition_Stance
+    ; push    hl
+        call    nz, Player_SetPosition_Stance
+    ; pop     hl
 
     jp      .continue
 
@@ -75,8 +83,6 @@ GetCurrentFrameAndGoToNext:
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
         
     ; IY = current frame header addr
-    ; ld      l, (ix + Player_Struct.Animation_CurrentFrame_Header)
-    ; ld      h, (ix + Player_Struct.Animation_CurrentFrame_Header + 1)
     ld      a, (hl)
     ld      iyl, a
     inc     hl
