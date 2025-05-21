@@ -8,6 +8,7 @@ Subzero_All_Animations_Left:
     dw      0 ; Subzero_Low_Kick_Left_Animation_Headers
     dw      0 ; Subzero_High_Kick_Left_Animation_Headers
     dw      0 ; Subzero_Block_Left_Animation_Headers
+    dw      0 ; Subzero_Crouching_Left_Animation_Headers
 
 Subzero_All_Animations_Right:
 ; TODO: pointers to all animations
@@ -21,3 +22,4 @@ Subzero_All_Animations_Right:
     dw      0 ; Subzero_Low_Kick_Right_Animation_Headers        ; POSITION.LOW_KICK = 12
     dw      0 ; Subzero_High_Kick_Right_Animation_Headers       ; POSITION.HIGH_KICK = 14
     dw      0 ; Subzero_Block_Right_Animation_Headers           ; POSITION.BLOCK = 16
+    dw      0 ; Subzero_Crouching_Right_Animation_Headers       ; POSITION.BLOCK = 18

@@ -424,6 +424,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/scorpion/kick/left/scorpion_low_kick_left_animation.s"
     INCLUDE "Data/scorpion/kick/left/scorpion_high_kick_left_animation.s"
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_animation.s"
+    INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_animation.s"
 
     ; --- Right
     ; INCLUDE "Data/scorpion/stance/right/scorpion_stance_right_animation.s"
@@ -435,6 +436,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/scorpion/kick/right/scorpion_low_kick_right_animation.s"
     ; INCLUDE "Data/scorpion/kick/right/scorpion_high_kick_right_animation.s"
     ; INCLUDE "Data/scorpion/block/right/scorpion_block_right_animation.s"
+    ; INCLUDE "Data/scorpion/crouching/right/scorpion_crouching_right_animation.s"
 
 
 
@@ -450,6 +452,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/kick/left/subzero_low_kick_left_animation.s"
     ; INCLUDE "Data/subzero/kick/left/subzero_high_kick_left_animation.s"
     ; INCLUDE "Data/subzero/block/left/subzero_block_left_animation.s"
+    ; INCLUDE "Data/subzero/crouching/left/subzero_crouching_left_animation.s"
 
     ; --- Right
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
@@ -461,6 +464,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/kick/right/subzero_low_kick_right_animation.s"
     ; INCLUDE "Data/subzero/kick/right/subzero_high_kick_right_animation.s"
     ; INCLUDE "Data/subzero/block/right/subzero_block_right_animation.s"
+    ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_animation.s"
 
 
 

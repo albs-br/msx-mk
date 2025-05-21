@@ -29,6 +29,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/jumping-forward/left/scorpion_jumping_forward_left_frame_headers.s"
     INCLUDE "Data/scorpion/kick/left/scorpion_kick_left_frame_headers.s"
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frame_headers.s"
+    INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -38,6 +39,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
     ; INCLUDE "Data/subzero/kick/right/subzero_kick_right_frame_headers.s"
     ; INCLUDE "Data/subzero/block/right/subzero_block_right_frame_headers.s"
+    ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
 
@@ -161,16 +163,20 @@ MegaRom_Page_10_size: equ $ - 0x8000 ; 0x27c7
 ; ------------------------------------------------- Page 11 -------------------------------------------------
 
 MEGAROM_PAGE_SCORPION_BLOCK_LEFT_DATA_0: equ 11
+MEGAROM_PAGE_SCORPION_CROUCHING_LEFT_DATA_0: equ 11
 
 
 	org	0x8000, 0xBFFF
 
     ; ------------ Data ---------------
+
 	INCLUDE "Data/scorpion/block/left/scorpion_block_left_frames_0_to_2_data.s"
+	INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frames_0_to_2_data.s"
 
     ; ------------ List ---------------
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frames_0_to_2_list.s"
+    INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frames_0_to_2_list.s"
 
-MegaRom_Page_11_size: equ $ - 0x8000 ; 0x????
+MegaRom_Page_11_size: equ $ - 0x8000 ; 0x2f2a
 
 	ds PageSize - ($ - 0x8000), 255

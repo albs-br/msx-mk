@@ -469,6 +469,34 @@ Player_Input_HighKick:
 
 
 
+Player_Input_Down:
+
+    ; if (player.Position != STANCE) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.STANCE
+    ret     nz
+
+    ; Player.IsAnimating = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    ; ; Player.IsGrounded = false
+    ; xor     a
+    ; ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.CROUCHING
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.CROUCHING
+    call    Player_SetAnimation
+
+
+    ret
+
+
+
 Player_Input_Block:
 
     ; if (player.IsBlocking) ret

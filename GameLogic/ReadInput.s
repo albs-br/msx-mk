@@ -80,6 +80,9 @@ ReadInput:
     bit     4, a                    ; 4th bit (key W)
     call    z, .player_Input_Up
 
+    ld      a, (SNSMAT_Line_5)
+    bit     0, a                    ; 0th bit (key S)
+    call    z, .player_Input_Down
 
 
     
@@ -205,6 +208,12 @@ ReadInput:
     ld      (PlayerInput), a
     ret
 
+.player_Input_Down:
+    ld      a, (PlayerInput)
+    or      INPUT_DOWN
+    ld      (PlayerInput), a
+    ret
+
 .player_Input_Left:
     ld      a, (PlayerInput)
     or      INPUT_LEFT
@@ -261,6 +270,10 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_RIGHT
     call    z, Player_Input_Right
+
+    ld      a, (PlayerInput)
+    cp      INPUT_DOWN
+    call    z, Player_Input_Down
 
     ld      a, (PlayerInput)
     cp      INPUT_LOW_KICK

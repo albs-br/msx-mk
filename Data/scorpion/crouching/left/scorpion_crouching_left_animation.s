@@ -3,6 +3,10 @@ Scorpion_Crouching_Left_Animation_Headers:
 	dw Scorpion_Crouching_Left_Frame_1_Header, Scorpion_Crouching_Left_Frame_1_Header, Scorpion_Crouching_Left_Frame_1_Header
 	dw Scorpion_Crouching_Left_Frame_2_Header, Scorpion_Crouching_Left_Frame_2_Header, Scorpion_Crouching_Left_Frame_2_Header
 
+    ; DEBUG PROVISORY !
+	dw 0x0100 ; end of data (end animation)
+
+
     ; frame headers are all stored on MegaROM pages at address 0x8000, 
     ; so the high byte will never be 0x00 or 0x01
 
