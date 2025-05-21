@@ -189,17 +189,11 @@ ReadInput:
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
 
-
-
     xor     a
     ld      (ix + Player_Struct.IsBlocking), a
 
-    ; xor     a
-    ; ld      (ix + Player_Struct.IsAnimating), a
-
-    ; call    Player_SetPosition_Stance
-    
     ret
+
 ; -----------------
 
 .player_Input_Up:

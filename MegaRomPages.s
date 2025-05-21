@@ -177,6 +177,6 @@ MEGAROM_PAGE_SCORPION_CROUCHING_LEFT_DATA_0: equ 11
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frames_0_to_2_list.s"
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frames_0_to_2_list.s"
 
-MegaRom_Page_11_size: equ $ - 0x8000 ; 0x2f2a
+MegaRom_Page_11_size: equ $ - 0x8000 ; 0x22c3 = 8899       ;  16384-8899 = 7.485
 
 	ds PageSize - ($ - 0x8000), 255
