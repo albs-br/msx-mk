@@ -306,6 +306,8 @@ Player_SetPosition_Stance:
     ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = false
 
     ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = false
+    
+    ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = false
 
     ; --- get addr of animation
     ld      bc, POSITION.STANCE
@@ -313,7 +315,6 @@ Player_SetPosition_Stance:
 
     ; --- set animation
     ld      a, POSITION.STANCE
-    ; ld      hl, Subzero_Stance_Right_Animation_Headers
     call    Player_SetAnimation
 
 
@@ -326,9 +327,10 @@ Player_SetPosition_Stance:
 
 Player_Input_Up:
 
-    ; Player.IsGrounded = false
+    
     xor     a
-    ld      (ix + Player_Struct.IsGrounded), a
+    ld      (ix + Player_Struct.IsGrounded), a  ; Player.IsGrounded = false
+    ; ld      (ix + Player_Struct.IsCrouching), a ; Player.IsCrouching = false
 
     ; --- get addr of animation
     ld      bc, POSITION.JUMPING_UP
@@ -471,6 +473,11 @@ Player_Input_HighKick:
 
 Player_Input_Down:
 
+    ; if (player.IsCrouching) ret
+    ld      a, (ix + Player_Struct.IsCrouching)
+    or      a
+    ret     nz
+
     ; if (player.Position != STANCE) ret
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
@@ -478,7 +485,9 @@ Player_Input_Down:
 
     ; Player.IsAnimating = true
     ld      a, 1
-    ld      (ix + Player_Struct.IsAnimating), a
+    ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = true
+
+    ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = true
 
     ; ; Player.IsGrounded = false
     ; xor     a

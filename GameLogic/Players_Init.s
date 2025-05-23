@@ -129,6 +129,7 @@ Player_Init:
     xor     a
     ld      (ix + Player_Struct.IsAnimating), a ; Player.IsAnimating = false
     ld      (ix + Player_Struct.IsBlocking), a  ; Player.IsBlocking = false
+    ld      (ix + Player_Struct.IsCrouching), a  ; Player.IsCrouching = false
 
     ld      (ix + Player_Struct.Animation_Current_Frame_Number), a ; Player.Animation_Current_Frame_Number = 0
 

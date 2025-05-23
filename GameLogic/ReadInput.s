@@ -54,7 +54,12 @@ ReadInput:
     ld      (PlayerInput), a
     ld      (PlayerInput_Block), a
 
-    ; if (Player.IsBlocking) .skipCheck_P1_Direction_Keys
+    ; if (Player.IsCrouching) .check_P1_Down_Released
+    ld      a, (ix + Player_Struct.IsCrouching)
+    or      a
+    jp      nz, .check_P1_Down_Released
+
+    ; if (Player.IsBlocking) .check_P1_Block_Released
     ld      a, (ix + Player_Struct.IsBlocking)
     or      a
     jp      nz, .check_P1_Block_Released
@@ -173,6 +178,29 @@ ReadInput:
 
 ; ----------
 
+.check_P1_Down_Released:
+
+    ld      a, (SNSMAT_Line_5)
+    bit     0, a                    ; 0th bit (key S)
+    call    nz, .releaseDown_P1
+
+    jp      .skipCheck_P1_Direction_Keys
+
+.releaseDown_P1:
+
+    ld      hl, Scorpion_Crouching_Left_Animation_Headers.RELEASE_CROUCHING_ANIMATION_HEADERS_ADDR
+
+    ; save new frame
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+    xor     a
+    ld      (ix + Player_Struct.IsCrouching), a
+
+    ret
+
+; ----------
+
 .check_P1_Block_Released:
 
     ld      a, (SNSMAT_Line_3)
@@ -245,9 +273,19 @@ ReadInput:
 
 .executePlayerInput:
 
+    ; ld      a, (PlayerInput)
+    ; cp      INPUT_UP OR INPUT_DOWN
+    ; jp      z, .ignoreUpAndDown
+
     ld      a, (PlayerInput)
     cp      INPUT_UP
     call    z, Player_Input_Up
+
+    ld      a, (PlayerInput)
+    cp      INPUT_DOWN
+    call    z, Player_Input_Down
+
+; .ignoreUpAndDown:
 
     ld      a, (PlayerInput)
     cp      INPUT_UP_RIGHT
@@ -264,10 +302,6 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_RIGHT
     call    z, Player_Input_Right
-
-    ld      a, (PlayerInput)
-    cp      INPUT_DOWN
-    call    z, Player_Input_Down
 
     ld      a, (PlayerInput)
     cp      INPUT_LOW_KICK
