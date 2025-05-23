@@ -28,6 +28,8 @@ ram_watch   add     0xc012      -type byte      -desc P1_Y     -format dec
 ram_watch   add     0xc02d      -type byte      -desc P1_Position     -format dec
 ram_watch   add     0xc030      -type byte      -desc P1_IsBlocking   -format dec
 ram_watch   add     0xc031      -type byte      -desc P1_IsCrouching  -format dec
+ram_watch   add     0xc02f      -type byte      -desc P1_IsAnimating  -format dec
+
 
 
 

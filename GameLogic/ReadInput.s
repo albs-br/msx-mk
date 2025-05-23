@@ -54,20 +54,6 @@ ReadInput:
     ld      (PlayerInput), a
     ld      (PlayerInput_Block), a
 
-    ; if (Player.IsCrouching) .check_P1_Down_Released
-    ld      a, (ix + Player_Struct.IsCrouching)
-    or      a
-    jp      nz, .check_P1_Down_Released
-
-    ; if (Player.IsBlocking) .check_P1_Block_Released
-    ld      a, (ix + Player_Struct.IsBlocking)
-    or      a
-    jp      nz, .check_P1_Block_Released
-
-    ; if (!Player.IsGrounded) .skipCheck_P1_Direction_Keys
-    ld      a, (ix + Player_Struct.IsGrounded)
-    or      a
-    jp      z, .skipCheck_P1_Direction_Keys
 
 
 
@@ -75,11 +61,17 @@ ReadInput:
     bit     6, a                    ; 6th bit (key A)
     call    z, .player_Input_Left
     
-    ; TODO: no need to check right if left was pressed
-
     ld      a, (SNSMAT_Line_3)
     bit     1, a                    ; 1st bit (key D)
     call    z, .player_Input_Right
+
+    ; if Left and Right are pressed, cancel both
+    ld      a, (PlayerInput)
+    and     INPUT_LEFT OR INPUT_RIGHT      ; keep just Left and Right bits
+    cp      INPUT_LEFT OR INPUT_RIGHT
+    call    z, .resetLeftAndRightBits
+
+
 
     ld      a, (SNSMAT_Line_5)
     bit     4, a                    ; 4th bit (key W)
@@ -89,6 +81,11 @@ ReadInput:
     bit     0, a                    ; 0th bit (key S)
     call    z, .player_Input_Down
 
+    ; if Up and Down are pressed, cancel both
+    ld      a, (PlayerInput)
+    and     INPUT_UP OR INPUT_DOWN      ; keep just Up and Down bits
+    cp      INPUT_UP OR INPUT_DOWN
+    call    z, .resetUpAndDownBits
 
     
     ; ----- action buttons here
@@ -107,15 +104,29 @@ ReadInput:
 
 
 
+    ; if (Player.IsCrouching) .check_P1_Down_Released
+    ld      a, (ix + Player_Struct.IsCrouching)
+    or      a
+    jp      nz, .check_P1_Down_Released
 
+    ; if (Player.IsBlocking) .check_P1_Block_Released
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    jp      nz, .check_P1_Block_Released
 
+    ; if (!Player.IsGrounded) .skipCheck_P1_Keys
+    ld      a, (ix + Player_Struct.IsGrounded)
+    or      a
+    jp      z, .skipCheck_P1_Keys
+
+;.cont_1:
 
     call    .executePlayerInput
 
 
 
 
-.skipCheck_P1_Direction_Keys:
+.skipCheck_P1_Keys:
 
 
 
@@ -184,7 +195,7 @@ ReadInput:
     bit     0, a                    ; 0th bit (key S)
     call    nz, .releaseDown_P1
 
-    jp      .skipCheck_P1_Direction_Keys
+    jp      .skipCheck_P1_Keys
 
 .releaseDown_P1:
 
@@ -207,7 +218,7 @@ ReadInput:
     bit     2, a                    ; 2nd bit (key E)
     call    nz, .releaseBlock_P1
 
-    jp      .skipCheck_P1_Direction_Keys
+    jp      .skipCheck_P1_Keys
 
 .releaseBlock_P1:
 
@@ -236,6 +247,12 @@ ReadInput:
     ld      (PlayerInput), a
     ret
 
+.resetUpAndDownBits:
+    ld      a, (PlayerInput)
+    and     0011 1111 b ; NOT (INPUT_UP OR INPUT_DOWN) ; don't work
+    ld      (PlayerInput), a
+    ret
+
 .player_Input_Left:
     ld      a, (PlayerInput)
     or      INPUT_LEFT
@@ -245,6 +262,12 @@ ReadInput:
 .player_Input_Right:
     ld      a, (PlayerInput)
     or      INPUT_RIGHT
+    ld      (PlayerInput), a
+    ret
+
+.resetLeftAndRightBits:
+    ld      a, (PlayerInput)
+    and     1100 1111 b ; NOT (INPUT_LEFT OR INPUT_RIGHT) ; don't work
     ld      (PlayerInput), a
     ret
 
@@ -272,10 +295,6 @@ ReadInput:
 ; --------------------------------------------------------------
 
 .executePlayerInput:
-
-    ; ld      a, (PlayerInput)
-    ; cp      INPUT_UP OR INPUT_DOWN
-    ; jp      z, .ignoreUpAndDown
 
     ld      a, (PlayerInput)
     cp      INPUT_UP
