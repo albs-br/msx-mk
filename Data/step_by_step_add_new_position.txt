@@ -10,7 +10,7 @@
     e.g.    (file: Data\subzero\subzero_all_animations.s)    
             dw      Subzero_Jumping_Backwards_Right_Animation_Headers   ; POSITION.JUMPING_BACKWARDS = 10
 
-- include headers on MEGAROM_PAGE_FRAME_HEADERS (file MegaROM.s)
+- include headers on MEGAROM_PAGE_FRAME_HEADERS (file MegaRomPages.s)
     e.g.     INCLUDE "Data/subzero/jumping-forward/right/subzero_jumping_forward_right_frame_headers.s"
 
 - create a new Megarom page (also on file MegaROM.s) to put data and list files (data always come first)

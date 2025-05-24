@@ -12,6 +12,7 @@ Scorpion_All_Animations_Left:
     dw      Scorpion_High_Kick_Left_Animation_Headers
     dw      Scorpion_Block_Left_Animation_Headers
     dw      Scorpion_Crouching_Left_Animation_Headers
+    dw      Scorpion_Crouching_Block_Left_Animation_Headers
 
 Scorpion_All_Animations_Right:
 
@@ -25,3 +26,4 @@ Scorpion_All_Animations_Right:
     dw      0 ; Scorpion_High_Kick_Right_Animation_Headers           ; POSITION.HIGH_KICK = 14
     dw      0 ; Scorpion_Block_Right_Animation_Headers               ; POSITION.BLOCK = 16
     dw      0 ; Scorpion_Crouching_Right_Animation_Headers           ; POSITION.CROUCHING = 18
+    dw      0 ; Scorpion_Crouching_Block_Right_Animation_Headers     ; POSITION.CROUCHING_BLOCK = 20

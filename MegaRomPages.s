@@ -30,6 +30,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/kick/left/scorpion_kick_left_frame_headers.s"
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frame_headers.s"
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frame_headers.s"
+    INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -40,6 +41,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     ; INCLUDE "Data/subzero/kick/right/subzero_kick_right_frame_headers.s"
     ; INCLUDE "Data/subzero/block/right/subzero_block_right_frame_headers.s"
     ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_frame_headers.s"
+    ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
 
@@ -164,6 +166,7 @@ MegaRom_Page_10_size: equ $ - 0x8000 ; 0x27c7
 
 MEGAROM_PAGE_SCORPION_BLOCK_LEFT_DATA_0: equ 11
 MEGAROM_PAGE_SCORPION_CROUCHING_LEFT_DATA_0: equ 11
+MEGAROM_PAGE_SCORPION_CROUCHING_BLOCK_LEFT_DATA_0: equ 11
 
 
 	org	0x8000, 0xBFFF
@@ -172,11 +175,18 @@ MEGAROM_PAGE_SCORPION_CROUCHING_LEFT_DATA_0: equ 11
 
 	INCLUDE "Data/scorpion/block/left/scorpion_block_left_frames_0_to_2_data.s"
 	INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frames_0_to_2_data.s"
+	INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frames_0_to_0_data.s"
 
+data_size: equ $ - 0x8000 ; 0x1a84
+
+list_start:
     ; ------------ List ---------------
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frames_0_to_2_list.s"
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frames_0_to_2_list.s"
+    INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frames_0_to_0_list.s"
+list_size: equ $ - list_start ; 0x0d53
 
-MegaRom_Page_11_size: equ $ - 0x8000 ; 0x22c3 = 8899       ;  16384-8899 = 7.485
+
+MegaRom_Page_11_size: equ $ - 0x8000 ; 0x27d7 = ?       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255

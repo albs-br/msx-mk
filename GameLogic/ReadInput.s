@@ -37,8 +37,16 @@ ReadInput:
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_8), a
 
+    ; Common moves that everybody shares:
 
+    ; Uppercut: Down+High Punch
 
+    ; Sweep Kick: Back+Low Kick
+
+    ; Roundhouse: Back+High Kick
+
+    ; Throw opponent: Must be up close to enemy, hold Forward and Press Low Kick
+ 
     ; ------------------------ read keyboard for player 1 ------------------------
 
     ; WASD: walk/jump/crouch
