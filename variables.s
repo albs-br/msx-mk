@@ -171,11 +171,13 @@ POSITION:
 
 
 OldSP:              rw 1
-; Last_NAMTBL_Addr:   rw 1
+
 
 ; --- ReadInput temp vars:
-PlayerInput:        rb 1
-PlayerInput_Block:  rb 1
+TempVars:
+    .PlayerInput:        rb 1
+    .PlayerInput_Block:  rb 1
+    
 SNSMAT_Line_2:      rb 1
 SNSMAT_Line_3:      rb 1
 SNSMAT_Line_5:      rb 1

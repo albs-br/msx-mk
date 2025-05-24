@@ -72,7 +72,7 @@ Player_Logic:
     ld      a, (ix + Player_Struct.Side)
     cp      SIDE.LEFT
     jp      z, .jumping_Decrease_X
-    jp      .jumping_Increase_X ; TODO: not necessary
+    ; jp      .jumping_Increase_X
 
 .jumping_Increase_X:
 

@@ -59,8 +59,8 @@ ReadInput:
     ld      ix, Player_1_Vars
 
     xor     a
-    ld      (PlayerInput), a
-    ld      (PlayerInput_Block), a
+    ld      (TempVars.PlayerInput), a
+    ld      (TempVars.PlayerInput_Block), a
 
 
 
@@ -74,7 +74,7 @@ ReadInput:
     call    z, .player_Input_Right
 
     ; if Left and Right are pressed, cancel both
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     and     INPUT_LEFT OR INPUT_RIGHT      ; keep just Left and Right bits
     cp      INPUT_LEFT OR INPUT_RIGHT
     call    z, .resetLeftAndRightBits
@@ -90,7 +90,7 @@ ReadInput:
     call    z, .player_Input_Down
 
     ; if Up and Down are pressed, cancel both
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     and     INPUT_UP OR INPUT_DOWN      ; keep just Up and Down bits
     cp      INPUT_UP OR INPUT_DOWN
     call    z, .resetUpAndDownBits
@@ -151,8 +151,8 @@ ReadInput:
     ld      ix, Player_2_Vars
 
     xor     a
-    ld      (PlayerInput), a
-    ld      (PlayerInput_Block), a
+    ld      (TempVars.PlayerInput), a
+    ld      (TempVars.PlayerInput_Block), a
 
 
 
@@ -244,120 +244,120 @@ ReadInput:
 ; -----------------
 
 .player_Input_Up:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_UP
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .player_Input_Down:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_DOWN
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .resetUpAndDownBits:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     and     0011 1111 b ; NOT (INPUT_UP OR INPUT_DOWN) ; don't work
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .player_Input_Left:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_LEFT
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .player_Input_Right:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_RIGHT
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .resetLeftAndRightBits:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     and     1100 1111 b ; NOT (INPUT_LEFT OR INPUT_RIGHT) ; don't work
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 ; --------
 
 .player_Input_LowKick:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_LOW_KICK
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 .player_Input_HighKick:
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     or      INPUT_HIGH_KICK
-    ld      (PlayerInput), a
+    ld      (TempVars.PlayerInput), a
     ret
 
 ; --------
 
 .player_Input_Block:
     ld      a, 1
-    ld      (PlayerInput_Block), a
+    ld      (TempVars.PlayerInput_Block), a
     ret
 
 ; --------------------------------------------------------------
 
 .executePlayerInput:
 
-    ld      a, (PlayerInput)
-    cp      INPUT_UP
-    call    z, Player_Input_Up
-
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_DOWN
     call    z, Player_Input_Down
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_DOWN_LEFT
     call    z, Player_Input_Down
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_DOWN_RIGHT
     call    z, Player_Input_Down
 
-; .ignoreUpAndDown:
 
-    ld      a, (PlayerInput)
+
+    ld      a, (TempVars.PlayerInput)
+    cp      INPUT_UP
+    call    z, Player_Input_Up
+
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_UP_RIGHT
     call    z, Player_Input_Up_Right
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_UP_LEFT
     call    z, Player_Input_Up_Left
 
 
 
-    ld      a, (PlayerInput_Block) ; TODO: these two labels are very similar, rename one of them
+    ld      a, (TempVars.PlayerInput_Block)
     or      a
-    call    nz, Player_Input_Block ; TODO: these two labels are very similar, rename one of them
+    call    nz, Player_Input_Block
 
 
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_LEFT
     call    z, Player_Input_Left
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_RIGHT
     call    z, Player_Input_Right
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_LOW_KICK
     call    z, Player_Input_LowKick
 
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     cp      INPUT_HIGH_KICK
     call    z, Player_Input_HighKick
 
     ; if (!PlayerInput && !PlayerInput_Block) Player_SetPosition_Stance();
-    ld      a, (PlayerInput)
+    ld      a, (TempVars.PlayerInput)
     ld      b, a
-    ld      a, (PlayerInput_Block)
+    ld      a, (TempVars.PlayerInput_Block)
     or      b
     call    z, Player_SetPosition_Stance
     
