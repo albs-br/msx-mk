@@ -304,6 +304,14 @@ ReadInput:
     cp      INPUT_DOWN
     call    z, Player_Input_Down
 
+    ld      a, (PlayerInput)
+    cp      INPUT_DOWN_LEFT
+    call    z, Player_Input_Down
+
+    ld      a, (PlayerInput)
+    cp      INPUT_DOWN_RIGHT
+    call    z, Player_Input_Down
+
 ; .ignoreUpAndDown:
 
     ld      a, (PlayerInput)
@@ -313,6 +321,14 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_UP_LEFT
     call    z, Player_Input_Up_Left
+
+
+
+    ld      a, (PlayerInput_Block) ; TODO: these two labels are very similar, rename one of them
+    or      a
+    call    nz, Player_Input_Block ; TODO: these two labels are very similar, rename one of them
+
+
 
     ld      a, (PlayerInput)
     cp      INPUT_LEFT
@@ -329,10 +345,6 @@ ReadInput:
     ld      a, (PlayerInput)
     cp      INPUT_HIGH_KICK
     call    z, Player_Input_HighKick
-
-    ld      a, (PlayerInput_Block) ; TODO: these two labels are very similar, rename one of them
-    or      a
-    call    nz, Player_Input_Block ; TODO: these two labels are very similar, rename one of them
 
     ; if (!PlayerInput && !PlayerInput_Block) Player_SetPosition_Stance();
     ld      a, (PlayerInput)

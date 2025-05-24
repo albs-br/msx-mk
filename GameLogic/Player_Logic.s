@@ -304,9 +304,7 @@ Player_SetPosition_Stance:
     
     xor     a
     ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = false
-
     ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = false
-    
     ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = false
 
     ; --- get addr of animation
@@ -331,6 +329,7 @@ Player_Input_Up:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a  ; Player.IsGrounded = false
     ld      (ix + Player_Struct.IsAnimating), a ; Player.IsAnimating = false
+    ld      (ix + Player_Struct.IsBlocking), a  ; Player.IsBlocking = false
 
     ; --- get addr of animation
     ld      bc, POSITION.JUMPING_UP
@@ -347,6 +346,7 @@ Player_Input_Up_Right:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a  ; Player.IsGrounded = false
     ld      (ix + Player_Struct.IsAnimating), a ; Player.IsAnimating = false
+    ld      (ix + Player_Struct.IsBlocking), a  ; Player.IsBlocking = false
 
     ; if (side == right) position = JUMPING_BACKWARDS else JUMPING_FORWARD
     ld      a, (ix + Player_Struct.Side)
@@ -384,6 +384,7 @@ Player_Input_Up_Left:
     xor     a
     ld      (ix + Player_Struct.IsGrounded), a  ; Player.IsGrounded = false
     ld      (ix + Player_Struct.IsAnimating), a ; Player.IsAnimating = false
+    ld      (ix + Player_Struct.IsBlocking), a  ; Player.IsBlocking = false
 
     ; if (side == left) position = JUMPING_BACKWARDS else JUMPING_FORWARD
     ld      a, (ix + Player_Struct.Side)
