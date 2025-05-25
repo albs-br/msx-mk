@@ -124,7 +124,6 @@ BIOS_MINDEL: equ 0F92Dh ; last def. pass 3
 VDP_COMMAND_POINT: equ 040h ; last def. pass 3
 Scorpion_Stance_Left_Frame_2.List: equ 0A598h ; last def. pass 3
 BIOS_STREND: equ 0F6C6h ; last def. pass 3
-ReadInput.cont_3: equ 043BFh ; last def. pass 3
 VDP_LOGIC_OPERATION_TXOR: equ 0Bh ; last def. pass 3
 MegaRom_Page_2_size: equ 03886h ; last def. pass 3
 BIOS_ENASLT: equ 024h ; last def. pass 3

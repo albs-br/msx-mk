@@ -115,11 +115,10 @@ ReadInput:
     ; if (Player.IsCrouching && Player.IsBlocking) .check_P1_Down_Block_Released
     ld      a, (ix + Player_Struct.IsCrouching)
     or      a
-    jp      z, .cont_3
+    jp      z, .cont_10
     ld      a, (ix + Player_Struct.IsBlocking)
     or      a
     jp      nz, .check_P1_Down_Block_Released
-.cont_3:
 
 .cont_10:
 
@@ -240,8 +239,22 @@ ReadInput:
     ld      a, (SNSMAT_Line_3)
     bit     2, a                    ; 2nd bit (key E)
     call    nz, .releaseBlock_P1
+    ; call    nz, .releaseCouchingBlock_P1
 
-    jp      .cont_P1
+    jp      .cont_P1 ; .skipCheck_P1_Keys
+
+; .releaseCouchingBlock_P1:
+
+;     ld      hl, Scorpion_Crouching_Block_Left_Frame_0_Header
+
+;     ; save new frame
+;     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+;     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+;     xor     a
+;     ld      (ix + Player_Struct.IsBlocking), a
+
+;     ret
 
 ; ----------
 .check_P1_Block_Released:
