@@ -112,6 +112,17 @@ ReadInput:
 
 
 
+    ; if (Player.IsCrouching && Player.IsBlocking) .check_P1_Down_Block_Released
+    ld      a, (ix + Player_Struct.IsCrouching)
+    or      a
+    jp      z, .cont_3
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    jp      nz, .check_P1_Down_Block_Released
+.cont_3:
+
+.cont_10:
+
     ; if (Player.IsCrouching) .check_P1_Down_Released
     ld      a, (ix + Player_Struct.IsCrouching)
     or      a
@@ -127,7 +138,7 @@ ReadInput:
     or      a
     jp      z, .skipCheck_P1_Keys
 
-;.cont_1:
+.cont_P1:
 
     call    .executePlayerInput
 
@@ -203,7 +214,7 @@ ReadInput:
     bit     0, a                    ; 0th bit (key S)
     call    nz, .releaseDown_P1
 
-    jp      .skipCheck_P1_Keys
+    jp      .cont_P1 ; .skipCheck_P1_Keys
 
 .releaseDown_P1:
 
@@ -220,6 +231,19 @@ ReadInput:
 
 ; ----------
 
+.check_P1_Down_Block_Released:
+
+    ld      a, (SNSMAT_Line_5)
+    bit     0, a                    ; 0th bit (key S)
+    call    nz, .releaseDown_P1
+
+    ld      a, (SNSMAT_Line_3)
+    bit     2, a                    ; 2nd bit (key E)
+    call    nz, .releaseBlock_P1
+
+    jp      .cont_P1
+
+; ----------
 .check_P1_Block_Released:
 
     ld      a, (SNSMAT_Line_3)
@@ -304,17 +328,22 @@ ReadInput:
 
 .executePlayerInput:
 
+    ; if (PlayerInput == INPUT_DOWN/LEFT/RIGHT && PlayerInput_Block) Player_Input_Down_Block();
     ld      a, (TempVars.PlayerInput)
-    cp      INPUT_DOWN
-    call    z, Player_Input_Down
+    bit     6, a ; cp      INPUT_DOWN ; Z is set if specified bit is 0; otherwise, it is reset.
+    jp      z, .cont_2
+    ld      a, (TempVars.PlayerInput_Block)
+    or      a
+    call    nz, Player_Input_Down_Block
+.cont_2:
 
-    ld      a, (TempVars.PlayerInput)
-    cp      INPUT_DOWN_LEFT
-    call    z, Player_Input_Down
 
+    ; check only the bit 6 (INPUT_DOWN), so it also works with INPUT_DOWN_LEFT and INPUT_DOWN_RIGHT
     ld      a, (TempVars.PlayerInput)
-    cp      INPUT_DOWN_RIGHT
-    call    z, Player_Input_Down
+    bit     6, a ; cp      INPUT_DOWN ; Z is set if specified bit is 0; otherwise, it is reset.
+    call    nz, Player_Input_Down
+
+
 
 
 

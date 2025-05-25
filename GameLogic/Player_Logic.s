@@ -543,6 +543,40 @@ Player_Input_Block:
 
 
 
+Player_Input_Down_Block:
+
+    ; if (player.IsBlocking) ret
+    ld      a, (ix + Player_Struct.IsBlocking)
+    or      a
+    ret     nz
+
+    ; if (player.Position != CROUCHING) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.CROUCHING
+    ret     nz
+
+    
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = true
+    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = true
+    ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = true
+    ld      (ix + Player_Struct.IsGrounded), a      ; Player.IsGrounded = true
+
+
+    ; --- get addr of animation
+    ld      bc, POSITION.CROUCHING_BLOCK
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.CROUCHING_BLOCK
+    call    Player_SetAnimation
+
+
+
+    ret
+
+
+
 ; Inputs:
 ;   IX: Player Vars base addr
 ;   A:  Position (constant POSITION.?)
