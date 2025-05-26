@@ -119,7 +119,6 @@ ReadInput:
     ld      a, (ix + Player_Struct.IsBlocking)
     or      a
     jp      nz, .check_P1_Down_Block_Released
-
 .cont_10:
 
     ; if (Player.IsCrouching) .check_P1_Down_Released
@@ -217,11 +216,21 @@ ReadInput:
 
 .releaseDown_P1:
 
-    ld      hl, Scorpion_Crouching_Left_Animation_Headers.RELEASE_CROUCHING_ANIMATION_HEADERS_ADDR
 
+    ; --- go to the second part of Down animation (character standing up)
+
+    ; get the first animation frame and add n frames
+    ld      l, (ix + Player_Struct.Animation_FirstFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_FirstFrame_Header + 1)
+
+    ld      bc, RELEASE_CROUCHING_ANIMATION_HEADERS_ADDR_OFFSET
+    add     hl, bc
+    
     ; save new frame
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+
 
     xor     a
     ld      (ix + Player_Struct.IsCrouching), a
@@ -234,27 +243,39 @@ ReadInput:
 
     ld      a, (SNSMAT_Line_5)
     bit     0, a                    ; 0th bit (key S)
-    call    nz, .releaseDown_P1
+    call    nz, .releaseDownBlock_P1_DownReleased
 
     ld      a, (SNSMAT_Line_3)
     bit     2, a                    ; 2nd bit (key E)
-    call    nz, .releaseBlock_P1
-    ; call    nz, .releaseCouchingBlock_P1
+    call    nz, .releaseDownBlock_P1_BlockReleased
 
-    jp      .cont_P1 ; .skipCheck_P1_Keys
+    jp      .skipCheck_P1_Keys
 
-; .releaseCouchingBlock_P1:
+.releaseDownBlock_P1_DownReleased:
 
-;     ld      hl, Scorpion_Crouching_Block_Left_Frame_0_Header
+    call    Player_Input_Block.skipChecks
+    
+    ret
 
-;     ; save new frame
-;     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
-;     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+.releaseDownBlock_P1_BlockReleased:
 
-;     xor     a
-;     ld      (ix + Player_Struct.IsBlocking), a
+    call    Player_Input_Down.skipChecks
 
-;     ret
+    ; --- go to middle of Down animation (character stuck crouching)
+
+    ; get the first animation frame and add n frames
+    ld      l, (ix + Player_Struct.Animation_FirstFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_FirstFrame_Header + 1)
+
+    ld      bc, RELEASE_CROUCHING_ANIMATION_HEADERS_ADDR_OFFSET - 2 ; one addr before, to be stuck in the intermediate frame
+    add     hl, bc
+
+    ; save new frame
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
+    ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+    ret
+
 
 ; ----------
 .check_P1_Block_Released:
@@ -267,11 +288,20 @@ ReadInput:
 
 .releaseBlock_P1:
 
-    ld      hl, Scorpion_Block_Left_Animation_Headers.RELEASE_BLOCK_ANIMATION_HEADERS_ADDR
+    ; --- go to the second part of Block animation (character undoing block movement)
+
+    ; get the first animation frame and add n frames
+    ld      l, (ix + Player_Struct.Animation_FirstFrame_Header)
+    ld      h, (ix + Player_Struct.Animation_FirstFrame_Header + 1)
+
+    ld      bc, RELEASE_BLOCK_ANIMATION_HEADERS_ADDR_OFFSET
+    add     hl, bc
 
     ; save new frame
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header), l
     ld      (ix + Player_Struct.Animation_CurrentFrame_Header + 1), h
+
+
 
     xor     a
     ld      (ix + Player_Struct.IsBlocking), a

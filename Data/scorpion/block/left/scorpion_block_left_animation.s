@@ -9,10 +9,12 @@ Scorpion_Block_Left_Animation_Headers:
 	; dw 0x0100 ; end of data (end animation)
 
 	; dw 0x0000 ; end of data (loop animation, return to first frame)
-	
+
+; this constant is equal for all characters
+RELEASE_BLOCK_ANIMATION_HEADERS_ADDR_OFFSET: equ $ - Scorpion_Block_Left_Animation_Headers	
+
     dw 0x0200 ; end of data (stop animation, keeps the frame while key is pressed, for example during block)
 
-.RELEASE_BLOCK_ANIMATION_HEADERS_ADDR:
 
 	dw Scorpion_Block_Left_Frame_2_Header, Scorpion_Block_Left_Frame_2_Header, Scorpion_Block_Left_Frame_2_Header
 	dw Scorpion_Block_Left_Frame_1_Header, Scorpion_Block_Left_Frame_1_Header, Scorpion_Block_Left_Frame_1_Header

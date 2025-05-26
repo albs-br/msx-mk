@@ -29,11 +29,12 @@ ram_watch   add     0xc02d      -type byte      -desc P1_Position     -format de
 ram_watch   add     0xc030      -type byte      -desc P1_IsBlocking   -format dec
 ram_watch   add     0xc031      -type byte      -desc P1_IsCrouching  -format dec
 ram_watch   add     0xc02f      -type byte      -desc P1_IsAnimating  -format dec
+ram_watch   add     0xc02e      -type byte      -desc P1_IsGrounded     -format dec
 
 
 
 
-#ram_watch   add     0xc029      -type byte      -desc P1_IsGrounded     -format dec
+
 #ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
 
 #ram_watch   add     0xc015      -type byte      -desc P1_Hb_X     -format dec

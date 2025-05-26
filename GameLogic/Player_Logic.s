@@ -484,15 +484,15 @@ Player_Input_Down:
     cp      POSITION.STANCE
     ret     nz
 
-    ; Player.IsAnimating = true
+.skipChecks:
+
     ld      a, 1
     ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = true
-
     ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = true
+    ld      (ix + Player_Struct.IsGrounded), a      ; Player.IsGrounded = true
 
-    ; ; Player.IsGrounded = false
-    ; xor     a
-    ; ld      (ix + Player_Struct.IsGrounded), a
+    xor     a
+    ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = false
 
     ; --- get addr of animation
     ld      bc, POSITION.CROUCHING
@@ -519,15 +519,15 @@ Player_Input_Block:
     cp      POSITION.STANCE
     ret     nz
 
-    
+.skipChecks:
+
     ld      a, 1
     ld      (ix + Player_Struct.IsAnimating), a     ; Player.IsAnimating = true
-
     ld      (ix + Player_Struct.IsBlocking), a      ; Player.IsBlocking = true
+    ld      (ix + Player_Struct.IsGrounded), a      ; Player.IsGrounded = true
 
-    ; ; Player.IsGrounded = true
-    ; ; ld      a, 1
-    ; ld      (ix + Player_Struct.IsGrounded), a
+    xor     a
+    ld      (ix + Player_Struct.IsCrouching), a     ; Player.IsCrouching = false
 
     ; --- get addr of animation
     ld      bc, POSITION.BLOCK
