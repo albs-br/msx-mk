@@ -24,3 +24,13 @@ FrameHeader_Struct:
     .Height:                equ 3   ; byte
     .MegaRomPage:           equ 4   ; byte
     .FirstFrameList_Addr:   equ 5   ; word
+; TODO:
+    ; .HurtBox_X              equ 7   ; byte
+    ; .HurtBox_Y              equ 8   ; byte
+    ; .HurtBox_Width          equ 9   ; byte
+    ; .HurtBox_Height         equ 10  ; byte
+
+    ; .HitBox_X               equ 11  ; byte
+    ; .HitBox_Y               equ 12  ; byte
+    ; .HitBox_Width           equ 13  ; byte
+    ; .HitBox_Height          equ 14  ; byte
