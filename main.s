@@ -103,6 +103,11 @@ Execute:
     ld      bc, Restore_BG_HMMM_Parameters_size
     ldir
 
+    ; ld      hl, LINE_Parameters
+    ; ld      de, TripleBuffer_Vars_LINE_Command
+    ; ld      bc, LINE_Parameters_size
+    ; ldir
+
     xor     a
     ld      (TripleBuffer_Vars.Step), a
 
@@ -390,16 +395,28 @@ Palette:
 ; --------------------------------------------------------
 
 Restore_BG_HMMM_Parameters:
-.Source_X:   dw    0 	    ; Source X (9 bits)
-.Source_Y:   dw    0        ; Source Y (10 bits)
-.Destiny_X:  dw    0 	    ; Destiny X (9 bits)
-.Destiny_Y:  dw    0 	    ; Destiny Y (10 bits)
-.Cols:       dw    0        ; number of cols (9 bits)
-.Lines:      dw    0        ; number of lines (10 bits)
-.NotUsed:    db    0
-.Options:    db    0        ; select destination memory and direction from base coordinate
-.Command:    db    VDP_COMMAND_HMMM
+    .Source_X:   dw    0 	    ; Source X (9 bits)
+    .Source_Y:   dw    0        ; Source Y (10 bits)
+    .Destiny_X:  dw    0 	    ; Destiny X (9 bits)
+    .Destiny_Y:  dw    0 	    ; Destiny Y (10 bits)
+    .Cols:       dw    0        ; number of cols (9 bits)
+    .Lines:      dw    0        ; number of lines (10 bits)
+    .NotUsed:    db    0
+    .Options:    db    0        ; select destination memory and direction from base coordinate
+    .Command:    db    VDP_COMMAND_HMMM
 Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
+
+
+
+; LINE_Parameters:
+;     .Start_X:    dw    0      ; Starting point X (9 bits)
+;     .Start_Y:    dw    0      ; Starting point Y (10 bits)
+;     .Cols:       dw    0      ; number of cols (9 bits)
+;     .Lines:      dw    0      ; number of lines (10 bits)
+;     .Color:      db   15      ; 4 bits (G4, G5), 2 bits (G6), 8 bits (G7)
+;     .Options:    db    0      ; select destination memory and direction from base coordinate
+;     .Command:    db    VDP_COMMAND_LINE
+; LINE_Parameters_size: equ $ - LINE_Parameters
 
 ; ----------------------------------------------------------
 

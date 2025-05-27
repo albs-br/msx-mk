@@ -27,6 +27,17 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
     .Command:    rb 1
 
 
+; TripleBuffer_Vars_LINE_Command:
+;     .Source_X:   rw 1
+;     .Source_Y:   rw 1
+;     .Destiny_X:  rw 1
+;     .Destiny_Y:  rw 1
+;     .Cols:       rw 1
+;     .Lines:      rw 1
+;     .NotUsed:    rb 1
+;     .Options:    rb 1
+;     .Command:    rb 1
+
 ; ----------------------------
 
 Object_Struct:

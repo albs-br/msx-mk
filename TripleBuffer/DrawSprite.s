@@ -158,6 +158,37 @@ DrawSprite:
         ld  sp, (OldSP)
     ei
 
+
+    ; ; --- debug
+    ; ; -------------- draw HurtBox
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_X)
+    ; ld      (TripleBuffer_Vars_LINE_Command), hl
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_Y)
+    ; ld      (TripleBuffer_Vars_LINE_Command + 2), hl
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_Width)
+    ; ld      (TripleBuffer_Vars_LINE_Command + 4), hl
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_Height)
+    ; ld      hl, 80
+    ; ld      (TripleBuffer_Vars_LINE_Command + 6), hl
+
+    ; ; ld      a, 7 ; color
+    ; ; ld      (TripleBuffer_Vars_LINE_Command + 8), a
+
+    ; ld      hl, TripleBuffer_Vars_LINE_Command
+    ; call    Execute_VDP_LINE
+
+
+
+
+
     ; --------- Update RestoreBG vars
 
     ; --- RestoreBG_1 = RestoreBG_0
