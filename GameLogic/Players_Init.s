@@ -88,6 +88,19 @@ Player_Init:
 
 
 
+    ld      a, 255
+
+    ld      (ix + Player_Struct.HurtBox_X), a
+    ld      (ix + Player_Struct.HurtBox_Y), a
+    ld      (ix + Player_Struct.HurtBox_Width), a
+    ld      (ix + Player_Struct.HurtBox_Height), a
+
+    ld      (ix + Player_Struct.HitBox_X), a
+    ld      (ix + Player_Struct.HitBox_Y), a
+    ld      (ix + Player_Struct.HitBox_Width), a
+    ld      (ix + Player_Struct.HitBox_Height), a
+
+
     ; ld      ix, Player_1_Vars
     call    Update_VRAM_NAMTBL_Addr
     ; ld      hl, 0 + ((64 - (58/2))/2) + (128*100) ; column number 64 - (58/2); line number 100

@@ -42,6 +42,29 @@ DrawSprite:
 
 
 
+    ; ----get hit box parameters from frame header and save to player vars
+    
+    ; if (FrameHeader_Struct.HitBox_X != 255) Player_Struct.HitBox_X = Player_Struct.X + FrameHeader_Struct.HitBox_X;
+    ld      a, (iy + FrameHeader_Struct.HitBox_X)
+    cp      255
+    jp      z, .ignoreHitBox
+.DEBUG_Hitbox:
+    add     (ix + Player_Struct.X)
+    ld      (ix + Player_Struct.HitBox_X), a
+
+
+    ; TODO
+    jp      .cont_2
+
+.ignoreHitBox:
+    ld      a, 255
+    ld      (ix + Player_Struct.HitBox_X), a
+    ld      (ix + Player_Struct.HitBox_Y), a
+    ld      (ix + Player_Struct.HitBox_Width), a
+    ld      (ix + Player_Struct.HitBox_Height), a
+
+.cont_2:
+
     ; this check needs to be done because of the new width (it's not necessary for left screen boundary)
     ; ----- check screen right limit
     ; if (x >= (255-width)) x = 255 - width
