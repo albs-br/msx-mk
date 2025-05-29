@@ -32,6 +32,9 @@ ram_watch   add     0xc02f      -type byte      -desc P1_IsAnimating  -format de
 ram_watch   add     0xc02e      -type byte      -desc P1_IsGrounded     -format dec
 
 ram_watch   add     0xc019      -type byte      -desc P1_HitB_X     -format dec
+ram_watch   add     0xc01a      -type byte      -desc P1_HitB_Y     -format dec
+ram_watch   add     0xc01b      -type byte      -desc P1_HitB_Width  -format dec
+ram_watch   add     0xc01c      -type byte      -desc P1_HitB_Height -format dec
 
 
 

@@ -48,12 +48,24 @@ DrawSprite:
     ld      a, (iy + FrameHeader_Struct.HitBox_X)
     cp      255
     jp      z, .ignoreHitBox
-.DEBUG_Hitbox:
     add     (ix + Player_Struct.X)
     ld      (ix + Player_Struct.HitBox_X), a
 
 
-    ; TODO
+    ; Player_Struct.HitBox_Y = Player_Struct.Y + FrameHeader_Struct.HitBox_Y;
+    ld      a, (iy + FrameHeader_Struct.HitBox_Y)
+    add     (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.HitBox_Y), a
+
+    ; Player_Struct.HitBox_Width = FrameHeader_Struct.HitBox_Width;
+    ld      a, (iy + FrameHeader_Struct.HitBox_Width)
+    ld      (ix + Player_Struct.HitBox_Width), a
+
+    ; Player_Struct.HitBox_Height = FrameHeader_Struct.HitBox_Height;
+    ld      a, (iy + FrameHeader_Struct.HitBox_Height)
+    ld      (ix + Player_Struct.HitBox_Height), a
+
+
     jp      .cont_2
 
 .ignoreHitBox:
