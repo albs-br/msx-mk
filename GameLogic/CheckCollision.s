@@ -1,4 +1,4 @@
-CheckCollision:
+CheckCollision_Hurtboxes:
     push    ix, iy
         ld      ix, Player_1_Vars.HurtBox
         ld      iy, Player_2_Vars.HurtBox
@@ -8,6 +8,100 @@ CheckCollision:
 
     .collision:
 
+        call    PushPlayersApart
+
+    .return:
+    
+        ld      ix, Player_1_Vars
+        call    UpdateHurtbox
+        call    Update_VRAM_NAMTBL_Addr
+
+        ld      ix, Player_2_Vars
+        call    UpdateHurtbox
+        call    Update_VRAM_NAMTBL_Addr
+
+    pop     iy, ix
+
+    ret
+
+
+
+;  Calculates whether a collision occurs between two objects
+; IN: 
+;   IX: addr of object 1 (format: X, Y, width, height)
+;   IY: addr of object 2 (format: X, Y, width, height)
+; OUT: Carry set if collision
+; CHANGES: AF
+CheckCollision_Obj1xObj2:
+
+        ld      a, (iy + Object_Struct.X)   ; get x2
+        sub     (ix + Object_Struct.X)      ; calculate x2 - x1
+        jr      c, .x1IsLarger              ; jump if x2 < x1
+        sub     (ix + Object_Struct.Width)  ; compare with width 1
+        ret     nc                          ; return if no collision
+        jp      .checkVerticalCollision
+.x1IsLarger:
+        neg                                 ; use negative value (Z80)
+        ; emulate neg instruction (Gameboy)
+        ; ld      b, a
+        ; xor     a                           ; same as ld a, 0
+        ; sub     a, b
+    
+        sub     (iy + Object_Struct.Width)  ; compare with width 2
+        ret     nc                          ; return if no collision
+
+.checkVerticalCollision:
+        ld      a, (iy + Object_Struct.Y)   ; get y2
+        sub     (ix + Object_Struct.Y)      ; calculate y2 - y1
+        jr      c, .y1IsLarger              ; jump if y2 < y1
+        sub     (ix + Object_Struct.Height) ; compare with height 1
+        ret                                 ; return collision or no collision
+.y1IsLarger:
+        neg                                 ; use negative value (Z80)
+        ; emulate neg instruction (Gameboy)
+        ; ld      c, a
+        ; xor     a                           ; same as ld a, 0
+        ; sub     a, c
+    
+        sub     (iy + Object_Struct.Height) ; compare with height 2
+        ret                                 ; return collision or no collision
+
+
+
+CheckCollision_Hitboxes:
+    
+    ; ---- Player 1 Hitbox x Player 2 Hurtbox
+    push    ix, iy
+        ld      ix, Player_1_Vars.HitBox
+        ld      iy, Player_2_Vars.HurtBox
+        call    CheckCollision_Obj1xObj2
+        jp      c, .collision
+        jp      .return
+
+    .collision:
+
+jp$;debug
+
+        call    PushPlayersApart
+
+    .return:
+    
+        ld      ix, Player_1_Vars
+        call    UpdateHurtbox
+        call    Update_VRAM_NAMTBL_Addr
+
+        ld      ix, Player_2_Vars
+        call    UpdateHurtbox
+        call    Update_VRAM_NAMTBL_Addr
+
+    pop     iy, ix
+
+    ret
+
+
+
+
+PushPlayersApart:
         ld      ix, Player_1_Vars
         ld      iy, Player_2_Vars
 
@@ -64,62 +158,15 @@ CheckCollision:
     
     .return:
     
-        ld      ix, Player_1_Vars
-        call    UpdateHurtbox
-        call    Update_VRAM_NAMTBL_Addr
+        ; ld      ix, Player_1_Vars
+        ; call    UpdateHurtbox
+        ; call    Update_VRAM_NAMTBL_Addr
 
-        ld      ix, Player_2_Vars
-        call    UpdateHurtbox
-        call    Update_VRAM_NAMTBL_Addr
-
-    pop     iy, ix
-    
+        ; ld      ix, Player_2_Vars
+        ; call    UpdateHurtbox
+        ; call    Update_VRAM_NAMTBL_Addr
 
     ret
-
-
-
-;  Calculates whether a collision occurs between two objects
-; IN: 
-;   IX: addr of object 1 (format: X, Y, width, height)
-;   IY: addr of object 2 (format: X, Y, width, height)
-; OUT: Carry set if collision
-; CHANGES: AF
-CheckCollision_Obj1xObj2:
-
-        ld      a, (iy + Object_Struct.X)   ; get x2
-        sub     (ix + Object_Struct.X)      ; calculate x2 - x1
-        jr      c, .x1IsLarger              ; jump if x2 < x1
-        sub     (ix + Object_Struct.Width)  ; compare with width 1
-        ret     nc                          ; return if no collision
-        jp      .checkVerticalCollision
-.x1IsLarger:
-        neg                                 ; use negative value (Z80)
-        ; emulate neg instruction (Gameboy)
-        ; ld      b, a
-        ; xor     a                           ; same as ld a, 0
-        ; sub     a, b
-    
-        sub     (iy + Object_Struct.Width)  ; compare with width 2
-        ret     nc                          ; return if no collision
-
-.checkVerticalCollision:
-        ld      a, (iy + Object_Struct.Y)   ; get y2
-        sub     (ix + Object_Struct.Y)      ; calculate y2 - y1
-        jr      c, .y1IsLarger              ; jump if y2 < y1
-        sub     (ix + Object_Struct.Height) ; compare with height 1
-        ret                                 ; return collision or no collision
-.y1IsLarger:
-        neg                                 ; use negative value (Z80)
-        ; emulate neg instruction (Gameboy)
-        ; ld      c, a
-        ; xor     a                           ; same as ld a, 0
-        ; sub     a, c
-    
-        sub     (iy + Object_Struct.Height) ; compare with height 2
-        ret                                 ; return collision or no collision
-
-
 
 ; ;  Calculates whether a collision occurs between Player 1 and 2
 ; ; IN: 
@@ -167,4 +214,5 @@ CheckCollision_Obj1xObj2:
     
 ;         sub     (iy + Player_Struct.Height) ; compare with height 2
 ;         ret                                 ; return collision or no collision
+
 

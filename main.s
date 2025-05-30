@@ -158,7 +158,8 @@ Triple_Buffer_Loop:
     ld      ix, Player_2_Vars
     call    Player_Logic
 
-    call    CheckCollision
+    call    CheckCollision_Hurtboxes
+    call    CheckCollision_Hitboxes
     
     ; -------
 
