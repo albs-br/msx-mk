@@ -81,6 +81,13 @@ CheckCollision_Hitboxes:
     .collision:
 
 jp$;debug
+        ; ld      bc, POSITION.HURT_1
+        ; call    GetAnimationAddr
+
+        ; ld      a, POSITION.HURT_1
+        ; call    Player_SetAnimation
+
+
 
         call    PushPlayersApart
 
