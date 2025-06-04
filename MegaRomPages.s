@@ -31,6 +31,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/block/left/scorpion_block_left_frame_headers.s"
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frame_headers.s"
     INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frame_headers.s"
+    ; INCLUDE "Data/scorpion/hurt-1/left/scorpion_hurt_1_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -42,8 +43,9 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     ; INCLUDE "Data/subzero/block/right/subzero_block_right_frame_headers.s"
     ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_frame_headers.s"
     ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_frame_headers.s"
+    INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frame_headers.s"
 
-MegaRom_Page_2_size: equ $ - 0x8000 ; 0x37ec
+MegaRom_Page_2_size: equ $ - 0x8000 ; 0x3b12
 
 	ds PageSize - ($ - 0x8000), 255
 
@@ -188,5 +190,24 @@ list_size: equ $ - list_start ; 0x0d53
 
 
 MegaRom_Page_11_size: equ $ - 0x8000 ; 0x27d7 = ?       ;  16384 - ? = ?
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 12 -------------------------------------------------
+
+MEGAROM_PAGE_SUBZERO_HURT_1_RIGHT_DATA_0: equ 12
+
+
+	org	0x8000, 0xBFFF
+
+    ; ------------ Data ---------------
+	INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_data.s"
+
+
+    ; ------------ List ---------------
+    INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_list.s"
+
+
+MegaRom_Page_12_size: equ $ - 0x8000 ; 0x? = ?       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255

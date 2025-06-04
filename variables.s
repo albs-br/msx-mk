@@ -183,7 +183,8 @@ POSITION:
     .BLOCK:                 equ 16
     .CROUCHING:             equ 18
     .CROUCHING_BLOCK:       equ 20
-
+    .HURT_1:                equ 22
+    
 ; ----------------------------
 
 

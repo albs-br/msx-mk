@@ -1,0 +1,6 @@
+Subzero_Hurt_1_Right_Animation_Headers:
+	dw Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header
+	dw Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header
+	dw Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header
+	dw Subzero_Hurt_1_Right_Frame_3_Header, Subzero_Hurt_1_Right_Frame_3_Header, Subzero_Hurt_1_Right_Frame_3_Header
+	dw 0x0000 ; end of data
