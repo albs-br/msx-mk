@@ -1,13 +1,13 @@
 Subzero_Hurt_1_Right_Animation_Headers:
-	dw Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header
-	dw Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header
-	dw Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header
+	dw Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header
+	dw Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header
+	dw Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header
 
-	dw Subzero_Hurt_1_Right_Frame_3_Header, Subzero_Hurt_1_Right_Frame_3_Header, Subzero_Hurt_1_Right_Frame_3_Header
+	dw Subzero_Hurt_1_Right_Frame_3_Header, Subzero_Hurt_1_Right_Frame_3_Header
 
-	dw Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header
-	dw Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header
-	dw Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header
+	dw Subzero_Hurt_1_Right_Frame_2_Header, Subzero_Hurt_1_Right_Frame_2_Header
+	dw Subzero_Hurt_1_Right_Frame_1_Header, Subzero_Hurt_1_Right_Frame_1_Header
+	dw Subzero_Hurt_1_Right_Frame_0_Header, Subzero_Hurt_1_Right_Frame_0_Header
 
     ; frame headers are all stored on MegaROM pages at address 0x8000, 
     ; so the high byte will never be 0x00 or 0x01

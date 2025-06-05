@@ -63,6 +63,8 @@ ReadInput:
     ld      (TempVars.PlayerInput_Block), a
 
 
+    ; TODO:
+    ; if (Player.IsAnimating) .skipCheck_P1_Keys
 
 
     ld      a, (SNSMAT_Line_2)

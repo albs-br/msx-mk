@@ -72,6 +72,22 @@ CheckCollision_Hitboxes:
     
     ; ---- Player 1 Hitbox x Player 2 Hurtbox
     push    ix, iy
+
+        ld      ix, Player_1_Vars
+        ld      iy, Player_2_Vars
+
+        ; if (Player_1.HitBox_X == 255) return;
+        ld      a, (ix + Player_Struct.HitBox_X) ; IX: Player_1
+        inc     a
+        jp      z, .return
+
+        ; if (Player_2.IsBlocking) return;
+        ld      a, (iy + Player_Struct.IsBlocking) ; IY: Player_2
+        or      a
+        jp      nz, .return
+
+
+
         ld      ix, Player_1_Vars.HitBox
         ld      iy, Player_2_Vars.HurtBox
         call    CheckCollision_Obj1xObj2
@@ -81,6 +97,11 @@ CheckCollision_Hitboxes:
     .collision:
 
         ld      ix, Player_2_Vars
+
+        ; if (!Player_2.IsGrounded) return;
+        ld      a, (ix + Player_Struct.IsGrounded) ; IX: Player_2
+        or      a
+        jp      z, .return
 
         ; Player.IsAnimating = true
         ld      a, 1
@@ -98,8 +119,6 @@ CheckCollision_Hitboxes:
 
         call    PushPlayersApart
 
-    .return:
-    
         ld      ix, Player_1_Vars
         call    UpdateHurtbox
         call    Update_VRAM_NAMTBL_Addr
@@ -107,6 +126,8 @@ CheckCollision_Hitboxes:
         ld      ix, Player_2_Vars
         call    UpdateHurtbox
         call    Update_VRAM_NAMTBL_Addr
+
+    .return:
 
     pop     iy, ix
 
