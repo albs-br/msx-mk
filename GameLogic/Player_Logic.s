@@ -598,6 +598,9 @@ Player_SetAnimation:
 
     ret
 
+
+; TODO: Routine to call GetAnimationAddr and Player_SetAnimation (these two are always used together)
+
 ; Inputs:
 ;   IX: Player Vars base addr
 ;   BC: Offset from base AllAnimations_Addr (constant POSITION.?)

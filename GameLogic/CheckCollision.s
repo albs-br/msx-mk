@@ -80,14 +80,19 @@ CheckCollision_Hitboxes:
 
     .collision:
 
-jp$;debug
-        ; ld      ix, Player_2_Vars
+        ld      ix, Player_2_Vars
 
-        ; ld      bc, POSITION.HURT_1
-        ; call    GetAnimationAddr
+        ; Player.IsAnimating = true
+        ld      a, 1
+        ld      (ix + Player_Struct.IsAnimating), a
 
-        ; ld      a, POSITION.HURT_1
-        ; call    Player_SetAnimation
+        ; --- get addr of animation
+        ld      bc, POSITION.HURT_1
+        call    GetAnimationAddr
+
+        ; --- set animation
+        ld      a, POSITION.HURT_1
+        call    Player_SetAnimation
 
 
 
