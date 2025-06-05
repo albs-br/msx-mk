@@ -42,6 +42,43 @@ DrawSprite:
 
 
 
+    ; ----get hurt box parameters from frame header and save to player vars
+    
+    ; if (FrameHeader_Struct.HurtBox_X != 255) Player_Struct.HurtBox_X = Player_Struct.X + FrameHeader_Struct.HurtBox_X;
+    ld      a, (iy + FrameHeader_Struct.HurtBox_X)
+    cp      255
+    jp      z, .ignoreHurtBox
+    add     (ix + Player_Struct.X)
+    ld      (ix + Player_Struct.HurtBox_X), a
+
+
+    ; Player_Struct.HurtBox_Y = Player_Struct.Y + FrameHeader_Struct.HurtBox_Y;
+    ld      a, (iy + FrameHeader_Struct.HurtBox_Y)
+    add     (ix + Player_Struct.Y)
+    ld      (ix + Player_Struct.HurtBox_Y), a
+
+    ; Player_Struct.HurtBox_Width = FrameHeader_Struct.HurtBox_Width;
+    ld      a, (iy + FrameHeader_Struct.HurtBox_Width)
+    ld      (ix + Player_Struct.HurtBox_Width), a
+
+    ; Player_Struct.HurtBox_Height = FrameHeader_Struct.HurtBox_Height;
+    ld      a, (iy + FrameHeader_Struct.HurtBox_Height)
+    ld      (ix + Player_Struct.HurtBox_Height), a
+
+
+    jp      .cont_20
+
+.ignoreHurtBox:
+    ld      a, 255
+    ld      (ix + Player_Struct.HurtBox_X), a
+    ld      (ix + Player_Struct.HurtBox_Y), a
+    ld      (ix + Player_Struct.HurtBox_Width), a
+    ld      (ix + Player_Struct.HurtBox_Height), a
+
+.cont_20:
+
+
+
     ; ----get hit box parameters from frame header and save to player vars
     
     ; if (FrameHeader_Struct.HitBox_X != 255) Player_Struct.HitBox_X = Player_Struct.X + FrameHeader_Struct.HitBox_X;
