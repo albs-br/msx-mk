@@ -231,9 +231,20 @@ DrawSprite:
     ei
 
 
-    ; ; --- debug
-    ; ; -------------- draw HurtBox
+;     ; --- debug
+;     ; -------------- draw HurtBox
+;     ld      a, 0000 0000 b
+;     ld      l, (ix + Player_Struct.VRAM_NAMTBL_Addr)
+;     ld      h, (ix + Player_Struct.VRAM_NAMTBL_Addr + 1)
+;     call    SetVdp_Write
+;     ld      c, PORT_0        ; you can also write ld bc,#nn9B, which is faster
+;     ld      b, 16 ; number of bytes
+; .loop_drawHurtbox:
+;     ld      a, 0xee ; color (two pixels)
+;     out     (c), a
+;     djnz    .loop_drawHurtbox
 
+    ; using LINE cmd (not working)
     ; ld      h, 0
     ; ld      l, (ix + Player_Struct.HurtBox_X)
     ; ld      (TripleBuffer_Vars_LINE_Command), hl
