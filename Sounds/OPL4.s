@@ -114,7 +114,6 @@ PlaySound:
     ret     z
 
     ; play sound on OPL4
-    ld	    d, 0x81 ; 0x80 to 0x82
     call    speak
     
     ret

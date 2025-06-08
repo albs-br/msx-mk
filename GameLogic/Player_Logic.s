@@ -443,6 +443,10 @@ Player_Input_LowKick:
     ld      a, POSITION.LOW_KICK
     call    Player_SetAnimation
 
+    ; play sound on OPL4
+    ld	   d, SOUND_FX_1
+    call   PlaySound
+
 
     ret
 
@@ -472,7 +476,7 @@ Player_Input_HighKick:
 
 
     ; play sound on OPL4
-    ld	   d, 0x80 ; 0x80 to 0x82
+    ld	   d, SOUND_FX_2
     call   PlaySound
 
 
