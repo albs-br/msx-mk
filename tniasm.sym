@@ -77,7 +77,6 @@ BIOS_H_PHYD: equ 0FFA7h ; last def. pass 3
 Subzero_Walking_Right_Frame_0_Header: equ 0B9AAh ; last def. pass 3
 BIOS_SAVVOL: equ 0FB39h ; last def. pass 3
 Player_Struct.HitBox_Y: equ 09h ; last def. pass 3
-MegaRom_Page_SoundsHeaders_size: equ 024h ; last def. pass 3
 Player_Struct.Width: equ 02h ; last def. pass 3
 Player_1_Vars.Restore_BG_1_HeightInPixels: equ 0C02Bh ; last def. pass 3
 BIOS_H_LPTO: equ 0FFB6h ; last def. pass 3
@@ -550,7 +549,6 @@ BIOS_PARM1: equ 0F6E8h ; last def. pass 3
 BIOS_ONGSBF: equ 0FBD8h ; last def. pass 3
 BIOS_H_LOF: equ 0FE9Eh ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_2_Header: equ 0B7BBh ; last def. pass 3
-MegaRom_Pages_SoundsData_size: equ 045C0h ; last def. pass 3
 MEGAROM_PAGE_SCORPION_JUMPING_UP_LEFT_DATA_0: equ 08h ; last def. pass 3
 Player_Struct.VRAM_NAMTBL_Addr: equ 011h ; last def. pass 3
 Scorpion_Walking_Left_Frame_0: equ 0A682h ; last def. pass 3
@@ -642,6 +640,7 @@ GetCurrentFrameAndGoToNext.stopAnimation: equ 04B44h ; last def. pass 3
 Scorpion_Crouching_Block_Left_Frame_0.List: equ 0A62Eh ; last def. pass 3
 MSXID1: equ 02Bh ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_7.List: equ 0AB20h ; last def. pass 3
+SoundsHeaders_size: equ 024h ; last def. pass 3
 MEGAROM_PAGE_BG_GOROS_LAIR_1: equ 02h ; last def. pass 3
 PPI.C: equ 0AAh ; last def. pass 3
 BIOS_LOHCNT: equ 0F94Dh ; last def. pass 3
@@ -680,6 +679,7 @@ BIOS_H_FRQI: equ 0FF93h ; last def. pass 3
 Player_Input_Up_Right.return: equ 046A1h ; last def. pass 3
 BIOS_SETGRP: equ 07Eh ; last def. pass 3
 BIOS_WRTVRM: equ 04Dh ; last def. pass 3
+SoundsData_size: equ 045C0h ; last def. pass 3
 MEMORY_MAPPER_SEGMENT_PAGE_2: equ 0FEh ; last def. pass 3
 BIOS_CLINEF: equ 0F935h ; last def. pass 3
 BIOS_H_OUTD: equ 0FEE4h ; last def. pass 3

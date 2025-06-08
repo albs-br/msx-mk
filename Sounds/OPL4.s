@@ -1,10 +1,14 @@
+	
+; Original by Bitvision Software
+; Converted (with adaptations) to TNI Asm by Andre Baptista
+
+
 ; Output:
 ;   z: not available
 ;   nz: available
 IsOPL4Available:
     in		  a, (0xc4)
     cp		  0xff
-    ;jr		  z, $						;stay here forever if not found!
     ret
 
 OPL4_Init:
@@ -60,7 +64,7 @@ OPL4_Init:
         call    write_opl4_port                              
         
         ld      a, MEGAROM_PAGE_SOUNDS_HEADERS
-        ld      (0x7000), a								;megarom block 1 from 0x8000
+        ld      (Seg_P8000_SW), a
 
         ld      hl, 0x8000 ;headers_begin
         ld      de, headers_end - headers_begin
@@ -89,13 +93,13 @@ loop_header:
         call    write_opl4_port                              
 
         ld      a, MEGAROM_PAGES_SOUNDS_DATA ; 2
-        ld      (0x7000), a
+        ld      (Seg_P8000_SW), a
         call	load_16kb_chunk
         ld      a, MEGAROM_PAGES_SOUNDS_DATA + 1 ;3
-        ld      (0x7000), a
+        ld      (Seg_P8000_SW), a
         call	load_16kb_chunk			
         ld      a, MEGAROM_PAGES_SOUNDS_DATA + 2 ; 4
-        ld      (0x7000), a
+        ld      (Seg_P8000_SW), a
         call	load_16kb_chunk
         
         
