@@ -209,7 +209,7 @@ Jiffy_Saved:            rw 1
 LastFps:                rb 1
 CurrentCounter:         rb 1
 
-
+Var_IsOPL4Available:    rb 1
 
 
 RamEnd:

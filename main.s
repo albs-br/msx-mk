@@ -22,6 +22,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "TripleBuffer/GetCurrentFrameAndGoToNext.s"
     ; INCLUDE "TripleBuffer/GoToNextFrame.s"
 
+    INCLUDE "Sounds/OPL4.s"
+
 Execute:
     ; init interrupt mode and stack pointer (in case the ROM isn't the first thing to be loaded)
 	di                          ; disable interrupts
@@ -88,9 +90,17 @@ Execute:
 
 
 
-
-
-
+    ; ---- OPL4 Initialization
+    xor     a
+    ld      (Var_IsOPL4Available), a
+    call    IsOPL4Available
+    jp      z, .OPL4notAvailable
+    
+    call    OPL4_Init
+    
+    ld      a, 1
+    ld      (Var_IsOPL4Available), a
+.OPL4notAvailable:
 
 
     call    BIOS_ENASCR
@@ -505,16 +515,18 @@ Page_0x4000_size: equ $ - Execute ; 0x04ba
 
 
 
+; -----------------------------------------------------------------
 ; MegaROM pages at 0x8000
     INCLUDE "MegaRomPages.s"
 
 
 
 
-
-
+; -----------------------------------------------------------------
 ; RAM
 	org     0xc000, 0xe5ff                   ; for machines with 16kb of RAM (use it if you need 16kb RAM, will crash on 8kb machines, such as the Casio PV-7)
 
     INCLUDE "Variables.s"
 
+
+; -----------------------------------------------------------------

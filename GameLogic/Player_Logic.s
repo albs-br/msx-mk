@@ -471,6 +471,11 @@ Player_Input_HighKick:
     call    Player_SetAnimation
 
 
+    ; play sound on OPL4
+    ld	   d, 0x80 ; 0x80 to 0x82
+    call   PlaySound
+
+
     ret
 
 

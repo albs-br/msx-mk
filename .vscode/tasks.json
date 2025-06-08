@@ -49,6 +49,10 @@
                     {   "value": "-script", "quoting": "escape" },
                     {   "value": "${workspaceFolder}\\msx-mk.tcl", "quoting": "weak" },
 
+
+                    {   "value": "-script", "quoting": "escape" },
+                    {   "value": "${workspaceFolder}\\add_opl4.tcl", "quoting": "weak" },
+
                 ],
             "label": "run openmsx",
             "type": "shell",
