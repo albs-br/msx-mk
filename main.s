@@ -90,17 +90,7 @@ Execute:
 
 
 
-    ; ---- OPL4 Initialization
-    xor     a
-    ld      (Var_IsOPL4Available), a
-    call    IsOPL4Available
-    jp      z, .OPL4notAvailable
-    
     call    OPL4_Init
-    
-    ld      a, 1
-    ld      (Var_IsOPL4Available), a
-.OPL4notAvailable:
 
 
     call    BIOS_ENASCR

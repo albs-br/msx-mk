@@ -9,6 +9,15 @@ IsOPL4Available:
 
 OPL4_Init:
 
+    xor     a
+    ld      (Var_IsOPL4Available), a
+    call    IsOPL4Available
+    ret     z
+    
+    ld      a, 1
+    ld      (Var_IsOPL4Available), a
+
+
     di
 
         ;setup OPL4 (parte FM)

@@ -107,6 +107,8 @@ CheckCollision_Hitboxes:
         ld      a, 1
         ld      (ix + Player_Struct.IsAnimating), a
 
+
+
         ; --- get addr of animation
         ld      bc, POSITION.HURT_1
         call    GetAnimationAddr
@@ -114,6 +116,12 @@ CheckCollision_Hitboxes:
         ; --- set animation
         ld      a, POSITION.HURT_1
         call    Player_SetAnimation
+
+
+
+        ; play sound on OPL4
+        ld	   d, SOUND_FX_0
+        call   PlaySound
 
 
 

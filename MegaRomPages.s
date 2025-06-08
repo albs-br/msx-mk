@@ -213,35 +213,27 @@ MegaRom_Page_12_size: equ $ - 0x8000 ; 0x? = ?       ;  16384 - ? = ?
 	ds PageSize - ($ - 0x8000), 255
 
 
-; ------------------------------------------------- Page 13 -------------------------------------------------
+
+
+; ------------------------------------------------- Pages 13 to 16 -------------------------------------------------
 
 MEGAROM_PAGE_SOUNDS_HEADERS: equ 13
+MEGAROM_PAGES_SOUNDS_DATA: equ 13
 
 
 	org	0x00
-
     INCLUDE "Sounds/Headers.s"
-
-;MegaRom_Page_13_size: equ $ - 0x8000 ; 0x? = ?       ;  16384 - ? = ?
-
-	ds PageSize - ($ - 0x00), 255
-
-
-; ------------------------------------------------- Pages 14 to 17 -------------------------------------------------
-
-MEGAROM_PAGES_SOUNDS_DATA: equ 14
+SoundsHeaders_size: equ $ - 0x00 ; 0x24 = 36 bytes       ;  16384 - ? = ?
 
 
     org    0x201200
-
-; Sounds Data
     INCLUDE "Sounds/Data.s"
+SoundsData_size: equ $ - 0x201200 ; 0x45c0 = ?       ;  65536 - ? = ?
 
-MegaRom_Pages_SoundsData_size: equ $ - 0x201200 ; 0x? = ?       ;  16384 - ? = ?
 
-    ds     0x201200 + (PageSize * 4) - $ ; fill with zeroes
+    ds     0x201200 + (PageSize * 4) - $ - SoundsHeaders_size ; fill with zeroes
 
-	; ds PageSize - ($ - 0x201200), 255
+
 
 
 
