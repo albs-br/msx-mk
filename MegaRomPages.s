@@ -208,7 +208,7 @@ MEGAROM_PAGE_SUBZERO_HURT_1_RIGHT_DATA_0: equ 12
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_list.s"
 
 
-MegaRom_Page_12_size: equ $ - 0x8000 ; 0x? = ?       ;  16384 - ? = ?
+MegaRom_Page_12_size: equ $ - 0x8000 ; 0x176b = 5995 bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
 

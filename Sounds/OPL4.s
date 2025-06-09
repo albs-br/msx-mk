@@ -92,13 +92,13 @@ loop_header:
         ld      bc, 0x0500
         call    write_opl4_port                              
 
-        ld      a, MEGAROM_PAGES_SOUNDS_DATA ; 2
+        ld      a, MEGAROM_PAGES_SOUNDS_DATA
         ld      (Seg_P8000_SW), a
         call	load_16kb_chunk
-        ld      a, MEGAROM_PAGES_SOUNDS_DATA + 1 ;3
+        ld      a, MEGAROM_PAGES_SOUNDS_DATA + 1
         ld      (Seg_P8000_SW), a
         call	load_16kb_chunk			
-        ld      a, MEGAROM_PAGES_SOUNDS_DATA + 2 ; 4
+        ld      a, MEGAROM_PAGES_SOUNDS_DATA + 2
         ld      (Seg_P8000_SW), a
         call	load_16kb_chunk
         
