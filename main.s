@@ -445,6 +445,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_animation.s"
     INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_animation.s"
     ; INCLUDE "Data/scorpion/hurt-1/left/scorpion_hurt_1_left_animation.s"
+    INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_animation.s"
 
     ; --- Right
     ; INCLUDE "Data/scorpion/stance/right/scorpion_stance_right_animation.s"
@@ -459,6 +460,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/scorpion/crouching/right/scorpion_crouching_right_animation.s"
     ; INCLUDE "Data/scorpion/crouching-block/right/scorpion_crouching_block_right_animation.s"
     ; INCLUDE "Data/scorpion/hurt-1/right/scorpion_hurt_1_right_animation.s"
+    ; INCLUDE "Data/scorpion/uppercut/right/scorpion_uppercut_right_animation.s"
 
 
 
@@ -477,6 +479,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/crouching/left/subzero_crouching_left_animation.s"
     ; INCLUDE "Data/subzero/crouching-block/left/subzero_crouching_block_left_animation.s"
     ; INCLUDE "Data/subzero/hurt-1/left/subzero_hurt_1_left_animation.s"
+    ; INCLUDE "Data/subzero/uppercut/left/subzero_uppercut_left_animation.s"
 
     ; --- Right
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
@@ -491,6 +494,7 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
     ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_animation.s"
     ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_animation.s"
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_animation.s"
+    ; INCLUDE "Data/subzero/uppercut/right/subzero_uppercut_right_animation.s"
 
 
 
@@ -506,14 +510,18 @@ Page_0x4000_size: equ $ - Execute ; 0x04ba
 
 
 ; -----------------------------------------------------------------
+
 ; MegaROM pages at 0x8000
+
     INCLUDE "MegaRomPages.s"
 
 
 
 
 ; -----------------------------------------------------------------
+
 ; RAM
+
 	org     0xc000, 0xe5ff                   ; for machines with 16kb of RAM (use it if you need 16kb RAM, will crash on 8kb machines, such as the Casio PV-7)
 
     INCLUDE "Variables.s"

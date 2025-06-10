@@ -32,6 +32,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/crouching/left/scorpion_crouching_left_frame_headers.s"
     INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frame_headers.s"
     ; INCLUDE "Data/scorpion/hurt-1/left/scorpion_hurt_1_left_frame_headers.s"
+    INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frame_headers.s"
     ; TODO: repeat for right
 
     ; TODO: repeat for left
@@ -44,6 +45,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     ; INCLUDE "Data/subzero/crouching/right/subzero_crouching_right_frame_headers.s"
     ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_frame_headers.s"
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frame_headers.s"
+    ; INCLUDE "Data/subzero/uppercut/right/subzero_uppercut_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x3b12
 
@@ -208,7 +210,7 @@ MEGAROM_PAGE_SUBZERO_HURT_1_RIGHT_DATA_0: equ 12
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_list.s"
 
 
-MegaRom_Page_12_size: equ $ - 0x8000 ; 0x176b = 5995 bytes       ;  16384 - ? = ?
+MegaRom_Page_12_size: equ $ - 0x8000 ; 0x176b = 5995 bytes       ;  16384 - 5995 = 10309 bytes free
 
 	ds PageSize - ($ - 0x8000), 255
 
@@ -237,3 +239,21 @@ SoundsData_size: equ $ - 0x201200 ; 0x45c0 = ?       ;  65536 - ? = ?
 
 
 
+; ------------------------------------------------- Page 17 -------------------------------------------------
+
+MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 17
+
+
+	org	0x8000, 0xBFFF
+
+    ; ------------ Data ---------------
+	INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_data.s"
+
+
+    ; ------------ List ---------------
+    INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_list.s"
+
+; TODO: put this position on page 12 free space
+MegaRom_Page_17_size: equ $ - 0x8000 ; 0x27e2 = 10210 bytes       ;  16384 - ? = ?
+
+	ds PageSize - ($ - 0x8000), 255
