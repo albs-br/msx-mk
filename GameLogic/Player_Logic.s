@@ -484,6 +484,38 @@ Player_Input_HighKick:
 
 
 
+Player_Input_LowPunch:
+
+    ; if (player.Position != STANCE) ret
+    ld      a, (ix + Player_Struct.Position)
+    cp      POSITION.STANCE
+    ret     nz
+
+    ; Player.IsAnimating = true
+    ld      a, 1
+    ld      (ix + Player_Struct.IsAnimating), a
+
+    ; ; Player.IsGrounded = false
+    ; xor     a
+    ; ld      (ix + Player_Struct.IsGrounded), a
+
+    ; --- get addr of animation
+    ld      bc, POSITION.UPPERCUT
+    call    GetAnimationAddr
+
+    ; --- set animation
+    ld      a, POSITION.UPPERCUT
+    call    Player_SetAnimation
+
+    ; ; play sound on OPL4
+    ; ld	   d, SOUND_FX_1
+    ; call   PlaySound
+
+
+    ret
+
+
+
 Player_Input_Down:
 
     ; if (player.IsCrouching) ret

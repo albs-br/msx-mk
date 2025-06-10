@@ -112,6 +112,10 @@ ReadInput:
     bit     4, a                    ; 4th bit (key G)
     call    z, .player_Input_LowKick
 
+    ld      a, (SNSMAT_Line_3)
+    bit     3, a                    ; 3th bit (key F)
+    call    z, .player_Input_LowPunch
+
 
 
     ; if (Player.IsCrouching && Player.IsBlocking) .check_P1_Down_Block_Released
@@ -362,6 +366,12 @@ ReadInput:
     ld      (TempVars.PlayerInput), a
     ret
 
+.player_Input_LowPunch:
+    ld      a, (TempVars.PlayerInput)
+    or      INPUT_LOW_PUNCH
+    ld      (TempVars.PlayerInput), a
+    ret
+
 ; --------
 
 .player_Input_Block:
@@ -427,6 +437,10 @@ ReadInput:
     ld      a, (TempVars.PlayerInput)
     cp      INPUT_HIGH_KICK
     call    z, Player_Input_HighKick
+
+    ld      a, (TempVars.PlayerInput)
+    cp      INPUT_LOW_PUNCH
+    call    z, Player_Input_LowPunch
 
     ; if (!PlayerInput && !PlayerInput_Block) Player_SetPosition_Stance();
     ld      a, (TempVars.PlayerInput)
