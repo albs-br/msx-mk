@@ -139,6 +139,7 @@ DrawSprite:
     ld      l, (iy + FrameHeader_Struct.yOffset)
     ld      h, (iy + FrameHeader_Struct.yOffset + 1)
 
+    ld      (TempVars.yOffset), hl
 
 
     call    UpdateHurtbox
@@ -301,6 +302,48 @@ DrawSprite:
     ld      a, (ix + Player_Struct.Height)
     ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
 
+
+.ddd: ; debug
+    ; -------------------------
+    ; if(FrameHeader_Struct.yOffset < 0) {
+    ;   temp = FrameHeader_Struct.yOffset / 128; // this value is negative
+    ;   Player_Struct.Restore_BG_0_Y += temp;
+    ;   Player_Struct.Restore_BG_0_HeightInPixels -= temp;
+    ; }
+    ld      hl, (TempVars.yOffset)
+
+    ; check bit 7 of H (if set the number is negative)
+    bit     7, h
+    jp      z, .yOffset_positive
+
+.yOffset_negative:
+    ; convert HL to positive (two's complement: invert all bits, then add 1)
+    ld      a, l
+    cpl
+    ld      l, a
+    ld      a, h
+    cpl
+    ld      h, a
+    inc     hl
+
+    ; divide by 128 (shift right 7 bits)
+    xor     a
+    add     hl, hl
+    rla
+    ld      l, h
+    ld      h, a
+
+    ; Player_Struct.Restore_BG_0_Y -= temp; // using signal inverted, because yOffset was inverted
+    ld      a, (ix + Player_Struct.Restore_BG_0_Y)
+    sub     h                                           ; value is all on low byte
+    ld      (ix + Player_Struct.Restore_BG_0_Y), a
+
+    ; Player_Struct.Restore_BG_0_HeightInPixels += temp; // using signal inverted, because yOffset was inverted
+    ld      a, (ix + Player_Struct.Restore_BG_0_HeightInPixels)
+    add     h
+    ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
+
+.yOffset_positive:
 
 
     ret
