@@ -330,12 +330,12 @@ DrawSprite:
     xor     a
     add     hl, hl
     rla
-    ld      l, h
-    ld      h, a
+    ; ld      l, h low byte is on H register
+    ; ld      h, a
 
     ; Player_Struct.Restore_BG_0_Y -= temp; // using signal inverted, because yOffset was inverted
     ld      a, (ix + Player_Struct.Restore_BG_0_Y)
-    sub     h                                           ; value is all on low byte
+    sub     h                                          ; value is all on low byte
     ld      (ix + Player_Struct.Restore_BG_0_Y), a
 
     ; Player_Struct.Restore_BG_0_HeightInPixels += temp; // using signal inverted, because yOffset was inverted

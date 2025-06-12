@@ -19,7 +19,7 @@ Y_BASE_PAGE_3:      equ 768 ; page 3
 
 
 FrameHeader_Struct:
-    .yOffset:               equ 0   ; word
+    .yOffset:               equ 0   ; signed word
     .Width:                 equ 2   ; byte
     .Height:                equ 3   ; byte
     .MegaRomPage:           equ 4   ; byte
