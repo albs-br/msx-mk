@@ -254,6 +254,6 @@ MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 17
     INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_list.s"
 
 ; TODO: put this position on page 12 free space
-MegaRom_Page_17_size: equ $ - 0x8000 ; 0x27e2 = 10210 bytes       ;  16384 - ? = ?
+MegaRom_Page_17_size: equ $ - 0x8000 ; 0x2779 = 10105 bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
