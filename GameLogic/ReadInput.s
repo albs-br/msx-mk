@@ -29,6 +29,10 @@ ReadInput:
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_3), a
     
+    ld      a, 4                    ; 3rd line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    ld      (SNSMAT_Line_4), a
+    
     ld      a, 5                    ; 5th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_5), a
@@ -111,6 +115,10 @@ ReadInput:
     ld      a, (SNSMAT_Line_3)
     bit     4, a                    ; 4th bit (key G)
     call    z, .player_Input_LowKick
+
+    ld      a, (SNSMAT_Line_4)
+    bit     7, a                    ; 4th bit (key R)
+    call    z, .player_Input_HighPunch
 
     ld      a, (SNSMAT_Line_3)
     bit     3, a                    ; 3th bit (key F)
@@ -372,6 +380,12 @@ ReadInput:
     ld      (TempVars.PlayerInput), a
     ret
 
+.player_Input_HighPunch:
+    ld      a, (TempVars.PlayerInput)
+    or      INPUT_HIGH_PUNCH
+    ld      (TempVars.PlayerInput), a
+    ret
+
 ; --------
 
 .player_Input_Block:
@@ -392,10 +406,17 @@ ReadInput:
     call    nz, Player_Input_Down_Block
 .cont_2:
 
-    ; check down + high punch
+    ; check down + low punch
     ld      a, (TempVars.PlayerInput)
     cp      INPUT_DOWN OR INPUT_LOW_PUNCH
     call    z, Player_Input_Uppercut
+
+    ; check down + high punch
+    ld      a, (TempVars.PlayerInput)
+    cp      INPUT_DOWN OR INPUT_HIGH_PUNCH
+    call    z, Player_Input_Uppercut
+
+
 
 
     ; check only the bit 6 (INPUT_DOWN), so it also works with INPUT_DOWN_LEFT and INPUT_DOWN_RIGHT

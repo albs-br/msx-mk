@@ -200,6 +200,7 @@ TempVars:
 
 SNSMAT_Line_2:      rb 1
 SNSMAT_Line_3:      rb 1
+SNSMAT_Line_4:      rb 1
 SNSMAT_Line_5:      rb 1
 SNSMAT_Line_8:      rb 1
 

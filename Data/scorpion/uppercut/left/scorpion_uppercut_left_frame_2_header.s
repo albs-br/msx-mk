@@ -3,4 +3,4 @@
 
 	; 255 = ignore
 	db  255, 255, 255, 255 ; HurtBox (X, Y, Width, Height)
-	db  255, 255, 255, 255 ; HitBox (X, Y, Width, Height)
+	db  72, 11, 13, 13     ; HitBox (X, Y, Width, Height)           ; 192 x 11 ; 192 --> 192 - 120 = 72  --> (72, 11)
