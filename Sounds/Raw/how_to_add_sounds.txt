@@ -1,0 +1,5 @@
+- convert the MP3 file to RAW unsing Audacity (Format: other formats, Mono, 11 KHz, signed 8 bits)
+
+- put the file in the Sounds/Raw folder
+
+- update Sounds/Data.s folowwing the pattern of the other SFX

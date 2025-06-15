@@ -23,3 +23,8 @@ sample_2:
 
 		   
 ; -------------------------------------------------
+SOUND_FX_3:     equ 0x83
+
+sample_3:          
+			incbin    "Sounds/Raw/mk1-00200.raw"
+.size: equ $ - sample_3

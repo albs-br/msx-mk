@@ -340,6 +340,10 @@ Player_Input_Up:
     ld      a, POSITION.JUMPING_UP
     call    Player_SetAnimation
 
+    ; play sound on OPL4
+    ld	   d, SOUND_FX_3
+    call   PlaySound
+
     ret
 
 Player_Input_Up_Right:
@@ -379,6 +383,10 @@ Player_Input_Up_Right:
 
 .return:
 
+    ; play sound on OPL4
+    ld	   d, SOUND_FX_3
+    call   PlaySound
+
     ret
 
 Player_Input_Up_Left:
@@ -417,6 +425,10 @@ Player_Input_Up_Left:
 .skip_10:
 
 .return:
+
+    ; play sound on OPL4
+    ld	   d, SOUND_FX_3
+    call   PlaySound
 
     ret
 

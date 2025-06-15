@@ -25,8 +25,6 @@ headers_begin:
 
 
 			;header sample 2
-			; sample_header	sample_2, (sample_2_end - sample_2)
-
 			db    sample_2 >> 16, (sample_2 >> 8) and 0xff, sample_2 and 0xff                                                                           ;8 bits & start address at wave memory
 			db    (sample_2.size) >> 8
 			db    (sample_2.size) and 0xff
@@ -34,6 +32,16 @@ headers_begin:
 			db    ((sample_2.size) xor 0xffFF) and 0xff
 			db    0x00, 0xf0, 0x00, 0x00, 0x00   ;also works 0x00, 0xf0, 0x00, 0x0f, 0x00
 
+
+
+			;header sample 3
+			db    sample_3 >> 16, (sample_3 >> 8) and 0xff, sample_3 and 0xff                                                                           ;8 bits & start address at wave memory
+			db    (sample_3.size) >> 8
+			db    (sample_3.size) and 0xff
+			db    ((sample_3.size) xor 0xffFF) >> 8
+			db    ((sample_3.size) xor 0xffFF) and 0xff
+			db    0x00, 0xf0, 0x00, 0x00, 0x00   ;also works 0x00, 0xf0, 0x00, 0x0f, 0x00
+            
 headers_end:  
 
 		   
