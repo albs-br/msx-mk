@@ -225,17 +225,17 @@ MEGAROM_PAGES_SOUNDS_DATA: equ 13
 
 	org	0x00
     INCLUDE "Sounds/Headers.s"
-SoundsHeaders_size: equ $ - 0x00 ; 0x24 = 36 bytes       ;  16384 - ? = ?
+SoundsHeaders_size: equ $ - 0x00 ; 0x?? = ?? bytes       ;  16384 - ? = ?
 
 
     org    0x201200
     INCLUDE "Sounds/Data.s"
-SoundsData_size: equ $ - 0x201200 ; 0x45c0 = ?       ;  65536 - ? = ?
+SoundsData_size: equ $ - 0x201200 ; 0x???? = ?       ;  65536 - ? = ?
 
 
     ds     0x201200 + (PageSize * 4) - $ - SoundsHeaders_size ; fill with zeroes
 
-SoundsTotal_size: equ SoundsHeaders_size + SoundsData_size ; 0x045e4 = 17892 bytes ; this value must be less than 64 kb (4 megarom pages)
+SoundsTotal_size: equ SoundsHeaders_size + SoundsData_size ; 0x05490 = 21648 bytes ; this value must be less than 64 kb (4 megarom pages)
 ; WARNING: currently loading only the first 48 kb
 
 

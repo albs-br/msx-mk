@@ -1,4 +1,4 @@
-- convert the MP3 file to RAW unsing Audacity (Format: other formats, Mono, 11 KHz, signed 8 bits)
+- convert the MP3 file to RAW using Audacity (Format: other formats, Mono, 11 KHz, RAW (headerless), signed 8-bit PCM)
 
 - put the file in the Sounds/Raw folder
 
