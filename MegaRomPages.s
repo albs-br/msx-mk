@@ -235,8 +235,8 @@ SoundsData_size: equ $ - 0x201200 ; 0x45c0 = ?       ;  65536 - ? = ?
 
     ds     0x201200 + (PageSize * 4) - $ - SoundsHeaders_size ; fill with zeroes
 
-
-
+SoundsTotal_size: equ SoundsHeaders_size + SoundsData_size ; 0x045e4 = 17892 bytes ; this value must be less than 64 kb (4 megarom pages)
+; WARNING: currently loading only the first 48 kb
 
 
 ; ------------------------------------------------- Page 17 -------------------------------------------------

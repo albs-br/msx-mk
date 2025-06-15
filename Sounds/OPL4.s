@@ -101,7 +101,7 @@ loop_header:
         ld      a, MEGAROM_PAGES_SOUNDS_DATA + 2
         ld      (Seg_P8000_SW), a
         call	load_16kb_chunk
-        
+        ; WARNING: currently loading only the first 48 kb
         
 
         ;restore regular operation (play sound!)

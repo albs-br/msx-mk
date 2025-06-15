@@ -385,17 +385,22 @@ ReadInput:
 
     ; if (PlayerInput == INPUT_DOWN/LEFT/RIGHT && PlayerInput_Block) Player_Input_Down_Block();
     ld      a, (TempVars.PlayerInput)
-    bit     6, a ; cp      INPUT_DOWN ; Z is set if specified bit is 0; otherwise, it is reset.
+    bit     6, a ; cp      INPUT_DOWN
     jp      z, .cont_2
     ld      a, (TempVars.PlayerInput_Block)
     or      a
     call    nz, Player_Input_Down_Block
 .cont_2:
 
+    ; check down + high punch
+    ld      a, (TempVars.PlayerInput)
+    cp      INPUT_DOWN OR INPUT_LOW_PUNCH
+    call    z, Player_Input_Uppercut
+
 
     ; check only the bit 6 (INPUT_DOWN), so it also works with INPUT_DOWN_LEFT and INPUT_DOWN_RIGHT
     ld      a, (TempVars.PlayerInput)
-    bit     6, a ; cp      INPUT_DOWN ; Z is set if specified bit is 0; otherwise, it is reset.
+    bit     6, a
     call    nz, Player_Input_Down
 
 
@@ -438,9 +443,9 @@ ReadInput:
     cp      INPUT_HIGH_KICK
     call    z, Player_Input_HighKick
 
-    ld      a, (TempVars.PlayerInput)
-    cp      INPUT_LOW_PUNCH
-    call    z, Player_Input_LowPunch
+    ; ld      a, (TempVars.PlayerInput)
+    ; cp      INPUT_LOW_PUNCH
+    ; call    z, Player_Input_LowPunch
 
     ; if (!PlayerInput && !PlayerInput_Block) Player_SetPosition_Stance();
     ld      a, (TempVars.PlayerInput)

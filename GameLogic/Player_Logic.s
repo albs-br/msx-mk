@@ -484,13 +484,16 @@ Player_Input_HighKick:
 
 
 
-Player_Input_LowPunch:
+Player_Input_Uppercut:
 
-    ; if (player.Position != STANCE) ret
+    ; if (player.Position != STANCE && player.Position != CROUCHING) ret
     ld      a, (ix + Player_Struct.Position)
     cp      POSITION.STANCE
+    jp      z, .cont
+    cp      POSITION.CROUCHING
     ret     nz
 
+.cont:
     ; Player.IsAnimating = true
     ld      a, 1
     ld      (ix + Player_Struct.IsAnimating), a
@@ -510,7 +513,6 @@ Player_Input_LowPunch:
     ; ; play sound on OPL4
     ; ld	   d, SOUND_FX_1
     ; call   PlaySound
-
 
     ret
 
