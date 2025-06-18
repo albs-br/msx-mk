@@ -29,7 +29,7 @@ ReadInput:
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_3), a
     
-    ld      a, 4                    ; 3rd line
+    ld      a, 4                    ; 4th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_4), a
     

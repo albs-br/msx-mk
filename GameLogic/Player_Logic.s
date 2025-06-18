@@ -188,11 +188,14 @@ Player_Input_Left:
     cp      SIDE.RIGHT
     jp      nz, .sideLeft
 
+    ; TODO: make this substitution all over the game
     ld      bc, POSITION.WALKING_FORWARD
-    call    GetAnimationAddr
+    call    Player_GetAndSetAnimation
+    ; ld      bc, POSITION.WALKING_FORWARD
+    ; call    GetAnimationAddr
 
-    ld      a, POSITION.WALKING_FORWARD
-    call    Player_SetAnimation
+    ; ld      a, POSITION.WALKING_FORWARD
+    ; call    Player_SetAnimation
     
     jp      .skip_2
 
@@ -633,6 +636,26 @@ Player_Input_Down_Block:
 
     ret
 
+; ---------------------------------------------------------------------------------------------------------
+
+; TODO: Routine to call GetAnimationAddr and Player_SetAnimation (these two are always used together)
+; Inputs:
+;   IX: Player Vars base addr
+;   BC: Offset from base AllAnimations_Addr (constant POSITION.?)
+Player_GetAndSetAnimation:
+    ; push    bc ; unnecessary
+        ; --- get addr of animation
+        ;ld      bc, POSITION.HURT_1
+        call    GetAnimationAddr
+    ; pop     bc
+
+    ; --- set animation
+    ; ld      a, POSITION.HURT_1
+    ld      a, c
+    call    Player_SetAnimation
+    
+    ret
+
 
 
 ; Inputs:
@@ -654,7 +677,6 @@ Player_SetAnimation:
     ret
 
 
-; TODO: Routine to call GetAnimationAddr and Player_SetAnimation (these two are always used together)
 
 ; Inputs:
 ;   IX: Player Vars base addr
@@ -672,6 +694,8 @@ GetAnimationAddr:
     ex      de, hl ; HL = DE
 
     ret
+
+; ---------------------------------------------------------------------------------------------------------
 
 ; Inputs:
 ;   IX: Player Vars base addr
