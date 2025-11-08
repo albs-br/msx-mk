@@ -638,7 +638,8 @@ Player_Input_Down_Block:
 
 ; ---------------------------------------------------------------------------------------------------------
 
-; TODO: Routine to call GetAnimationAddr and Player_SetAnimation (these two are always used together)
+; Routine to call GetAnimationAddr and Player_SetAnimation (these two are always used together)
+; TODO: implement it all over the game
 ; Inputs:
 ;   IX: Player Vars base addr
 ;   BC: Offset from base AllAnimations_Addr (constant POSITION.?)

@@ -1175,6 +1175,7 @@ Subzero_Walking_Right_Frame_6_Header: equ 0BA5Eh ; last def. pass 3
 VDP_LOGIC_OPERATION_TIMP: equ 08h ; last def. pass 3
 BIOS_INIFNK: equ 03Eh ; last def. pass 3
 INPUT_DOWN_LEFT: equ 060h ; last def. pass 3
+POSITION.FALLING: equ 01Ah ; last def. pass 3
 BIOS_MCLFLG: equ 0F958h ; last def. pass 3
 VDP_COMMAND_SRCH: equ 060h ; last def. pass 3
 Scorpion_Uppercut_Left_Frame_1.List: equ 09BACh ; last def. pass 3

@@ -185,6 +185,7 @@ POSITION:
     .CROUCHING_BLOCK:       equ 20
     .HURT_1:                equ 22
     .UPPERCUT:              equ 24
+    .FALLING:               equ 26
     
 ; ----------------------------
 
