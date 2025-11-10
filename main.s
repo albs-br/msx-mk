@@ -11,6 +11,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "Include/MsxConstants.s"
     INCLUDE "Include/CommonRoutines.s"
 
+    INCLUDE "Include/dzx0_standard.asm"
+
     INCLUDE "GameLogic/ReadInput.s"
     INCLUDE "GameLogic/Player_Logic.s"
     INCLUDE "GameLogic/Players_Init.s"
@@ -44,6 +46,65 @@ Execute:
 	; enable page 1
     ld	    a, 1
 	ld	    (Seg_P8000_SW), a
+
+
+
+    ; -------------- Show choose fighter screen
+
+    ; change to screen 8
+    ld      a, 8
+    call    BIOS_CHGMOD
+
+    call    BIOS_DISSCR
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0
+    ld      hl, Bg_Choose_Fighter_Screen_Part_0     ; ZX0 file addr
+    ld		de, NAMTBL_SC8                          ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0
+    ld      hl, Bg_Choose_Fighter_Screen_Part_1     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 1)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0
+    ld      hl, Bg_Choose_Fighter_Screen_Part_2     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 2)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0
+    ld      hl, Bg_Choose_Fighter_Screen_Part_3     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 3)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1
+    ld      hl, Bg_Choose_Fighter_Screen_Part_4     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 4)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1
+    ld      hl, Bg_Choose_Fighter_Screen_Part_5     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 5)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+    ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1
+    ld      hl, Bg_Choose_Fighter_Screen_Part_6     ; ZX0 file addr
+    ld		de, NAMTBL_SC8 + (8192 * 6)             ; VRAM address (destiny, bits 15-0)
+    call    Decompress_ZX0_8kb_and_Load_SC8
+
+
+
+    call    BIOS_ENASCR
+
+
+    ld      b, 240  ; wait 4 seconds
+    call    Wait_B_Vblanks
+
+
+
+    ; -------------- Init Gameplay
+
+    call    BIOS_DISSCR
 
     ; change to screen 5
     ld      a, 5
@@ -385,6 +446,36 @@ LoadImageTo_SC5_Page:
     ret
 
 
+
+; --------------------------------------------------
+; Input:
+;   A:  Number of MegaROM page
+;   HL: Addr of ZX0 file
+;   DE: 17-bit VRAM address
+Decompress_ZX0_8kb_and_Load_SC8:
+    
+    ld	    (Seg_P8000_SW), a   ; set MegaROM page
+
+    push    de
+        ; decompress zx0 file using standard decompressor
+        ;ld      hl, Bg_Choose_Fighter_Screen_Part_0
+        ld      de, UncompressedData
+        call    dzx0_standard
+    pop     de
+
+NAMTBL_SC8:     equ 0x00000
+
+    ; load uncompressed data to screen     
+    ld		hl, UncompressedData   			        ; RAM address (source)
+    ld      a, 0                                    ; VRAM address (destiny, bit 16)
+    ;ld		de, NAMTBL_SC8                          ; VRAM address (destiny, bits 15-0)
+    ld		c, 0 + (UncompressedData.size / 256)    ; Block length * 256
+    call    LDIRVM_MSX2    
+    
+    ret
+
+
+; --------------------------------------------------
 
 Palette:
     INCBIN "Images/mk.pal"

@@ -206,6 +206,12 @@ SNSMAT_Line_5:      rb 1
 SNSMAT_Line_8:      rb 1
 
 
+
+; Buffer for ZX0 decompressed data
+UncompressedData:     rb 8192
+.size:      equ $ - UncompressedData
+
+
 ; ----------------------------
 
 ; Debug:

@@ -257,3 +257,44 @@ MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 17
 MegaRom_Page_17_size: equ $ - 0x8000 ; 0x2779 = 10105 bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 18 -------------------------------------------------
+
+MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0: equ 18
+
+	org	0x8000, 0xBFFF
+Bg_Choose_Fighter_Screen_Part_0:
+    INCBIN "Images/choose-fighter-screen-parts_aa.sr8.zx0"
+;.size:      equ $ - Bg_Choose_Fighter_Screen_Part_0
+
+Bg_Choose_Fighter_Screen_Part_1:
+    INCBIN "Images/choose-fighter-screen-parts_ab.sr8.zx0"
+
+Bg_Choose_Fighter_Screen_Part_2:
+    INCBIN "Images/choose-fighter-screen-parts_ac.sr8.zx0"
+
+Bg_Choose_Fighter_Screen_Part_3:
+    INCBIN "Images/choose-fighter-screen-parts_ad.sr8.zx0"
+
+MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0_size:      equ $ - Bg_Choose_Fighter_Screen_Part_0
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 19 -------------------------------------------------
+
+MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1: equ 19
+
+	org	0x8000, 0xBFFF
+Bg_Choose_Fighter_Screen_Part_4:
+    INCBIN "Images/choose-fighter-screen-parts_ae.sr8.zx0"
+
+Bg_Choose_Fighter_Screen_Part_5:
+    INCBIN "Images/choose-fighter-screen-parts_af.sr8.zx0"
+
+Bg_Choose_Fighter_Screen_Part_6:
+    INCBIN "Images/choose-fighter-screen-parts_ag.sr8.zx0"
+
+MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1_size:      equ $ - Bg_Choose_Fighter_Screen_Part_4
+
+	ds PageSize - ($ - 0x8000), 255
+
