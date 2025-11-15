@@ -283,6 +283,7 @@ MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0_size:      equ $ - Bg_Choose_Fighter_Scr
 ; ------------------------------------------------- Page 19 -------------------------------------------------
 
 MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1: equ 19
+MEGAROM_PAGE_BG_TITLE_0: equ 19
 
 	org	0x8000, 0xBFFF
 Bg_Choose_Fighter_Screen_Part_4:
@@ -293,6 +294,9 @@ Bg_Choose_Fighter_Screen_Part_5:
 
 Bg_Choose_Fighter_Screen_Part_6:
     INCBIN "Images/choose-fighter-screen-parts_ag.sr8.zx0"
+
+Bg_Title_Part_0:
+    INCBIN "Images/mk-title-parts_aa.zx0"
 
 MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1_size:      equ $ - Bg_Choose_Fighter_Screen_Part_4
 
