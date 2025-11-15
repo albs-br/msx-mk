@@ -298,7 +298,33 @@ Bg_Choose_Fighter_Screen_Part_6:
 Bg_Title_Part_0:
     INCBIN "Images/mk-title-parts_aa.zx0"
 
+Bg_Title_Part_1:
+    INCBIN "Images/mk-title-parts_ab.zx0"
+
 MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1_size:      equ $ - Bg_Choose_Fighter_Screen_Part_4
 
 	ds PageSize - ($ - 0x8000), 255
 
+; ------------------------------------------------- Page 20 -------------------------------------------------
+MEGAROM_PAGE_BG_TITLE_1: equ 20
+
+	org	0x8000, 0xBFFF
+
+Bg_Title_Part_2:
+    INCBIN "Images/mk-title-parts_ac.zx0"
+
+Bg_Title_Part_3:
+    INCBIN "Images/mk-title-parts_ad.zx0"
+
+Bg_Title_Part_4:
+    INCBIN "Images/mk-title-parts_ae.zx0"
+
+Bg_Title_Part_5:
+    INCBIN "Images/mk-title-parts_af.zx0"
+
+Bg_Title_Part_6:
+    INCBIN "Images/mk-title-parts_ag.zx0"
+
+MEGAROM_PAGE_BG_TITLE_1_size:      equ $ - Bg_Title_Part_2
+
+	ds PageSize - ($ - 0x8000), 255
