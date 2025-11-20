@@ -499,6 +499,17 @@ LDIRVM_MSX2:
     jp      nz, .loop_1
 	ret
 
+; Inputs:
+; 	HL: source addr in RAM
+; 	ADE: 17 bits destiny addr in VRAM
+; 	B: number of bytes
+LDIRVM_MSX2_Less_Than_256_bytes:
+    ex		de, hl
+        call    SetVdp_Write
+    ex		de, hl
+    ld      c, PORT_0        ; you can also write ld bc,#nn9B, which is faster
+    otir
+	ret
 
 
 ; ;Random number generator:

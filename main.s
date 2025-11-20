@@ -52,11 +52,11 @@ Execute:
 
 
 
-    call    TitleScreen
+    ; call    TitleScreen ; [debug]
 
 
 
-    call    ChooseFighterScreen
+    ; call    ChooseFighterScreen ; [debug]
 
 
 
@@ -107,6 +107,8 @@ Execute:
     ld      hl, 0x8000
     call    LoadImageTo_SC5_Page
 
+
+    call    DrawLifeBars
 
 
     call    OPL4_Init
@@ -180,6 +182,8 @@ Triple_Buffer_Loop:
     call    CheckCollision_Hurtboxes
     call    CheckCollision_Hitboxes
     
+  
+
     ; -------
 
     ld      a, (TripleBuffer_Vars.Step)
@@ -438,7 +442,54 @@ NAMTBL_SC8:     equ 0x00000
 Palette:
     INCBIN "Images/mk.pal"
 
+; --------------------------------------------------------
 
+; size: 90x12 pixels
+; left bar position: 23, 31
+
+LeftBar:
+    .X:             equ 11 ; 22/2
+    .Y:             equ 14
+    .size:          equ 45
+
+Color:
+    .Yellow_Green:    equ 0xf7
+    .Double_Yellow:   equ 0xff
+    .Double_Green:    equ 0x77
+    .Double_Red:      equ 0x44
+
+LifeBar_Line_Yellow: 
+    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+
+LifeBar_Line_Middle: 
+    db  Color.Yellow_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+
+DrawLifeBars:
+
+    ; load data to screen     
+    ld		hl, LifeBar_Line_Yellow			            ; RAM address (source)
+    ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
+    ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + (LeftBar.Y * 128))    ; VRAM address (destiny, bits 15-0)
+    ld		b, 0 + (LeftBar.size)                  ; Block length
+    call    LDIRVM_MSX2_Less_Than_256_bytes
+
+    ; load data to screen     
+    ld		hl, LifeBar_Line_Middle			            ; RAM address (source)
+    ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
+    ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + ((LeftBar.Y + 1) * 128))    ; VRAM address (destiny, bits 15-0)
+    ld		b, 0 + (LeftBar.size)                  ; Block length
+    call    LDIRVM_MSX2_Less_Than_256_bytes
+
+    ret
 
 
 

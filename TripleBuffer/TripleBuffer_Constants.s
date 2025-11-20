@@ -17,6 +17,8 @@ Y_BASE_PAGE_2:      equ 512 ; page 2
 Y_BASE_PAGE_3:      equ 768 ; page 3
 
 
+NAMTBL_ADRR_PAGE_3:     equ Y_BASE_PAGE_3 * 128
+
 
 FrameHeader_Struct:
     .yOffset:               equ 0   ; signed word
