@@ -716,8 +716,9 @@ UpdateHurtbox:
     add     8
     ld      (ix + Player_Struct.HurtBox_X), a
 
-    ; HurtBox_Y = Player.Y
+    ; HurtBox_Y = Player.Y + 1
     ld      a, (ix + Player_Struct.Y)
+    inc     a
     ld      (ix + Player_Struct.HurtBox_Y), a
 
     ; HurtBox_Width = Player.Width - 16
@@ -725,8 +726,9 @@ UpdateHurtbox:
     sub     16
     ld      (ix + Player_Struct.HurtBox_Width), a
 
-    ; HurtBox_Height = Player.Height
+    ; HurtBox_Height = Player.Height - 2
     ld      a, (ix + Player_Struct.Height)
+    sub     2
     ld      (ix + Player_Struct.HurtBox_Height), a
 
     ret

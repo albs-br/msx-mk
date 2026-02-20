@@ -52,11 +52,11 @@ Execute:
 
 
 
-    ; call    TitleScreen ; [debug]
+    call    TitleScreen ; [debug]
 
 
 
-    ; call    ChooseFighterScreen ; [debug]
+    call    ChooseFighterScreen ; [debug]
 
 
 
@@ -124,10 +124,10 @@ Execute:
     ld      bc, Restore_BG_HMMM_Parameters_size
     ldir
 
-    ; ld      hl, LINE_Parameters
-    ; ld      de, TripleBuffer_Vars_LINE_Command
-    ; ld      bc, LINE_Parameters_size
-    ; ldir
+    ld      hl, LINE_Parameters
+    ld      de, TripleBuffer_Vars_LINE_Command
+    ld      bc, LINE_Parameters_size
+    ldir
 
     xor     a
     ld      (TripleBuffer_Vars.Step), a
@@ -223,6 +223,7 @@ Triple_Buffer_Step_0:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
+    ld      hl, Y_BASE_PAGE_1
     call    DrawSprite
 
 
@@ -239,6 +240,7 @@ Triple_Buffer_Step_0:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_1
+    ld      hl, Y_BASE_PAGE_1
     call    DrawSprite
 
 
@@ -278,6 +280,7 @@ Triple_Buffer_Step_1:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_2
+    ld      hl, Y_BASE_PAGE_2
     call    DrawSprite
 
 
@@ -294,6 +297,7 @@ Triple_Buffer_Step_1:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_2
+    ld      hl, Y_BASE_PAGE_2
     call    DrawSprite
 
 
@@ -331,6 +335,7 @@ Triple_Buffer_Step_2:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_0
+    ld      hl, Y_BASE_PAGE_0
     call    DrawSprite
 
 
@@ -347,6 +352,7 @@ Triple_Buffer_Step_2:
     call    GetCurrentFrameAndGoToNext
     
     ld      a, R14_PAGE_0
+    ld      hl, Y_BASE_PAGE_0
     call    DrawSprite
 
 
@@ -509,15 +515,19 @@ Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
 
 
 
-; LINE_Parameters:
-;     .Start_X:    dw    0      ; Starting point X (9 bits)
-;     .Start_Y:    dw    0      ; Starting point Y (10 bits)
-;     .Cols:       dw    0      ; number of cols (9 bits)
-;     .Lines:      dw    0      ; number of lines (10 bits)
-;     .Color:      db   15      ; 4 bits (G4, G5), 2 bits (G6), 8 bits (G7)
-;     .Options:    db    0      ; select destination memory and direction from base coordinate
-;     .Command:    db    VDP_COMMAND_LINE
-; LINE_Parameters_size: equ $ - LINE_Parameters
+LINE_Parameters:
+    .Start_X:    dw    0      ; Starting point X (9 bits)
+    .Start_Y:    dw    0      ; Starting point Y (10 bits)
+    .LongSide:   dw    0      ; long side (9 bits)
+    .ShortSide:  dw    0      ; short side (10 bits)
+    .Color:      db   15      ; 4 bits (G4, G5), 2 bits (G6), 8 bits (G7)
+    .Options:    db    0000 0000 b     ; bit 0: defines short and long side
+    .Command:    db    VDP_COMMAND_LINE
+LINE_Parameters_size: equ $ - LINE_Parameters
+
+
+
+
 
 ; ----------------------------------------------------------
 
@@ -622,7 +632,7 @@ Page_0x4000_size: equ $ - Execute ; 0x04ba
 
 ; RAM
 
-	org     0xc000, 0xe5ff                   ; for machines with 16kb of RAM (use it if you need 16kb RAM, will crash on 8kb machines, such as the Casio PV-7)
+	; org     0xc000, 0xe5ff                   ; for machines with 16kb of RAM (use it if you need 16kb RAM, will crash on 8kb machines, such as the Casio PV-7)
 
     INCLUDE "Variables.s"
 

@@ -1,5 +1,6 @@
 RamStart:
 
+    org     0xc000 ; fixed addr to make it easier to track on tcl debug script
 
 ; ----------------------------
 
@@ -14,6 +15,7 @@ RamStart:
 TripleBuffer_Vars:
     .Step:                  rb 1
     .R14_Value:             rb 1
+    .DrawingPage_Y:         rw 1
 
 TripleBuffer_Vars_RestoreBG_HMMM_Command:
     .Source_X:   rw 1
@@ -27,18 +29,17 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
     .Command:    rb 1
 
 
-; TripleBuffer_Vars_LINE_Command:
-;     .Source_X:   rw 1
-;     .Source_Y:   rw 1
-;     .Destiny_X:  rw 1
-;     .Destiny_Y:  rw 1
-;     .Cols:       rw 1
-;     .Lines:      rw 1
-;     .NotUsed:    rb 1
-;     .Options:    rb 1
-;     .Command:    rb 1
+TripleBuffer_Vars_LINE_Command:
+    .Start_X:    rw 1 ; R#36 and R#37
+    .Start_Y:    rw 1 ; R#38 and R#39
+    .LongSide:   rw 1 ; R#40 and R#41
+    .ShortSide:  rw 1 ; R#42 and R#43
+    .Color:      rb 1 ; R#44
+    .Options:    rb 1 ; R#45
+    .Command:    rb 1 ; R#46
 
 ; ----------------------------
+
 
 Object_Struct:
     .X:                                 equ 0
@@ -85,6 +86,8 @@ Player_Struct:
     .IsCrouching:                       equ Player_1_Vars.IsCrouching                    - Player_1_Vars
     .AllAnimations_Addr:                equ Player_1_Vars.AllAnimations_Addr             - Player_1_Vars
 
+    org     0xc100 ; fixed addr to make it easier to track on tcl debug script
+
 Player_1_Vars:
     .X:                                 rb 1
     .Y:                                 rb 1
@@ -125,6 +128,7 @@ Player_1_Vars:
 Player_Struct_size: equ $ - Player_1_Vars
 
 
+    org     0xc200 ; fixed addr to make it easier to track on tcl debug script
 
 Player_2_Vars:
     .X:                                 rb 1
@@ -189,6 +193,7 @@ POSITION:
     
 ; ----------------------------
 
+    org     0xc300 ; fixed addr to make it easier to track on tcl debug script
 
 OldSP:              rw 1
 

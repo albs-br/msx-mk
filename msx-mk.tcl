@@ -14,9 +14,9 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xe064      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xe30d      -type byte      -desc LastFps     -format dec
 
-ram_watch   add     0xe066      -type byte      -desc IsOPL4Available     -format dec
+ram_watch   add     0xe30f      -type byte      -desc IsOPL4Available     -format dec
 
 
 #ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
@@ -25,19 +25,23 @@ ram_watch   add     0xe066      -type byte      -desc IsOPL4Available     -forma
 #ram_watch   add     0xc02f      -type byte      -desc P2.CurrFrame     -format dec
 
 
-ram_watch   add     0xc011      -type byte      -desc P1_X     -format dec
-ram_watch   add     0xc012      -type byte      -desc P1_Y     -format dec
-ram_watch   add     0xc02d      -type byte      -desc P1_Position     -format dec
-ram_watch   add     0xc030      -type byte      -desc P1_IsBlocking   -format dec
-ram_watch   add     0xc031      -type byte      -desc P1_IsCrouching  -format dec
-ram_watch   add     0xc02f      -type byte      -desc P1_IsAnimating  -format dec
-ram_watch   add     0xc02e      -type byte      -desc P1_IsGrounded     -format dec
+ram_watch   add     0xc100      -type byte      -desc P1_X     -format dec
+ram_watch   add     0xc101      -type byte      -desc P1_Y     -format dec
+#ram_watch   add     0xc102      -type byte      -desc P1_Position     -format dec
+#ram_watch   add     0xc030      -type byte      -desc P1_IsBlocking   -format dec
+#ram_watch   add     0xc031      -type byte      -desc P1_IsCrouching  -format dec
+#ram_watch   add     0xc02f      -type byte      -desc P1_IsAnimating  -format dec
+#ram_watch   add     0xc02e      -type byte      -desc P1_IsGrounded     -format dec
 
-ram_watch   add     0xc019      -type byte      -desc P1_HitB_X     -format dec
-ram_watch   add     0xc01a      -type byte      -desc P1_HitB_Y     -format dec
-ram_watch   add     0xc01b      -type byte      -desc P1_HitB_Width  -format dec
-ram_watch   add     0xc01c      -type byte      -desc P1_HitB_Height -format dec
+#ram_watch   add     0xc019      -type byte      -desc P1_HitB_X     -format dec
+#ram_watch   add     0xc01a      -type byte      -desc P1_HitB_Y     -format dec
+#ram_watch   add     0xc01b      -type byte      -desc P1_HitB_Width  -format dec
+#ram_watch   add     0xc01c      -type byte      -desc P1_HitB_Height -format dec
 
+ram_watch   add     0xc104      -type byte      -desc P1_HurtB_X     -format dec
+ram_watch   add     0xc105      -type byte      -desc P1_HurtB_Y     -format dec
+ram_watch   add     0xc106      -type byte      -desc P1_HurtB_Width  -format dec
+ram_watch   add     0xc107      -type byte      -desc P1_HurtB_Height -format dec
 
 
 
@@ -46,10 +50,6 @@ ram_watch   add     0xc01c      -type byte      -desc P1_HitB_Height -format dec
 
 #ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
 
-#ram_watch   add     0xc015      -type byte      -desc P1_Hb_X     -format dec
-#ram_watch   add     0xc016      -type byte      -desc P1_Hb_Y     -format dec
-#ram_watch   add     0xc017      -type byte      -desc P1_Hb_Width     -format dec
-#ram_watch   add     0xc018      -type byte      -desc P1_Hb_Height     -format dec
 
 #ram_watch   add     0xc031      -type byte      -desc P2_X     -format dec
 #ram_watch   add     0xc032      -type byte      -desc P2_Y     -format dec
@@ -59,3 +59,8 @@ ram_watch   add     0xc01c      -type byte      -desc P1_HitB_Height -format dec
 #ram_watch   add     0xc037      -type byte      -desc P2_Hb_Width     -format dec
 #ram_watch   add     0xc038      -type byte      -desc P2_Hb_Height     -format dec
 
+# TripleBuffer_Vars_LINE_Command:
+ram_watch   add     0xc013      -type word      -desc LINE_X -format dec
+ram_watch   add     0xc015      -type word      -desc LINE_Y -format dec
+ram_watch   add     0xc017      -type word      -desc LINE_Cols -format dec
+ram_watch   add     0xc019      -type word      -desc LINE_Lines -format dec

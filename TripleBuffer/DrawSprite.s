@@ -1,10 +1,12 @@
 
 ; Inputs:
 ;   A: value of R#14 to set VDP to write/read VRAM (constants: R14_PAGE_n)
+;   HL: base y coord of the page that will be draw
 ;   IY: addr of current frame header
 ;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
 
+    ld      (TripleBuffer_Vars.DrawingPage_Y), hl
 
     ld      (TripleBuffer_Vars.R14_Value), a
     ; set R#14
@@ -243,43 +245,8 @@ DrawSprite:
     ei
 
 
-;     ; --- debug
-;     ; -------------- draw HurtBox
-;     ld      a, 0000 0000 b
-;     ld      l, (ix + Player_Struct.VRAM_NAMTBL_Addr)
-;     ld      h, (ix + Player_Struct.VRAM_NAMTBL_Addr + 1)
-;     call    SetVdp_Write
-;     ld      c, PORT_0        ; you can also write ld bc,#nn9B, which is faster
-;     ld      b, 16 ; number of bytes
-; .loop_drawHurtbox:
-;     ld      a, 0xee ; color (two pixels)
-;     out     (c), a
-;     djnz    .loop_drawHurtbox
-
-    ; using LINE cmd (not working)
-    ; ld      h, 0
-    ; ld      l, (ix + Player_Struct.HurtBox_X)
-    ; ld      (TripleBuffer_Vars_LINE_Command), hl
-
-    ; ld      h, 0
-    ; ld      l, (ix + Player_Struct.HurtBox_Y)
-    ; ld      (TripleBuffer_Vars_LINE_Command + 2), hl
-
-    ; ld      h, 0
-    ; ld      l, (ix + Player_Struct.HurtBox_Width)
-    ; ld      (TripleBuffer_Vars_LINE_Command + 4), hl
-
-    ; ld      h, 0
-    ; ld      l, (ix + Player_Struct.HurtBox_Height)
-    ; ld      hl, 80
-    ; ld      (TripleBuffer_Vars_LINE_Command + 6), hl
-
-    ; ; ld      a, 7 ; color
-    ; ; ld      (TripleBuffer_Vars_LINE_Command + 8), a
-
-    ; ld      hl, TripleBuffer_Vars_LINE_Command
-    ; call    Execute_VDP_LINE
-
+    ; debug
+    call    DrawHurtBox
 
 
 
@@ -496,3 +463,102 @@ DrawSprite_After16kb:
 ;     jp  nz, .loop
 
 ;     jp  .endFrame
+
+
+DrawHurtBox:
+;     ; --- debug
+;     ; -------------- draw HurtBox
+
+    ; --- using LINE cmd
+    
+    ; top line
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_X)
+    ld      (TripleBuffer_Vars_LINE_Command.Start_X), hl
+
+
+    ld      de, (TripleBuffer_Vars.DrawingPage_Y)
+
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_Y)
+    add     hl, de
+    ld      (TripleBuffer_Vars_LINE_Command.Start_Y), hl
+
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_Width)
+    ld      (TripleBuffer_Vars_LINE_Command.LongSide), hl
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_Height)
+    ld      hl, 0
+    ld      (TripleBuffer_Vars_LINE_Command.ShortSide), hl
+
+
+    ld      a, 0000 0000 b ; bit 0: defines short and long side
+    ld      (TripleBuffer_Vars_LINE_Command.Options), a
+
+    ; ld      a, 7 ; color
+    ; ld      (TripleBuffer_Vars_LINE_Command + 8), a
+
+    ld      hl, TripleBuffer_Vars_LINE_Command
+    call    Execute_VDP_LINE
+
+
+
+    ; bottom line
+    ld      de, (TripleBuffer_Vars.DrawingPage_Y)
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_Y)
+    add     hl, de
+
+    ld      d, 0
+    ld      e, (ix + Player_Struct.HurtBox_Height)
+    add     hl, de
+    ld      (TripleBuffer_Vars_LINE_Command.Start_Y), hl
+
+    ld      hl, TripleBuffer_Vars_LINE_Command
+    call    Execute_VDP_LINE
+
+
+
+    ; left line
+    ld      de, (TripleBuffer_Vars.DrawingPage_Y)
+
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_Y)
+    add     hl, de
+    ld      (TripleBuffer_Vars_LINE_Command.Start_Y), hl
+
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_Height)
+    ; ld      hl, 10
+    ld      (TripleBuffer_Vars_LINE_Command.LongSide), hl
+
+    ; ld      h, 0
+    ; ld      l, (ix + Player_Struct.HurtBox_Height)
+    ld      hl, 0
+    ld      (TripleBuffer_Vars_LINE_Command.ShortSide), hl
+
+    ld      a, 0000 0001 b ; bit 0: defines short and long side
+    ld      (TripleBuffer_Vars_LINE_Command.Options), a
+
+    ld      hl, TripleBuffer_Vars_LINE_Command
+    call    Execute_VDP_LINE
+
+
+
+    ; right line
+    ld      d, 0
+    ld      e, (ix + Player_Struct.HurtBox_Width)
+
+    ld      h, 0
+    ld      l, (ix + Player_Struct.HurtBox_X)
+    add     hl, de
+    ld      (TripleBuffer_Vars_LINE_Command.Start_X), hl
+
+
+    ld      hl, TripleBuffer_Vars_LINE_Command
+    call    Execute_VDP_LINE
+
+
+    ret
