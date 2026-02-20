@@ -170,27 +170,35 @@ DrawSprite:
         ld      l, e
         ld      h, d
 
+        ld      c, PORT_0
+
 .loop:
 
             ; -----------------------------------------------------------
             ; Read list
 
-            pop     bc              ; B = length, C = increment
+
+            ; optimization feb/2026: instead of POP BC, POP DE, use POP DE twice, leaving C register fixed to PORT_0
+            ; before 171/166
+            ; after 158/153
+            ; saved 13 cycles/slice, average 150 slices/frame = 1950 cycles/frame
+
+            pop     de              ; D = length, E = increment
             xor     a
-            or      c
+            or      e
             jr      z, .endFrame ; if (increment == 0) endFrame
 
-            ld      a, b
+            ld      b, d            ; B = length
 
-            pop     de              ; DE = slice data address
+            ; pop     de              ; DE = slice data address
 
             ; --- set VRAM addr
 
             ; HL = (Last_NAMTBL_Addr) + increment
-            ld      b, 0
-            add     hl, bc  ; BC = increment
+            ld      d, 0
+            add     hl, de  ; DE = increment
 
-            ld      b, a    ; B = length
+            ; ld      b, a    ; B = length
 
             ; write the lower 14 bits of the address to VDP PORT_1
             ld      a, l
@@ -210,11 +218,14 @@ DrawSprite:
     ;.continue:
 
 
+            pop     de              ; DE = slice data address
+
+
             ; HL = DE (slice data address)
             ; DE = HL (VRAM NAMTBL addr)
             ex      de, hl
 
-                ld      c, PORT_0
+                ; ld      c, PORT_0
                 otir
 
             ; HL = DE (VRAM NAMTBL addr)
@@ -376,21 +387,26 @@ DrawSprite_After16kb:
         ; -----------------------------------------------------------
         ; Read list
 
-        pop     bc              ; B = length, C = increment
+        ; optimization feb/2026: instead of POP BC, POP DE, use POP DE twice, leaving C register fixed to PORT_0
+        ; before 145/140
+        ; after 132/127
+        ; saved 13 cycles/slice, average 150 slices/frame = 1950 cycles/frame
+
+        pop     de              ; D = length, E = increment
         xor     a
-        or      c
+        or      e
         jr      z, DrawSprite.endFrame ; if (increment == 0) endFrame
 
-        ld      a, b
+        ld      b, d            ; B = length
 
-        pop     de              ; DE = slice data address
+        ; pop     de              ; DE = slice data address
 
         ; --- set VRAM addr
 
-        ld      b, 0
-        add     hl, bc  ; BC = increment
+        ld      d, 0
+        add     hl, de  ; DE = increment
 
-        ld      b, a    ; B = length
+        ; ld      b, a    ; B = length
 
         ; write the lower 14 bits of the address to VDP PORT_1
         ld      a, l
@@ -411,11 +427,14 @@ DrawSprite_After16kb:
 .continue:
 
 
+        pop     de              ; DE = slice data address
+
+
         ; HL = DE (slice data address)
         ; DE = HL (VRAM NAMTBL addr)
         ex      de, hl
 
-            ld      c, PORT_0
+            ; ld      c, PORT_0
             otir
 
         ; HL = DE (VRAM NAMTBL addr)

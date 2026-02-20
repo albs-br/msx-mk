@@ -14,9 +14,9 @@
 
 #ram_watch   add     0xc01f      -type byte      -desc P2_curr_frame     -format dec
 
-ram_watch   add     0xc064      -type byte      -desc LastFps     -format dec
+ram_watch   add     0xe064      -type byte      -desc LastFps     -format dec
 
-ram_watch   add     0xc066      -type byte      -desc IsOPL4Available     -format dec
+ram_watch   add     0xe066      -type byte      -desc IsOPL4Available     -format dec
 
 
 #ram_watch   add     0xc006      -type byte      -desc PlayerInput     -format hex
