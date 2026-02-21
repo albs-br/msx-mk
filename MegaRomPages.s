@@ -307,6 +307,7 @@ MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1_size:      equ $ - Bg_Choose_Fighter_Scr
 
 ; ------------------------------------------------- Page 20 -------------------------------------------------
 MEGAROM_PAGE_BG_TITLE_1: equ 20
+MEGAROM_PAGE_LIFEBARS: equ 20
 
 	org	0x8000, 0xBFFF
 
@@ -325,6 +326,10 @@ Bg_Title_Part_5:
 Bg_Title_Part_6:
     INCBIN "Images/mk-title-parts_ag.zx0"
 
-MEGAROM_PAGE_BG_TITLE_1_size:      equ $ - Bg_Title_Part_2
+Lifebars_SC5:
+    INCBIN "Images/lifebars.sc5"
+Lifebars_SC5_size: equ $ - Lifebars_SC5
+
+MEGAROM_PAGE_20_size:      equ $ - 0x8000
 
 	ds PageSize - ($ - 0x8000), 255

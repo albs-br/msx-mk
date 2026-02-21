@@ -108,7 +108,7 @@ Execute:
     call    LoadImageTo_SC5_Page
 
 
-    ; call    DrawLifeBars
+    call    DrawLifeBars
 
 
     call    OPL4_Init
@@ -458,42 +458,61 @@ LeftBar:
     .Y:             equ 14
     .size:          equ 45
 
-Color:
-    .Yellow_Green:    equ 0xf7
-    .Double_Yellow:   equ 0xff
-    .Double_Green:    equ 0x77
-    .Double_Red:      equ 0x44
+; Color:
+;     .Yellow_Green:    equ 0xf7
+;     .Double_Yellow:   equ 0xff
+;     .Double_Green:    equ 0x77
+;     .Double_Red:      equ 0x44
 
-LifeBar_Line_Yellow: 
-    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
-    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
-    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
-    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
-    db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+; LifeBar_Line_Yellow: 
+;     db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+;     db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+;     db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+;     db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
+;     db  Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow, Color.Double_Yellow
 
-LifeBar_Line_Middle: 
-    db  Color.Yellow_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
-    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
-    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
-    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
-    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
-    db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+; LifeBar_Line_Middle: 
+;     db  Color.Yellow_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+;     db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+;     db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+;     db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+;     db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
+;     db  Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green, Color.Double_Green
 
 DrawLifeBars:
 
-    ; load data to screen     
-    ld		hl, LifeBar_Line_Yellow			            ; RAM address (source)
-    ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
-    ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + (LeftBar.Y * 128))    ; VRAM address (destiny, bits 15-0)
-    ld		b, 0 + (LeftBar.size)                  ; Block length
-    call    LDIRVM_MSX2_Less_Than_256_bytes
+    ; ; load data to screen     
+    ; ld		hl, LifeBar_Line_Yellow			            ; RAM address (source)
+    ; ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
+    ; ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + (LeftBar.Y * 128))    ; VRAM address (destiny, bits 15-0)
+    ; ld		b, 0 + (LeftBar.size)                  ; Block length
+    ; call    LDIRVM_MSX2_Less_Than_256_bytes
 
-    ; load data to screen     
-    ld		hl, LifeBar_Line_Middle			            ; RAM address (source)
-    ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
-    ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + ((LeftBar.Y + 1) * 128))    ; VRAM address (destiny, bits 15-0)
-    ld		b, 0 + (LeftBar.size)                  ; Block length
-    call    LDIRVM_MSX2_Less_Than_256_bytes
+    ; ; load data to screen     
+    ; ld		hl, LifeBar_Line_Middle			            ; RAM address (source)
+    ; ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
+    ; ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + ((LeftBar.Y + 1) * 128))    ; VRAM address (destiny, bits 15-0)
+    ; ld		b, 0 + (LeftBar.size)                  ; Block length
+    ; call    LDIRVM_MSX2_Less_Than_256_bytes
+
+    ld	    a, MEGAROM_PAGE_LIFEBARS
+    ld	    (Seg_P8000_SW), a
+
+    ld      a, 0 + (((1024 - 44) * 128) AND 0x10000) >> 16  ; bit 16 of VRAM addr
+    ld      hl, 0 + ((1024 - 44) * 128) AND 0x0ffff         ; bits 0-15 of VRAM addr
+    call    SetVdp_Write
+    ld      hl, Lifebars_SC5
+    ld      c, PORT_0
+    ld      de, 0 + (Lifebars_SC5_size)
+    xor     a
+.loop:    
+    outi
+    dec     de
+    cp      e
+    jp      nz, .loop
+    cp      d
+    jp      nz, .loop
+
 
     ret
 
