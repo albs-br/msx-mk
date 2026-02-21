@@ -43,6 +43,10 @@ ram_watch   add     0xc105      -type byte      -desc P1_HurtB_Y     -format dec
 ram_watch   add     0xc106      -type byte      -desc P1_HurtB_Width  -format dec
 ram_watch   add     0xc107      -type byte      -desc P1_HurtB_Height -format dec
 
+ram_watch   add     0xc108      -type byte      -desc P1_HitB_X     -format dec
+ram_watch   add     0xc109      -type byte      -desc P1_HitB_Y     -format dec
+ram_watch   add     0xc10a      -type byte      -desc P1_HitB_Width  -format dec
+ram_watch   add     0xc10b      -type byte      -desc P1_HitB_Height -format dec
 
 
 

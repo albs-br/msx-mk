@@ -22,7 +22,7 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "TripleBuffer/RestoreBg.s" 
     INCLUDE "TripleBuffer/SetActivePage.s" 
     INCLUDE "TripleBuffer/GetCurrentFrameAndGoToNext.s"
-    ; INCLUDE "TripleBuffer/GoToNextFrame.s"
+    INCLUDE "TripleBuffer/DrawHurtAndHitBox.s"
 
     INCLUDE "Screens/TitleScreen.s"
     INCLUDE "Screens/ChooseFighterScreen.s"
@@ -52,11 +52,11 @@ Execute:
 
 
 
-    call    TitleScreen ; [debug]
+    ; call    TitleScreen ; [debug]
 
 
 
-    call    ChooseFighterScreen ; [debug]
+    ; call    ChooseFighterScreen ; [debug]
 
 
 
@@ -520,7 +520,7 @@ LINE_Parameters:
     .Start_Y:    dw    0      ; Starting point Y (10 bits)
     .LongSide:   dw    0      ; long side (9 bits)
     .ShortSide:  dw    0      ; short side (10 bits)
-    .Color:      db   15      ; 4 bits (G4, G5), 2 bits (G6), 8 bits (G7)
+    .Color:      db    15     ; 4 bits (G4, G5), 2 bits (G6), 8 bits (G7)
     .Options:    db    0000 0000 b     ; bit 0: defines short and long side
     .Command:    db    VDP_COMMAND_LINE
 LINE_Parameters_size: equ $ - LINE_Parameters
