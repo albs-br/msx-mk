@@ -108,7 +108,7 @@ Execute:
     call    LoadImageTo_SC5_Page
 
 
-    call    DrawLifeBars
+    ; call    DrawLifeBars
 
 
     call    OPL4_Init
@@ -131,7 +131,7 @@ Execute:
 
     xor     a
     ld      (TripleBuffer_Vars.Step), a
-
+    ld      (IsDebugModeActivated), a
 
 
     call    Players_Init

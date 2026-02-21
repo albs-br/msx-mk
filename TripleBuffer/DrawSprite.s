@@ -1,7 +1,7 @@
 
 ; Inputs:
-;   A: value of R#14 to set VDP to write/read VRAM (constants: R14_PAGE_n)
-;   HL: base y coord of the page that will be draw
+;   A: value of R#14 to set VDP to write/read VRAM (constant: R14_PAGE_n)
+;   HL: base y coord of the page that will be draw (constant: Y_BASE_PAGE_0)
 ;   IY: addr of current frame header
 ;   IX: Player Vars base addr (already pointing to next frame)
 DrawSprite:
@@ -10,10 +10,10 @@ DrawSprite:
 
     ld      (TripleBuffer_Vars.R14_Value), a
     ; set R#14
-    ; ld a, 0000 0000 b ; page 0
-    ; ld a, 0000 0010 b ; page 1
-    ; ld a, 0000 0100 b ; page 2
-    ; ld a, 0000 0110 b ; page 3
+    ; ld a, 0000 0000 b ; SC5 page 0
+    ; ld a, 0000 0010 b ; SC5 page 1
+    ; ld a, 0000 0100 b ; SC5 page 2
+    ; ld a, 0000 0110 b ; SC5 page 3
     di
         ; write bits a14-16 of address to R#14
         out     (PORT_1), a ; data
@@ -245,8 +245,10 @@ DrawSprite:
     ei
 
 
-    ; debug
-    call    DrawHurtAndHitBox
+    ; show debug mode if active
+    ld      a, (IsDebugModeActivated)
+    or      a
+    call    nz, DrawHurtAndHitBox
 
 
 
@@ -281,7 +283,6 @@ DrawSprite:
     ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
 
 
-.ddd: ; debug
     ; -------------------------
     ; if(FrameHeader_Struct.yOffset < 0) {
     ;   temp = FrameHeader_Struct.yOffset / 128; // this value is negative

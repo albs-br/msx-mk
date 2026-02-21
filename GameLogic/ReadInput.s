@@ -37,9 +37,37 @@ ReadInput:
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_5), a
 
+    ;update Old_SNSMAT_Line_7
+    ld      a, (SNSMAT_Line_7)
+    ld      (Old_SNSMAT_Line_7), a
+
+    ld      a, 7                    ; 7th line
+    call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
+    cpl
+    ld      (SNSMAT_Line_7), a
+
     ld      a, 8                    ; 8th line
     call    BIOS_SNSMAT             ; Read Data Of Specified Line From Keyboard Matrix
     ld      (SNSMAT_Line_8), a
+
+
+    ; ----------------------- F4 key (debug mode)
+    
+    ; if (Old_SNSMAT_Line_7 & 00000001b != 0) skip
+    ld      a, (Old_SNSMAT_Line_7)
+    and     0000 0001 b ; mask to get only bit 0 (F4 key)
+    or      a
+    jp      nz, .skipF4Check
+
+    ; if (SNSMAT_Line_7 & 00000001b == 1) toggleDebugMode
+    ld      a, (SNSMAT_Line_7)
+    and     0000 0001 b ; mask to get only bit 0 (F4 key)
+    or      a
+    call    nz, .toggleDebugMode
+
+.skipF4Check:
+
+    ; -----------------------
 
     ; Common moves that everybody shares:
 
@@ -475,4 +503,20 @@ ReadInput:
     or      b
     call    z, Player_SetPosition_Stance
     
+    ret
+
+.toggleDebugMode:
+
+    ld      a, (IsDebugModeActivated)
+    or      a
+    jp      z, .setDebugMode
+
+;resetDebugMode
+    xor     a
+    ld      (IsDebugModeActivated), a
+    ret
+
+.setDebugMode:
+    ld      a, 1
+    ld      (IsDebugModeActivated), a
     ret

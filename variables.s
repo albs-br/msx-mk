@@ -208,8 +208,15 @@ SNSMAT_Line_2:      rb 1
 SNSMAT_Line_3:      rb 1
 SNSMAT_Line_4:      rb 1
 SNSMAT_Line_5:      rb 1
+SNSMAT_Line_7:      rb 1
 SNSMAT_Line_8:      rb 1
 
+; Old_SNSMAT_Line_2:      rb 1
+; Old_SNSMAT_Line_3:      rb 1
+; Old_SNSMAT_Line_4:      rb 1
+; Old_SNSMAT_Line_5:      rb 1
+Old_SNSMAT_Line_7:      rb 1
+; Old_SNSMAT_Line_8:      rb 1
 
 
 ; Buffer for ZX0 decompressed data
@@ -226,5 +233,6 @@ CurrentCounter:         rb 1
 
 Var_IsOPL4Available:    rb 1
 
+IsDebugModeActivated:   rb 1
 
 RamEnd:
