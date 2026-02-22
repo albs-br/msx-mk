@@ -31,7 +31,7 @@ Scorpion_Block_Left_Frame_1: equ 09CADh ; last def. pass 3
 BIOS_T32PAT: equ 0F3C5h ; last def. pass 3
 VDP_LOGIC_OPERATION_XOR: equ 03h ; last def. pass 3
 Subzero_Walking_Right_Frame_1: equ 0A604h ; last def. pass 3
-DrawSprite_After16kb.continue: equ 04BA5h ; last def. pass 3
+DrawSprite_After16kb.continue: equ 04BBFh ; last def. pass 3
 R14_PAGE_3: equ 06h ; last def. pass 3
 LINE_Parameters.ShortSide: equ 0516Ch ; last def. pass 3
 ClearVram_MSX2: equ 040FDh ; last def. pass 3
@@ -165,7 +165,6 @@ BIOS_DECTMP: equ 0F7F0h ; last def. pass 3
 Player_2_Vars: equ 0C200h ; last def. pass 3
 BIOS_TAPIN: equ 0E4h ; last def. pass 3
 BIOS_H_CHPH: equ 0FDA4h ; last def. pass 3
-UpdateRestoreBGvars.save_Restore_BG_0_Height: equ 04BF3h ; last def. pass 3
 REG22SAV: equ 0FFF5h ; last def. pass 3
 BIOS_NSETRD: equ 016Eh ; last def. pass 3
 Bg_Title_Part_2: equ 08000h ; last def. pass 3
@@ -248,7 +247,7 @@ Player_2_Vars.IsGrounded: equ 0C21Dh ; last def. pass 3
 Scorpion_Stance_Left_Frame_4: equ 0AA76h ; last def. pass 3
 Scorpion_Kick_Left_Frame_6_Header: equ 0B86Fh ; last def. pass 3
 Wait_Vblank.loop: equ 040AAh ; last def. pass 3
-DrawSprite.yOffset_negative: equ 04B6Eh ; last def. pass 3
+DrawSprite.yOffset_negative: equ 04B88h ; last def. pass 3
 BIOS_SETMLT: equ 081h ; last def. pass 3
 CheckCollision_Obj1xObj2.x1IsLarger: equ 049ABh ; last def. pass 3
 BIOS_QUEUEN: equ 0FB3Eh ; last def. pass 3
@@ -285,7 +284,7 @@ BIOS_GRPPAT: equ 0F3CFh ; last def. pass 3
 Scorpion_Uppercut_Left_Frame_0_Header: equ 0B8E7h ; last def. pass 3
 BIOS_H_ISMI: equ 0FF7Fh ; last def. pass 3
 Scorpion_Crouching_Left_Frame_1.List: equ 0A358h ; last def. pass 3
-UpdateRestoreBGvars: equ 04BADh ; last def. pass 3
+UpdateRestoreBGvars: equ 04BC7h ; last def. pass 3
 BIOS_SETPLT: equ 014Dh ; last def. pass 3
 Scorpion_Jumping_Forward_Left_Frame_0: equ 0A4F5h ; last def. pass 3
 Player_Struct.IsCrouching: equ 020h ; last def. pass 3
@@ -316,7 +315,7 @@ Player_2_Vars.Restore_BG_0_X: equ 0C213h ; last def. pass 3
 REG5SAV: equ 0F3E4h ; last def. pass 3
 Subzero_Stance_Right_Frame_8: equ 0BA40h ; last def. pass 3
 BIOS_LINWRK: equ 0FC18h ; last def. pass 3
-DrawSprite.ignoreHurtBox: equ 04AC2h ; last def. pass 3
+DrawSprite.ignoreHurtBox: equ 04ADCh ; last def. pass 3
 Scorpion_Walking_Left_Frame_2_Header: equ 0B707h ; last def. pass 3
 MEMORY_MAPPER_SEGMENT_PAGE_3: equ 0FFh ; last def. pass 3
 Execute_VDP_LMMM: equ 041F8h ; last def. pass 3
@@ -426,7 +425,7 @@ BIOS_MAXFIL: equ 0F85Fh ; last def. pass 3
 Player_Struct.Restore_BG_0_X: equ 013h ; last def. pass 3
 Subzero_Stance_Right_Frame_11_Header: equ 0B9E6h ; last def. pass 3
 BIOS_H_DSPF: equ 0FDB3h ; last def. pass 3
-DrawSprite.cont_20: equ 04AD0h ; last def. pass 3
+DrawSprite.cont_20: equ 04AEAh ; last def. pass 3
 INPUT_LOW_KICK: equ 01h ; last def. pass 3
 MEGAROM_PAGE_SCORPION_KICK_LEFT_DATA_0: equ 0Ah ; last def. pass 3
 Player_1_Vars.Restore_BG_0_WidthInPixels: equ 0C115h ; last def. pass 3
@@ -467,11 +466,11 @@ BIOS_TOCNT: equ 0FB03h ; last def. pass 3
 Player_Struct.HitBox_Width: equ 0Ah ; last def. pass 3
 sample_0.size: equ 0C60h ; last def. pass 3
 Scorpion_Uppercut_Left_Frame_4_Header: equ 0B923h ; last def. pass 3
-DrawSprite.notOutsideOfScreen: equ 04B10h ; last def. pass 3
+DrawSprite.notOutsideOfScreen: equ 04B2Ah ; last def. pass 3
 BIOS_ASPCT2: equ 0F40Dh ; last def. pass 3
 BIOS_INTVAL: equ 0FCA0h ; last def. pass 3
 BIOS_CALBAS: equ 0159h ; last def. pass 3
-DrawSprite.endFrame: equ 04B57h ; last def. pass 3
+DrawSprite.endFrame: equ 04B71h ; last def. pass 3
 TripleBuffer_Vars_LINE_Command.LongSide: equ 0C017h ; last def. pass 3
 Player_Jump_Delta_Y: equ 045DBh ; last def. pass 3
 ClearVram_MSX2.loop_2: equ 04107h ; last def. pass 3
@@ -490,6 +489,7 @@ MEGAROM_PAGE_SCORPION_CROUCHING_LEFT_DATA_0: equ 0Bh ; last def. pass 3
 TempVars.PlayerInput_Block: equ 0C303h ; last def. pass 3
 Player_2_Vars.Restore_BG_1_HeightInPixels: equ 0C21Ah ; last def. pass 3
 BIOS_TEMPST: equ 0F67Ah ; last def. pass 3
+DrawSprite.cap_Height: equ 04AAEh ; last def. pass 3
 SNSMAT_Line_7: equ 0C30Ah ; last def. pass 3
 SetInterlacedMode: equ 04177h ; last def. pass 3
 speak: equ 04F24h ; last def. pass 3
@@ -619,7 +619,7 @@ Wait_Vblank.waitVBlank: equ 040AEh ; last def. pass 3
 Bg_Choose_Fighter_Screen_Part_4: equ 08000h ; last def. pass 3
 Subzero_Walking_Right_Frame_0.List: equ 0A3C3h ; last def. pass 3
 Scorpion_Walking_Left_Frame_6_Header: equ 0B743h ; last def. pass 3
-DrawSprite_After16kb: equ 04B96h ; last def. pass 3
+DrawSprite_After16kb: equ 04BB0h ; last def. pass 3
 MegaRom_Page_17_size: equ 02779h ; last def. pass 3
 BIOS_HIGH: equ 0F408h ; last def. pass 3
 Subzero_Walking_Right_Frame_7: equ 0B1CEh ; last def. pass 3
@@ -698,7 +698,6 @@ PPI.C: equ 0AAh ; last def. pass 3
 BIOS_LOHCNT: equ 0F94Dh ; last def. pass 3
 BIOS_TEMP: equ 0F6A7h ; last def. pass 3
 TripleBuffer_Vars.DrawingPage_Y: equ 0C002h ; last def. pass 3
-UpdateRestoreBGvars.save: equ 04BF7h ; last def. pass 3
 BIOS_EOL: equ 0168h ; last def. pass 3
 BIOS_PHYDIO: equ 0144h ; last def. pass 3
 Player_2_Vars.HurtBox_Width: equ 0C206h ; last def. pass 3
@@ -750,13 +749,14 @@ Scorpion_Block_Left_Animation_Headers: equ 0537Bh ; last def. pass 3
 BIOS_ARG: equ 0F847h ; last def. pass 3
 Palette: equ 05115h ; last def. pass 3
 LeftBar.Y: equ 0Eh ; last def. pass 3
-DrawSprite.loop: equ 04B3Ah ; last def. pass 3
+DrawSprite.loop: equ 04B54h ; last def. pass 3
 BIOS_CLS: equ 0C3h ; last def. pass 3
 SIDE.LEFT: equ 00h ; last def. pass 3
 BIOS_PRTFLG: equ 0F416h ; last def. pass 3
 TripleBuffer_Vars_RestoreBG_HMMM_Command.Source_X: equ 0C004h ; last def. pass 3
 BIOS_DISSCR: equ 041h ; last def. pass 3
 Player_Input_LowKick: equ 04796h ; last def. pass 3
+DrawSprite.save_Height: equ 04AB3h ; last def. pass 3
 sample_2.size: equ 01D40h ; last def. pass 3
 BIOS_PARM2: equ 0F750h ; last def. pass 3
 BIOS_RG9SAV: equ 0FFE8h ; last def. pass 3
@@ -863,13 +863,13 @@ BIOS_CONSAV: equ 0F668h ; last def. pass 3
 ReadInput.skipCheck_P1_Keys: equ 0445Eh ; last def. pass 3
 PushPlayersApart: equ 04A2Ah ; last def. pass 3
 MEGAROM_PAGE_SUBZERO_HURT_1_RIGHT_DATA_0: equ 0Ch ; last def. pass 3
-DrawSprite_After16kb.loop: equ 04B96h ; last def. pass 3
+DrawSprite_After16kb.loop: equ 04BB0h ; last def. pass 3
 POSITION.HIGH_KICK: equ 0Eh ; last def. pass 3
 BIOS_T32CGP: equ 0F3C1h ; last def. pass 3
 BIOS_H_TIMI: equ 0FD9Fh ; last def. pass 3
-DrawSprite.ignoreHitBox: equ 04AF6h ; last def. pass 3
+DrawSprite.ignoreHitBox: equ 04B10h ; last def. pass 3
 Player_2_Vars.Restore_BG_0_HeightInPixels: equ 0C216h ; last def. pass 3
-DrawSprite.cross16kb: equ 04B87h ; last def. pass 3
+DrawSprite.cross16kb: equ 04BA1h ; last def. pass 3
 FrameHeader_Struct.HurtBox_X: equ 07h ; last def. pass 3
 MegaRom_Page_9_size: equ 02BE0h ; last def. pass 3
 Player_1_Vars.IsCrouching: equ 0C120h ; last def. pass 3
@@ -883,7 +883,7 @@ BIOS_CASPRV: equ 0FCB1h ; last def. pass 3
 FrameHeader_Struct.Height: equ 03h ; last def. pass 3
 BIOS_PADX: equ 0FC9Dh ; last def. pass 3
 BIOS_MLTPAT: equ 0F3D9h ; last def. pass 3
-DrawSprite.cont_2: equ 04B04h ; last def. pass 3
+DrawSprite.cont_2: equ 04B1Eh ; last def. pass 3
 BIOS_H_KYEA: equ 0FDD1h ; last def. pass 3
 Restore_BG_HMMM_Parameters.Source_X: equ 05157h ; last def. pass 3
 SetVdp_Read: equ 040E3h ; last def. pass 3
@@ -953,7 +953,6 @@ BIOS_CHGCAP: equ 0132h ; last def. pass 3
 MEGAROM_PAGE_SCORPION_JUMPING_FORWARD_LEFT_DATA_0: equ 08h ; last def. pass 3
 BIOS_DONUM: equ 0F665h ; last def. pass 3
 LDIRVM_MSX2_Less_Than_256_bytes: equ 041D3h ; last def. pass 3
-UpdateRestoreBGvars.cap_Restore_BG_0_Height: equ 04BEEh ; last def. pass 3
 ReadInput.player_Input_Left: equ 04512h ; last def. pass 3
 INPUT_UP: equ 080h ; last def. pass 3
 BIOS_CMASK: equ 0F92Ch ; last def. pass 3
@@ -975,7 +974,7 @@ Player_2_Vars.HitBox_Y: equ 0C209h ; last def. pass 3
 FrameHeader_Struct.HitBox_Y: equ 0Ch ; last def. pass 3
 CheckCollision_Hitboxes.return: equ 04A25h ; last def. pass 3
 LINE_Parameters.Start_Y: equ 05168h ; last def. pass 3
-DrawSprite.yOffset_positive: equ 04B86h ; last def. pass 3
+DrawSprite.yOffset_positive: equ 04BA0h ; last def. pass 3
 OPL4_Init: equ 04E88h ; last def. pass 3
 Player_2_Vars.HitBox_Height: equ 0C20Bh ; last def. pass 3
 BIOS_VDPSTA: equ 0131h ; last def. pass 3

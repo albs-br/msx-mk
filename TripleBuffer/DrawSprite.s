@@ -36,10 +36,31 @@ DrawSprite:
 
 
 
-    ; get width and height and save to player vars
+    ; ------ get width and height and save to player vars
     ld      a, (iy + FrameHeader_Struct.Width)
     ld      (ix + Player_Struct.Width), a
+    
+    ; --- cap max height to screen limit (212)
+    ; check if Y + height is larger than 212
+    ld      h, 0
+    ld      l, (ix + Player_Struct.Y)
+
+    ld      d, 0
+    ld      e, (iy + FrameHeader_Struct.Height)
+    add     hl, de
+    ld      de, 212 ; 212 lines
+    rst     BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE); Destroys A
+    jp      nc, .cap_Height  ; (Y + height) >= 212
     ld      a, (iy + FrameHeader_Struct.Height)
+    jp      .save_Height     ; (Y + height) < 212
+    
+.cap_Height:
+    ; height = 212 - y
+    ld      a, 212
+    sub     (ix + Player_Struct.Y)
+
+.save_Height:
+    
     ld      (ix + Player_Struct.Height), a
 
 
@@ -461,55 +482,13 @@ UpdateRestoreBGvars:
 
     ld      a, (ix + Player_Struct.Y)
     ld      (ix + Player_Struct.Restore_BG_0_Y), a
-    ld      h, 0
-    ld      l, a
 
-    ; TODO: cap max width to screen limit (256)
     ld      a, (ix + Player_Struct.Width)
     ld      (ix + Player_Struct.Restore_BG_0_WidthInPixels), a
 
-
-    ; ---- cap max height to screen limit (212)
-    ; check if Y + height is larger than 212
     ld      a, (ix + Player_Struct.Height)
-    ld      d, 0
-    ld      e, a
-    add     hl, de
-    ld      de, 212 ; 212 lines
-    ; call    CapMaxValue
-    rst     BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE); Destroys A
-    jp      nc, .cap_Restore_BG_0_Height  ; (Y + height) >= 212
-    ld      a, (ix + Player_Struct.Height)
-    jp      .save_Restore_BG_0_Height     ; (Y + height) < 212
-    
-.cap_Restore_BG_0_Height:
-    ; height = 212 - y
-    ld      a, 212
-    sub     (ix + Player_Struct.Y)
-
-.save_Restore_BG_0_Height:
     ld      (ix + Player_Struct.Restore_BG_0_HeightInPixels), a
 
-; jp $ ; debug
 
     ret
 
-; ; TODO:
-; ; Inputs:
-; ;   HL: value
-; ;   DE: max value
-; ; Output:
-; ;   A: value capped
-; CapMaxValue:
-;     rst     BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE); Destroys A
-;     jp      nc, .cap  ; (Y + height) >= 212
-;     ld      a, l
-;     jp      .save     ; (Y + height) < 212
-    
-; .cap:
-;     ; A =  - y
-;     ld      a, 212
-;     sub     (ix + Player_Struct.Y)
-
-.save:
-    ret
