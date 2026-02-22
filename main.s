@@ -447,6 +447,7 @@ NAMTBL_SC8:     equ 0x00000
 
 Palette:
     INCBIN "Images/mk.pal"
+; TODO: change color 4 of the bg to color 0, so this color 4 can be used to red (blood/lifebars)
 
 ; --------------------------------------------------------
 

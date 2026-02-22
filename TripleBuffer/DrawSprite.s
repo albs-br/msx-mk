@@ -65,6 +65,24 @@ DrawSprite:
 
 
 
+    ; this check needs to be done because of the new width (it's not necessary for left screen boundary)
+    ; ----- check screen right limit
+    ; if (x >= (255-width)) x = 255 - width
+    ; ld      a, 255
+    ; sub     (ix + Player_Struct.Width)
+    ; ld      b, a ; B = max_valid_X
+    ; ld      a, (ix + Player_Struct.X)
+    ; cp      b       
+    call    Player_CheckScreenLimitRight
+    jp      c, .notOutsideOfScreen
+
+    ld      (ix + Player_Struct.X), b ; x = max_valid_X
+    call    Update_VRAM_NAMTBL_Addr
+.notOutsideOfScreen:
+
+
+    ; hurtboxes and hitboxes should be set after ajustement of X based on width and screen limit (Player_CheckScreenLimitRight)
+
     ; ----get hurt box parameters from frame header and save to player vars
     
     ; if (FrameHeader_Struct.HurtBox_X != 255) Player_Struct.HurtBox_X = Player_Struct.X + FrameHeader_Struct.HurtBox_X;
@@ -92,7 +110,7 @@ DrawSprite:
     jp      .cont_20
 
 .ignoreHurtBox:
-    ld      a, 255
+    ; ld      a, 255 ; unnecessary, A is always 255 here
     ld      (ix + Player_Struct.HurtBox_X), a
     ld      (ix + Player_Struct.HurtBox_Y), a
     ld      (ix + Player_Struct.HurtBox_Width), a
@@ -129,7 +147,7 @@ DrawSprite:
     jp      .cont_2
 
 .ignoreHitBox:
-    ld      a, 255
+    ; ld      a, 255 ; unnecessary, A is always 255 here
     ld      (ix + Player_Struct.HitBox_X), a
     ld      (ix + Player_Struct.HitBox_Y), a
     ld      (ix + Player_Struct.HitBox_Width), a
@@ -137,20 +155,20 @@ DrawSprite:
 
 .cont_2:
 
-    ; this check needs to be done because of the new width (it's not necessary for left screen boundary)
-    ; ----- check screen right limit
-    ; if (x >= (255-width)) x = 255 - width
-    ; ld      a, 255
-    ; sub     (ix + Player_Struct.Width)
-    ; ld      b, a ; B = max_valid_X
-    ; ld      a, (ix + Player_Struct.X)
-    ; cp      b       
-    call    Player_CheckScreenLimitRight
-    jp      c, .notOutsideOfScreen
+;     ; this check needs to be done because of the new width (it's not necessary for left screen boundary)
+;     ; ----- check screen right limit
+;     ; if (x >= (255-width)) x = 255 - width
+;     ; ld      a, 255
+;     ; sub     (ix + Player_Struct.Width)
+;     ; ld      b, a ; B = max_valid_X
+;     ; ld      a, (ix + Player_Struct.X)
+;     ; cp      b       
+;     call    Player_CheckScreenLimitRight
+;     jp      c, .notOutsideOfScreen
 
-    ld      (ix + Player_Struct.X), b ; x = max_valid_X
-    call    Update_VRAM_NAMTBL_Addr
-.notOutsideOfScreen:
+;     ld      (ix + Player_Struct.X), b ; x = max_valid_X
+;     call    Update_VRAM_NAMTBL_Addr
+; .notOutsideOfScreen:
 
 
     ; --- adjust VRAM NAMTBL address based on yOffset
