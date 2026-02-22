@@ -539,6 +539,53 @@ DrawLifeBars:
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
+    ; subzero over right lifebar: 90, 0; w: 48, h: 10
+    ld      hl, 90
+    ld      (Lifebars_HMMM_Command.Source_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 212
+    ld      (Lifebars_HMMM_Command.Source_Y), hl
+
+    ld      hl, 255 - 23 - 48 - 5
+    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 16 + 1
+    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, 48
+    ld      (Lifebars_HMMM_Command.Cols), hl
+
+    ld      hl, 10
+    ld      (Lifebars_HMMM_Command.Lines), hl
+
+    ld      hl, Lifebars_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
+
+    ; scorpion over left lifebar: 90, 0; w: 46, h: 10
+    ld      hl, 140
+    ld      (Lifebars_HMMM_Command.Source_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 212
+    ld      (Lifebars_HMMM_Command.Source_Y), hl
+
+    ld      hl, 23 + 5
+    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 16 + 1
+    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, 46
+    ld      (Lifebars_HMMM_Command.Cols), hl
+
+    ld      hl, 10
+    ld      (Lifebars_HMMM_Command.Lines), hl
+
+    ld      hl, Lifebars_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
     ret
 
 
