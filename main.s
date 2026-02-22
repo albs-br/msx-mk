@@ -146,7 +146,7 @@ Triple_Buffer_Loop:
     ; if (Jiffy >= LastJiffy + 60) resetFpsCounter
     ld      hl, (Jiffy_Saved)
     ld      de, (BIOS_JIFFY)
-    call    BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE)
+    rst     BIOS_DCOMPR         ; Compare Contents Of HL & DE, Set Z-Flag IF (HL == DE), Set CY-Flag IF (HL < DE); Destroys A
     jp      nc, .doNotResetFpsCounter
 
     ; save current Jiffy + 60
