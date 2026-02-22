@@ -119,9 +119,9 @@ Execute:
     ; ---- Triple buffer logic
 
     ; init vars
-    ld      hl, Restore_BG_HMMM_Parameters
+    ld      hl, VDP_Cmd_HMMM_Parameters
     ld      de, TripleBuffer_Vars_RestoreBG_HMMM_Command
-    ld      bc, Restore_BG_HMMM_Parameters_size
+    ld      bc, VDP_Cmd_HMMM_Parameters_size
     ldir
 
     ld      hl, LINE_Parameters
@@ -482,25 +482,12 @@ LeftBar:
 
 DrawLifeBars:
 
-    ; ; load data to screen     
-    ; ld		hl, LifeBar_Line_Yellow			            ; RAM address (source)
-    ; ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
-    ; ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + (LeftBar.Y * 128))    ; VRAM address (destiny, bits 15-0)
-    ; ld		b, 0 + (LeftBar.size)                  ; Block length
-    ; call    LDIRVM_MSX2_Less_Than_256_bytes
-
-    ; ; load data to screen     
-    ; ld		hl, LifeBar_Line_Middle			            ; RAM address (source)
-    ; ld      a, 1 ; NAMTBL_ADRR_PAGE_3                   ; VRAM address (destiny, bit 16)
-    ; ld		de, NAMTBL_ADRR_PAGE_3 - (64 * 1024) + (LeftBar.X + ((LeftBar.Y + 1) * 128))    ; VRAM address (destiny, bits 15-0)
-    ; ld		b, 0 + (LeftBar.size)                  ; Block length
-    ; call    LDIRVM_MSX2_Less_Than_256_bytes
-
+    ; --- put base image of bars on bottom of page 3
     ld	    a, MEGAROM_PAGE_LIFEBARS
     ld	    (Seg_P8000_SW), a
 
-    ld      a, 0 + (((1024 - 44) * 128) AND 0x10000) >> 16  ; bit 16 of VRAM addr
-    ld      hl, 0 + ((1024 - 44) * 128) AND 0x0ffff         ; bits 0-15 of VRAM addr
+    ld      a, 0 + (((1024 - (256-212)) * 128) AND 0x10000) >> 16  ; bit 16 of VRAM addr
+    ld      hl, 0 + ((1024 - (256-212)) * 128) AND 0x0ffff         ; bits 0-15 of VRAM addr
     call    SetVdp_Write
     ld      hl, Lifebars_SC5
     ld      c, PORT_0
@@ -515,13 +502,50 @@ DrawLifeBars:
     jp      nz, .loop
 
 
+    ; --- copy to screen on page 3 (restore bg screen) using vdp cmd
+    ld      hl, VDP_Cmd_HMMM_Parameters
+    ld      de, Lifebars_HMMM_Command
+    ld      bc, VDP_Cmd_HMMM_Parameters_size
+    ldir
+
+    ; left lifebar
+    ld      hl, 0
+    ld      (Lifebars_HMMM_Command.Source_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 212
+    ld      (Lifebars_HMMM_Command.Source_Y), hl
+
+    ld      hl, 23
+    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 16 ; 31
+    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, 90
+    ld      (Lifebars_HMMM_Command.Cols), hl
+
+    ld      hl, 12
+    ld      (Lifebars_HMMM_Command.Lines), hl
+
+    ld      hl, Lifebars_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
+    ; right lifebar
+    ld      hl, 255 - 23 - 90
+    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+
+    ld      hl, Lifebars_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
     ret
 
 
 
 ; --------------------------------------------------------
 
-Restore_BG_HMMM_Parameters:
+VDP_Cmd_HMMM_Parameters:
     .Source_X:   dw    0 	    ; Source X (9 bits)
     .Source_Y:   dw    0        ; Source Y (10 bits)
     .Destiny_X:  dw    0 	    ; Destiny X (9 bits)
@@ -531,7 +555,7 @@ Restore_BG_HMMM_Parameters:
     .NotUsed:    db    0
     .Options:    db    0        ; select destination memory and direction from base coordinate
     .Command:    db    VDP_COMMAND_HMMM
-Restore_BG_HMMM_Parameters_size: equ $ - Restore_BG_HMMM_Parameters
+VDP_Cmd_HMMM_Parameters_size: equ $ - VDP_Cmd_HMMM_Parameters
 
 
 
