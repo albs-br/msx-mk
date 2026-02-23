@@ -1167,7 +1167,7 @@ VDP_COMMAND_LMMC: equ 0B0h ; last def. pass 3
 BIOS_H_PINL: equ 0FDDBh ; last def. pass 3
 BIOS_KANAST: equ 0FCACh ; last def. pass 3
 Player_Input_Block: equ 04810h ; last def. pass 3
-MEGAROM_PAGE_20_size: equ 03503h ; last def. pass 3
+MEGAROM_PAGE_20_size: equ 034FAh ; last def. pass 3
 INPUT_RIGHT: equ 010h ; last def. pass 3
 BIOS_NTMSXP: equ 0F417h ; last def. pass 3
 BIOS_NRDVRM: equ 0174h ; last def. pass 3
@@ -1216,7 +1216,7 @@ BIOS_AUTINC: equ 0F6ADh ; last def. pass 3
 Subzero_Stance_Right_Frame_4: equ 0B1A0h ; last def. pass 3
 NAMTBL_ADRR_PAGE_3: equ 018000h ; last def. pass 3
 Player_1_Vars.IsGrounded: equ 0C11Dh ; last def. pass 3
-Lifebars_SC5_size: equ 0BC9h ; last def. pass 3
+Lifebars_SC5_size: equ 0BC0h ; last def. pass 3
 Subzero_Hurt_1_Right_Frame_2: equ 09375h ; last def. pass 3
 BIOS_TTYPOS: equ 0F661h ; last def. pass 3
 BIOS_NVBXFL: equ 0CDh ; last def. pass 3
