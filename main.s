@@ -85,22 +85,22 @@ Execute:
     call    LoadPalette
 
    
-    ; --- Load background on all 4 pages
+    ; --- Load background on page 3, finish and copy it to the ther pages
 
-    ; SC 5 - page 0
-    ld      a, 0000 0000 b
-    ld      hl, 0x0000
-    call    LoadImageTo_SC5_Page
+    ; ; SC 5 - page 0
+    ; ld      a, 0000 0000 b
+    ; ld      hl, 0x0000
+    ; call    LoadImageTo_SC5_Page
 
-    ; SC 5 - page 1
-    ld      a, 0000 0000 b
-    ld      hl, 0x8000
-    call    LoadImageTo_SC5_Page
+    ; ; SC 5 - page 1
+    ; ld      a, 0000 0000 b
+    ; ld      hl, 0x8000
+    ; call    LoadImageTo_SC5_Page
 
-    ; SC 5 - page 2
-    ld      a, 0000 0001 b
-    ld      hl, 0x0000
-    call    LoadImageTo_SC5_Page
+    ; ; SC 5 - page 2
+    ; ld      a, 0000 0001 b
+    ; ld      hl, 0x0000
+    ; call    LoadImageTo_SC5_Page
 
     ; SC 5 - page 3
     ld      a, 0000 0001 b
@@ -108,7 +108,12 @@ Execute:
     call    LoadImageTo_SC5_Page
 
 
+
     call    DrawLifeBars
+
+
+    ; copy screen from page 3 after finished to pages 0, 1 and 2
+    call    CopyFromPage3ToOthers
 
 
     call    OPL4_Init
@@ -504,89 +509,134 @@ DrawLifeBars:
 
     ; --- copy to screen on page 3 (restore bg screen) using vdp cmd
     ld      hl, VDP_Cmd_HMMM_Parameters
-    ld      de, Lifebars_HMMM_Command
+    ld      de, Parameters_HMMM_Command
     ld      bc, VDP_Cmd_HMMM_Parameters_size
     ldir
 
     ; left lifebar
     ld      hl, 0
-    ld      (Lifebars_HMMM_Command.Source_X), hl
+    ld      (Parameters_HMMM_Command.Source_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 212
-    ld      (Lifebars_HMMM_Command.Source_Y), hl
+    ld      (Parameters_HMMM_Command.Source_Y), hl
 
     ld      hl, 23
-    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+    ld      (Parameters_HMMM_Command.Destiny_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 16 ; 31
-    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
     ld      hl, 90
-    ld      (Lifebars_HMMM_Command.Cols), hl
+    ld      (Parameters_HMMM_Command.Cols), hl
 
     ld      hl, 12
-    ld      (Lifebars_HMMM_Command.Lines), hl
+    ld      (Parameters_HMMM_Command.Lines), hl
 
-    ld      hl, Lifebars_HMMM_Command
+    ld      hl, Parameters_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
     ; right lifebar
     ld      hl, 255 - 23 - 90
-    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+    ld      (Parameters_HMMM_Command.Destiny_X), hl
 
-    ld      hl, Lifebars_HMMM_Command
+    ld      hl, Parameters_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
     ; subzero over right lifebar: 90, 0; w: 48, h: 10
     ld      hl, 90
-    ld      (Lifebars_HMMM_Command.Source_X), hl
+    ld      (Parameters_HMMM_Command.Source_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 212
-    ld      (Lifebars_HMMM_Command.Source_Y), hl
+    ld      (Parameters_HMMM_Command.Source_Y), hl
 
     ld      hl, 255 - 23 - 48 - 5
-    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+    ld      (Parameters_HMMM_Command.Destiny_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 16 + 1
-    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
     ld      hl, 48
-    ld      (Lifebars_HMMM_Command.Cols), hl
+    ld      (Parameters_HMMM_Command.Cols), hl
 
     ld      hl, 10
-    ld      (Lifebars_HMMM_Command.Lines), hl
+    ld      (Parameters_HMMM_Command.Lines), hl
 
-    ld      hl, Lifebars_HMMM_Command
+    ld      hl, Parameters_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
 
     ; scorpion over left lifebar: 90, 0; w: 46, h: 10
     ld      hl, 140
-    ld      (Lifebars_HMMM_Command.Source_X), hl
+    ld      (Parameters_HMMM_Command.Source_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 212
-    ld      (Lifebars_HMMM_Command.Source_Y), hl
+    ld      (Parameters_HMMM_Command.Source_Y), hl
 
     ld      hl, 23 + 5
-    ld      (Lifebars_HMMM_Command.Destiny_X), hl
+    ld      (Parameters_HMMM_Command.Destiny_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 16 + 1
-    ld      (Lifebars_HMMM_Command.Destiny_Y), hl
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
     ld      hl, 46
-    ld      (Lifebars_HMMM_Command.Cols), hl
+    ld      (Parameters_HMMM_Command.Cols), hl
 
     ld      hl, 10
-    ld      (Lifebars_HMMM_Command.Lines), hl
+    ld      (Parameters_HMMM_Command.Lines), hl
 
-    ld      hl, Lifebars_HMMM_Command
+    ld      hl, Parameters_HMMM_Command
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
     ret
+
+CopyFromPage3ToOthers:
+
+    ; --- Copy entire screen form page 3 to page 0
+    ld      hl, 0
+    ld      (Parameters_HMMM_Command.Source_X), hl
+
+    ld      hl, Y_BASE_PAGE_3
+    ld      (Parameters_HMMM_Command.Source_Y), hl
+
+    ld      hl, 0
+    ld      (Parameters_HMMM_Command.Destiny_X), hl
+
+    ld      hl, Y_BASE_PAGE_0
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, 256
+    ld      (Parameters_HMMM_Command.Cols), hl
+
+    ld      hl, 212
+    ld      (Parameters_HMMM_Command.Lines), hl
+
+    ld      hl, Parameters_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
+
+    ; --- Copy entire screen form page 3 to page 1
+    ld      hl, Y_BASE_PAGE_1
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, Parameters_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+
+
+    ; --- Copy entire screen form page 3 to page 2
+    ld      hl, Y_BASE_PAGE_2
+    ld      (Parameters_HMMM_Command.Destiny_Y), hl
+
+    ld      hl, Parameters_HMMM_Command
+    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+
+    ret
+
 
 
 

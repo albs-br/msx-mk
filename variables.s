@@ -28,7 +28,7 @@ TripleBuffer_Vars_RestoreBG_HMMM_Command:
     .Options:    rb 1
     .Command:    rb 1
 
-Lifebars_HMMM_Command:
+Parameters_HMMM_Command:
     .Source_X:   rw 1
     .Source_Y:   rw 1
     .Destiny_X:  rw 1
