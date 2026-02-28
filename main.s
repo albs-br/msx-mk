@@ -452,7 +452,10 @@ NAMTBL_SC8:     equ 0x00000
 
 Palette:
     INCBIN "Images/mk.pal"
+
 ; TODO: change color 4 of the bg to color 0, so this color 4 can be used to red (blood/lifebars)
+; TODO: change color 8 of the bg to color 1, so this color 8 can be used to light green (lifebars)
+    ;INCBIN "Images/mk-new.pal"
 
 
 ; ----- bg palette usage (goro's lair scenario):
@@ -464,11 +467,11 @@ Palette:
 ; Color 1: 10569 pixels (17.44%)
 ; Color 2: 5606 pixels (9.25%)
 ; Color 3: 8056 pixels (13.29%)
-; Color 4: 5129 pixels (8.46%)
+; Color 4: 5129 pixels (8.46%)      <--- replaced
 ; Color 5: 2002 pixels (3.30%)
 ; Color 6: 4495 pixels (7.42%)
 ; Color 7: 861 pixels (1.42%)
-; Color 8: 878 pixels (1.45%)
+; Color 8: 878 pixels (1.45%)       <--- replaced
 ; Color 9: 1490 pixels (2.46%)
 ; Color 10: 214 pixels (0.35%)
 ; Color 11: 0 pixels (0.00%)        scorpion/subzero
@@ -722,6 +725,7 @@ LINE_Parameters_size: equ $ - LINE_Parameters
     INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_animation.s"
     ; INCLUDE "Data/scorpion/hurt-1/left/scorpion_hurt_1_left_animation.s"
     INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_animation.s"
+    ; INCLUDE "Data/scorpion/falling/left/scorpion_falling_left_animation.s"
 
     ; --- Right
     ; INCLUDE "Data/scorpion/stance/right/scorpion_stance_right_animation.s"
@@ -737,6 +741,7 @@ LINE_Parameters_size: equ $ - LINE_Parameters
     ; INCLUDE "Data/scorpion/crouching-block/right/scorpion_crouching_block_right_animation.s"
     ; INCLUDE "Data/scorpion/hurt-1/right/scorpion_hurt_1_right_animation.s"
     ; INCLUDE "Data/scorpion/uppercut/right/scorpion_uppercut_right_animation.s"
+    ; INCLUDE "Data/scorpion/falling/right/scorpion_falling_right_animation.s"
 
 
 
@@ -756,6 +761,7 @@ LINE_Parameters_size: equ $ - LINE_Parameters
     ; INCLUDE "Data/subzero/crouching-block/left/subzero_crouching_block_left_animation.s"
     ; INCLUDE "Data/subzero/hurt-1/left/subzero_hurt_1_left_animation.s"
     ; INCLUDE "Data/subzero/uppercut/left/subzero_uppercut_left_animation.s"
+    ; INCLUDE "Data/subzero/falling/left/subzero_falling_left_animation.s"
 
     ; --- Right
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_animation.s"
@@ -771,6 +777,7 @@ LINE_Parameters_size: equ $ - LINE_Parameters
     ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_animation.s"
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_animation.s"
     ; INCLUDE "Data/subzero/uppercut/right/subzero_uppercut_right_animation.s"
+    INCLUDE "Data/subzero/falling/right/subzero_falling_right_animation.s"
 
 
 

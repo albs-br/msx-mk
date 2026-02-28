@@ -12,6 +12,7 @@ Subzero_All_Animations_Left:
     dw      0 ; Subzero_Crouching_Block_Left_Animation_Headers
     dw      0 ; Subzero_Hurt_1_Left_Animation_Headers
     dw      0 ; Subzero_Uppercut_Left_Animation_Headers
+    dw      0 ; Subzero_Falling_Left_Animation_Headers
 
 Subzero_All_Animations_Right:
 ; TODO: pointers to all animations
@@ -29,3 +30,4 @@ Subzero_All_Animations_Right:
     dw      0 ; Subzero_Crouching_Block_Right_Animation_Headers ; POSITION.CROUCHING_BLOCK = 20
     dw      Subzero_Hurt_1_Right_Animation_Headers              ; POSITION.HURT_1 = 22
     dw      0 ; Subzero_Uppercut_1_Right_Animation_Headers      ; POSITION.UPPERCUT = 24
+    dw      Subzero_Falling_Right_Animation_Headers             ; POSITION.FALLING = 26

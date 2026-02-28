@@ -15,6 +15,7 @@ Scorpion_All_Animations_Left:
     dw      Scorpion_Crouching_Block_Left_Animation_Headers
     dw      0 ; Scorpion_Hurt_1_Left_Animation_Headers
     dw      Scorpion_Uppercut_Left_Animation_Headers
+    dw      0 ; Scorpion_Falling_Left_Animation_Headers
 
 Scorpion_All_Animations_Right:
 
@@ -31,3 +32,4 @@ Scorpion_All_Animations_Right:
     dw      0 ; Scorpion_Crouching_Block_Right_Animation_Headers     ; POSITION.CROUCHING_BLOCK = 20
     dw      0 ; Scorpion_Hurt_1_Right_Animation_Headers              ; POSITION.HURT_1 = 22
     dw      0 ; Scorpion_Uppercut_Right_Animation_Headers            ; POSITION.UPPERCUT = 24
+    dw      0 ; Scorpion_Falling_Right_Animation_Headers             ; POSITION.FALLING = 26

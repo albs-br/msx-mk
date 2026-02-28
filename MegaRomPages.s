@@ -23,6 +23,8 @@ Bg_Bottom:
 
 MEGAROM_PAGE_FRAME_HEADERS: equ 2
 
+    ; -------------- Scorpion
+
     INCLUDE "Data/scorpion/stance/left/scorpion_stance_left_frame_headers.s"
     INCLUDE "Data/scorpion/walking/left/scorpion_walking_left_frame_headers.s"
     INCLUDE "Data/scorpion/jumping-up/left/scorpion_jumping_up_left_frame_headers.s"
@@ -33,9 +35,16 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     INCLUDE "Data/scorpion/crouching-block/left/scorpion_crouching_block_left_frame_headers.s"
     ; INCLUDE "Data/scorpion/hurt-1/left/scorpion_hurt_1_left_frame_headers.s"
     INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frame_headers.s"
+    ; INCLUDE "Data/subzero/falling/left/subzero_falling_left_frame_headers.s"
+    
     ; TODO: repeat for right
 
+
+    
+    ; -------------- Subzero
+
     ; TODO: repeat for left
+    
     INCLUDE "Data/subzero/stance/right/subzero_stance_right_frame_headers.s"
     INCLUDE "Data/subzero/walking/right/subzero_walking_right_frame_headers.s"
     INCLUDE "Data/subzero/jumping-up/right/subzero_jumping_up_right_frame_headers.s"
@@ -46,6 +55,7 @@ MEGAROM_PAGE_FRAME_HEADERS: equ 2
     ; INCLUDE "Data/subzero/crouching-block/right/subzero_crouching_block_right_frame_headers.s"
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frame_headers.s"
     ; INCLUDE "Data/subzero/uppercut/right/subzero_uppercut_right_frame_headers.s"
+    INCLUDE "Data/subzero/falling/right/subzero_falling_right_frame_headers.s"
 
 MegaRom_Page_2_size: equ $ - 0x8000 ; 0x3b12
 
@@ -205,7 +215,6 @@ MEGAROM_PAGE_SUBZERO_HURT_1_RIGHT_DATA_0: equ 12
     ; ------------ Data ---------------
 	INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_data.s"
 
-
     ; ------------ List ---------------
     INCLUDE "Data/subzero/hurt-1/right/subzero_hurt_1_right_frames_0_to_3_list.s"
 
@@ -225,12 +234,12 @@ MEGAROM_PAGES_SOUNDS_DATA: equ 13
 
 	org	0x00
     INCLUDE "Sounds/Headers.s"
-SoundsHeaders_size: equ $ - 0x00 ; 0x?? = ?? bytes       ;  16384 - ? = ?
+SoundsHeaders_size: equ $ - 0x00 ; 0x30 = ? bytes
 
 
     org    0x201200
     INCLUDE "Sounds/Data.s"
-SoundsData_size: equ $ - 0x201200 ; 0x???? = ?       ;  65536 - ? = ?
+SoundsData_size: equ $ - 0x201200 ; 0x5460 = ? bytes
 
 
     ds     0x201200 + (PageSize * 4) - $ - SoundsHeaders_size ; fill with zeroes
@@ -241,20 +250,19 @@ SoundsTotal_size: equ SoundsHeaders_size + SoundsData_size ; 0x05490 = 21648 byt
 
 ; ------------------------------------------------- Page 17 -------------------------------------------------
 
-MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 17
-
+MEGAROM_PAGE_SUBZERO_FALLING_RIGHT_DATA_0: equ 17
 
 	org	0x8000, 0xBFFF
 
-    ; ------------ Data ---------------
-	INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_data.s"
 
+    ; ------------ Data ---------------
+	INCLUDE "Data/subzero/falling/right/subzero_falling_right_frames_0_to_10_data.s"
 
     ; ------------ List ---------------
-    INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_list.s"
+    INCLUDE "Data/subzero/falling/right/subzero_falling_right_frames_0_to_10_list.s"
 
-; TODO: put this position on page 12 free space
-MegaRom_Page_17_size: equ $ - 0x8000 ; 0x2779 = 10105 bytes       ;  16384 - ? = ?
+
+MegaRom_Page_17_size: equ $ - 0x8000 ; 0x3312 = ? bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
 
@@ -331,5 +339,22 @@ Lifebars_SC5:
 Lifebars_SC5_size: equ $ - Lifebars_SC5
 
 MEGAROM_PAGE_20_size:      equ $ - 0x8000
+
+	ds PageSize - ($ - 0x8000), 255
+
+; ------------------------------------------------- Page 21 -------------------------------------------------
+
+MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 21
+
+
+	org	0x8000, 0xBFFF
+
+    ; ------------ Data ---------------
+	INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_data.s"
+
+    ; ------------ List ---------------
+    INCLUDE "Data/scorpion/uppercut/left/scorpion_uppercut_left_frames_0_to_5_list.s"
+
+MegaRom_Page_21_size: equ $ - 0x8000 ; 0x2779 = ? bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
