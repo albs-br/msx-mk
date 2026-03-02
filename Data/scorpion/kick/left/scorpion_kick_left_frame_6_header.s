@@ -4,3 +4,7 @@
     ; 255 = ignore
     db  255, 255, 255, 255 ; HurtBox (X, Y, Width, Height)
     db  68, 28, 13, 13 ; HitBox (X, Y, Width, Height)
+
+
+
+    ; PS. Same animation frames used for low and high kicks, only different on frames #4 and #6

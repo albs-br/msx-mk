@@ -109,6 +109,29 @@ CheckCollision_Hitboxes:
 
 
 
+;         ; if (Player_1.Position == POSITION.UPPERCUT) 
+;         ;       setPlayer_2_Position_Falling(); 
+;         ; else 
+;         ;       setPlayer_2_Position_Hurt_1(); 
+;         ld      iy, Player_1_Vars
+;         ld      a, (iy + Player_Struct.Position) ; IY: Player_1
+;         cp      POSITION.UPPERCUT
+;         jp      nz, .setPlayer_2_Position_Hurt_1
+
+; ;.setPlayer_2_Position_Falling:
+
+;         ; --- get addr of animation
+;         ld      bc, POSITION.FALLING
+;         call    GetAnimationAddr
+
+;         ; --- set animation
+;         ld      a, POSITION.FALLING
+;         call    Player_SetAnimation
+
+;         jp      .cont_5
+
+.setPlayer_2_Position_Hurt_1:
+
         ; --- get addr of animation
         ld      bc, POSITION.HURT_1
         call    GetAnimationAddr
@@ -117,6 +140,7 @@ CheckCollision_Hitboxes:
         ld      a, POSITION.HURT_1
         call    Player_SetAnimation
 
+.cont_5:
 
 
         ; play sound on OPL4
@@ -138,6 +162,9 @@ CheckCollision_Hitboxes:
     .return:
 
     pop     iy, ix
+
+    ; TODO:
+    ; ---- Player 2 Hitbox x Player 1 Hurtbox
 
     ret
 

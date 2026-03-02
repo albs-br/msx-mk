@@ -22,6 +22,10 @@ Player_Logic:
     cp      POSITION.JUMPING_BACKWARDS
     jp      z, .jumpingBackwards
 
+    ; ; case POSITION.FALLING:
+    ; cp      POSITION.FALLING
+    ; jp      z, .jumpingBackwards
+
     ; UNNECESSARY:
     ; ; case POSITION.LOW_KICK:
     ; cp      POSITION.LOW_KICK
@@ -658,6 +662,7 @@ Player_GetAndSetAnimation:
     ret
 
 
+; TODO: these two subroutines (Player_SetAnimation and GetAnimationAddr) are always used together, make them one subroutine
 
 ; Inputs:
 ;   IX: Player Vars base addr

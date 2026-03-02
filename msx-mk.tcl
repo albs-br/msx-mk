@@ -60,8 +60,9 @@ ram_watch   add     0xc10b      -type byte      -desc P1_HitB_Height -format dec
 #ram_watch   add     0xc01c      -type byte      -desc P1_Anim_CurrFrame     -format dec
 
 
-#ram_watch   add     0xc031      -type byte      -desc P2_X     -format dec
-#ram_watch   add     0xc032      -type byte      -desc P2_Y     -format dec
+ram_watch   add     0xc200      -type byte      -desc P2_X     -format dec
+ram_watch   add     0xc201      -type byte      -desc P2_Y     -format dec
+ram_watch   add     0xc21c      -type byte      -desc P2_Position     -format dec
 
 #ram_watch   add     0xc035      -type byte      -desc P2_Hb_X     -format dec
 #ram_watch   add     0xc036      -type byte      -desc P2_Hb_Y     -format dec
