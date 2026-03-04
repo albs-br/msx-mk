@@ -451,11 +451,12 @@ NAMTBL_SC8:     equ 0x00000
 ; --------------------------------------------------
 
 Palette:
-    INCBIN "Images/mk.pal"
+    ; INCBIN "Images/mk.pal"
 
 ; TODO: change color 4 of the bg to color 0, so this color 4 can be used to red (blood/lifebars)
 ; TODO: change color 8 of the bg to color 1, so this color 8 can be used to light green (lifebars)
-    ;INCBIN "Images/mk-new.pal"
+    ; INCBIN "Images/mk-new.pal" ; color 4 changed
+    INCBIN "Images/mk-new1.pal" ; color 4 and 8 changed
 
 
 ; ----- bg palette usage (goro's lair scenario):
