@@ -464,22 +464,22 @@ Palette:
 ; Size: 30336 bytes
 ; Number of pixels: 60608
 ; Lines: 236.75
-; Color 0: 21097 pixels (34.81%)
-; Color 1: 10569 pixels (17.44%)
+; Color 0: 21097 pixels (34.81%)    dark gray
+; Color 1: 10569 pixels (17.44%)    medium gray
 ; Color 2: 5606 pixels (9.25%)
 ; Color 3: 8056 pixels (13.29%)     black
-; Color 4: 5129 pixels (8.46%)                      <--- replaced
-; Color 5: 2002 pixels (3.30%)
+; Color 4: 5129 pixels (8.46%)      red             <--- replaced
+; Color 5: 2002 pixels (3.30%)      light gray
 ; Color 6: 4495 pixels (7.42%)
-; Color 7: 861 pixels (1.42%)
-; Color 8: 878 pixels (1.45%)                       <--- replaced
+; Color 7: 861 pixels (1.42%)       dark green
+; Color 8: 878 pixels (1.45%)       light green     <--- replaced
 ; Color 9: 1490 pixels (2.46%)
 ; Color 10: 214 pixels (0.35%)
 ; Color 11: 0 pixels (0.00%)                        scorpion/subzero
 ; Color 12: 6 pixels (0.01%)                        scorpion/subzero/lifebars
-; Color 13: 0 pixels (0.00%)                        subzero
+; Color 13: 0 pixels (0.00%)        cyan            subzero
 ; Color 14: 203 pixels (0.33%)                      scorpion/subzero
-; Color 15: 2 pixels (0.00%)                        scorpion/lifebars/eyes on cave
+; Color 15: 2 pixels (0.00%)        dark yellow     scorpion/lifebars/eyes on cave
 ; Unique colors: 14
 
 
