@@ -335,7 +335,7 @@ Bg_Title_Part_6:
     INCBIN "Images/mk-title-parts_ag.zx0"
 
 Lifebars_SC5:
-    INCBIN "Images/lifebars.sc5"
+    INCBIN "Images/lifebars.sc5", 7 ; include from offset 7
 Lifebars_SC5_size: equ $ - Lifebars_SC5
 
 MEGAROM_PAGE_20_size:      equ $ - 0x8000
