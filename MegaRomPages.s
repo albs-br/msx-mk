@@ -335,10 +335,10 @@ Bg_Title_Part_6:
     INCBIN "Images/mk-title-parts_ag.zx0"
 
 Lifebars_SC5:
-    INCBIN "Images/lifebars.sc5", 7 ; include from offset 7
+    INCBIN "Images/lifebars.sc5", 7, 30*128 ; include from offset 7 (to skip header), include only first 30 lines (30*128 bytes)
 Lifebars_SC5_size: equ $ - Lifebars_SC5
 
-MEGAROM_PAGE_20_size:      equ $ - 0x8000
+MEGAROM_PAGE_20_size:      equ $ - 0x8000 ; 0x383a bytes
 
 	ds PageSize - ($ - 0x8000), 255
 
