@@ -52,11 +52,11 @@ Execute:
 
 
 
-    ; call    TitleScreen ; [debug]
+    call    TitleScreen ; [debug]
 
 
 
-    ; call    ChooseFighterScreen ; [debug]
+    call    ChooseFighterScreen ; [debug]
 
 
 
@@ -542,8 +542,8 @@ DrawLifeBars:
     ld      bc, VDP_Cmd_HMMM_Parameters_size
     ldir
 
-    ; left lifebar
-    ld      hl, 0
+    ; left lifebar (scorpion)
+    ld      hl, 90
     ld      (Parameters_HMMM_Command.Source_X), hl
 
     ld      hl, Y_BASE_PAGE_3 + 212
@@ -565,7 +565,13 @@ DrawLifeBars:
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
-    ; right lifebar
+    ; right lifebar (subzero)
+    ld      hl, 0
+    ld      (Parameters_HMMM_Command.Source_X), hl
+
+    ld      hl, Y_BASE_PAGE_3 + 212 + 12
+    ld      (Parameters_HMMM_Command.Source_Y), hl
+
     ld      hl, 255 - 23 - 90
     ld      (Parameters_HMMM_Command.Destiny_X), hl
 
@@ -573,58 +579,58 @@ DrawLifeBars:
     call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
-    ; subzero over right lifebar: 90, 0; w: 48, h: 10
-    ld      hl, 90
-    ld      (Parameters_HMMM_Command.Source_X), hl
+    ; ; subzero over right lifebar: 90, 0; w: 48, h: 10
+    ; ld      hl, 90
+    ; ld      (Parameters_HMMM_Command.Source_X), hl
 
-    ld      hl, Y_BASE_PAGE_3 + 212
-    ld      (Parameters_HMMM_Command.Source_Y), hl
+    ; ld      hl, Y_BASE_PAGE_3 + 212
+    ; ld      (Parameters_HMMM_Command.Source_Y), hl
 
-    ld      hl, 255 - 23 - 48 - 5
-    ld      (Parameters_HMMM_Command.Destiny_X), hl
+    ; ld      hl, 255 - 23 - 48 - 5
+    ; ld      (Parameters_HMMM_Command.Destiny_X), hl
 
-    ld      hl, Y_BASE_PAGE_3 + 16 + 1
-    ld      (Parameters_HMMM_Command.Destiny_Y), hl
+    ; ld      hl, Y_BASE_PAGE_3 + 16 + 1
+    ; ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
-    ld      hl, 48
-    ld      (Parameters_HMMM_Command.Cols), hl
+    ; ld      hl, 48
+    ; ld      (Parameters_HMMM_Command.Cols), hl
 
-    ld      hl, 10
-    ld      (Parameters_HMMM_Command.Lines), hl
+    ; ld      hl, 10
+    ; ld      (Parameters_HMMM_Command.Lines), hl
 
-    ld      hl, Parameters_HMMM_Command
-    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+    ; ld      hl, Parameters_HMMM_Command
+    ; call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
 
-    ; scorpion over left lifebar: 90, 0; w: 46, h: 10
-    ld      hl, 140
-    ld      (Parameters_HMMM_Command.Source_X), hl
+    ; ; scorpion over left lifebar: 90, 0; w: 46, h: 10
+    ; ld      hl, 140
+    ; ld      (Parameters_HMMM_Command.Source_X), hl
 
-    ld      hl, Y_BASE_PAGE_3 + 212
-    ld      (Parameters_HMMM_Command.Source_Y), hl
+    ; ld      hl, Y_BASE_PAGE_3 + 212
+    ; ld      (Parameters_HMMM_Command.Source_Y), hl
 
-    ld      hl, 23 + 5
-    ld      (Parameters_HMMM_Command.Destiny_X), hl
+    ; ld      hl, 23 + 5
+    ; ld      (Parameters_HMMM_Command.Destiny_X), hl
 
-    ld      hl, Y_BASE_PAGE_3 + 16 + 1
-    ld      (Parameters_HMMM_Command.Destiny_Y), hl
+    ; ld      hl, Y_BASE_PAGE_3 + 16 + 1
+    ; ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
-    ld      hl, 46
-    ld      (Parameters_HMMM_Command.Cols), hl
+    ; ld      hl, 46
+    ; ld      (Parameters_HMMM_Command.Cols), hl
 
-    ld      hl, 10
-    ld      (Parameters_HMMM_Command.Lines), hl
+    ; ld      hl, 10
+    ; ld      (Parameters_HMMM_Command.Lines), hl
 
-    ld      hl, Parameters_HMMM_Command
-    call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
+    ; ld      hl, Parameters_HMMM_Command
+    ; call    Execute_VDP_HMMM	    ; High speed move VRAM to VRAM
 
 
     ret
 
 CopyFromPage3ToOthers:
 
-    ; --- Copy entire screen form page 3 to page 0
+    ; --- Copy entire screen from page 3 to page 0
     ld      hl, 0
     ld      (Parameters_HMMM_Command.Source_X), hl
 
@@ -648,7 +654,7 @@ CopyFromPage3ToOthers:
 
 
 
-    ; --- Copy entire screen form page 3 to page 1
+    ; --- Copy entire screen from page 3 to page 1
     ld      hl, Y_BASE_PAGE_1
     ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
@@ -657,7 +663,7 @@ CopyFromPage3ToOthers:
 
 
 
-    ; --- Copy entire screen form page 3 to page 2
+    ; --- Copy entire screen from page 3 to page 2
     ld      hl, Y_BASE_PAGE_2
     ld      (Parameters_HMMM_Command.Destiny_Y), hl
 
