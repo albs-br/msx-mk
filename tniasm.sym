@@ -1174,7 +1174,6 @@ BIOS_RG6SAV: equ 0F3E5h ; last def. pass 3
 MegaRom_Page_10_size: equ 027CFh ; last def. pass 3
 Scorpion_Jumping_Up_Left_Frame_2: equ 0A310h ; last def. pass 3
 Subzero_Walking_Right_Frame_8: equ 0B3F3h ; last def. pass 3
-Scorpion_Jumping_Forward_Left_Frames_0_to_7_Data: equ 08C56h ; last def. pass 3
 Scorpion_Kick_Left_Frame_2: equ 09FB2h ; last def. pass 3
 BIOS_CPCSUM: equ 0F93Dh ; last def. pass 3
 HKEYI: equ 0FD9Ah ; last def. pass 3
@@ -1298,7 +1297,6 @@ Subzero_Walking_Right_Frame_3_Header: equ 0BA31h ; last def. pass 3
 RamStart: equ 0C000h ; last def. pass 3
 Scorpion_Uppercut_Left_Frame_4.List: equ 0A2AFh ; last def. pass 3
 Subzero_Walking_Right_Frame_5_Header: equ 0BA4Fh ; last def. pass 3
-Scorpion_Jumping_Up_Left_Frames_0_to_2_Data: equ 08000h ; last def. pass 3
 Player_2_Vars.IsCrouching: equ 0C220h ; last def. pass 3
 BIOS_CLIKFL: equ 0FBD9h ; last def. pass 3
 BIOS_H_CHGE: equ 0FDC2h ; last def. pass 3
