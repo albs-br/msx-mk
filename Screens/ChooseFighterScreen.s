@@ -26,6 +26,13 @@ ChooseFighterScreen:
     ld		de, NAMTBL_SC8 + (8192 * 1)             ; VRAM address (destiny, bits 15-0)
     call    Decompress_ZX0_8kb_and_Load_SC8
 
+ 
+    ;-----------------------------------------------------------------------------------
+    ld      a,1                         ; Player Select music
+    call    RePlayer_PlayTrack          ;  
+    ;-----------------------------------------------------------------------------------
+
+
     ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_0
     ld      hl, Bg_Choose_Fighter_Screen_Part_2     ; ZX0 file addr
     ld		de, NAMTBL_SC8 + (8192 * 2)             ; VRAM address (destiny, bits 15-0)
@@ -46,23 +53,20 @@ ChooseFighterScreen:
     ld		de, NAMTBL_SC8 + (8192 * 5)             ; VRAM address (destiny, bits 15-0)
     call    Decompress_ZX0_8kb_and_Load_SC8
 
-        ld a,1
-    call    RePlayer_PlayTrack      ; Play music
-
     ld	    a, MEGAROM_PAGE_BG_CHOOSE_FIGHTER_SCREEN_1
     ld      hl, Bg_Choose_Fighter_Screen_Part_6     ; ZX0 file addr
     ld		de, NAMTBL_SC8 + (8192 * 6)             ; VRAM address (destiny, bits 15-0)
     call    Decompress_ZX0_8kb_and_Load_SC8
 
 
-    call    BIOS_ENASCR
-    halt
-    call    BIOS_DISSCR
-    halt
-    call    BIOS_ENASCR
-
-    call    BIOS_KILBUF
-    call    BIOS_CHGET
-    
+    call    BIOS_ENASCR     ; Trying a kind of improvised Fade-In
+    halt                    ; Wait v-blank
+    call    BIOS_DISSCR      
+    halt                     
+    call    BIOS_ENASCR      
+    halt                     
+ 
+    call    BIOS_KILBUF     ; Clear BIOS keyboard buffer
+    call    BIOS_CHGET      ; Waits a key pressed
     
     ret

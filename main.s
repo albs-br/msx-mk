@@ -43,7 +43,7 @@ Execute:
 
     ; disable keyboard click
     xor     a
-    ld 		(BIOS_CLIKSW), a     ; Key Press Click Switch 0:Off 1:On (1B/RW)
+    ld 		(BIOS_CLIKSW), a        ; Key Press Click Switch 0:Off 1:On (1B/RW)
 
     call    EnableRomPage2
 
@@ -54,25 +54,13 @@ Execute:
     ld      (Seg_P8000_SW_Mirror),a 
     ei
 
-    call    RePlayer_Init           ; Init OPLL-PSG Replayer
-    ld      a,0
-    call    RePlayer_PlayTrack      ; Play music
-    ld      b, 40 
-    call    Wait_B_Vblanks
-
+    call    RePlayer_Init           ; Init OPLL-PSG Replayer and installs Hook on FD9AH (HKEYI)
        
     call    TitleScreen             ; [debug]
-  
+
     call    ChooseFighterScreen     ; [debug]
 
     ; -------------- Init Gameplay
-
-    call    BIOS_DISSCR
-  
-    
-    ; Set border color to 00h
-    ld      bc,0007h          
-    call    BIOS_WRTVDP
 
     ; change to screen 5
     ld      a, 5
@@ -85,9 +73,9 @@ Execute:
     ld      hl, Palette
     call    LoadPalette
 
-    ld bc,307h
-    call BIOS_WRTVDP
-
+    ; set border pallete to 3 (BLACK on current pallete)
+    ld      bc,0307h                
+    call    BIOS_WRTVDP
     
 
     call    ClearVram_MSX2
@@ -125,7 +113,7 @@ Execute:
     ; copy screen from page 3 after finished to pages 0, 1 and 2
     call    CopyFromPage3ToOthers
 
-    call    RePlayer_Stop
+    call    RePlayer_Stop           ; Stop music
 
     call    OPL4_Init
     
@@ -151,14 +139,14 @@ Execute:
 
     call    Players_Init
 
-    ld a,2
-    call    RePlayer_PlayTrack      ; Play music
+    ld      a,2                     ; Stage music
+    call    RePlayer_PlayTrack      ;
   
 
 Triple_Buffer_Loop:
 
 
-    ; ---------------------------------------------------------------
+    ; ------------------------------------------------------------------------------
     ; FPS counter
 
     ; if (Jiffy >= LastJiffy + 60) resetFpsCounter

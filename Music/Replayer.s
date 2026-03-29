@@ -8,14 +8,12 @@
 ; ------------------------------------------------------------------
 RePlayer_HookInstall:
     di
-    ; escreve opcode JP (C3h)
     ld  a,0C3h
-    ld  (0FD9Ah),a
+    ld  (0FD9Ah),a      ; HKEYI hook (V-Blank interruption)
 
-    ; escreve endereço do hook logo depois
     ld  hl,RePlayer_IRQ_Hook
     ld  (0FD9Ah+1),hl
-    ei
+    ei                  ; ** Note: This exit can be improved using to avoid next BIOS unecessaries task. **
     ret
 
 ; ------------------------------------------------------------------
@@ -54,8 +52,8 @@ RePlayer_Init:
     call RePlayer_Stop
     call RePlayer_HookInstall 
 
-    ld a,(Seg_P8000_SW_Mirror)
-    ld  (Seg_P8000_SW),a
+    ld a,(Seg_P8000_SW_Mirror)      ; Restore Megarom bank
+    ld   (Seg_P8000_SW),a           ;
     ei
     ret
 
@@ -72,7 +70,7 @@ RePlayer_PlayTrack:
 
     call RePlayer_Play_entry
 
-    ld  a,(Seg_P8000_SW_Mirror)  
+    ld  a,(Seg_P8000_SW_Mirror)     ; Restore Megarom bank
     ld  (Seg_P8000_SW),a
     ei
     ret
@@ -82,7 +80,7 @@ RePlayer_PlayTrack:
 ; ------------------------------------------------------------------
 RePlayer_Stop:
     call RePlayer_Stop_entry
-    ld a,(Seg_P8000_SW_Mirror)
+    ld a,(Seg_P8000_SW_Mirror)      ; Restore Megarom bank
     ld  (Seg_P8000_SW),a
     ret
 
@@ -91,7 +89,7 @@ RePlayer_Stop:
 ; ------------------------------------------------------------------
 RePlayer_TogglePause:
     call RePlayer_TogglePause_entry
-    ld a,(Seg_P8000_SW_Mirror)
+    ld a,(Seg_P8000_SW_Mirror)      ; Restore Megarom bank
     ld  (Seg_P8000_SW),a
     ret
 
