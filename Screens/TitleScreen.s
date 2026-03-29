@@ -5,15 +5,10 @@ TitleScreen:
     ; change to screen 8
     ld      a, 8
     call    BIOS_CHGMOD
-
     call    BIOS_DISSCR
-
     call    ClearVram_MSX2
-
     call    Set212Lines
-
     call    SetColor0ToNonTransparent
-
     call    DisableSprites
     
     ld	    a, MEGAROM_PAGE_BG_TITLE_0
@@ -54,10 +49,7 @@ TitleScreen:
 
     call    BIOS_ENASCR
 
-
-    ld      b, 240  ; wait 4 seconds
+    ld      b, 200  ; wait 
     call    Wait_B_Vblanks
-
-
     
     ret

@@ -358,3 +358,18 @@ MEGAROM_PAGE_SCORPION_UPPERCUT_LEFT_DATA_0: equ 21
 MegaRom_Page_21_size: equ $ - 0x8000 ; 0x2779 = ? bytes       ;  16384 - ? = ?
 
 	ds PageSize - ($ - 0x8000), 255
+
+
+; ------------------------------------------------- Page 23 -------------------------------------------------
+; --- Music data for Grauw's Re-player ----
+; -----------------------------------------
+MEGAROM_PAGE_REPLAYER_0: equ 23                 ; First Bank reference for Sound Data
+    INCBIN "Music/re-play.rom", 4000h *(23 -1), 4000h
+MEGAROM_PAGE_REPLAYER_1: equ 24
+    INCBIN "Music/re-play.rom", 4000h *(24 -1), 4000h
+MEGAROM_PAGE_REPLAYER_2: equ 25
+    INCBIN "Music/re-play.rom", 4000h *(25 -1), 4000h
+ MEGAROM_PAGE_REPLAYER_3: equ 26
+    INCBIN "Music/re-play.rom", 4000h *(26 -1), 4000h
+  
+; ------------------------------------------------- Page 27 -------------------------------------------------

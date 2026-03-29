@@ -246,4 +246,23 @@ Var_IsOPL4Available:    rb 1
 
 IsDebugModeActivated:   rb 1
 
+Seg_P8000_SW_Mirror:    rb 1                    ; Save Megarom Page 2 Bank
+
+; ----------------------------
+
+    org 0xc400                  ;        --- OPLL/PSG Grauw's Re-Player Variables E800h-E9FFh ---
+MSXMusic_registerMirrors:  equ 0E800H   ; 
+RePlayer_playing:          equ 0E840H
+RePlayer_currentBank:      equ 0E841H
+RePlayer_stackPointer:     equ 0E842H
+RePlayer_stack:            equ 0E844H
+RePlayer_Process:          equ 0E9C5H
+RePlayer_Mute:             equ 0E9C8H
+RePlayer_Restore:          equ 0E9CBH
+Main_currentTrack:         equ 0E9CEH   ; Estado do programa de teste (opcional no MK)
+SoundData:                 equ 8000h    ; Megarom Bank on Page 2
+
+;-----------------------------------------------------------------------------------------------------------------------
+
+
 RamEnd:

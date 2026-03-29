@@ -28,7 +28,8 @@ Seg_P8000_SW:	equ	0x7000	        ; Segment switch for page 0x8000-BFFFh (ASCII 1
     INCLUDE "Screens/ChooseFighterScreen.s"
 
     INCLUDE "Sounds/OPL4.s"
-
+    INCLUDE "Music/Replayer.s"
+    
 Execute:
     ; init interrupt mode and stack pointer (in case the ROM isn't the first thing to be loaded)
 	di                          ; disable interrupts
@@ -46,23 +47,32 @@ Execute:
 
     call    EnableRomPage2
 
-	; enable page 1
+ 	; enable page 1
+    di
     ld	    a, 1
 	ld	    (Seg_P8000_SW), a
+    ld      (Seg_P8000_SW_Mirror),a 
+    ei
 
+    call    RePlayer_Init           ; Init OPLL-PSG Replayer
+    ld      a,0
+    call    RePlayer_PlayTrack      ; Play music
+    ld      b, 40 
+    call    Wait_B_Vblanks
 
-
-    call    TitleScreen ; [debug]
-
-
-
-    call    ChooseFighterScreen ; [debug]
-
-
+       
+    call    TitleScreen             ; [debug]
+  
+    call    ChooseFighterScreen     ; [debug]
 
     ; -------------- Init Gameplay
 
     call    BIOS_DISSCR
+  
+    
+    ; Set border color to 00h
+    ld      bc,0007h          
+    call    BIOS_WRTVDP
 
     ; change to screen 5
     ld      a, 5
@@ -70,21 +80,23 @@ Execute:
 
     call    BIOS_DISSCR
 
-    call    ClearVram_MSX2
-
-    call    Set212Lines
-
     call    SetColor0ToNonTransparent
-
-    call    DisableSprites
-
-
-    
     ; load 32-byte palette data
     ld      hl, Palette
     call    LoadPalette
 
-   
+    ld bc,307h
+    call BIOS_WRTVDP
+
+    
+
+    call    ClearVram_MSX2
+
+    call    Set212Lines
+
+    call    DisableSprites
+
+      
     ; --- Load background on page 3, finish and copy it to the ther pages
 
     ; ; SC 5 - page 0
@@ -107,18 +119,16 @@ Execute:
     ld      hl, 0x8000
     call    LoadImageTo_SC5_Page
 
-
-
     call    DrawLifeBars
 
 
     ; copy screen from page 3 after finished to pages 0, 1 and 2
     call    CopyFromPage3ToOthers
 
+    call    RePlayer_Stop
 
     call    OPL4_Init
-
-
+    
     call    BIOS_ENASCR
 
     ; ---- Triple buffer logic
@@ -128,7 +138,7 @@ Execute:
     ld      de, TripleBuffer_Vars_RestoreBG_HMMM_Command
     ld      bc, VDP_Cmd_HMMM_Parameters_size
     ldir
-
+   
     ld      hl, LINE_Parameters
     ld      de, TripleBuffer_Vars_LINE_Command
     ld      bc, LINE_Parameters_size
@@ -140,7 +150,10 @@ Execute:
 
 
     call    Players_Init
-    
+
+    ld a,2
+    call    RePlayer_PlayTrack      ; Play music
+  
 
 Triple_Buffer_Loop:
 
@@ -211,7 +224,6 @@ Triple_Buffer_Step_0:
     ; --- set active page 0
     ld      a, R2_PAGE_0
     call    SetActivePage
-
 
 
 
@@ -379,7 +391,10 @@ LoadImageTo_SC5_Page:
 	; enable megarom page with top of bg
     push    af
         ld	    a, MEGAROM_PAGE_BG_GOROS_LAIR_0
-        ld	    (Seg_P8000_SW), a
+        di
+	    ld	    (Seg_P8000_SW), a
+        ld      (Seg_P8000_SW_Mirror),a 
+        ei
     pop     af
 
     ; first 16kb (top 128 lines)
@@ -398,7 +413,10 @@ LoadImageTo_SC5_Page:
 	; enable megarom page with bottom of bg
     push    af
         ld	    a, MEGAROM_PAGE_BG_GOROS_LAIR_1
+        di
         ld	    (Seg_P8000_SW), a
+        ld      (Seg_P8000_SW_Mirror),a 
+        ei
     pop     af
 
     ; lines below 128
@@ -427,7 +445,10 @@ LoadImageTo_SC5_Page:
 ;   DE: 17-bit VRAM address
 Decompress_ZX0_8kb_and_Load_SC8:
     
-    ld	    (Seg_P8000_SW), a   ; set MegaROM page
+        di
+        ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+        ld      (Seg_P8000_SW_Mirror),a  
+        ei
 
     push    de
         ; decompress zx0 file using standard decompressor
@@ -518,7 +539,10 @@ DrawLifeBars:
 
     ; --- put base image of bars on bottom of page 3
     ld	    a, MEGAROM_PAGE_LIFEBARS
-    ld	    (Seg_P8000_SW), a
+    di
+    ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+    ld      (Seg_P8000_SW_Mirror),a  
+    ei
 
     ld      a, 0 + (((1024 - (256-212)) * 128) AND 0x10000) >> 16  ; bit 16 of VRAM addr
     ld      hl, 0 + ((1024 - (256-212)) * 128) AND 0x0ffff         ; bits 0-15 of VRAM addr
@@ -787,16 +811,22 @@ LINE_Parameters_size: equ $ - LINE_Parameters
     INCLUDE "Data/subzero/falling/right/subzero_falling_right_animation.s"
 
 
+    ; Inserts Grauw's Replayer -------------------------------------------------------------------------------------------
+    ds PageSize - ($ - 0x3A47), 255	        ; Jumps to 7A47H to put re-player routines (not relocable routines)
+    INCBIN "Music/re-play.rom", 3A47h, 500h ; Routines to 7A47h to 7FFFh
+
+    ; Fixed address for the Re-player installed at 7A47H (See RePlayer.s to see the calls)
+    RePlayer_Detect_entry:             equ 7CF6H    
+    RePlayer_Play_entry:               equ 7D1DH
+    RePlayer_Tick_entry:               equ 7D60H
+    RePlayer_Stop_entry:               equ 7D47H
+    RePlayer_TogglePause_entry:        equ 7D58H
+    ;----------------------------------------------------------------------------------------------------------------------
 
     db      "End ROM started at 0x4000"
-
-Page_0x4000_size: equ $ - Execute ; 0x04ba
+    Page_0x4000_size: equ $ - Execute ; 
 
 	ds PageSize - ($ - 0x4000), 255	; Fill the unused area with 0xFF
-
-
-
-
 
 
 ; -----------------------------------------------------------------
