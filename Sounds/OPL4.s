@@ -64,7 +64,10 @@ OPL4_Init:
         call    write_opl4_port                              
         
         ld      a, MEGAROM_PAGE_SOUNDS_HEADERS
-        ld      (Seg_P8000_SW), a
+        di
+        ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+        ld      (Seg_P8000_SW_Mirror),a  
+        ei
 
         ld      hl, 0x8000 ;headers_begin
         ld      de, headers_end - headers_begin
@@ -93,13 +96,22 @@ loop_header:
         call    write_opl4_port                              
 
         ld      a, MEGAROM_PAGES_SOUNDS_DATA
-        ld      (Seg_P8000_SW), a
+        di
+        ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+        ld      (Seg_P8000_SW_Mirror),a  
+        ei
         call	load_16kb_chunk
         ld      a, MEGAROM_PAGES_SOUNDS_DATA + 1
-        ld      (Seg_P8000_SW), a
+        di
+        ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+        ld      (Seg_P8000_SW_Mirror),a  
+        ei
         call	load_16kb_chunk			
         ld      a, MEGAROM_PAGES_SOUNDS_DATA + 2
-        ld      (Seg_P8000_SW), a
+        di
+        ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+        ld      (Seg_P8000_SW_Mirror),a  
+        ei
         call	load_16kb_chunk
         ; WARNING: currently loading only the first 48 kb
         

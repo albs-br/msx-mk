@@ -27,7 +27,10 @@ DrawSprite:
     ; Read header
 
     ld      a, MEGAROM_PAGE_FRAME_HEADERS
-    ld	    (Seg_P8000_SW), a
+    di
+    ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+    ld      (Seg_P8000_SW_Mirror),a  
+    ei
 
 
     ; header: ;		yOffset (word), width (byte), height (byte), megaROM page, list addr
@@ -199,7 +202,10 @@ DrawSprite:
 
     ; get megaROM page number (for data and list of the frame) from header and switch to the page
     ld      a, (iy + FrameHeader_Struct.MegaRomPage)
-    ld	    (Seg_P8000_SW), a
+    di
+    ld	    (Seg_P8000_SW), a           ; Set MegaromPage
+    ld      (Seg_P8000_SW_Mirror),a  
+    ei
 
 
 
